@@ -1,0 +1,37 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+#import <Availability.h>
+#import <CoreLocation/CoreLocation.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "ProgressHUD.h"
+#define serverQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)
+
+#endif
+
+
+#ifdef TARGET_IPHONE_SIMULATOR
+@interface CLLocationManager (Simulator)
+@end
+
+@implementation CLLocationManager (Simulator)
+
+-(void)startUpdatingLocation
+{
+    float latitude = 31.197414;
+    float longitude = 121.606026;
+    CLLocation *setLocation= [[[CLLocation alloc] initWithLatitude:latitude longitude:longitude] autorelease];
+    [self.delegate locationManager:self didUpdateToLocation:setLocation
+                      fromLocation:setLocation];
+}
+@end
+#endif // TARGET_IPHONE_SIMULATOR
