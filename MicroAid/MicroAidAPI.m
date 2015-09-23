@@ -444,4 +444,46 @@ NSString *ipAddr;
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
 }
 
+//17 获取任务信息
++(NSDictionary *)fetchMission:(NSInteger)missionID{
+    NSError *error = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/getTaskByTaskID?taskID=%ld",ipAddr,(long)missionID];
+    
+    NSLog(@"fetchMissionURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
+//18 修改任务
++(NSDictionary *)updateMission:(Mission *)mission{
+    NSError *error = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/updateTask.action?taskPOString={\"id\":\"%ld\",\"userID\":\"%ld\",\"title\":\"%@\",\"taskType\":\"%@\",\"taskScores\":\"%@\",\"startTime\":\"%@\",\"endTime\":\"%@\",\"status\":\"%ld\",\"description\":\"%@\",\"address\":\"%@\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"publicity\":\"%@\"}",ipAddr,(long)mission.missionID,(long)mission.userID,mission.title,mission.type,mission.bonus,mission.startTime,mission.endTime,mission.status,mission.descript,mission.address,mission.longitude,mission.latitude,mission.group];
+    
+    NSLog(@"updateMissionUserURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[SmartHomeAPIs toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
 @end

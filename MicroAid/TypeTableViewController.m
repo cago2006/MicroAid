@@ -135,6 +135,7 @@
         
         self.returnTypeDelegate = cmVC;
         [self.returnTypeDelegate passChoiceTypeValues:choosed];
+        cmVC.isEditMission = NO;
         
         [self.navigationController popToViewController:cmVC animated:YES];
         
@@ -147,6 +148,7 @@
         choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         
+        cmVC.isEditMission = NO;
         self.returnTypeDelegate = cmVC;
         [self.returnTypeDelegate passChoiceTypeValues:choosed];
         

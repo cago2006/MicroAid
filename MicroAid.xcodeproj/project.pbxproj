@@ -74,6 +74,8 @@
 		AFC90DA21B8AF54E0057CF3D /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC90DA11B8AF54E0057CF3D /* RootController.m */; };
 		AFC90DA51B8AF6D80057CF3D /* MicroAidAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC90DA41B8AF6D80057CF3D /* MicroAidAPI.m */; };
 		AFD43AB71BAD094A00D6D441 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD43AB51BAD094A00D6D441 /* GTMBase64.m */; };
+		AFDC6C091BB23F700080F6D1 /* ViewMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDC6C071BB23F700080F6D1 /* ViewMissionViewController.m */; };
+		AFDC6C0A1BB23F700080F6D1 /* ViewMissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDC6C081BB23F700080F6D1 /* ViewMissionViewController.xib */; };
 		AFDD8ACF1BAB988D00A3369B /* MyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDD8ACD1BAB988D00A3369B /* MyInfoCell.m */; };
 		AFDD8AD01BAB988D00A3369B /* MyInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDD8ACE1BAB988D00A3369B /* MyInfoCell.xib */; };
 		AFDD8AD41BABACA200A3369B /* ModPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDD8AD21BABACA200A3369B /* ModPasswordViewController.m */; };
@@ -212,6 +214,9 @@
 		AFD43AB41BAD094A00D6D441 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		AFD43AB51BAD094A00D6D441 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		AFD43AB61BAD094A00D6D441 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		AFDC6C061BB23F700080F6D1 /* ViewMissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewMissionViewController.h; sourceTree = "<group>"; };
+		AFDC6C071BB23F700080F6D1 /* ViewMissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewMissionViewController.m; sourceTree = "<group>"; };
+		AFDC6C081BB23F700080F6D1 /* ViewMissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewMissionViewController.xib; sourceTree = "<group>"; };
 		AFDD8ACC1BAB988D00A3369B /* MyInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoCell.h; sourceTree = "<group>"; };
 		AFDD8ACD1BAB988D00A3369B /* MyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoCell.m; sourceTree = "<group>"; };
 		AFDD8ACE1BAB988D00A3369B /* MyInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoCell.xib; sourceTree = "<group>"; };
@@ -290,6 +295,9 @@
 				AF5923FC1BAA59EE00158B86 /* ViewGroupViewController.h */,
 				AF5923FD1BAA59EE00158B86 /* ViewGroupViewController.m */,
 				AF5923FE1BAA59EE00158B86 /* ViewGroupViewController.xib */,
+				AFDC6C061BB23F700080F6D1 /* ViewMissionViewController.h */,
+				AFDC6C071BB23F700080F6D1 /* ViewMissionViewController.m */,
+				AFDC6C081BB23F700080F6D1 /* ViewMissionViewController.xib */,
 			);
 			name = mainTab;
 			sourceTree = "<group>";
@@ -651,6 +659,7 @@
 				AF6011FA1B9036910016E973 /* Default-568h@2x.png in Resources */,
 				AF5924001BAA59EE00158B86 /* ViewGroupViewController.xib in Resources */,
 				AF02ED161B91A59D00890BF7 /* MissionViewController.xib in Resources */,
+				AFDC6C0A1BB23F700080F6D1 /* ViewMissionViewController.xib in Resources */,
 				AF42A67A1B95C4480060D67C /* TypeTableViewController.xib in Resources */,
 				AF02ED261B92936200890BF7 /* NotificationViewController.xib in Resources */,
 				AFDD8AD51BABACA200A3369B /* ModPasswordViewController.xib in Resources */,
@@ -687,6 +696,7 @@
 				AF4E2B8A1B8C086A00425FF1 /* User.m in Sources */,
 				AF42A67E1B95D70B0060D67C /* GroupTableViewController.m in Sources */,
 				AF5D62041B8EA2F800897E09 /* HomeViewController.m in Sources */,
+				AFDC6C091BB23F700080F6D1 /* ViewMissionViewController.m in Sources */,
 				AFC90D781B8AF2010057CF3D /* AppDelegate.m in Sources */,
 				AF589C311BAFE1C200D1A797 /* FinishedMissionsViewController.m in Sources */,
 				AF5923FA1BA9593700158B86 /* FilterGroupTVC.m in Sources */,

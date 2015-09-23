@@ -116,6 +116,7 @@
     CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
     
     self.returnLocationDelegate = cmVC;
+    cmVC.isEditMission = NO;
     [self.returnLocationDelegate passChoiceLocationValues:self.missionLocation latitude:self.missionLatitude longitude:self.missionLongitude];
     
     

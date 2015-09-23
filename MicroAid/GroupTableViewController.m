@@ -129,7 +129,7 @@
         
         
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-        
+        cmVC.isEditMission = NO;
         self.returnGroupDelegate = cmVC;
         [self.returnGroupDelegate passChoiceGroupValues:choosed];
         
@@ -143,7 +143,7 @@
         NSString *choosed = [[NSString alloc]init];
         choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-        
+        cmVC.isEditMission = NO;
         self.returnGroupDelegate = cmVC;
         [self.returnGroupDelegate passChoiceGroupValues:choosed];
         

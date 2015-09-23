@@ -132,6 +132,7 @@
         
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         
+        cmVC.isEditMission = NO;
         self.returnBonusDelegate = cmVC;
         [self.returnBonusDelegate passChoiceBonusValues:choosed];
         
@@ -145,6 +146,8 @@
         NSString *choosed = [[NSString alloc]init];
         choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+        
+        cmVC.isEditMission = NO;
         
         self.returnBonusDelegate = cmVC;
         [self.returnBonusDelegate passChoiceBonusValues:choosed];

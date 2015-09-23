@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     [self.navigationItem setTitle:@"创建任务"];
     
     self.mission= [[Mission alloc] init];
@@ -42,24 +43,70 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     [self.pickerView setHidden:YES];
-    NSDate *date = [DateTimeUtils getCurrentTime];
-    [startTimeBtn setTitle:[DateTimeUtils changeDateIntoString:date] forState:UIControlStateNormal];
-    date = [DateTimeUtils getCurrentTimeAfterAnHour];
-    [endTimeBtn setTitle:[DateTimeUtils changeDateIntoString:date] forState:UIControlStateNormal];
     
-    [objectBtn setTitle:@"公开" forState:UIControlStateNormal];
-    self.groupString = @"公开";
-    //self.tabBarController.tabBar.hidden = YES;
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *location = [userDefaults objectForKey:@"location"];
-    if(!(location == nil||[location isEqualToString:@""])){
-        [addressBtn setTitle:location forState:UIControlStateNormal];
-        self.locationString = location;
-        self.missionLatitude = [userDefaults doubleForKey:@"latitude"];
-        self.missionLongitude = [userDefaults doubleForKey:@"longitude"];
+    if(_isEditMission){
+        [self getMission];
+    }else{
+        NSDate *date = [DateTimeUtils getCurrentTime];
+        [startTimeBtn setTitle:[DateTimeUtils changeDateIntoString:date] forState:UIControlStateNormal];
+        date = [DateTimeUtils getCurrentTimeAfterAnHour];
+        [endTimeBtn setTitle:[DateTimeUtils changeDateIntoString:date] forState:UIControlStateNormal];
+        
+        [objectBtn setTitle:@"公开" forState:UIControlStateNormal];
+        self.groupString = @"公开";
+        //self.tabBarController.tabBar.hidden = YES;
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *location = [userDefaults objectForKey:@"location"];
+        if(!(location == nil||[location isEqualToString:@""])){
+            [addressBtn setTitle:location forState:UIControlStateNormal];
+            self.locationString = location;
+            self.missionLatitude = [userDefaults doubleForKey:@"latitude"];
+            self.missionLongitude = [userDefaults doubleForKey:@"longitude"];
+        }
     }
+}
 
+-(void) getMission{
+    dispatch_async(serverQueue, ^{
+        NSDictionary *resultDic = [MicroAidAPI fetchMission:self.missionID];
+        if ([[resultDic objectForKey:@"flg"] boolValue]) {//获取成功
+            NSMutableDictionary *dic = [resultDic objectForKey:@"task"];
+            //显示
+            [self performSelectorOnMainThread:@selector(showMissionInfo:) withObject:dic waitUntilDone:YES];
+            
+        }else//获取失败
+        {
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败！" waitUntilDone:YES];
+            return ;
+        }
+    });
+}
+
+-(void) showMissionInfo:(NSMutableDictionary *)dic{
+    [startTimeBtn setTitle:[dic objectForKey:@"startTime"] forState:UIControlStateNormal];
+    [endTimeBtn setTitle:[dic objectForKey:@"endTime"] forState:UIControlStateNormal];
+    
+    self.groupString = [dic objectForKey:@"publicity"];
+    [objectBtn setTitle:self.groupString forState:UIControlStateNormal];
+    
+    self.typeString = [dic objectForKey:@"taskType"];
+    [typeBtn setTitle:self.typeString forState:UIControlStateNormal];
+    
+    descriptionTextView.text =[dic objectForKey:@"description"];
+    
+    titleTextField.text = [dic objectForKey:@"title"];
+    
+    self.bonusString = [NSString stringWithFormat:@"%ld分",(long)[[dic objectForKey:@"taskScores"]integerValue]];
+    [bonusBtn setTitle:self.bonusString forState:UIControlStateNormal];
+    
+    self.locationString = [dic objectForKey:@"address"];
+    [addressBtn setTitle:self.locationString forState:UIControlStateNormal];
+    self.missionLatitude = [[dic objectForKey:@"latitude"]doubleValue];
+    self.missionLongitude = [[dic objectForKey:@"longitude"]doubleValue];
+    
+    self.mission.status = [[dic objectForKey:@"status"]integerValue];
 }
 
 
@@ -333,21 +380,38 @@
     [self.mission setLongitude:self.missionLongitude];
     
     if([self.mission verifyInfo]){
-        dispatch_async(serverQueue, ^{
-            NSDictionary *resultDic = [MicroAidAPI createMission:self.mission];
-            if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
-                //显示
-                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务创建成功!" waitUntilDone:YES];
-                [self performSelectorOnMainThread:@selector(switchNextViewController) withObject:nil waitUntilDone:YES];
-                
-            }else//创建失败
-            {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务创建失败！" waitUntilDone:YES];
-                return ;
-            }
-        });
+        if(_isEditMission){
+            [self.mission setMissionID:self.missionID];
+            dispatch_async(serverQueue, ^{
+                NSDictionary *resultDic = [MicroAidAPI updateMission:self.mission];
+                if ([[resultDic objectForKey:@"flg"] boolValue]) {//修改成功
+                    //显示
+                    [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务修改成功!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(switchNextViewController) withObject:nil waitUntilDone:YES];
+                    return;
+                }else//修改失败
+                {
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务修改失败,请检查网络!" waitUntilDone:YES];
+                    return ;
+                }
+            });
+            
+        }else{
+            dispatch_async(serverQueue, ^{
+                NSDictionary *resultDic = [MicroAidAPI createMission:self.mission];
+                if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
+                    //显示
+                    [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务创建成功!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(switchNextViewController) withObject:nil waitUntilDone:YES];
+                    
+                }else//创建失败
+                {
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务创建失败！" waitUntilDone:YES];
+                    return ;
+                }
+            });
+        }
     }
-
 }
 
 

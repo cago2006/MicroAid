@@ -28,7 +28,7 @@
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//初始化window
-    //self.window.rootViewController = [[NavigationViewController alloc] initWithRootViewController:[[HomeViewController alloc] init]];
+    //self.window.rootViewController = [[NavigationViewController alloc] initWithRootViewController:[[RootController alloc] init]];
     self.window.rootViewController = [[RootController alloc] init];
     self.window.backgroundColor = [UIColor whiteColor];//背景颜色
     [self.window makeKeyAndVisible];//这行代码会让包含了视图控制器视图的window窗口显示在屏幕上

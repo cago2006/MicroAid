@@ -10,6 +10,8 @@
 #import "MicroAidAPI.h"
 #import "MissionInfo.h"
 #import "MissionListCell.h"
+#import "CreateMissionViewController.h"
+#import "ViewMissionViewController.h"
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 @interface StartedMissionsViewController ()
@@ -60,14 +62,30 @@
 //点击显示具体信息，首先进行判断
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    NSString *groupName = [self.dataArray objectAtIndex:indexPath.row];
-    //    ViewGroupViewController *viewGroupVC = [[ViewGroupViewController alloc]initWithNibName:@"ViewGroupViewController" bundle:nil];
-    //
-    //    viewGroupVC.groupName = groupName;
-    //
-    //    self.tabBarController.tabBar.hidden = YES;
-    //
-    //    [self.navigationController pushViewController:viewGroupVC animated:YES];
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [userDefaults integerForKey:@"userID"];
+    MissionInfo *info = [self.dataArray objectAtIndex:indexPath.row];
+    if(info.userId == userID){
+        CreateMissionViewController *cmVC = [[CreateMissionViewController alloc]initWithNibName:@"CreateMissionViewController" bundle:nil];
+        
+        self.tabBarController.tabBar.hidden = YES;
+        cmVC.isEditMission = YES;
+        cmVC.missionID = info.missionId;
+        //[self.view addSubview:cmVC.view];
+        NSLog(@"%@",self.navigationController);
+        [self.navigationController pushViewController:cmVC animated:YES];
+    }else{
+        ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
+        if([info.statusInfo isEqualToString:@"未接受"]){
+            viewMissionVC.isAccepted = NO;
+        }else{
+            viewMissionVC.isAccepted = YES;
+        }
+        viewMissionVC.missionDistance = info.distance;
+        self.tabBarController.tabBar.hidden = YES;
+        [self.navigationController pushViewController:viewMissionVC animated:YES];
+    }
     
 }
 

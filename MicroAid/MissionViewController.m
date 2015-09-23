@@ -15,6 +15,7 @@
 #import "MissionInfo.h"
 #import "ProgressHUD.h"
 #import "FilterViewController.h"
+#import "ViewMissionViewController.h"
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 @interface MissionViewController ()
@@ -92,7 +93,7 @@
     CreateMissionViewController *createMissionVC = [[CreateMissionViewController alloc] initWithNibName:@"CreateMissionViewController" bundle:nil];
     
     self.tabBarController.tabBar.hidden = YES;
-    
+    createMissionVC.isEditMission = NO;
     [self.navigationController pushViewController:createMissionVC animated:YES];
 }
 
@@ -149,8 +150,27 @@
 //点击显示具体信息，首先进行判断
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"你点击了" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [userDefaults integerForKey:@"userID"];
+    MissionInfo *info = [self.dataArray objectAtIndex:indexPath.row];
+    if(info.userId == userID){
+        CreateMissionViewController *cmVC = [[CreateMissionViewController alloc]initWithNibName:@"CreateMissionViewController" bundle:nil];
+        
+        self.tabBarController.tabBar.hidden = YES;
+        cmVC.isEditMission = YES;
+        cmVC.missionID = info.missionId;
+        [self.navigationController pushViewController:cmVC animated:YES];
+    }else{
+        ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
+        if([info.statusInfo isEqualToString:@"未接受"]){
+            viewMissionVC.isAccepted = NO;
+        }else{
+            viewMissionVC.isAccepted = YES;
+        }
+        viewMissionVC.missionDistance = info.distance;
+        self.tabBarController.tabBar.hidden = YES;
+        [self.navigationController pushViewController:viewMissionVC animated:YES];
+    }
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

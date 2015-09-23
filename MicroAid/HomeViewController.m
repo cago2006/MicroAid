@@ -135,7 +135,7 @@
 
 -(void)createMission{
     CreateMissionViewController *createMissionVC = [[CreateMissionViewController alloc] initWithNibName:@"CreateMissionViewController" bundle:nil];
-    
+    createMissionVC.isEditMission = NO;
     [self.navigationController pushViewController:createMissionVC animated:YES];
 }
 

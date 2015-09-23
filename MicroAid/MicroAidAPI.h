@@ -62,4 +62,13 @@
 //16 获取附近任务列表2(已完成、已发起、已接受等)
 +(NSDictionary *)getMissionList2:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
 
+//17 获取任务信息
++(NSDictionary *)fetchMission:(NSInteger)missionID;
+
+//18 修改任务
++(NSDictionary *)updateMission:(Mission *)mission;
+
+//18 修改任务
++(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID;
+
 @end

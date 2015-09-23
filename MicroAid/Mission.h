@@ -10,7 +10,9 @@
 
 @interface Mission : NSObject
 
+@property(nonatomic)NSInteger missionID;
 @property(nonatomic)NSInteger userID;
+@property(nonatomic)NSInteger status;
 @property(strong,nonatomic)NSString *title;
 @property(strong,nonatomic)NSString *type;
 @property(strong,nonatomic)NSString *bonus;
