@@ -201,9 +201,13 @@
             }
             if ([_groupInfoArray count] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    [alertView show];
+                    if(self.count == 1){
+                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"您没有加入任何群组!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        [alertView show];
+                    }else{
+                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        [alertView show];
+                    }
                 });
                 return;
             }

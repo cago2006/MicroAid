@@ -58,7 +58,7 @@
         if ([[resultDic objectForKey:@"flg"] boolValue]) {//查找成功
             NSDictionary *user = [resultDic objectForKey:@"user"];
             [self performSelectorOnMainThread:@selector(showMyInfo:) withObject:user waitUntilDone:YES];
-        }else//失败
+        }else if([[resultDic objectForKey:@"onError"] boolValue])//失败
         {
             [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"信息查找失败,请检查网络!" waitUntilDone:YES];
             return ;
@@ -70,21 +70,25 @@
         if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
             NSData *picture = [resultDic objectForKey:@"picture"];
             [self performSelectorOnMainThread:@selector(showPicture:) withObject:picture waitUntilDone:YES];
-        }else//创建失败
+        }else if([[resultDic objectForKey:@"onError"] boolValue])//创建失败
         {
             [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败！" waitUntilDone:YES];
             return ;
+        }else{
+            [self performSelectorOnMainThread:@selector(showPicture:) withObject:nil waitUntilDone:YES];
         }
     });
 }
 
 -(void) showPicture:(NSString *)picture{
-    
-    //需要转换了才能用
-    NSString *formatedString = [picture stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSData *imageData = [GTMBase64 decodeString:formatedString];
-    [photoBtn setBackgroundImage:[UIImage imageWithData:imageData scale:0.0] forState:UIControlStateNormal];
-    
+    if(picture == nil){
+        [photoBtn setBackgroundImage:[UIImage imageNamed:@"default_pic"] forState:UIControlStateNormal];
+    }else{
+        //需要转换了才能用
+        NSString *formatedString = [picture stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+        NSData *imageData = [GTMBase64 decodeString:formatedString];
+        [photoBtn setBackgroundImage:[UIImage imageWithData:imageData scale:0.0] forState:UIControlStateNormal];
+    }
 }
 
 -(void) showMyInfo:(NSDictionary *)dic{

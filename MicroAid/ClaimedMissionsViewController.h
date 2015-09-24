@@ -16,5 +16,6 @@
 //附近任务数组(每次从服务器获取)
 @property(nonatomic,strong) NSArray *missionInfoArray;
 @property(nonatomic,assign) int count;
-
+@property(nonatomic,strong) UINavigationController* parentNavController;
+-(void) setParentNav:(UINavigationController *)parentNavController;
 @end

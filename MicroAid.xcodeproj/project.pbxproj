@@ -76,6 +76,8 @@
 		AFD43AB71BAD094A00D6D441 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD43AB51BAD094A00D6D441 /* GTMBase64.m */; };
 		AFDC6C091BB23F700080F6D1 /* ViewMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDC6C071BB23F700080F6D1 /* ViewMissionViewController.m */; };
 		AFDC6C0A1BB23F700080F6D1 /* ViewMissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDC6C081BB23F700080F6D1 /* ViewMissionViewController.xib */; };
+		AFDC6C0E1BB3BD1F0080F6D1 /* ViewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDC6C0C1BB3BD1F0080F6D1 /* ViewUserViewController.m */; };
+		AFDC6C0F1BB3BD1F0080F6D1 /* ViewUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDC6C0D1BB3BD1F0080F6D1 /* ViewUserViewController.xib */; };
 		AFDD8ACF1BAB988D00A3369B /* MyInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDD8ACD1BAB988D00A3369B /* MyInfoCell.m */; };
 		AFDD8AD01BAB988D00A3369B /* MyInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDD8ACE1BAB988D00A3369B /* MyInfoCell.xib */; };
 		AFDD8AD41BABACA200A3369B /* ModPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDD8AD21BABACA200A3369B /* ModPasswordViewController.m */; };
@@ -217,6 +219,9 @@
 		AFDC6C061BB23F700080F6D1 /* ViewMissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewMissionViewController.h; sourceTree = "<group>"; };
 		AFDC6C071BB23F700080F6D1 /* ViewMissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewMissionViewController.m; sourceTree = "<group>"; };
 		AFDC6C081BB23F700080F6D1 /* ViewMissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewMissionViewController.xib; sourceTree = "<group>"; };
+		AFDC6C0B1BB3BD1F0080F6D1 /* ViewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUserViewController.h; sourceTree = "<group>"; };
+		AFDC6C0C1BB3BD1F0080F6D1 /* ViewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUserViewController.m; sourceTree = "<group>"; };
+		AFDC6C0D1BB3BD1F0080F6D1 /* ViewUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewUserViewController.xib; sourceTree = "<group>"; };
 		AFDD8ACC1BAB988D00A3369B /* MyInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoCell.h; sourceTree = "<group>"; };
 		AFDD8ACD1BAB988D00A3369B /* MyInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoCell.m; sourceTree = "<group>"; };
 		AFDD8ACE1BAB988D00A3369B /* MyInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyInfoCell.xib; sourceTree = "<group>"; };
@@ -523,6 +528,9 @@
 				AF589C381BAFE5D900D1A797 /* ClaimedMissionsViewController.h */,
 				AF589C391BAFE5D900D1A797 /* ClaimedMissionsViewController.m */,
 				AF589C3A1BAFE5D900D1A797 /* ClaimedMissionsViewController.xib */,
+				AFDC6C0B1BB3BD1F0080F6D1 /* ViewUserViewController.h */,
+				AFDC6C0C1BB3BD1F0080F6D1 /* ViewUserViewController.m */,
+				AFDC6C0D1BB3BD1F0080F6D1 /* ViewUserViewController.xib */,
 			);
 			name = mineView;
 			sourceTree = "<group>";
@@ -642,6 +650,7 @@
 				AF4A2C3B1B8B355000B61B1B /* ProgressHUD.bundle in Resources */,
 				AF5923F11BA93DD600158B86 /* FilterBonusTVC.xib in Resources */,
 				AF589C3C1BAFE5D900D1A797 /* ClaimedMissionsViewController.xib in Resources */,
+				AFDC6C0F1BB3BD1F0080F6D1 /* ViewUserViewController.xib in Resources */,
 				AF589C2D1BAFDEAC00D1A797 /* MyMissionsViewController.xib in Resources */,
 				AF6B66331B8DF0CB0013F12A /* LoginViewController.xib in Resources */,
 				AFDEE7D61B9D2F6000CCDA2C /* blueArrow.png in Resources */,
@@ -712,6 +721,7 @@
 				AF02ED1F1B91E32500890BF7 /* NotificationViewController.m in Sources */,
 				AF5923EA1BA801C400158B86 /* FilterViewController.m in Sources */,
 				AF4A2C3C1B8B355000B61B1B /* ProgressHUD.m in Sources */,
+				AFDC6C0E1BB3BD1F0080F6D1 /* ViewUserViewController.m in Sources */,
 				AFDD8AD91BABE11A00A3369B /* MyInfoViewController.m in Sources */,
 				AFC90D751B8AF2010057CF3D /* main.m in Sources */,
 				AF589C2A1BAFA73800D1A797 /* MyMissionsViewController.m in Sources */,

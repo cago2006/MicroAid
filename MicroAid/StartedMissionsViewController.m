@@ -10,6 +10,7 @@
 #import "MicroAidAPI.h"
 #import "MissionInfo.h"
 #import "MissionListCell.h"
+#import "MyMissionsViewController.h"
 #import "CreateMissionViewController.h"
 #import "ViewMissionViewController.h"
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
@@ -27,6 +28,10 @@
         
     }
     return self;
+}
+
+-(void) setParentNav:(UINavigationController *)parentNavController{
+    self.parentNavController = parentNavController;
 }
 
 - (void)viewDidLoad {
@@ -66,15 +71,13 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
     MissionInfo *info = [self.dataArray objectAtIndex:indexPath.row];
-    if(info.userId == userID){
+    if(info.userId == userID && [info.statusInfo isEqualToString:@"未接受"]){
         CreateMissionViewController *cmVC = [[CreateMissionViewController alloc]initWithNibName:@"CreateMissionViewController" bundle:nil];
         
         self.tabBarController.tabBar.hidden = YES;
         cmVC.isEditMission = YES;
         cmVC.missionID = info.missionId;
-        //[self.view addSubview:cmVC.view];
-        NSLog(@"%@",self.navigationController);
-        [self.navigationController pushViewController:cmVC animated:YES];
+        [self.parentNavController pushViewController:cmVC animated:YES];
     }else{
         ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
         if([info.statusInfo isEqualToString:@"未接受"]){
@@ -83,8 +86,9 @@
             viewMissionVC.isAccepted = YES;
         }
         viewMissionVC.missionDistance = info.distance;
+        viewMissionVC.missionID = info.missionId;
         self.tabBarController.tabBar.hidden = YES;
-        [self.navigationController pushViewController:viewMissionVC animated:YES];
+        [self.parentNavController pushViewController:viewMissionVC animated:YES];
     }
     
 }
@@ -134,11 +138,6 @@
         } else {
             _missionInfoArray = [MissionInfo getMissionInfos:[finishedMissions objectForKey:@"taskInfoList"]];
             if ([_missionInfoArray count] == 0) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    [alertView show];
-                });
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^{

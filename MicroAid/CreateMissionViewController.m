@@ -44,7 +44,6 @@
     
     [self.pickerView setHidden:YES];
     
-    
     if(_isEditMission){
         [self getMission];
     }else{
@@ -83,6 +82,7 @@
         }
     });
 }
+
 
 -(void) showMissionInfo:(NSMutableDictionary *)dic{
     [startTimeBtn setTitle:[dic objectForKey:@"startTime"] forState:UIControlStateNormal];

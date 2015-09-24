@@ -65,21 +65,25 @@
         if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
             NSData *picture = [resultDic objectForKey:@"picture"];
             [self performSelectorOnMainThread:@selector(showPicture:) withObject:picture waitUntilDone:YES];
-        }else//创建失败
+        }else if ([[resultDic objectForKey:@"onError"] boolValue])//创建失败
         {
             [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败！" waitUntilDone:YES];
             return ;
+        }else{
+            [self performSelectorOnMainThread:@selector(showPicture:) withObject:nil waitUntilDone:YES];
         }
     });
 }
 
 -(void) showPicture:(NSString *)picture{
-    
-    //需要转换了才能用
-    NSString *formatedString = [picture stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSData *imageData = [GTMBase64 decodeString:formatedString];
-    self.imageView = [UIImage imageWithData:imageData scale:0.0];
-    
+    if(picture == nil){
+        self.imageView = [UIImage imageNamed:@"default_pic"];
+    }else{
+        //需要转换了才能用
+        NSString *formatedString = [picture stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+        NSData *imageData = [GTMBase64 decodeString:formatedString];
+        self.imageView = [UIImage imageWithData:imageData scale:0.0];
+    }
 }
 
 

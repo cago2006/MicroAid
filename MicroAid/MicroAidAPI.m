@@ -469,7 +469,7 @@ NSString *ipAddr;
 +(NSDictionary *)updateMission:(Mission *)mission{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/updateTask.action?taskPOString={\"id\":\"%ld\",\"userID\":\"%ld\",\"title\":\"%@\",\"taskType\":\"%@\",\"taskScores\":\"%@\",\"startTime\":\"%@\",\"endTime\":\"%@\",\"status\":\"%ld\",\"description\":\"%@\",\"address\":\"%@\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"publicity\":\"%@\"}",ipAddr,(long)mission.missionID,(long)mission.userID,mission.title,mission.type,mission.bonus,mission.startTime,mission.endTime,mission.status,mission.descript,mission.address,mission.longitude,mission.latitude,mission.group];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/updateTask.action?taskPOString={\"id\":\"%ld\",\"userID\":\"%ld\",\"title\":\"%@\",\"taskType\":\"%@\",\"taskScores\":\"%@\",\"startTime\":\"%@\",\"endTime\":\"%@\",\"status\":\"%ld\",\"description\":\"%@\",\"address\":\"%@\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"publicity\":\"%@\"}",ipAddr,(long)mission.missionID,(long)mission.userID,mission.title,mission.type,mission.bonus,mission.startTime,mission.endTime,(long)mission.status,mission.descript,mission.address,mission.longitude,mission.latitude,mission.group];
     
     NSLog(@"updateMissionUserURL:%@",urlString);
     
@@ -482,6 +482,27 @@ NSString *ipAddr;
     }
     
     //NSLog(@"result: %@",[SmartHomeAPIs toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
+//19 接受任务
++(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID{
+    NSError *error = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/receiveTask.action?taskID=%ld&recUserID=%ld",ipAddr,(long)missionID,(long)userID];
+    
+    NSLog(@"fetchPictureURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
     
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
 }

@@ -27,5 +27,7 @@
 @property (assign, nonatomic) NSInteger missionID;
 @property (assign, nonatomic) NSInteger fromID;
 @property (assign, nonatomic) NSInteger toID;
+-(IBAction)fromBtnClicked:(UIButton *)sender;
+-(IBAction)toBtnClicked:(UIButton *)sender;
 
 @end

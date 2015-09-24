@@ -27,26 +27,15 @@
 
 @implementation MyMissionsViewController
 
+
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self){
-        FinishedMissionsViewController *finishedMissionsVC = [[FinishedMissionsViewController alloc] initWithNibName:@"FinishedMissionsViewController" bundle:nil];
-        [finishedMissionsVC setTitle:@"已完成"];
         
-        StartedMissionsViewController *startedMissionsVC = [[StartedMissionsViewController alloc] initWithNibName:@"StartedMissionsViewController" bundle:nil];
-        [startedMissionsVC setTitle:@"已发起"];
-        
-        ClaimedMissionsViewController *claimedMissionsVC = [[ClaimedMissionsViewController alloc] initWithNibName:@"ClaimedMissionsViewController" bundle:nil];
-        [claimedMissionsVC setTitle:@"已认领"];
-        
-        _controllers =[[NSArray alloc]initWithObjects:startedMissionsVC, claimedMissionsVC,finishedMissionsVC,  nil];
-    
-        selectedTab = NSIntegerMax;
-        _delegate = nil;
-        _indicatorView = [[UIView alloc] init];
     }
     return self;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,6 +48,27 @@
     [self.navigationItem setTitle:@"我的任务"];
     
     self.view.backgroundColor = [UIColor whiteColor];//tab颜色
+    
+    FinishedMissionsViewController *finishedMissionsVC = [[FinishedMissionsViewController alloc] initWithNibName:@"FinishedMissionsViewController" bundle:nil];
+    [finishedMissionsVC setTitle:@"已完成"];
+    [finishedMissionsVC setParentNav:self.navigationController];
+    
+    StartedMissionsViewController *startedMissionsVC = [[StartedMissionsViewController alloc] initWithNibName:@"StartedMissionsViewController" bundle:nil];
+    [startedMissionsVC setTitle:@"已发起"];
+    NSLog(@"slef:%@",self.navigationController);
+    [startedMissionsVC setParentNav:self.navigationController];
+    
+    ClaimedMissionsViewController *claimedMissionsVC = [[ClaimedMissionsViewController alloc] initWithNibName:@"ClaimedMissionsViewController" bundle:nil];
+    [claimedMissionsVC setTitle:@"已认领"];
+    [claimedMissionsVC setParentNav:self.navigationController];
+    
+    _controllers =[[NSArray alloc]initWithObjects:startedMissionsVC, claimedMissionsVC,finishedMissionsVC,  nil];
+    
+    selectedTab = NSIntegerMax;
+    _delegate = nil;
+    _indicatorView = [[UIView alloc] init];
+    
+    
     _indicatorView.backgroundColor= [UIColor orangeColor];//游标的颜色
     _statusHeight = 0.0;
     if (_controllers != nil)

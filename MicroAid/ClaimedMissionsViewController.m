@@ -10,6 +10,8 @@
 #import "MicroAidAPI.h"
 #import "MissionInfo.h"
 #import "MissionListCell.h"
+#import "CreateMissionViewController.h"
+#import "ViewMissionViewController.h"
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 @interface ClaimedMissionsViewController ()
@@ -27,6 +29,10 @@
         
     }
     return self;
+}
+
+-(void) setParentNav:(UINavigationController *)parentNavController{
+    self.parentNavController = parentNavController;
 }
 
 - (void)viewDidLoad {
@@ -59,15 +65,28 @@
 //点击显示具体信息，首先进行判断
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    NSString *groupName = [self.dataArray objectAtIndex:indexPath.row];
-    //    ViewGroupViewController *viewGroupVC = [[ViewGroupViewController alloc]initWithNibName:@"ViewGroupViewController" bundle:nil];
-    //
-    //    viewGroupVC.groupName = groupName;
-    //
-    //    self.tabBarController.tabBar.hidden = YES;
-    //
-    //    [self.navigationController pushViewController:viewGroupVC animated:YES];
-    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [userDefaults integerForKey:@"userID"];
+    MissionInfo *info = [self.dataArray objectAtIndex:indexPath.row];
+    if(info.userId == userID && [info.statusInfo isEqualToString:@"未接受"]){
+        CreateMissionViewController *cmVC = [[CreateMissionViewController alloc]initWithNibName:@"CreateMissionViewController" bundle:nil];
+        
+        self.tabBarController.tabBar.hidden = YES;
+        cmVC.isEditMission = YES;
+        cmVC.missionID = info.missionId;
+        [self.parentNavController pushViewController:cmVC animated:YES];
+    }else{
+        ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
+        if([info.statusInfo isEqualToString:@"未接受"]){
+            viewMissionVC.isAccepted = NO;
+        }else{
+            viewMissionVC.isAccepted = YES;
+        }
+        viewMissionVC.missionDistance = info.distance;
+        viewMissionVC.missionID = info.missionId;
+        self.tabBarController.tabBar.hidden = YES;
+        [self.parentNavController pushViewController:viewMissionVC animated:YES];
+    }
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,11 +132,6 @@
         } else {
             _missionInfoArray = [MissionInfo getMissionInfos:[finishedMissions objectForKey:@"taskInfoList"]];
             if ([_missionInfoArray count] == 0) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    [alertView show];
-                });
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^{

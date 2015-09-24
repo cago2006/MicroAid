@@ -167,6 +167,7 @@
         }else{
             viewMissionVC.isAccepted = YES;
         }
+        viewMissionVC.missionID = info.missionId;
         viewMissionVC.missionDistance = info.distance;
         self.tabBarController.tabBar.hidden = YES;
         [self.navigationController pushViewController:viewMissionVC animated:YES];

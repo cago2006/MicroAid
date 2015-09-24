@@ -68,7 +68,7 @@
 //18 修改任务
 +(NSDictionary *)updateMission:(Mission *)mission;
 
-//18 修改任务
+//19 接受任务
 +(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID;
 
 @end
