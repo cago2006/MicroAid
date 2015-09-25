@@ -49,6 +49,12 @@
     
     self.view.backgroundColor = [UIColor whiteColor];//tab颜色
     
+    
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     FinishedMissionsViewController *finishedMissionsVC = [[FinishedMissionsViewController alloc] initWithNibName:@"FinishedMissionsViewController" bundle:nil];
     [finishedMissionsVC setTitle:@"已完成"];
     [finishedMissionsVC setParentNav:self.navigationController];
@@ -75,7 +81,6 @@
     {
         [self loadUI];
     }
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 
 - (void)didReceiveMemoryWarning {

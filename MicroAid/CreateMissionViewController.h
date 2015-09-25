@@ -52,6 +52,7 @@
 @property (assign, nonatomic) double missionLatitude;
 @property (retain, nonatomic) NSString *locationString;
 @property (nonatomic, assign) bool isEditMission;
+@property (nonatomic, assign) bool isFromMyMission;
 @property (assign, nonatomic) NSInteger missionID;
 
 @end

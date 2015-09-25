@@ -77,6 +77,7 @@
         self.tabBarController.tabBar.hidden = YES;
         cmVC.isEditMission = YES;
         cmVC.missionID = info.missionId;
+        cmVC.isFromMyMission = YES;
         [self.parentNavController pushViewController:cmVC animated:YES];
     }else{
         ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
