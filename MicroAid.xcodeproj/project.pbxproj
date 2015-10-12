@@ -53,6 +53,12 @@
 		AF5A52021B9BDB230018CE98 /* Mission.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A52011B9BDB230018CE98 /* Mission.m */; };
 		AF5D62041B8EA2F800897E09 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5D62021B8EA2F800897E09 /* HomeViewController.m */; };
 		AF5D62051B8EA2F800897E09 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF5D62031B8EA2F800897E09 /* HomeViewController.xib */; };
+		AF5E3A751BB5369400521BEE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5E3A741BB5369400521BEE /* CoreFoundation.framework */; };
+		AF5E3A771BB5369F00521BEE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5E3A761BB5369F00521BEE /* Foundation.framework */; };
+		AF5E3A791BB536A900521BEE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5E3A781BB536A900521BEE /* libz.dylib */; };
+		AF5E3A7D1BB92D2800521BEE /* NotificationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5E3A7B1BB92D2800521BEE /* NotificationListCell.m */; };
+		AF5E3A7E1BB92D2800521BEE /* NotificationListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF5E3A7C1BB92D2800521BEE /* NotificationListCell.xib */; };
+		AF5E3A811BC66F7900521BEE /* NotificationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5E3A801BC66F7900521BEE /* NotificationInfo.m */; };
 		AF6011FA1B9036910016E973 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF6011F91B9036910016E973 /* Default-568h@2x.png */; };
 		AF6012011B9045380016E973 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012001B9045380016E973 /* BaiduMapAPI.framework */; };
 		AF6012031B90455D0016E973 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012021B90455D0016E973 /* CoreLocation.framework */; };
@@ -183,6 +189,14 @@
 		AF5D62011B8EA2F800897E09 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		AF5D62021B8EA2F800897E09 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		AF5D62031B8EA2F800897E09 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		AF5E3A741BB5369400521BEE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		AF5E3A761BB5369F00521BEE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AF5E3A781BB536A900521BEE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AF5E3A7A1BB92D2800521BEE /* NotificationListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationListCell.h; sourceTree = "<group>"; };
+		AF5E3A7B1BB92D2800521BEE /* NotificationListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationListCell.m; sourceTree = "<group>"; };
+		AF5E3A7C1BB92D2800521BEE /* NotificationListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationListCell.xib; sourceTree = "<group>"; };
+		AF5E3A7F1BC66F7900521BEE /* NotificationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationInfo.h; sourceTree = "<group>"; };
+		AF5E3A801BC66F7900521BEE /* NotificationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationInfo.m; sourceTree = "<group>"; };
 		AF6011F91B9036910016E973 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		AF6012001B9045380016E973 /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI.framework; sourceTree = "<group>"; };
 		AF6012021B90455D0016E973 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -257,9 +271,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF6012091B9045880016E973 /* SystemConfiguration.framework in Frameworks */,
+				AF5E3A791BB536A900521BEE /* libz.dylib in Frameworks */,
+				AF5E3A771BB5369F00521BEE /* Foundation.framework in Frameworks */,
+				AF5E3A751BB5369400521BEE /* CoreFoundation.framework in Frameworks */,
 				AF60120D1B90459B0016E973 /* Security.framework in Frameworks */,
 				AF60120B1B9045930016E973 /* CoreGraphics.framework in Frameworks */,
-				AF6012091B9045880016E973 /* SystemConfiguration.framework in Frameworks */,
 				AF6012071B90457C0016E973 /* OpenGLES.framework in Frameworks */,
 				AF6012051B9045730016E973 /* QuartzCore.framework in Frameworks */,
 				AF6012031B90455D0016E973 /* CoreLocation.framework in Frameworks */,
@@ -303,6 +320,9 @@
 				AFDC6C061BB23F700080F6D1 /* ViewMissionViewController.h */,
 				AFDC6C071BB23F700080F6D1 /* ViewMissionViewController.m */,
 				AFDC6C081BB23F700080F6D1 /* ViewMissionViewController.xib */,
+				AF5E3A7A1BB92D2800521BEE /* NotificationListCell.h */,
+				AF5E3A7B1BB92D2800521BEE /* NotificationListCell.m */,
+				AF5E3A7C1BB92D2800521BEE /* NotificationListCell.xib */,
 			);
 			name = mainTab;
 			sourceTree = "<group>";
@@ -357,6 +377,8 @@
 				AF5A52011B9BDB230018CE98 /* Mission.m */,
 				AF8E84BC1B9C3009009EC184 /* MissionInfo.h */,
 				AF8E84BD1B9C3009009EC184 /* MissionInfo.m */,
+				AF5E3A7F1BC66F7900521BEE /* NotificationInfo.h */,
+				AF5E3A801BC66F7900521BEE /* NotificationInfo.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -383,6 +405,9 @@
 		AF6011FD1B90402C0016E973 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF5E3A781BB536A900521BEE /* libz.dylib */,
+				AF5E3A761BB5369F00521BEE /* Foundation.framework */,
+				AF5E3A741BB5369400521BEE /* CoreFoundation.framework */,
 				AF60120C1B90459B0016E973 /* Security.framework */,
 				AF60120A1B9045930016E973 /* CoreGraphics.framework */,
 				AF6012081B9045880016E973 /* SystemConfiguration.framework */,
@@ -659,6 +684,7 @@
 				AFDEE7DA1B9D2F6000CCDA2C /* whiteArrow.png in Resources */,
 				AFDEE7E01B9D309100CCDA2C /* MissionListCell.xib in Resources */,
 				AF5D62051B8EA2F800897E09 /* HomeViewController.xib in Resources */,
+				AF5E3A7E1BB92D2800521BEE /* NotificationListCell.xib in Resources */,
 				AFDD8AD01BAB988D00A3369B /* MyInfoCell.xib in Resources */,
 				AF5923EB1BA801C400158B86 /* FilterViewController.xib in Resources */,
 				AF589C371BAFE59200D1A797 /* StartedMissionsViewController.xib in Resources */,
@@ -696,6 +722,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF42A6701B94785D0060D67C /* BonusTableViewController.m in Sources */,
+				AF5E3A811BC66F7900521BEE /* NotificationInfo.m in Sources */,
 				AF5923F51BA9482600158B86 /* FilterTypeTVC.m in Sources */,
 				AFDEE7CA1B9D2F4100CCDA2C /* MessageInterceptor.m in Sources */,
 				AF02ED1A1B91A5CF00890BF7 /* GroupViewController.m in Sources */,
@@ -731,6 +758,7 @@
 				AFDEE7C91B9D2F4100CCDA2C /* LoadMoreTableFooterView.m in Sources */,
 				AF4A2C731B8B40EA00B61B1B /* RegisterViewController.m in Sources */,
 				AF42A6831B96908C0060D67C /* LocationViewController.m in Sources */,
+				AF5E3A7D1BB92D2800521BEE /* NotificationListCell.m in Sources */,
 				AFDEE7CB1B9D2F4100CCDA2C /* PullTableView.m in Sources */,
 				AF02ED241B91E33600890BF7 /* MineViewController.m in Sources */,
 				AF02ED2B1B9294D000890BF7 /* CreateMissionViewController.m in Sources */,
