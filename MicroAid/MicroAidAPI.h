@@ -15,7 +15,7 @@
 +(NSString *)GetIPAddress;
 
 //1 用户帐户登录
-+(NSDictionary *)MobileLogin:(NSString *)email password:(NSString *)password;
++(NSDictionary *)MobileLogin:(NSString *)email password:(NSString *)password channelID:(NSString *)channelID;
 
 //2 注册用户
 +(NSDictionary *)RegisterUser:(User *)user choiceID:(NSString *)strings;

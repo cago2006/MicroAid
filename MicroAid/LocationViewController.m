@@ -11,6 +11,7 @@
 
 @interface LocationViewController (){
     bool isGeoSearch;
+    bool isSuccess;
 }
 
 @end
@@ -35,16 +36,35 @@
         self.navigationController.navigationBar.translucent = NO;
     }
     
-    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
-    [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [rightBtn addTarget:self action:@selector(returnToCreate) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
-    self.navigationItem.rightBarButtonItem = rightItem;
+    if(!self.isView){
+        UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
+        [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [rightBtn addTarget:self action:@selector(returnToCreate) forControlEvents:UIControlEventTouchUpInside];
+        [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+        self.navigationItem.rightBarButtonItem = rightItem;
+    }else{
+        _geocodesearch = [[BMKGeoCodeSearch alloc]init];
+        _searchBar.text = self.missionLocation;
+        //开始定位
+        isGeoSearch = false;
+        CLLocationCoordinate2D pt = (CLLocationCoordinate2D){self.missionLatitude, self.missionLongitude};
+        
+        BMKReverseGeoCodeOption *reverseGeocodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
+        reverseGeocodeSearchOption.reverseGeoPoint = pt;
+        BOOL flag = [_geocodesearch reverseGeoCode:reverseGeocodeSearchOption];
+        if(flag)
+        {
+            NSLog(@"反geo检索发送成功");
+        }
+        else
+        {
+            NSLog(@"反geo检索发送失败");
+        }
+    }
     [self.navigationItem setTitle:@"任务定位"];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
  
-    NSLog(@"load");
     [_mapView setZoomLevel:14];
 }
 -(void) passTypeValues:(NSMutableArray *)array choiceString:(NSString *)string{
@@ -113,15 +133,18 @@
 }
 
 -(void) returnToCreate{
-    CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+    if(isSuccess){
+        CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+        
+        self.returnLocationDelegate = cmVC;
+        cmVC.isEditMission = NO;
+        [self.returnLocationDelegate passChoiceLocationValues:self.missionLocation latitude:self.missionLatitude longitude:self.missionLongitude];
+        
+        [self.navigationController popToViewController:cmVC animated:YES];
+    }else{
+        [ProgressHUD showError:@"请搜索成功后再保存!"];
+    }
     
-    self.returnLocationDelegate = cmVC;
-    cmVC.isEditMission = NO;
-    [self.returnLocationDelegate passChoiceLocationValues:self.missionLocation latitude:self.missionLatitude longitude:self.missionLongitude];
-    
-    
-    
-    [self.navigationController popToViewController:cmVC animated:YES];
 }
 
 
@@ -182,9 +205,11 @@
     [_mapView removeOverlays:array];
     
     if (error == 0) {//搜索成功
+        isSuccess = YES;
         BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
         item.coordinate = result.location;
         
+        self.missionLocation = result.address;
         self.missionLatitude = result.location.latitude;
         self.missionLongitude = result.location.longitude;
         
@@ -212,6 +237,7 @@
         BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
         item.coordinate = result.location;
         item.title = result.address;
+        _searchBar.text = result.address;
         [_mapView addAnnotation:item];
         _mapView.centerCoordinate = result.location;
         
@@ -225,7 +251,8 @@
     
     [searchBar resignFirstResponder];
     
-    self.missionLocation = searchBar.text;
+    //self.missionLocation = searchBar.text;
+    isSuccess = NO;
     
     //搜索
     [self beginGeocode:@"" andAddress:searchBar.text];

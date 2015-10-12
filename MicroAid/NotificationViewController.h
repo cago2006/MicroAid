@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PullTableView.h"
 
-@interface NotificationViewController : UIViewController
+@interface NotificationViewController : UIViewController<PullTableViewDelegate,UITableViewDelegate>{
+    
+}
+@property (nonatomic, strong) IBOutlet PullTableView *pullTableView;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+//附近任务数组(每次从服务器获取)
+@property(nonatomic,strong) NSMutableArray *notificationInfoArray;
+@property(nonatomic,assign) int count;
 
 @end

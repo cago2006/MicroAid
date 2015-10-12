@@ -24,10 +24,15 @@
 
 @property (nonatomic, assign) bool isAccepted;
 @property (assign, nonatomic) double missionDistance;
+@property (strong, nonatomic) NSString *missionAddress;
+@property (assign, nonatomic) double missionLatitude;
+@property (assign, nonatomic) double missionLongitude;
 @property (assign, nonatomic) NSInteger missionID;
 @property (assign, nonatomic) NSInteger fromID;
 @property (assign, nonatomic) NSInteger toID;
+@property (assign, nonatomic) bool isSelf;//用于判断是否显示“据您xxx米”
 -(IBAction)fromBtnClicked:(UIButton *)sender;
 -(IBAction)toBtnClicked:(UIButton *)sender;
+-(IBAction)addressBtnClicked:(UIButton *)sender;
 
 @end

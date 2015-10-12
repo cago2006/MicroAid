@@ -12,6 +12,7 @@
 #import "GTMBase64.h"
 #import "MyInfoViewController.h"
 #import "ViewUserViewController.h"
+#import "LocationViewController.h"
 
 @interface ViewMissionViewController ()
 
@@ -72,7 +73,14 @@
     [typeLabel setText:[NSString stringWithFormat:@"任务类型:%@",[dic objectForKey:@"taskType"]]];
     [groupLabel setText:[NSString stringWithFormat:@"任务对象:%@",[dic objectForKey:@"publicity"]]];
     [bonusLabel setText:[NSString stringWithFormat:@"任务悬赏:%@",[NSString stringWithFormat:@"%ld分",(long)[[dic objectForKey:@"taskScores"]integerValue]]]];
-    [addressLabel setText:[NSString stringWithFormat:@"任务地址:%@(距您%.1f米)",[dic objectForKey:@"address"],self.missionDistance]];
+    self.missionAddress = [dic objectForKey:@"address"];
+    self.missionLatitude = [[dic objectForKey:@"latitude"]doubleValue];
+    self.missionLongitude = [[dic objectForKey:@"longitude"]doubleValue];
+    if(!self.isSelf){
+        [addressLabel setText:[NSString stringWithFormat:@"任务地址:%@(距您%.1f米)",self.missionAddress,self.missionDistance]];
+    }else{
+        [addressLabel setText:[NSString stringWithFormat:@"任务地址:%@",self.missionAddress]];
+    }
     [typeLabel setText:[NSString stringWithFormat:@"任务类型:%@",[dic objectForKey:@"taskType"]]];
     desTextView.text =[dic objectForKey:@"description"];
     if(self.toID<1){
@@ -178,5 +186,14 @@
         [self.navigationController pushViewController:viewUserVC animated:YES];
     }
 }
+-(IBAction)addressBtnClicked:(UIButton *)sender{
+    LocationViewController *locationVC = [[LocationViewController alloc] initWithNibName:@"LocationViewController" bundle:nil];
+    locationVC.isView = YES;
+    locationVC.missionLocation = self.missionAddress;
+    locationVC.missionLongitude = self.missionLongitude;
+    locationVC.missionLatitude = self.missionLatitude;
+    [self.navigationController pushViewController:locationVC animated:YES];
+}
+
 
 @end

@@ -46,16 +46,36 @@
     NSString *password = [userDefaults stringForKey:@"password"];
     NSLog(@"userName=%@,password=%@",username,password);
     if ((username != nil)&&(password != nil)&&!([username isEqualToString:@""]) && !([password isEqualToString:@""])) {
-        //如果已登陆
-        HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
-        self.homeNavigationViewController = [[UINavigationController alloc]initWithRootViewController:homeVC];
-        [self.homeNavigationViewController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
-        [self.view addSubview:self.homeNavigationViewController.view];
-        
+        //如果已登陆,不用输入，直接登录
+        dispatch_async(serverQueue, ^{
+            NSDictionary *resultDic = [MicroAidAPI MobileLogin:username password:password channelID:@""];
+            if ([[resultDic objectForKey:@"userID"] integerValue] > 0 ) {
+                [self performSelectorOnMainThread:@selector(switchNextViewController) withObject:nil waitUntilDone:YES];
+                return ;
+            }
+            else//登录出错
+            {
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"登录失败！" waitUntilDone:YES];
+                return ;
+            }
+        });
     } else {
         self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
         [self.view addSubview:self.loginViewController.view];
     }
+}
+
+-(void)switchNextViewController{
+    //如果已登陆
+    HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+    self.homeNavigationViewController = [[UINavigationController alloc]initWithRootViewController:homeVC];
+    [self.homeNavigationViewController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
+    [self.view addSubview:self.homeNavigationViewController.view];
+}
+
+- (void) errorWithMessage:(NSString *)message {
+    [self.view setUserInteractionEnabled:true];
+    [ProgressHUD showError:message];
 }
 
 //从login界面到homeview界面

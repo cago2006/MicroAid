@@ -114,16 +114,15 @@
 }
 
 -(void)returnToLogin{
-    RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
-    [rootController switchToLoginViewFromMainTab];
-    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *dictionary = [userDefaults dictionaryRepresentation];
     for(NSString* key in [dictionary allKeys]){
         [userDefaults removeObjectForKey:key];
         [userDefaults synchronize];
     }
+    RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
+    [rootController switchToLoginViewFromMainTab];
 }
 
 @end

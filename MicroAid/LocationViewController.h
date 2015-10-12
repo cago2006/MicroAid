@@ -19,7 +19,7 @@
     
     IBOutlet BMKMapView* _mapView;
     BMKGeoCodeSearch* _geocodesearch;
-    
+    __weak IBOutlet UISearchBar *_searchBar;
 }
 
 @property (retain,nonatomic) id <ReturnLocationDelegate> returnLocationDelegate;
@@ -30,5 +30,7 @@
 @property (nonatomic, assign) double missionLatitude;
 //当前位置
 @property (nonatomic, retain) NSString *missionLocation;
+
+@property (nonatomic, assign) bool isView;
 
 @end

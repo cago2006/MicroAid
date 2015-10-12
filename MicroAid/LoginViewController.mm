@@ -67,7 +67,7 @@
     self.view.userInteractionEnabled = false;
     
     dispatch_async(serverQueue, ^{
-        NSDictionary *resultDic = [MicroAidAPI MobileLogin:username password:password];
+        NSDictionary *resultDic = [MicroAidAPI MobileLogin:username password:password channelID:@""];
         
         if ([[resultDic objectForKey:@"userID"] integerValue] > 0 ) {
             
