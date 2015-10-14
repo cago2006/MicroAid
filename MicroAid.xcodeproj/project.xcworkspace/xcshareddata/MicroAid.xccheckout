@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1174204F-6454-4338-88FA-156343F1FF31</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MicroAid</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>351FADCAA7B8A63BE8239FE42FA87D01BD1D721E</key>
+		<string>https://github.com/cago2006/MicroAid.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MicroAid.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>351FADCAA7B8A63BE8239FE42FA87D01BD1D721E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/cago2006/MicroAid.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>351FADCAA7B8A63BE8239FE42FA87D01BD1D721E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>351FADCAA7B8A63BE8239FE42FA87D01BD1D721E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MicroAid</string>
+		</dict>
+	</array>
+</dict>
+</plist>

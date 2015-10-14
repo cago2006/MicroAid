@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF02ED0F1B919DDF00890BF7 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF02ED0D1B919DDF00890BF7 /* MainTabBarController.m */; };
 		AF02ED151B91A59D00890BF7 /* MissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF02ED131B91A59D00890BF7 /* MissionViewController.m */; };
 		AF02ED161B91A59D00890BF7 /* MissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF02ED141B91A59D00890BF7 /* MissionViewController.xib */; };
 		AF02ED1A1B91A5CF00890BF7 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF02ED181B91A5CF00890BF7 /* GroupViewController.m */; };
@@ -18,6 +17,15 @@
 		AF02ED261B92936200890BF7 /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF02ED1E1B91E32500890BF7 /* NotificationViewController.xib */; };
 		AF02ED2B1B9294D000890BF7 /* CreateMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF02ED291B9294D000890BF7 /* CreateMissionViewController.m */; };
 		AF02ED2C1B9294D000890BF7 /* CreateMissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF02ED2A1B9294D000890BF7 /* CreateMissionViewController.xib */; };
+		AF04FA6A1BCBAD1500035C59 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012081B9045880016E973 /* SystemConfiguration.framework */; };
+		AF04FA6B1BCBAD5100035C59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5E3A761BB5369F00521BEE /* Foundation.framework */; };
+		AF04FA6C1BCBAD5B00035C59 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5E3A741BB5369400521BEE /* CoreFoundation.framework */; };
+		AF04FA6D1BCBAD6300035C59 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF60120C1B90459B0016E973 /* Security.framework */; };
+		AF04FA6E1BCBAD6C00035C59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF60120A1B9045930016E973 /* CoreGraphics.framework */; };
+		AF04FA6F1BCBAD7600035C59 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012061B90457C0016E973 /* OpenGLES.framework */; };
+		AF04FA701BCBAD7D00035C59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012041B9045730016E973 /* QuartzCore.framework */; };
+		AF04FA711BCBAD8700035C59 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012021B90455D0016E973 /* CoreLocation.framework */; };
+		AF04FA751BCBADFF00035C59 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AF04FA741BCBADFF00035C59 /* libz.tbd */; };
 		AF42A6701B94785D0060D67C /* BonusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42A66E1B94785D0060D67C /* BonusTableViewController.m */; };
 		AF42A6711B94785D0060D67C /* BonusTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF42A66F1B94785D0060D67C /* BonusTableViewController.xib */; };
 		AF42A6751B958C310060D67C /* DateTimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42A6741B958C310060D67C /* DateTimeUtils.m */; };
@@ -53,26 +61,22 @@
 		AF5A52021B9BDB230018CE98 /* Mission.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5A52011B9BDB230018CE98 /* Mission.m */; };
 		AF5D62041B8EA2F800897E09 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5D62021B8EA2F800897E09 /* HomeViewController.m */; };
 		AF5D62051B8EA2F800897E09 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF5D62031B8EA2F800897E09 /* HomeViewController.xib */; };
-		AF5E3A751BB5369400521BEE /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5E3A741BB5369400521BEE /* CoreFoundation.framework */; };
-		AF5E3A771BB5369F00521BEE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5E3A761BB5369F00521BEE /* Foundation.framework */; };
-		AF5E3A791BB536A900521BEE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5E3A781BB536A900521BEE /* libz.dylib */; };
 		AF5E3A7D1BB92D2800521BEE /* NotificationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5E3A7B1BB92D2800521BEE /* NotificationListCell.m */; };
 		AF5E3A7E1BB92D2800521BEE /* NotificationListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF5E3A7C1BB92D2800521BEE /* NotificationListCell.xib */; };
 		AF5E3A811BC66F7900521BEE /* NotificationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF5E3A801BC66F7900521BEE /* NotificationInfo.m */; };
 		AF6011FA1B9036910016E973 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF6011F91B9036910016E973 /* Default-568h@2x.png */; };
-		AF6012011B9045380016E973 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012001B9045380016E973 /* BaiduMapAPI.framework */; };
-		AF6012031B90455D0016E973 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012021B90455D0016E973 /* CoreLocation.framework */; };
-		AF6012051B9045730016E973 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012041B9045730016E973 /* QuartzCore.framework */; };
-		AF6012071B90457C0016E973 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012061B90457C0016E973 /* OpenGLES.framework */; };
-		AF6012091B9045880016E973 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012081B9045880016E973 /* SystemConfiguration.framework */; };
-		AF60120B1B9045930016E973 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF60120A1B9045930016E973 /* CoreGraphics.framework */; };
-		AF60120D1B90459B0016E973 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF60120C1B90459B0016E973 /* Security.framework */; };
-		AF6012111B9046600016E973 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AF6012101B9046600016E973 /* mapapi.bundle */; };
 		AF68EBB91B8F060A003FF85B /* ChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF68EBB71B8F060A003FF85B /* ChoiceViewController.m */; };
 		AF68EBBA1B8F060A003FF85B /* ChoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF68EBB81B8F060A003FF85B /* ChoiceViewController.xib */; };
 		AF6B66321B8DF0CB0013F12A /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = AF6B66301B8DF0CB0013F12A /* LoginViewController.mm */; };
 		AF6B66331B8DF0CB0013F12A /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF6B66311B8DF0CB0013F12A /* LoginViewController.xib */; };
+		AF862D5C1BCBD85B003BF8CE /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */; settings = {ASSET_TAGS = (); }; };
 		AF8E84BE1B9C3009009EC184 /* MissionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8E84BD1B9C3009009EC184 /* MissionInfo.m */; };
+		AFA694C91BCE7A12000AD7CC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA694C71BCE7A12000AD7CC /* MainTabBarController.m */; settings = {ASSET_TAGS = (); }; };
+		AFA694CA1BCE7A12000AD7CC /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA694C81BCE7A12000AD7CC /* MainTabBarController.xib */; settings = {ASSET_TAGS = (); }; };
+		AFAF92F81BCBE45400CE1A9D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012001B9045380016E973 /* BaiduMapAPI.framework */; };
+		AFAF92FA1BCCA95100CE1A9D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */; };
+		AFAF92FF1BCCAB2F00CE1A9D /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF92FD1BCCAB2F00CE1A9D /* libBPush.a */; settings = {ASSET_TAGS = (); }; };
+		AFAF93001BCCAB2F00CE1A9D /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = AFAF92FE1BCCAB2F00CE1A9D /* test.caf */; settings = {ASSET_TAGS = (); }; };
 		AFC90D751B8AF2010057CF3D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC90D741B8AF2010057CF3D /* main.m */; };
 		AFC90D781B8AF2010057CF3D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC90D771B8AF2010057CF3D /* AppDelegate.m */; };
 		AFC90D801B8AF2010057CF3D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFC90D7F1B8AF2010057CF3D /* Images.xcassets */; };
@@ -117,8 +121,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AF02ED0C1B919DDF00890BF7 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
-		AF02ED0D1B919DDF00890BF7 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		AF02ED121B91A59D00890BF7 /* MissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionViewController.h; sourceTree = "<group>"; };
 		AF02ED131B91A59D00890BF7 /* MissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionViewController.m; sourceTree = "<group>"; };
 		AF02ED141B91A59D00890BF7 /* MissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissionViewController.xib; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		AF02ED281B9294D000890BF7 /* CreateMissionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateMissionViewController.h; sourceTree = "<group>"; };
 		AF02ED291B9294D000890BF7 /* CreateMissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateMissionViewController.m; sourceTree = "<group>"; };
 		AF02ED2A1B9294D000890BF7 /* CreateMissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateMissionViewController.xib; sourceTree = "<group>"; };
+		AF04FA741BCBADFF00035C59 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		AF42A66D1B94785D0060D67C /* BonusTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusTableViewController.h; sourceTree = "<group>"; };
 		AF42A66E1B94785D0060D67C /* BonusTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusTableViewController.m; sourceTree = "<group>"; };
 		AF42A66F1B94785D0060D67C /* BonusTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BonusTableViewController.xib; sourceTree = "<group>"; };
@@ -191,7 +194,6 @@
 		AF5D62031B8EA2F800897E09 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		AF5E3A741BB5369400521BEE /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		AF5E3A761BB5369F00521BEE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		AF5E3A781BB536A900521BEE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		AF5E3A7A1BB92D2800521BEE /* NotificationListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationListCell.h; sourceTree = "<group>"; };
 		AF5E3A7B1BB92D2800521BEE /* NotificationListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationListCell.m; sourceTree = "<group>"; };
 		AF5E3A7C1BB92D2800521BEE /* NotificationListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationListCell.xib; sourceTree = "<group>"; };
@@ -205,15 +207,22 @@
 		AF6012081B9045880016E973 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		AF60120A1B9045930016E973 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AF60120C1B90459B0016E973 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		AF6012101B9046600016E973 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapAPI.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		AF68EBB61B8F060A003FF85B /* ChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoiceViewController.h; sourceTree = "<group>"; };
 		AF68EBB71B8F060A003FF85B /* ChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoiceViewController.m; sourceTree = "<group>"; };
 		AF68EBB81B8F060A003FF85B /* ChoiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoiceViewController.xib; sourceTree = "<group>"; };
 		AF6B662F1B8DF0CB0013F12A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		AF6B66301B8DF0CB0013F12A /* LoginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginViewController.mm; sourceTree = "<group>"; };
 		AF6B66311B8DF0CB0013F12A /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapAPI.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		AF8E84BC1B9C3009009EC184 /* MissionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionInfo.h; sourceTree = "<group>"; };
 		AF8E84BD1B9C3009009EC184 /* MissionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionInfo.m; sourceTree = "<group>"; };
+		AFA694C61BCE7A12000AD7CC /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		AFA694C71BCE7A12000AD7CC /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		AFA694C81BCE7A12000AD7CC /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTabBarController.xib; sourceTree = "<group>"; };
+		AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		AFAF92FC1BCCAB2F00CE1A9D /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
+		AFAF92FD1BCCAB2F00CE1A9D /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		AFAF92FE1BCCAB2F00CE1A9D /* test.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.caf; sourceTree = "<group>"; };
 		AFC90D6F1B8AF2010057CF3D /* MicroAid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MicroAid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC90D731B8AF2010057CF3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFC90D741B8AF2010057CF3D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -271,16 +280,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF6012091B9045880016E973 /* SystemConfiguration.framework in Frameworks */,
-				AF5E3A791BB536A900521BEE /* libz.dylib in Frameworks */,
-				AF5E3A771BB5369F00521BEE /* Foundation.framework in Frameworks */,
-				AF5E3A751BB5369400521BEE /* CoreFoundation.framework in Frameworks */,
-				AF60120D1B90459B0016E973 /* Security.framework in Frameworks */,
-				AF60120B1B9045930016E973 /* CoreGraphics.framework in Frameworks */,
-				AF6012071B90457C0016E973 /* OpenGLES.framework in Frameworks */,
-				AF6012051B9045730016E973 /* QuartzCore.framework in Frameworks */,
-				AF6012031B90455D0016E973 /* CoreLocation.framework in Frameworks */,
-				AF6012011B9045380016E973 /* BaiduMapAPI.framework in Frameworks */,
+				AFAF92FA1BCCA95100CE1A9D /* CoreTelephony.framework in Frameworks */,
+				AFAF92F81BCBE45400CE1A9D /* BaiduMapAPI.framework in Frameworks */,
+				AF04FA751BCBADFF00035C59 /* libz.tbd in Frameworks */,
+				AF04FA711BCBAD8700035C59 /* CoreLocation.framework in Frameworks */,
+				AF04FA701BCBAD7D00035C59 /* QuartzCore.framework in Frameworks */,
+				AF04FA6F1BCBAD7600035C59 /* OpenGLES.framework in Frameworks */,
+				AF04FA6E1BCBAD6C00035C59 /* CoreGraphics.framework in Frameworks */,
+				AF04FA6D1BCBAD6300035C59 /* Security.framework in Frameworks */,
+				AF04FA6C1BCBAD5B00035C59 /* CoreFoundation.framework in Frameworks */,
+				AF04FA6B1BCBAD5100035C59 /* Foundation.framework in Frameworks */,
+				AFAF92FF1BCCAB2F00CE1A9D /* libBPush.a in Frameworks */,
+				AF04FA6A1BCBAD1500035C59 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,8 +308,9 @@
 		AF02ED111B91A57500890BF7 /* mainTab */ = {
 			isa = PBXGroup;
 			children = (
-				AF02ED0C1B919DDF00890BF7 /* MainTabBarController.h */,
-				AF02ED0D1B919DDF00890BF7 /* MainTabBarController.m */,
+				AFA694C61BCE7A12000AD7CC /* MainTabBarController.h */,
+				AFA694C71BCE7A12000AD7CC /* MainTabBarController.m */,
+				AFA694C81BCE7A12000AD7CC /* MainTabBarController.xib */,
 				AF02ED121B91A59D00890BF7 /* MissionViewController.h */,
 				AF02ED131B91A59D00890BF7 /* MissionViewController.m */,
 				AF02ED141B91A59D00890BF7 /* MissionViewController.xib */,
@@ -405,7 +417,8 @@
 		AF6011FD1B90402C0016E973 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AF5E3A781BB536A900521BEE /* libz.dylib */,
+				AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */,
+				AF04FA741BCBADFF00035C59 /* libz.tbd */,
 				AF5E3A761BB5369F00521BEE /* Foundation.framework */,
 				AF5E3A741BB5369400521BEE /* CoreFoundation.framework */,
 				AF60120C1B90459B0016E973 /* Security.framework */,
@@ -419,10 +432,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AFAF92FB1BCCAB0F00CE1A9D /* LibBPush */ = {
+			isa = PBXGroup;
+			children = (
+				AFAF92FC1BCCAB2F00CE1A9D /* BPush.h */,
+				AFAF92FD1BCCAB2F00CE1A9D /* libBPush.a */,
+				AFAF92FE1BCCAB2F00CE1A9D /* test.caf */,
+			);
+			name = LibBPush;
+			sourceTree = "<group>";
+		};
 		AFC90D661B8AF2010057CF3D = {
 			isa = PBXGroup;
 			children = (
-				AF6012101B9046600016E973 /* mapapi.bundle */,
+				AFAF92FB1BCCAB0F00CE1A9D /* LibBPush */,
+				AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */,
 				AFC90D711B8AF2010057CF3D /* MicroAid */,
 				AFC90D8B1B8AF2010057CF3D /* MicroAidTests */,
 				AFC90D701B8AF2010057CF3D /* Products */,
@@ -627,14 +651,16 @@
 		AFC90D671B8AF2010057CF3D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Strikingly;
 				TargetAttributes = {
 					AFC90D6E1B8AF2010057CF3D = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 94RFBF469V;
 					};
 					AFC90D871B8AF2010057CF3D = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 94RFBF469V;
 						TestTargetID = AFC90D6E1B8AF2010057CF3D;
 					};
 				};
@@ -663,6 +689,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFAF93001BCCAB2F00CE1A9D /* test.caf in Resources */,
 				AF4A2C741B8B40EA00B61B1B /* RegisterViewController.xib in Resources */,
 				AFDEE7D91B9D2F6000CCDA2C /* grayArrow@2x.png in Resources */,
 				AF42A67F1B95D70B0060D67C /* GroupTableViewController.xib in Resources */,
@@ -684,14 +711,15 @@
 				AFDEE7DA1B9D2F6000CCDA2C /* whiteArrow.png in Resources */,
 				AFDEE7E01B9D309100CCDA2C /* MissionListCell.xib in Resources */,
 				AF5D62051B8EA2F800897E09 /* HomeViewController.xib in Resources */,
+				AF862D5C1BCBD85B003BF8CE /* mapapi.bundle in Resources */,
 				AF5E3A7E1BB92D2800521BEE /* NotificationListCell.xib in Resources */,
 				AFDD8AD01BAB988D00A3369B /* MyInfoCell.xib in Resources */,
 				AF5923EB1BA801C400158B86 /* FilterViewController.xib in Resources */,
 				AF589C371BAFE59200D1A797 /* StartedMissionsViewController.xib in Resources */,
-				AF6012111B9046600016E973 /* mapapi.bundle in Resources */,
 				AF42A6841B96908C0060D67C /* LocationViewController.xib in Resources */,
 				AF5923F61BA9482600158B86 /* FilterTypeTVC.xib in Resources */,
 				AF6011FA1B9036910016E973 /* Default-568h@2x.png in Resources */,
+				AFA694CA1BCE7A12000AD7CC /* MainTabBarController.xib in Resources */,
 				AF5924001BAA59EE00158B86 /* ViewGroupViewController.xib in Resources */,
 				AF02ED161B91A59D00890BF7 /* MissionViewController.xib in Resources */,
 				AFDC6C0A1BB23F700080F6D1 /* ViewMissionViewController.xib in Resources */,
@@ -732,6 +760,7 @@
 				AF4E2B8A1B8C086A00425FF1 /* User.m in Sources */,
 				AF42A67E1B95D70B0060D67C /* GroupTableViewController.m in Sources */,
 				AF5D62041B8EA2F800897E09 /* HomeViewController.m in Sources */,
+				AFA694C91BCE7A12000AD7CC /* MainTabBarController.m in Sources */,
 				AFDC6C091BB23F700080F6D1 /* ViewMissionViewController.m in Sources */,
 				AFC90D781B8AF2010057CF3D /* AppDelegate.m in Sources */,
 				AF589C311BAFE1C200D1A797 /* FinishedMissionsViewController.m in Sources */,
@@ -742,7 +771,6 @@
 				AFD43AB71BAD094A00D6D441 /* GTMBase64.m in Sources */,
 				AFDD8AD41BABACA200A3369B /* ModPasswordViewController.m in Sources */,
 				AF6B66321B8DF0CB0013F12A /* LoginViewController.mm in Sources */,
-				AF02ED0F1B919DDF00890BF7 /* MainTabBarController.m in Sources */,
 				AFDEE7C81B9D2F4100CCDA2C /* EGORefreshTableHeaderView.m in Sources */,
 				AF5923F01BA93DD600158B86 /* FilterBonusTVC.m in Sources */,
 				AF02ED1F1B91E32500890BF7 /* NotificationViewController.m in Sources */,
@@ -805,10 +833,12 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -827,6 +857,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "00a50e7a-2ee1-4b3a-b81c-b79b038592c3";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -848,6 +879,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -863,6 +895,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "00a50e7a-2ee1-4b3a-b81c-b79b038592c3";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -872,16 +905,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/junchen/Desktop/BaiduMap_IOSSDK_v2.8.1_All/BaiduMap_IOSSDK_v2.8.1_Lib/Release-iphoneos",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = "MicroAid/MicroAid-prefix.pch";
 				INFOPLIST_FILE = MicroAid/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BaiduMapAPI.framework",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fudan.microAid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -889,16 +931,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/junchen/Desktop/BaiduMap_IOSSDK_v2.8.1_All/BaiduMap_IOSSDK_v2.8.1_Lib/Release-iphoneos",
 					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = "MicroAid/MicroAid-prefix.pch";
 				INFOPLIST_FILE = MicroAid/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BaiduMapAPI.framework",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fudan.microAid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -906,6 +957,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -916,7 +969,9 @@
 				);
 				INFOPLIST_FILE = MicroAidTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "strikingly.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MicroAid.app/MicroAid";
 			};
 			name = Debug;
@@ -925,13 +980,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = MicroAidTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "strikingly.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MicroAid.app/MicroAid";
 			};
 			name = Release;
