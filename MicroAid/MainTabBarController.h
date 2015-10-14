@@ -2,12 +2,16 @@
 //  MainTabBarController.h
 //  MicroAid
 //
-//  Created by jiahuaxu on 15/8/29.
-//  Copyright (c) 2015年 Strikingly. All rights reserved.
+//  Created by jiahuaxu on 15/10/14.
+//  Copyright © 2015年 Strikingly. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface MainTabBarController : UITabBarController
+
+@property(nonatomic, assign) int currentIndex;
+@property(nonatomic, assign) bool isgood;
+@property(nonatomic, assign) double test;
 
 @end

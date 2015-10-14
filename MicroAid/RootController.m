@@ -8,6 +8,7 @@
 
 #import "RootController.h"
 #import "MicroAidAPI.h"
+#import "BPush.h"
 #import "LoginViewController.h"
 #import "HomeViewController.h"
 #import "MainTabBarController.h"
@@ -48,7 +49,7 @@
     if ((username != nil)&&(password != nil)&&!([username isEqualToString:@""]) && !([password isEqualToString:@""])) {
         //如果已登陆,不用输入，直接登录
         dispatch_async(serverQueue, ^{
-            NSDictionary *resultDic = [MicroAidAPI MobileLogin:username password:password channelID:@""];
+            NSDictionary *resultDic = [MicroAidAPI MobileLogin:username password:password channelID:[BPush getChannelId]];
             if ([[resultDic objectForKey:@"userID"] integerValue] > 0 ) {
                 [self performSelectorOnMainThread:@selector(switchNextViewController) withObject:nil waitUntilDone:YES];
                 return ;
@@ -116,7 +117,10 @@
     [self.view addSubview:self.mainTabBarNavifationController.view];*/
     
     
-    self.mainTabBarController = [[MainTabBarController alloc]init];
+    self.mainTabBarController = [[MainTabBarController alloc]initWithNibName:@"MainTabBarController" bundle:nil];
+    self.mainTabBarController.currentIndex = 2;
+    self.mainTabBarController.isgood= YES;
+    self.mainTabBarController.test = 9.99;
     [self.view addSubview:self.mainTabBarController.view];
     
     //navigation
@@ -150,6 +154,19 @@
     self.homeNavigationViewController = [[UINavigationController alloc]initWithRootViewController:homeVC];
     [self.homeNavigationViewController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
     [self.view addSubview:self.homeNavigationViewController.view];
+}
+
+
+-(void) startLoginView{
+    self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    [self.view addSubview:self.loginViewController.view];
+}
+
+
+-(void) startMainTabView{
+    self.mainTabBarController = [[MainTabBarController alloc]init];
+    self.mainTabBarController.currentIndex = 2;
+    [self.view addSubview:self.mainTabBarController.view];
 }
 
 

@@ -35,7 +35,7 @@ NSString *ipAddr;
 + (NSDictionary *)MobileLogin:(NSString *)username password:(NSString *)password channelID:(NSString *)channelID
 {
     NSError *error = nil;
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/user/login.action?userName=%@&password=%@&channelID=&%@&deviceType=4",ipAddr,username,password,channelID];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/user/login.action?userName=%@&password=%@&channelID=%@&deviceType=4",ipAddr,username,password,channelID];
     NSLog(@"loginURL:%@",urlString);
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

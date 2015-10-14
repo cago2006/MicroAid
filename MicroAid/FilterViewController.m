@@ -245,6 +245,7 @@
 
 -(void) saveFilter{
     //保存
+    [self.view endEditing:YES];
     self.missionDistance = [distanceTextField.text doubleValue];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:self.missionGroup forKey:@"missionGroup"];

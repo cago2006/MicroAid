@@ -22,4 +22,8 @@
 
 -(void) switchToHomeViewFromMainTab;  //从驻界面到homeview界面
 
+-(void) startLoginView;  //打开登陆界面
+
+-(void) startMainTabView;  //打开主界面
+
 @end

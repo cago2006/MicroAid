@@ -371,7 +371,7 @@
 }
 
 -(void) saveMission{
-    
+    [self.view endEditing:YES];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
     

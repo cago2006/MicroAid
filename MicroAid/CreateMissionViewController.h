@@ -48,7 +48,6 @@
 @property (retain, nonatomic) NSString *typeString;
 @property (retain, nonatomic) NSString *groupString;
 @property (assign, nonatomic) double missionLongitude;
-
 @property (assign, nonatomic) double missionLatitude;
 @property (retain, nonatomic) NSString *locationString;
 @property (nonatomic, assign) bool isEditMission;

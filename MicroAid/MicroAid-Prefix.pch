@@ -19,19 +19,19 @@
 #endif
 
 
-#ifdef TARGET_IPHONE_SIMULATOR
-@interface CLLocationManager (Simulator)
-@end
-
-@implementation CLLocationManager (Simulator)
-
--(void)startUpdatingLocation
-{
-    float latitude = 31.197414;
-    float longitude = 121.606026;
-    CLLocation *setLocation= [[[CLLocation alloc] initWithLatitude:latitude longitude:longitude] autorelease];
-    [self.delegate locationManager:self didUpdateToLocation:setLocation
-                      fromLocation:setLocation];
-}
-@end
-#endif // TARGET_IPHONE_SIMULATOR
+//#ifdef TARGET_IPHONE_SIMULATOR
+//@interface CLLocationManager (Simulator)
+//@end
+//
+//@implementation CLLocationManager (Simulator)
+//
+//-(void)startUpdatingLocation
+//{
+//    float latitude = 31.197414;
+//    float longitude = 121.606026;
+//    CLLocation *setLocation= [[[CLLocation alloc] initWithLatitude:latitude longitude:longitude] autorelease];
+//    [self.delegate locationManager:self didUpdateToLocation:setLocation
+//                      fromLocation:setLocation];
+//}
+//@end
+//#endif // TARGET_IPHONE_SIMULATOR

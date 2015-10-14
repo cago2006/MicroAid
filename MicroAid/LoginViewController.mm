@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "ProgressHUD.h"
 #import "RootController.h"
+#import "BPush.h"
 #import "RegisterViewController.h"
 #import "HomeViewController.h"
 #import "MicroAidAPI.h"
@@ -67,7 +68,7 @@
     self.view.userInteractionEnabled = false;
     
     dispatch_async(serverQueue, ^{
-        NSDictionary *resultDic = [MicroAidAPI MobileLogin:username password:password channelID:@""];
+        NSDictionary *resultDic = [MicroAidAPI MobileLogin:username password:password channelID:[BPush getChannelId]];
         
         if ([[resultDic objectForKey:@"userID"] integerValue] > 0 ) {
             

@@ -5,7 +5,7 @@
 //  Created by jiahuaxu on 15/8/29.
 //  Copyright (c) 2015年 Strikingly. All rights reserved.
 //
-
+#import "RootController.h"
 #import "MainTabBarController.h"
 #import "MissionViewController.h"
 #import "GroupViewController.h"
@@ -53,7 +53,12 @@
     
     self.viewControllers=@[missionNav,groupNav,notifyNav,mineNav];
     
+    self.selectedIndex = 2;
+    
+    
+    NSLog(@"index:%i",self.currentIndex);
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -61,13 +66,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
