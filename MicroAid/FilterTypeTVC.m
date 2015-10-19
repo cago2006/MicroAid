@@ -37,6 +37,11 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.dataArray = nil;
+}
+
 -(void) passLocationValues:(NSString *)location latitude:(double)latitude longitude:(double)longitude{
     
 }

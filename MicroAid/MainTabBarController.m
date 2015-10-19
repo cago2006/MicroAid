@@ -53,13 +53,12 @@
     
     self.viewControllers=@[missionNav,groupNav,notifyNav,mineNav];
     
-    self.selectedIndex = 2;
-    
-    
-    NSLog(@"index:%i",self.currentIndex);
 }
 
-
+-(void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.selectedIndex = self.currentIndex;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

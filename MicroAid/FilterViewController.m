@@ -76,6 +76,11 @@
     [typeBtn setTitle:self.missionType forState:UIControlStateNormal];
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.view.userInteractionEnabled = true;
+}
+
 -(void) passFilterBonusValues:(NSString *)string{
     self.missionBonus = string;
     [bonusBtn setTitle:self.missionBonus forState:UIControlStateNormal];
@@ -118,6 +123,7 @@
     switch (sender.tag) {
         case 0:
         {
+            self.view.userInteractionEnabled = false;
             [self.pickerView setHidden:YES];
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllExcel];
@@ -154,6 +160,7 @@
         }
         case 2:
         {
+            self.view.userInteractionEnabled = false;
             [self.pickerView setHidden:YES];
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

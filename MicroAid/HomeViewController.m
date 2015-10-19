@@ -10,6 +10,7 @@
 #import "RootController.h"
 #import "MicroAidAPI.h"
 #import "MissionInfo.h"
+#import "ViewMissionViewController.h"
 #import "CreateMissionViewController.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
@@ -86,6 +87,7 @@
     _locService.delegate = self;
     _geocodesearch.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     [self startLocation];
+    self.view.userInteractionEnabled = true;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -94,7 +96,6 @@
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
     _geocodesearch.delegate = nil; // 不用时，置nil
-    
 }
 
 
@@ -133,6 +134,7 @@
 }
 
 -(void)createMission{
+    self.view.userInteractionEnabled = false;
     CreateMissionViewController *createMissionVC = [[CreateMissionViewController alloc] initWithNibName:@"CreateMissionViewController" bundle:nil];
     createMissionVC.isEditMission = NO;
     [self.navigationController pushViewController:createMissionVC animated:YES];
@@ -248,6 +250,55 @@
 }
 
 #pragma mark BMMapGeoSearch
+
+
+/**
+ *当点击annotation view弹出的泡泡时，调用此接口
+ *@param mapView 地图View
+ *@param view 泡泡所属的annotation view
+ */
+- (void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view
+{
+    CLLocationCoordinate2D viewLocation =[view.annotation coordinate];
+    NSUInteger len = [self.missionInfoArray count];
+    for (int i=0; i<len; i++) {
+        
+        MissionInfo *info = [self.missionInfoArray objectAtIndex:i];
+        //NSLog(@"%f=%f,%f=%f",info.latitude, viewLocation.latitude, info.longtitude, viewLocation.longitude);
+        if (info.latitude == viewLocation.latitude && info.longitude == viewLocation.longitude && [info.title isEqualToString:view.annotation.title]) {
+            [self switchToTagDetailVC:info];
+            break;
+        }
+    }
+}
+
+
+-(void) switchToTagDetailVC:(MissionInfo *)info{
+    [ProgressHUD show:@"正在获取详细信息"];
+    self.view.userInteractionEnabled = false;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [userDefaults integerForKey:@"userID"];
+    if(info.userId == userID){
+        CreateMissionViewController *cmVC = [[CreateMissionViewController alloc]initWithNibName:@"CreateMissionViewController" bundle:nil];
+        
+        self.tabBarController.tabBar.hidden = YES;
+        cmVC.isEditMission = YES;
+        cmVC.missionID = info.missionId;
+        [self.navigationController pushViewController:cmVC animated:YES];
+    }else{
+        ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
+        if([info.statusInfo isEqualToString:@"未接受"]){
+            viewMissionVC.isAccepted = NO;
+        }else{
+            viewMissionVC.isAccepted = YES;
+        }
+        viewMissionVC.missionID = info.missionId;
+        viewMissionVC.missionDistance = info.distance;
+        self.tabBarController.tabBar.hidden = YES;
+        [self.navigationController pushViewController:viewMissionVC animated:YES];
+    }
+}
+
 
 
 //根据anntation生成对应的View

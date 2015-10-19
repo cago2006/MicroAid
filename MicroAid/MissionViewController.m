@@ -76,6 +76,12 @@
     self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
     [self searchNearby:self.count pageSize:20];
     self.tabBarController.tabBar.hidden = NO;
+    self.view.userInteractionEnabled = true;
+}
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.dataArray = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,6 +104,7 @@
 }
 
 -(void) filterMission{
+    self.view.userInteractionEnabled = false;
     FilterViewController *filterVC = [[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
     
     self.tabBarController.tabBar.hidden = YES;

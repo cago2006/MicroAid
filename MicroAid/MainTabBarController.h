@@ -11,7 +11,5 @@
 @interface MainTabBarController : UITabBarController
 
 @property(nonatomic, assign) int currentIndex;
-@property(nonatomic, assign) bool isgood;
-@property(nonatomic, assign) double test;
 
 @end

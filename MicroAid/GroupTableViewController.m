@@ -36,6 +36,12 @@
     [self.navigationItem setTitle:@"发布对象"];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.dataArray = nil;
+}
+
 -(void) passTypeValues:(NSMutableArray *)array choiceString:(NSString *)string{
     
 }

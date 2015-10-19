@@ -42,6 +42,11 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.dataArray = nil;
+}
+
 
 - (void) refreshTable
 {

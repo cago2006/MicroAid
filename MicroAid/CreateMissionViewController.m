@@ -68,6 +68,12 @@
     }
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [ProgressHUD dismiss];
+    self.view.userInteractionEnabled = true;
+}
+
 -(void) getMission{
     dispatch_async(serverQueue, ^{
         NSDictionary *resultDic = [MicroAidAPI fetchMission:self.missionID];
@@ -203,6 +209,7 @@
             
         case 2:
         {
+            self.view.userInteractionEnabled = false;
             [self.pickerView setHidden:YES];
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllExcel];
@@ -228,6 +235,7 @@
         }
         case 3:
         {
+            self.view.userInteractionEnabled = false;
             [self.pickerView setHidden:YES];
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

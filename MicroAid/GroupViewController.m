@@ -50,6 +50,11 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.dataArray = nil;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -66,6 +71,7 @@
 */
 
 -(void) createGroup{
+    self.view.userInteractionEnabled = false;
     UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入群组名称" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"添加",nil];
     [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [[dialog textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDefault];
@@ -90,6 +96,7 @@
             }
         });
     }
+    self.view.userInteractionEnabled = true;
     
 }
 

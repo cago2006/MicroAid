@@ -95,19 +95,19 @@
     self.nickName =[dic objectForKey:@"nickName"];
     [nickNameBtn setTitle:self.nickName forState:UIControlStateNormal];
     self.gender = [dic objectForKey:@"gender"];
-    if(![self.gender isKindOfClass:[NSString class]]){
+    if(![self.gender isKindOfClass:[NSString class]] || [self.gender isEqualToString:@""]){
         self.gender = @"点击修改";
     }
     [genderBtn setTitle:self.gender forState:UIControlStateNormal];
     self.address = [dic objectForKey:@"address"];
-    if(![self.address isKindOfClass:[NSString class]]){
+    if(![self.address isKindOfClass:[NSString class]] || [self.address isEqualToString:@""]){
         self.address = @"点击修改";
     }
     [addressBtn setTitle:self.address forState:UIControlStateNormal];
     self.score = [[dic objectForKey:@"scroes"]integerValue];
     [scoreBtn setTitle:[NSString stringWithFormat:@"%ld",(long)self.score] forState:UIControlStateNormal];
     self.email = [dic objectForKey:@"email"];
-    if(![self.email isKindOfClass:[NSString class]]){
+    if(![self.email isKindOfClass:[NSString class]] || [self.email isEqualToString:@""]){
         self.email = @"点击修改";
     }
     [emailBtn setTitle:self.email forState:UIControlStateNormal];
