@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "ic_action_list.png"
+      "filename" : "ic_action_list20.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "ic_action_list40.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "ic_action_list60.png",
       "scale" : "3x"
     }
   ],

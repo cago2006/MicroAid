@@ -117,10 +117,7 @@
     [self.view addSubview:self.mainTabBarNavifationController.view];*/
     
     
-    self.mainTabBarController = [[MainTabBarController alloc]initWithNibName:@"MainTabBarController" bundle:nil];
-    self.mainTabBarController.currentIndex = 2;
-    self.mainTabBarController.isgood= YES;
-    self.mainTabBarController.test = 9.99;
+    self.mainTabBarController = [[MainTabBarController alloc]init];
     [self.view addSubview:self.mainTabBarController.view];
     
     //navigation
