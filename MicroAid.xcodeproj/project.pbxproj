@@ -72,8 +72,6 @@
 		AF862D5C1BCBD85B003BF8CE /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */; settings = {ASSET_TAGS = (); }; };
 		AF8E84BE1B9C3009009EC184 /* MissionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8E84BD1B9C3009009EC184 /* MissionInfo.m */; };
 		AFA694C91BCE7A12000AD7CC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA694C71BCE7A12000AD7CC /* MainTabBarController.m */; settings = {ASSET_TAGS = (); }; };
-		AFA694CA1BCE7A12000AD7CC /* MainTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA694C81BCE7A12000AD7CC /* MainTabBarController.xib */; settings = {ASSET_TAGS = (); }; };
-		AFAF92F81BCBE45400CE1A9D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012001B9045380016E973 /* BaiduMapAPI.framework */; };
 		AFAF92FA1BCCA95100CE1A9D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */; };
 		AFAF92FF1BCCAB2F00CE1A9D /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF92FD1BCCAB2F00CE1A9D /* libBPush.a */; settings = {ASSET_TAGS = (); }; };
 		AFAF93001BCCAB2F00CE1A9D /* test.caf in Resources */ = {isa = PBXBuildFile; fileRef = AFAF92FE1BCCAB2F00CE1A9D /* test.caf */; settings = {ASSET_TAGS = (); }; };
@@ -83,6 +81,9 @@
 		AFC90D8F1B8AF2010057CF3D /* MicroAidTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC90D8E1B8AF2010057CF3D /* MicroAidTests.m */; };
 		AFC90DA21B8AF54E0057CF3D /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC90DA11B8AF54E0057CF3D /* RootController.m */; };
 		AFC90DA51B8AF6D80057CF3D /* MicroAidAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC90DA41B8AF6D80057CF3D /* MicroAidAPI.m */; };
+		AFD369C41BCF781D00C9101D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012001B9045380016E973 /* BaiduMapAPI.framework */; };
+		AFD369C61BCF782800C9101D /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD369C51BCF782800C9101D /* libsqlite3.0.tbd */; };
+		AFD369C81BCF784800C9101D /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD369C71BCF784800C9101D /* libstdc++.6.0.9.tbd */; };
 		AFD43AB71BAD094A00D6D441 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD43AB51BAD094A00D6D441 /* GTMBase64.m */; };
 		AFDC6C091BB23F700080F6D1 /* ViewMissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDC6C071BB23F700080F6D1 /* ViewMissionViewController.m */; };
 		AFDC6C0A1BB23F700080F6D1 /* ViewMissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDC6C081BB23F700080F6D1 /* ViewMissionViewController.xib */; };
@@ -218,7 +219,6 @@
 		AF8E84BD1B9C3009009EC184 /* MissionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionInfo.m; sourceTree = "<group>"; };
 		AFA694C61BCE7A12000AD7CC /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		AFA694C71BCE7A12000AD7CC /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
-		AFA694C81BCE7A12000AD7CC /* MainTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTabBarController.xib; sourceTree = "<group>"; };
 		AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		AFAF92FC1BCCAB2F00CE1A9D /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		AFAF92FD1BCCAB2F00CE1A9D /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
@@ -236,6 +236,8 @@
 		AFC90DA11B8AF54E0057CF3D /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
 		AFC90DA31B8AF6D80057CF3D /* MicroAidAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MicroAidAPI.h; sourceTree = "<group>"; };
 		AFC90DA41B8AF6D80057CF3D /* MicroAidAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MicroAidAPI.m; sourceTree = "<group>"; };
+		AFD369C51BCF782800C9101D /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		AFD369C71BCF784800C9101D /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		AFD43AB41BAD094A00D6D441 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		AFD43AB51BAD094A00D6D441 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		AFD43AB61BAD094A00D6D441 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -280,8 +282,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFD369C81BCF784800C9101D /* libstdc++.6.0.9.tbd in Frameworks */,
 				AFAF92FA1BCCA95100CE1A9D /* CoreTelephony.framework in Frameworks */,
-				AFAF92F81BCBE45400CE1A9D /* BaiduMapAPI.framework in Frameworks */,
+				AFD369C61BCF782800C9101D /* libsqlite3.0.tbd in Frameworks */,
+				AFD369C41BCF781D00C9101D /* BaiduMapAPI.framework in Frameworks */,
 				AF04FA751BCBADFF00035C59 /* libz.tbd in Frameworks */,
 				AF04FA711BCBAD8700035C59 /* CoreLocation.framework in Frameworks */,
 				AF04FA701BCBAD7D00035C59 /* QuartzCore.framework in Frameworks */,
@@ -310,7 +314,6 @@
 			children = (
 				AFA694C61BCE7A12000AD7CC /* MainTabBarController.h */,
 				AFA694C71BCE7A12000AD7CC /* MainTabBarController.m */,
-				AFA694C81BCE7A12000AD7CC /* MainTabBarController.xib */,
 				AF02ED121B91A59D00890BF7 /* MissionViewController.h */,
 				AF02ED131B91A59D00890BF7 /* MissionViewController.m */,
 				AF02ED141B91A59D00890BF7 /* MissionViewController.xib */,
@@ -417,6 +420,8 @@
 		AF6011FD1B90402C0016E973 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AFD369C71BCF784800C9101D /* libstdc++.6.0.9.tbd */,
+				AFD369C51BCF782800C9101D /* libsqlite3.0.tbd */,
 				AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */,
 				AF04FA741BCBADFF00035C59 /* libz.tbd */,
 				AF5E3A761BB5369F00521BEE /* Foundation.framework */,
@@ -719,7 +724,6 @@
 				AF42A6841B96908C0060D67C /* LocationViewController.xib in Resources */,
 				AF5923F61BA9482600158B86 /* FilterTypeTVC.xib in Resources */,
 				AF6011FA1B9036910016E973 /* Default-568h@2x.png in Resources */,
-				AFA694CA1BCE7A12000AD7CC /* MainTabBarController.xib in Resources */,
 				AF5924001BAA59EE00158B86 /* ViewGroupViewController.xib in Resources */,
 				AF02ED161B91A59D00890BF7 /* MissionViewController.xib in Resources */,
 				AFDC6C0A1BB23F700080F6D1 /* ViewMissionViewController.xib in Resources */,
@@ -836,7 +840,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
