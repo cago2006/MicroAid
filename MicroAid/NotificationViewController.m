@@ -10,6 +10,8 @@
 #import "MicroAidAPI.h"
 #import "NotificationInfo.h"
 #import "NotificationListCell.h"
+#import "ViewMissionViewController.h"
+#import "CreateMissionViewController.h"
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 @interface NotificationViewController ()
@@ -90,23 +92,42 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 99;
+    return 80;
 }
 
 //点击显示具体信息，首先进行判断
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     NotificationInfo *info = [self.dataArray objectAtIndex:indexPath.row];
-    [self successWithMessage:[NSString stringWithFormat:@"%li selected",info.missionID-1]];
-//    NSString *groupName = [self.dataArray objectAtIndex:indexPath.row];
-//    ViewGroupViewController *viewGroupVC = [[ViewGroupViewController alloc]initWithNibName:@"ViewGroupViewController" bundle:nil];
-//    
-//    viewGroupVC.groupName = groupName;
-//    
-//    self.tabBarController.tabBar.hidden = YES;
-//    
-//    [self.navigationController pushViewController:viewGroupVC animated:YES];
+    if([info.title isEqualToString:@"有新的任务发布,请查看!"]){
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSInteger userID = [userDefaults integerForKey:@"userID"];
+        if(info.userID==userID){
+            CreateMissionViewController *cmVC = [[CreateMissionViewController alloc]initWithNibName:@"CreateMissionViewController" bundle:nil];
+            
+            self.tabBarController.tabBar.hidden = YES;
+            cmVC.isEditMission = YES;
+            cmVC.missionID = info.missionID;
+            [self.navigationController pushViewController:cmVC animated:YES];
+        }else{
+            ViewMissionViewController *viewMissionVC = [[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
+            
+            viewMissionVC.missionID = info.missionID;
+            viewMissionVC.isAccepted = NO;
+            
+            self.tabBarController.tabBar.hidden = YES;
+            
+            [self.navigationController pushViewController:viewMissionVC animated:YES];
+        }
+    }else{
+        ViewMissionViewController *viewMissionVC = [[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
+        
+        viewMissionVC.missionID = info.missionID;
+        viewMissionVC.isAccepted = YES;
+        self.tabBarController.tabBar.hidden = YES;
+        
+        [self.navigationController pushViewController:viewMissionVC animated:YES];
+    }
     
 }
 
@@ -125,9 +146,9 @@
 
     
     NotificationInfo *info = [self.dataArray objectAtIndex:indexPath.row];
-    [[cell title]setText:[NSString stringWithFormat:@"%@ %li",info.title,info.missionID-1]];
-    [[cell taskName]setText:[NSString stringWithFormat:@"%@ %li",info.missionTitle,info.missionID-1]];
-    [[cell taskGroup]setText:[NSString stringWithFormat:@"%@ %li",info.missionGroup,info.missionID-1]];
+    [[cell title]setText:info.title];
+    [[cell taskName]setText:info.missionTitle];
+    [[cell taskGroup]setText:info.missionGroup];
     [[cell time]setText:info.time];
     
     cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
@@ -154,60 +175,36 @@
     NSInteger userID = [userDefaults integerForKey:@"userID"];
     
     
-    //test
-    for(int i = 0 ; i<10;i++){
-        NotificationInfo *info = [[NotificationInfo alloc]init];
-        info.notificationID = i+1;
-        info.missionID = i+1;
-        info.userID = i+1;
-        info.title = @"title";
-        info.missionTitle = @"missionTitle";
-        info.missionGroup = @"missionGroup";
-        info.time = @"2010-01-01 08:30";
-        [self.dataArray addObject:info];
-    }
-    
-    //end test
-    
-    
-//    dispatch_async(kBgQueue, ^{
-//        NSDictionary *groupInfo = [MicroAidAPI fetchAllGroup:userID pageNo:pageNo pageSize:pageSize];
-//        
-//        if ([[groupInfo objectForKey:@"onError"] boolValue]) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                [alertView show];
-//            });
-//            return;
-//        } else {
-//            [self.notificationInfoArray removeAllObjects];
-//            if ([[groupInfo objectForKey:@"flg"] boolValue]) {//获取成功
-//                NSArray *list = [groupInfo objectForKey:@"groupInfoList"];
-//                self.notificationInfoArray = [NSMutableArray arrayWithCapacity:[list count]];
-//                for(int i =0; i<[list count]; i++){
-//                    NSString *groupName =(NSString *)[list objectAtIndex:i];
-//                    [self.notificationInfoArray addObject:groupName];
-//                }
-//            }
-//            if ([_notificationInfoArray count] == 0) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    if(self.count == 1){
-//                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"您没有通知!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                        [alertView show];
-//                    }else{
-//                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                        [alertView show];
-//                    }
-//                });
-//                return;
-//            }
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self.dataArray addObjectsFromArray:self.notificationInfoArray];
-//                [self.pullTableView reloadData];
-//            });
-//            
-//        }
-//    });
+    dispatch_async(kBgQueue, ^{
+        NSDictionary *dic = [MicroAidAPI fetchNotification:userID pageNo:pageNo pageSize:pageSize];
+        
+        if ([[dic objectForKey:@"onError"] boolValue]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alertView show];
+            });
+            return;
+        } else {
+            _notificationInfoArray = [NotificationInfo getNotificationInfos:[dic objectForKey:@"notifications"]];
+            if ([_notificationInfoArray count] == 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(self.count == 1){
+                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"您没有通知!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        [alertView show];
+                    }else{
+                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        [alertView show];
+                    }
+                });
+                return;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.dataArray addObjectsFromArray:self.notificationInfoArray];
+                [self.pullTableView reloadData];
+            });
+            
+        }
+    });
 }
 
 - (void) errorWithMessage:(NSString *)message {

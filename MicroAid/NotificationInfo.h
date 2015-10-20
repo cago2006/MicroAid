@@ -18,4 +18,6 @@
 @property(strong,nonatomic)NSString *missionGroup;//任务群组
 @property(strong,nonatomic)NSString *time;//通知时间
 
++(NSMutableArray *)getNotificationInfos:(NSArray *)dataArray;
+
 @end

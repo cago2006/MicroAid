@@ -71,4 +71,7 @@
 //19 接受任务
 +(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID;
 
+//20 获取通知
++(NSDictionary *)fetchNotification:(NSInteger )userID pageNo:(int)pageNo pageSize:(int)pageSize;
+
 @end

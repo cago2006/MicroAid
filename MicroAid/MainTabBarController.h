@@ -10,6 +10,4 @@
 
 @interface MainTabBarController : UITabBarController
 
-@property(nonatomic, assign) int currentIndex;
-
 @end

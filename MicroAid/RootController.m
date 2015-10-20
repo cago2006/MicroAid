@@ -33,11 +33,12 @@
     NSString *ipAddr = [defaults stringForKey:@"ipAddr"];
     if (ipAddr==nil || [ipAddr isEqualToString:@""])
     {
-        ipAddr =  @"218.193.130.169:8080";
+        //ipAddr =  @"218.193.130.169:8080";
+        ipAddr =  @"10.131.241.184:8080";
     }
     NSLog(@"IP : %@", ipAddr);
-    [MicroAidAPI setIpAddr:@"218.193.130.169:8080"];
-    
+    //[MicroAidAPI setIpAddr:@"218.193.130.169:8080"];
+    [MicroAidAPI setIpAddr:@"10.131.241.184:8080"];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -162,7 +163,7 @@
 
 -(void) startMainTabView{
     self.mainTabBarController = [[MainTabBarController alloc]init];
-    self.mainTabBarController.currentIndex = 2;
+    self.mainTabBarController.selectedIndex = 2;
     [self.view addSubview:self.mainTabBarController.view];
 }
 

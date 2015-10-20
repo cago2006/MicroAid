@@ -507,4 +507,26 @@ NSString *ipAddr;
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
 }
 
+
+//20 获取通知
++(NSDictionary *)fetchNotification:(NSInteger )userID pageNo:(int)pageNo pageSize:(int)pageSize{
+    NSError *error = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/notification/findByUserID.action?userID=%ld&pageNo=%i&pageSize=%i",ipAddr,(long)userID,pageNo,pageSize];
+    
+    NSLog(@"fetchNotificationURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
 @end

@@ -10,4 +10,21 @@
 
 @implementation NotificationInfo
 
++(NSMutableArray *)getNotificationInfos:(NSArray *)dataArray{
+    NSMutableArray *momentsArray = [[NSMutableArray alloc] init];
+    NSDictionary *dic;
+    for (dic in dataArray) {
+        NotificationInfo *info =[[NotificationInfo alloc] init];
+        [info setNotificationID:[[dic objectForKey:@"id"] intValue]];
+        [info setMissionID:[[dic objectForKey:@"taskID"] intValue]];
+        [info setUserID:[[dic objectForKey:@"userID"] intValue]];
+        [info setTitle:[dic objectForKey:@"title"]];
+        [info setMissionTitle:[dic objectForKey:@"taskName"]];
+        [info setMissionGroup:[dic objectForKey:@"taskGroup"]];
+        [info setTime:[dic objectForKey:@"time"]];
+        [momentsArray addObject:info];
+    }
+    return momentsArray;
+}
+
 @end
