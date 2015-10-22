@@ -8,6 +8,7 @@
 
 #import "MicroAidAPI.h"
 #import "DateTimeUtils.h"
+#import "BPush.h"
 
 NSString *ipAddr;
 @implementation MicroAidAPI
@@ -56,7 +57,7 @@ NSString *ipAddr;
 +(NSDictionary *)RegisterUser:(User *)user choiceID:(NSString *)strings{
     NSError *error = nil;
 
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/signup.action?userPOString={\"nickName\":\"%@\",\"userName\":\"%@\",\"password\":\"%@\"}&userExcelString=%@&separator=%@",ipAddr,@"新用户",user.username,user.password,strings,@","];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/signup.action?userPOString={\"nickName\":\"%@\",\"userName\":\"%@\",\"password\":\"%@\",\"channelID\":\"%@\",\"deviceType\":\"4\"}&userExcelString=%@&separator=%@",ipAddr,@"新用户",user.username,user.password,[BPush getChannelId],strings,@","];
     
     NSLog(@"RegisterUserURL:%@",urlString);
     

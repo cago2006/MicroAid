@@ -58,6 +58,17 @@
             else//登录出错
             {
                 [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"登录失败！" waitUntilDone:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                    NSDictionary *dictionary = [userDefaults dictionaryRepresentation];
+                    for(NSString* key in [dictionary allKeys]){
+                        [userDefaults removeObjectForKey:key];
+                        [userDefaults synchronize];
+                    }
+                    self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+                    [self.view addSubview:self.loginViewController.view];
+                    return ;
+                });
                 return ;
             }
         });
