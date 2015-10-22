@@ -36,23 +36,21 @@
     
     self.navigationItem.rightBarButtonItem = addItem;
     
-//    self.count = 1;
-//    self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
-//    [self getGroupInfo:self.count pageSize:20];
+    self.dataArray = [[NSMutableArray alloc] init];
 
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.count = 1;
-    self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
+    //self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
     [self getGroupInfo:self.count pageSize:20];
     self.tabBarController.tabBar.hidden = NO;
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.dataArray = nil;
+    //self.dataArray = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,7 +106,7 @@
      
      */
     self.count = 1;
-    [self.dataArray removeAllObjects];
+    //[self.dataArray removeAllObjects];
     [self getGroupInfo:self.count pageSize:20];
     
     self.pullTableView.pullLastRefreshDate = [NSDate date];
@@ -219,6 +217,7 @@
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self.dataArray removeAllObjects];
                 [self.dataArray addObjectsFromArray:self.groupInfoArray];
                 [self.pullTableView reloadData];
             });

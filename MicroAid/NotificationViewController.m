@@ -29,6 +29,11 @@
         self.navigationController.navigationBar.translucent = NO;
     }
     [self.navigationItem setTitle:@"我的通知"];
+    
+    self.pullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
+    self.pullTableView.pullBackgroundColor = [UIColor whiteColor];
+    self.pullTableView.pullTextColor = [UIColor blackColor];
+    self.dataArray = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,14 +44,15 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.count = 1;
-    self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
+    //self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
     [self getNotificationInfo:self.count pageSize:20];
     self.tabBarController.tabBar.hidden = NO;
+    self.view.userInteractionEnabled = true;
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.dataArray = nil;
+    //self.dataArray = nil;
 }
 
 
@@ -58,7 +64,7 @@
      
      */
     self.count = 1;
-    [self.dataArray removeAllObjects];
+    
     [self getNotificationInfo:self.count pageSize:20];
     
     self.pullTableView.pullLastRefreshDate = [NSDate date];
@@ -199,6 +205,8 @@
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self.dataArray removeAllObjects];
                 [self.dataArray addObjectsFromArray:self.notificationInfoArray];
                 [self.pullTableView reloadData];
             });

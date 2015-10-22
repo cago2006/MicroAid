@@ -150,6 +150,8 @@
     [userDefaults setInteger:self.user.userID forKey:@"userID"];
     [userDefaults setObject:self.user.username forKey:@"username"];
     [userDefaults setObject:self.user.password forKey:@"password"];
+    [userDefaults setObject:@"nickName" forKey:@"新用户"];
+    [userDefaults synchronize];
     
     [self.view setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];

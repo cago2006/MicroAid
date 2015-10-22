@@ -65,7 +65,7 @@
     [self.navigationItem setTitle:@"任务定位"];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
  
-    [_mapView setZoomLevel:14];
+    [_mapView setZoomLevel:16];
 }
 -(void) passTypeValues:(NSMutableArray *)array choiceString:(NSString *)string{
     

@@ -35,7 +35,7 @@ NSString *ipAddr;
 + (NSDictionary *)MobileLogin:(NSString *)username password:(NSString *)password channelID:(NSString *)channelID
 {
     NSError *error = nil;
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/user/login.action?userName=%@&password=%@&channelID=%@&deviceType=4",ipAddr,username,password,channelID];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/login.action?userName=%@&password=%@&channelID=%@&deviceType=4",ipAddr,username,password,channelID];
     NSLog(@"loginURL:%@",urlString);
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -56,7 +56,7 @@ NSString *ipAddr;
 +(NSDictionary *)RegisterUser:(User *)user choiceID:(NSString *)strings{
     NSError *error = nil;
 
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/user/signup.action?userPOString={\"nickName\":\"%@\",\"userName\":\"%@\",\"password\":\"%@\"}&userExcelString=%@&separator=%@",ipAddr,@"新用户",user.username,user.password,strings,@","];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/signup.action?userPOString={\"nickName\":\"%@\",\"userName\":\"%@\",\"password\":\"%@\"}&userExcelString=%@&separator=%@",ipAddr,@"新用户",user.username,user.password,strings,@","];
     
     NSLog(@"RegisterUserURL:%@",urlString);
     
@@ -79,7 +79,7 @@ NSString *ipAddr;
 +(NSDictionary *)fetchAllExcel{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/excel/findAll.action",ipAddr];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/excel/findAll.action",ipAddr];
     
     NSLog(@"fetchAllExcelURL:%@",urlString);
     
@@ -99,7 +99,7 @@ NSString *ipAddr;
 +(NSDictionary *)fetchAllGroup:(NSInteger)userID pageNo:(int)pageNo pageSize:(int)pageSize{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/group/getAllJoinedGroupName.action?userID=%ld&pageNo=%i&pageSize=%i",ipAddr,(long)userID,pageNo,pageSize];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/getAllJoinedGroupName.action?userID=%ld&pageNo=%i&pageSize=%i",ipAddr,(long)userID,pageNo,pageSize];
     
     NSLog(@"fetchAllURL:%@",urlString);
     
@@ -120,7 +120,7 @@ NSString *ipAddr;
     
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/createTask.action?taskPOString={\"userID\":\"%ld\",\"title\":\"%@\",\"taskType\":\"%@\",\"taskScores\":\"%@\",\"startTime\":\"%@\",\"endTime\":\"%@\",\"status\":\"0\",\"description\":\"%@\",\"address\":\"%@\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"publicity\":\"%@\"}",ipAddr,(long)mission.userID,mission.title,mission.type,mission.bonus,mission.startTime,mission.endTime,mission.descript,mission.address,mission.longitude,mission.latitude,mission.group];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/createTask.action?taskPOString={\"userID\":\"%ld\",\"title\":\"%@\",\"taskType\":\"%@\",\"taskScores\":\"%@\",\"startTime\":\"%@\",\"endTime\":\"%@\",\"status\":\"0\",\"description\":\"%@\",\"address\":\"%@\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"publicity\":\"%@\"}",ipAddr,(long)mission.userID,mission.title,mission.type,mission.bonus,mission.startTime,mission.endTime,mission.descript,mission.address,mission.longitude,mission.latitude,mission.group];
     
     NSLog(@"createMissionUserURL:%@",urlString);
     
@@ -148,7 +148,7 @@ NSString *ipAddr;
     }
     status = [status stringByAppendingString:@"]"];
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/getTaskWithFilter.action?taskFilterString={\"statusList\":%@,\"distance\":\"%f\",\"longitude\":\"%f\",\"latitude\":\"%f\"",ipAddr,status,distance,longitude,latitude];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/getTaskWithFilter.action?taskFilterString={\"statusList\":%@,\"distance\":\"%f\",\"longitude\":\"%f\",\"latitude\":\"%f\"",ipAddr,status,distance,longitude,latitude];
     if(![type isEqualToString:@"全部"]){
         NSArray *list = [type componentsSeparatedByString:@","];
         type = @"[";
@@ -198,7 +198,7 @@ NSString *ipAddr;
 +(NSDictionary *)createGroup:(NSInteger)userID userName:(NSString *)userName groupName:(NSString *)groupName{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/group/signup.action?groupPOString={\"creator\":\"%@\",\"groupName\":\"%@\"}&userID=%ld",ipAddr,userName,groupName,(long)userID];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/signup.action?groupPOString={\"creator\":\"%@\",\"groupName\":\"%@\"}&userID=%ld",ipAddr,userName,groupName,(long)userID];
     
     NSLog(@"createGroupURL:%@",urlString);
     
@@ -219,7 +219,7 @@ NSString *ipAddr;
 +(NSDictionary *)getGroupInfo:(NSString *)groupName{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/group/getGroupByGroupName.action?groupName=%@",ipAddr,groupName];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/getGroupByGroupName.action?groupName=%@",ipAddr,groupName];
     
     NSLog(@"getGroupInfoURL:%@",urlString);
     
@@ -242,7 +242,7 @@ NSString *ipAddr;
 +(NSDictionary *)joinGroup:(NSInteger)userID groupName:(NSString *)groupName phoneNumber:(NSString *)phoneNumber{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/group/recommendJoinGroup.action?refereesID=%ld&groupName=%@&applicantName=%@",ipAddr,(long)userID,groupName,phoneNumber];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/recommendJoinGroup.action?refereesID=%ld&groupName=%@&applicantName=%@",ipAddr,(long)userID,groupName,phoneNumber];
     
     NSLog(@"joinGroupURL:%@",urlString);
     
@@ -264,7 +264,7 @@ NSString *ipAddr;
 +(NSDictionary *)exitGroup:(NSInteger)userID groupName:(NSString *)groupName{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/group/leaveGroup.action?userID=%ld&groupName=%@",ipAddr,(long)userID,groupName];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/leaveGroup.action?userID=%ld&groupName=%@",ipAddr,(long)userID,groupName];
     
     NSLog(@"exitGroupURL:%@",urlString);
     
@@ -287,7 +287,7 @@ NSString *ipAddr;
 +(NSDictionary *)modPassword:(NSInteger)userID password:(NSString *)password newPassword:(NSString *)newPassword{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/user/updateUser.action?userPOString={\"id\":\"%ld\",\"password\":\"%@\"}&newPassword=%@",ipAddr,(long)userID,password,newPassword];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/updateUser.action?userPOString={\"id\":\"%ld\",\"password\":\"%@\"}&newPassword=%@",ipAddr,(long)userID,password,newPassword];
     
     NSLog(@"modPasswordURL:%@",urlString);
     
@@ -308,7 +308,7 @@ NSString *ipAddr;
 +(NSDictionary *)findUser:(NSInteger)userID{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/user/findUser.action?userID=%ld",ipAddr,(long)userID];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/findUser.action?userID=%ld",ipAddr,(long)userID];
     
     NSLog(@"findUserURL:%@",urlString);
     
@@ -330,7 +330,7 @@ NSString *ipAddr;
 +(NSDictionary *)updateUser:(NSInteger)userID nickName:(NSString *)nickName gender:(NSString *)gender message:(NSString *)message address:(NSString *)address email:(NSString *)email{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/user/updateUser.action?userPOString={\"id\":\"%ld\",\"nickName\":\"%@\",\"gender\":\"%@\",\"message\":\"%@\",\"address\":\"%@\",\"email\":\"%@\"}&newPassword=",ipAddr,(long)userID,nickName,gender,message,address,email];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/updateUser.action?userPOString={\"id\":\"%ld\",\"nickName\":\"%@\",\"gender\":\"%@\",\"message\":\"%@\",\"address\":\"%@\",\"email\":\"%@\"}&newPassword=",ipAddr,(long)userID,nickName,gender,message,address,email];
     
     NSLog(@"updateUserURL:%@",urlString);
     
@@ -354,7 +354,7 @@ NSString *ipAddr;
     NSString *jsonString = [@"picturePOString=" stringByAppendingString:[[NSString alloc] initWithData:requestData encoding:NSUTF8StringEncoding]];
     
     //NSLog(@"jsonString:::%@",jsonString);
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/user/savePicture.action",ipAddr];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/savePicture.action",ipAddr];
     //    NSLog(@"urlString:::%@",urlString);
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -388,7 +388,7 @@ NSString *ipAddr;
 +(NSDictionary *)fetchPicture:(NSInteger)userID{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/user/findPictuerByUserID.action?userID=%ld",ipAddr,(long)userID];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/findPictuerByUserID.action?userID=%ld",ipAddr,(long)userID];
     
     NSLog(@"fetchPictureURL:%@",urlString);
     
@@ -418,7 +418,7 @@ NSString *ipAddr;
     status = [status substringToIndex:status.length-1];
     status = [status stringByAppendingString:@"]"];
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/getTaskWithFilter?taskFilterString={",ipAddr];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/getTaskWithFilter?taskFilterString={",ipAddr];
     
     if(userID != 0){
         urlString = [urlString stringByAppendingFormat:@"\"userID\":\"%ld\",",(long)userID];
@@ -448,7 +448,7 @@ NSString *ipAddr;
 +(NSDictionary *)fetchMission:(NSInteger)missionID{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/getTaskByTaskID?taskID=%ld",ipAddr,(long)missionID];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/getTaskByTaskID?taskID=%ld",ipAddr,(long)missionID];
     
     NSLog(@"fetchMissionURL:%@",urlString);
     
@@ -469,7 +469,7 @@ NSString *ipAddr;
 +(NSDictionary *)updateMission:(Mission *)mission{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/updateTask.action?taskPOString={\"id\":\"%ld\",\"userID\":\"%ld\",\"title\":\"%@\",\"taskType\":\"%@\",\"taskScores\":\"%@\",\"startTime\":\"%@\",\"endTime\":\"%@\",\"status\":\"%ld\",\"description\":\"%@\",\"address\":\"%@\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"publicity\":\"%@\"}",ipAddr,(long)mission.missionID,(long)mission.userID,mission.title,mission.type,mission.bonus,mission.startTime,mission.endTime,(long)mission.status,mission.descript,mission.address,mission.longitude,mission.latitude,mission.group];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/updateTask.action?taskPOString={\"id\":\"%ld\",\"userID\":\"%ld\",\"title\":\"%@\",\"taskType\":\"%@\",\"taskScores\":\"%@\",\"startTime\":\"%@\",\"endTime\":\"%@\",\"status\":\"%ld\",\"description\":\"%@\",\"address\":\"%@\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"publicity\":\"%@\"}",ipAddr,(long)mission.missionID,(long)mission.userID,mission.title,mission.type,mission.bonus,mission.startTime,mission.endTime,(long)mission.status,mission.descript,mission.address,mission.longitude,mission.latitude,mission.group];
     
     NSLog(@"updateMissionUserURL:%@",urlString);
     
@@ -490,7 +490,7 @@ NSString *ipAddr;
 +(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/task/receiveTask.action?taskID=%ld&recUserID=%ld",ipAddr,(long)missionID,(long)userID];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/receiveTask.action?taskID=%ld&recUserID=%ld",ipAddr,(long)missionID,(long)userID];
     
     NSLog(@"fetchPictureURL:%@",urlString);
     
@@ -512,9 +512,30 @@ NSString *ipAddr;
 +(NSDictionary *)fetchNotification:(NSInteger )userID pageNo:(int)pageNo pageSize:(int)pageSize{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRA_AID/notification/findByUserID.action?userID=%ld&pageNo=%i&pageSize=%i",ipAddr,(long)userID,pageNo,pageSize];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/notification/findByUserID.action?userID=%ld&pageNo=%i&pageSize=%i",ipAddr,(long)userID,pageNo,pageSize];
     
     NSLog(@"fetchNotificationURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
+//21 修改用户channelID
++(NSDictionary *)updateChannelID:(NSInteger)userID channelID:(NSString *)channelID{
+    NSError *error = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/updateUser.action?userPOString={\"id\":\"%ld\",\"channelID\":\"%@\",\"deviceType\":\"4\"}&newPassword=",ipAddr,(long)userID,channelID];
+    
+    NSLog(@"updateChannelIDURL:%@",urlString);
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];

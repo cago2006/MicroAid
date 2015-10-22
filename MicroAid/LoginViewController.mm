@@ -93,6 +93,15 @@
     
 }
 
+-(void) viewWillDisappear:(BOOL)animated{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [userDefaults integerForKey:@"userID"];
+    
+    dispatch_async(serverQueue, ^{
+        [MicroAidAPI updateChannelID:userID channelID:[BPush getChannelId]];
+    });
+}
+
 //点击空白区域，键盘收起
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {

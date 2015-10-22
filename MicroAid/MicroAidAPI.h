@@ -74,4 +74,7 @@
 //20 获取通知
 +(NSDictionary *)fetchNotification:(NSInteger )userID pageNo:(int)pageNo pageSize:(int)pageSize;
 
+//21 修改用户channelID
++(NSDictionary *)updateChannelID:(NSInteger)userID channelID:(NSString *)channelID;
+
 @end

@@ -77,7 +77,7 @@
     
     _locService = [[BMKLocationService alloc]init];
     _geocodesearch = [[BMKGeoCodeSearch alloc]init];
-    [_mapView setZoomLevel:14];
+    [_mapView setZoomLevel:16];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -168,22 +168,29 @@
             
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllGroup:userID pageNo:1 pageSize:10];
-                if ([[resultDic objectForKey:@"flg"] boolValue]) {//获取成功
-                    NSArray *list = [resultDic objectForKey:@"groupInfoList"];
-                    NSMutableArray *array = [NSMutableArray arrayWithCapacity:[list count]];
-                    [array addObject:@"全部"];
-                    [array addObject:@"公开"];
-                    for(int i =0; i<[list count]; i++){
-                        NSString *groupName =(NSString *)[list objectAtIndex:i];
-                        [array addObject:groupName];
-                    }
-                    //显示
-                    [self performSelectorOnMainThread:@selector(openGroupView:) withObject:array waitUntilDone:YES];
-                    
-                }else//获取失败
-                {
+                if ([[resultDic objectForKey:@"onError"] boolValue]) {//获取成功
                     [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败！" waitUntilDone:YES];
                     return ;
+                }else//获取失败
+                {
+                    if ([[resultDic objectForKey:@"flg"] boolValue]) {//获取成功
+                        NSArray *list = [resultDic objectForKey:@"groupInfoList"];
+                        NSMutableArray *array = [NSMutableArray arrayWithCapacity:[list count]];
+                        [array addObject:@"全部"];
+                        [array addObject:@"公开"];
+                        for(int i =0; i<[list count]; i++){
+                            NSString *groupName =(NSString *)[list objectAtIndex:i];
+                            [array addObject:groupName];
+                        }
+                        //显示
+                        [self performSelectorOnMainThread:@selector(openGroupView:) withObject:array waitUntilDone:YES];
+                    }else{
+                        NSMutableArray *array = [NSMutableArray arrayWithCapacity:2];
+                        [array addObject:@"全部"];
+                        [array addObject:@"公开"];
+                        //显示
+                        [self performSelectorOnMainThread:@selector(openGroupView:) withObject:array waitUntilDone:YES];
+                    }
                 }
             });
             break;
