@@ -45,6 +45,8 @@
     
     [self.pickerView setHidden:YES];
     
+    [self getLeftBobus];
+    
     if(_isEditMission){
         [self getMission];
     }else{
@@ -55,6 +57,10 @@
         
         [objectBtn setTitle:@"公开" forState:UIControlStateNormal];
         self.groupString = @"公开";
+        [bonusBtn setTitle:@"0分" forState:UIControlStateNormal];
+        self.bonusString = @"0分";
+        [typeBtn setTitle:@"拿快递" forState:UIControlStateNormal];
+        self.typeString = @"拿快递";
         //self.tabBarController.tabBar.hidden = YES;
         
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -72,6 +78,7 @@
     [super viewWillAppear:animated];
     [ProgressHUD dismiss];
     self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
 }
 
 -(void) getMission{
@@ -88,6 +95,29 @@
             return ;
         }
     });
+}
+
+-(void) getLeftBobus{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [userDefaults integerForKey:@"userID"];
+    dispatch_async(serverQueue, ^{
+        NSDictionary *resultDic = [MicroAidAPI findUser:userID];
+        if ([[resultDic objectForKey:@"flg"] boolValue]) {//获取成功
+            NSMutableDictionary *dic = [resultDic objectForKey:@"user"];
+            //显示
+            [self performSelectorOnMainThread:@selector(showLeftBonus:) withObject:dic waitUntilDone:YES];
+            
+        }else//获取失败
+        {
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"余额获取失败！" waitUntilDone:YES];
+            return ;
+        }
+    });
+}
+
+-(void) showLeftBonus:(NSMutableDictionary *)dic{
+    self.leftBonus = [[dic objectForKey:@"scroes"]integerValue];
+    [leftBonusLabel setText:[NSString stringWithFormat:@"%li分",(long)self.leftBonus]];
 }
 
 
@@ -211,6 +241,7 @@
         case 2:
         {
             self.view.userInteractionEnabled = false;
+            [self.navigationController.navigationBar setUserInteractionEnabled:false];
             [self.pickerView setHidden:YES];
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllExcel];
@@ -237,6 +268,7 @@
         case 3:
         {
             self.view.userInteractionEnabled = false;
+            [self.navigationController.navigationBar setUserInteractionEnabled:false];
             [self.pickerView setHidden:YES];
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -357,11 +389,14 @@
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showError:message];
 }
 
 - (void) successWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
     [ProgressHUD showSuccess:message];
 }
 
@@ -386,7 +421,21 @@
 }
 
 -(void) saveMission{
+    [self.navigationController.navigationBar setUserInteractionEnabled:false];
+    [self.view setUserInteractionEnabled:false];
+    CGRect frame = self.inputView.frame;
+    frame.origin.y = 64;
+    [UIView animateWithDuration:0.5f
+                          delay:0
+         usingSpringWithDamping:1
+          initialSpringVelocity:0.1f
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.inputView.frame = frame;}
+                     completion:^(BOOL finished) {}];
     [self.view endEditing:YES];
+    [self.pickerView setHidden:YES];
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
     
@@ -397,12 +446,16 @@
     [self.mission setStartTime:startTimeBtn.titleLabel.text];
     [self.mission setEndTime:endTimeBtn.titleLabel.text];
     [self.mission setDescript:[NSString stringWithString:descriptionTextView.text]];
+    if([[NSString stringWithString:descriptionTextView.text] isEqualToString:@"请在此输入任务描述"]){
+        [self.mission setDescript:[NSString stringWithString:titleTextField.text]];
+    }
     [self.mission setAddress:addressBtn.titleLabel.text];
     [self.mission setGroup:objectBtn.titleLabel.text];
     [self.mission setLatitude:self.missionLatitude];
     [self.mission setLongitude:self.missionLongitude];
     
-    if([self.mission verifyInfo]){
+    
+    if([self.mission verifyInfo] && [self isLeftBonusEnough]){
         if(_isEditMission){
             [self.mission setMissionID:self.missionID];
             dispatch_async(serverQueue, ^{
@@ -434,10 +487,21 @@
                 }
             });
         }
+    }else{
+        [self.navigationController.navigationBar setUserInteractionEnabled:true];
+        [self.view setUserInteractionEnabled:true];
     }
 }
 
-
+-(BOOL) isLeftBonusEnough{
+    NSInteger bonus = [[self formatBonus:bonusBtn.titleLabel.text]integerValue];
+    if(bonus < self.leftBonus || bonus == self.leftBonus){
+        return true;
+    }else{
+        [ProgressHUD showError:@"余额不足！"];
+        return false;
+    }
+}
 
 /*
 #pragma mark - Navigation

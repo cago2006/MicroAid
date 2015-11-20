@@ -57,12 +57,13 @@
     
     [self.user setUsername:[NSString stringWithString:usernameTextField.text]];
     [self.user setPassword:[NSString stringWithString:passwordTextField.text]];
-    [self.user setNickName:@"新用户"];
+    [self.user setNickName:[NSString stringWithString:nickNameTextField.text]];
     
     BOOL isInfoRight = [self.user verifyInfo:[NSString stringWithString:passwordTextField2.text]];
     if (isInfoRight== TRUE) {
         [ProgressHUD show:@"正在注册"];
         self.view.userInteractionEnabled = false;
+        [self.navigationController.navigationBar setUserInteractionEnabled:false];
         
         dispatch_async(serverQueue, ^{
             NSDictionary *resultDic = [MicroAidAPI RegisterUser:self.user choiceID:self.choiceIDStrings];
@@ -150,16 +151,19 @@
     [userDefaults setInteger:self.user.userID forKey:@"userID"];
     [userDefaults setObject:self.user.username forKey:@"username"];
     [userDefaults setObject:self.user.password forKey:@"password"];
-    [userDefaults setObject:@"nickName" forKey:@"新用户"];
+    [userDefaults setObject:self.user.nickName forKey:@"nickName"];
     [userDefaults synchronize];
     
     [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
     [self returnToLogin];
 }
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showError:message];
 }
 

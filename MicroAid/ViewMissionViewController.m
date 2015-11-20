@@ -13,6 +13,7 @@
 #import "MyInfoViewController.h"
 #import "ViewUserViewController.h"
 #import "LocationViewController.h"
+#import "DateTimeUtils.h"
 
 @interface ViewMissionViewController ()
 
@@ -75,6 +76,10 @@
     [startTimeLabel setText:[NSString stringWithFormat:@"起始时间:%@",[dic objectForKey:@"startTime"]]];
     [statusLabel setText:[NSString stringWithFormat:@"任务状态:%@",[dic objectForKey:@"statusInfo"]]];
     [endTimeLabel setText:[NSString stringWithFormat:@"截止时间:%@",[dic objectForKey:@"endTime"]]];
+    //截止时间<现在时间
+    if([DateTimeUtils isOutOfDate:[dic objectForKey:@"endTime"]]){
+        self.isAccepted = YES;
+    }
     [typeLabel setText:[NSString stringWithFormat:@"任务类型:%@",[dic objectForKey:@"taskType"]]];
     [groupLabel setText:[NSString stringWithFormat:@"任务对象:%@",[dic objectForKey:@"publicity"]]];
     [bonusLabel setText:[NSString stringWithFormat:@"任务悬赏:%@",[NSString stringWithFormat:@"%ld分",(long)[[dic objectForKey:@"taskScores"]integerValue]]]];
@@ -89,12 +94,15 @@
     [typeLabel setText:[NSString stringWithFormat:@"任务类型:%@",[dic objectForKey:@"taskType"]]];
     desTextView.text =[dic objectForKey:@"description"];
     if(self.toID<1){
-        UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
-        [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [rightBtn addTarget:self action:@selector(acceptMission) forControlEvents:UIControlEventTouchUpInside];
-        [rightBtn setTitle:@"接受" forState:UIControlStateNormal];
-        UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
-        self.navigationItem.rightBarButtonItem = rightItem;
+        if(!self.isAccepted){
+            UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
+            [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [rightBtn addTarget:self action:@selector(acceptMission) forControlEvents:UIControlEventTouchUpInside];
+            [rightBtn setTitle:@"接受" forState:UIControlStateNormal];
+            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+            self.navigationItem.rightBarButtonItem = rightItem;
+        }
+        
     }else{
         toView.userInteractionEnabled = YES;
         dispatch_async(serverQueue, ^{
@@ -159,11 +167,14 @@
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showError:message];
 }
 
 - (void) successWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
 }
 

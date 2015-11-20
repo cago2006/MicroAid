@@ -11,6 +11,20 @@
 
 @implementation User
 
+//用于unjoineduser解析
++(NSMutableArray *)getUserInfos:(NSArray *)dataArray{
+    NSMutableArray *momentsArray = [[NSMutableArray alloc] init];
+    NSDictionary *dic = [[NSDictionary alloc]init];
+    for (dic in dataArray) {
+        User *info =[[User alloc] init];
+        [info setUserID:[[dic objectForKey:@"id"] intValue]];
+        [info setUsername:[dic objectForKey:@"userName"]];
+        [info setNickName:[dic objectForKey:@"nickName"]];
+        [momentsArray addObject:info];
+    }
+    return momentsArray;
+}
+
 
 -(BOOL) verifyInfo:(NSString*)verifyPassword{
     if ([_username isEqualToString:@""]) {
@@ -42,6 +56,13 @@
     }
     if(![_password isEqualToString:verifyPassword]){
         [ProgressHUD showError:@"两次输入密码不一致，请重新输入！"];
+        return FALSE;
+    }
+    regex = @"^[a-zA-Z0-9_\u4e00-\u9fa5]{2,6}$";
+    pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    isMatch = [pred evaluateWithObject:_nickName];
+    if(!isMatch){
+        [ProgressHUD showError:@"昵称应该由2-6位中英文、数字或下滑线组成！"];
         return FALSE;
     }
     return TRUE;

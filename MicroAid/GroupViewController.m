@@ -70,6 +70,7 @@
 
 -(void) createGroup{
     self.view.userInteractionEnabled = false;
+    [self.navigationController.navigationBar setUserInteractionEnabled:false];
     UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入群组名称" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"添加",nil];
     [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [[dialog textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDefault];
@@ -89,12 +90,13 @@
                 [self performSelectorOnMainThread:@selector(refreshTable) withObject:nil waitUntilDone:YES];
             }else//创建失败
             {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务创建失败！" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"群组创建失败！" waitUntilDone:YES];
                 return ;
             }
         });
     }
     self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     
 }
 
@@ -217,7 +219,9 @@
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.dataArray removeAllObjects];
+                if(self.count == 1){
+                    [self.dataArray removeAllObjects];
+                }
                 [self.dataArray addObjectsFromArray:self.groupInfoArray];
                 [self.pullTableView reloadData];
             });
@@ -228,11 +232,14 @@
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showError:message];
 }
 
 - (void) successWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
 }
 

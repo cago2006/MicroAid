@@ -130,11 +130,14 @@
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showError:message];
 }
 
 - (void) successWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
 }
 
@@ -237,10 +240,11 @@
     //首先保存信息，在保存图片
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
-    [userDefaults setObject:nickNameBtn.titleLabel.text forKey:@"nickName"];
-    [userDefaults synchronize];
+//    [userDefaults setObject:nickNameBtn.titleLabel.text forKey:@"nickName"];
+//    [userDefaults synchronize];
     [ProgressHUD show:@"正在上传"];
-    self.view.userInteractionEnabled = false;
+    self.view.userInteractionEnabled = NO;
+    [self.navigationController.navigationBar setUserInteractionEnabled:false];
     
     isInfoChanged = [self testChange];
     if(isInfoChanged || isPhotoChanged){
@@ -279,11 +283,19 @@
             }
             
         });
+    }else{
+        [ProgressHUD dismiss];
+        [self returnToMine];
     }
     
 }
 
 -(void)returnToMine{
+    [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:nickNameBtn.titleLabel.text forKey:@"nickName"];
+    [userDefaults synchronize];
     MineViewController *mineVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
     [self.navigationController popToViewController:mineVC animated:YES];
 }

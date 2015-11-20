@@ -48,6 +48,7 @@
     [self getNotificationInfo:self.count pageSize:20];
     self.tabBarController.tabBar.hidden = NO;
     self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
@@ -206,7 +207,9 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [self.dataArray removeAllObjects];
+                if(self.count == 1){
+                    [self.dataArray removeAllObjects];
+                }
                 [self.dataArray addObjectsFromArray:self.notificationInfoArray];
                 [self.pullTableView reloadData];
             });
@@ -217,11 +220,14 @@
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showError:message];
 }
 
 - (void) successWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
 }
 

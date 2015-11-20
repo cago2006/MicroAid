@@ -24,6 +24,7 @@
 @property(nonatomic)NSInteger userID;
 @property(nonatomic)NSInteger scores;//积分
 
++(NSMutableArray *)getUserInfos:(NSArray *)dataArray;//用于unjoineduser解析
 -(BOOL) verifyInfo:(NSString*)verifyPassword;
 //-(void) saveUserInfo:(NSInteger)userId;
 

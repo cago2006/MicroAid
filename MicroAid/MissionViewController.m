@@ -78,6 +78,7 @@
     [self searchNearby:self.count pageSize:20];
     self.tabBarController.tabBar.hidden = NO;
     self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
@@ -106,6 +107,7 @@
 
 -(void) filterMission{
     self.view.userInteractionEnabled = false;
+    [self.navigationController.navigationBar setUserInteractionEnabled:false];
     FilterViewController *filterVC = [[FilterViewController alloc]initWithNibName:@"FilterViewController" bundle:nil];
     
     self.tabBarController.tabBar.hidden = YES;
@@ -221,6 +223,7 @@
     
     NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [userDefaults integerForKey:@"userID"];
     double distance = [userDefaults doubleForKey:@"missionDistance"];
     NSLog(@"mission:%f",distance);
     if(distance < 0.1){
@@ -246,7 +249,7 @@
     }
     
     dispatch_async(kBgQueue, ^{
-        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusArray distance:distance type:type group:group bonus:bonus longitude:longitude latitude:latitude endTime:endTime pageNo:pageNo pageSize:pageSize];
+        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusArray distance:distance type:type group:group bonus:bonus longitude:longitude latitude:latitude endTime:endTime pageNo:pageNo pageSize:pageSize userID:userID];
         
         if ([[nearbyMissions objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -265,7 +268,9 @@
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.dataArray removeAllObjects];
+                if(self.count == 1){
+                    [self.dataArray removeAllObjects];
+                }
                 [self.dataArray addObjectsFromArray:self.missionInfoArray];
                 [self.pullTableView reloadData];
             });

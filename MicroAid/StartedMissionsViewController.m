@@ -47,7 +47,7 @@
 
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.dataArray = nil;
+    //self.dataArray = nil;
 }
 
 
@@ -147,6 +147,9 @@
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                if(self.count == 1){
+                    [self.dataArray removeAllObjects];
+                }
                 [self.dataArray addObjectsFromArray:self.missionInfoArray];
                 [self.pullTableView reloadData];
             });
@@ -161,6 +164,7 @@
 
 - (void) successWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
     [ProgressHUD showSuccess:message];
 }
 

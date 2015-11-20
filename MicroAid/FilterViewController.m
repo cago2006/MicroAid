@@ -79,6 +79,7 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
 }
 
 -(void) passFilterBonusValues:(NSString *)string{
@@ -124,6 +125,7 @@
         case 0:
         {
             self.view.userInteractionEnabled = false;
+            [self.navigationController.navigationBar setUserInteractionEnabled:false];
             [self.pickerView setHidden:YES];
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllExcel];
@@ -161,6 +163,7 @@
         case 2:
         {
             self.view.userInteractionEnabled = false;
+            [self.navigationController.navigationBar setUserInteractionEnabled:false];
             [self.pickerView setHidden:YES];
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -240,6 +243,7 @@
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showError:message];
 }
 

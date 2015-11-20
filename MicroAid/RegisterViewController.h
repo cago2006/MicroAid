@@ -20,6 +20,7 @@
     __weak IBOutlet UITextField *usernameTextField;
     __weak IBOutlet UITextField *passwordTextField;
     __weak IBOutlet UITextField *passwordTextField2;
+    __weak IBOutlet UITextField *nickNameTextField;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *inputView;

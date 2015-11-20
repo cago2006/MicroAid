@@ -43,5 +43,16 @@
     return [dateFormatter stringFromDate:date];
 }
 
++(BOOL)isOutOfDate:(NSString *)dateString{
+    NSDate *currentDate = [self getCurrentTime];
+    NSDate *testDate = [self changeStringIntoDate:dateString];
+    if([currentDate timeIntervalSinceDate:testDate]> 0.0){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+
 
 @end

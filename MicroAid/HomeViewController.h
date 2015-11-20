@@ -30,6 +30,9 @@
 //用于存放搜索到的pointAnnotation数组
 @property(nonatomic,strong) BMKMapView *searchedPointAnnotations;
 
+//用于存放当前位置的地址
+@property(nonatomic,strong) BMKPointAnnotation *locationPointAnnotation;
+
 typedef enum {
     AddTagReverseGeoCode,
     SearchTagReverseGeoCode

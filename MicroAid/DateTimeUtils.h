@@ -14,5 +14,6 @@
 +(NSDate *)getCurrentTimeAfterAnHour;
 +(NSDate *)changeStringIntoDate:(NSString *)dateString;//例如 2015-09-01 10:20
 +(NSString *)changeDateIntoString:(NSDate *)date;
++(BOOL)isOutOfDate:(NSString *)dateString;
 
 @end

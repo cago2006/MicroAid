@@ -57,7 +57,7 @@ NSString *ipAddr;
 +(NSDictionary *)RegisterUser:(User *)user choiceID:(NSString *)strings{
     NSError *error = nil;
 
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/signup.action?userPOString={\"nickName\":\"%@\",\"userName\":\"%@\",\"password\":\"%@\",\"channelID\":\"%@\",\"deviceType\":\"4\"}&userExcelString=%@&separator=%@",ipAddr,@"新用户",user.username,user.password,[BPush getChannelId],strings,@","];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/signup.action?userPOString={\"nickName\":\"%@\",\"userName\":\"%@\",\"password\":\"%@\",\"channelID\":\"%@\",\"deviceType\":\"4\"}&userExcelString=%@&separator=%@",ipAddr,user.nickName,user.username,user.password,[BPush getChannelId],strings,@","];
     
     NSLog(@"RegisterUserURL:%@",urlString);
     
@@ -139,7 +139,7 @@ NSString *ipAddr;
 }
 
 //6 获取附近任务列表
-+(NSDictionary *)getMissionList:(NSArray *)statusList distance:(double)distance type:(NSString *)type group:(NSString *)group bonus:(NSString *)bonus longitude:(double)longitude latitude:(double)latitude endTime:(NSString *)endTime pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
++(NSDictionary *)getMissionList:(NSArray *)statusList distance:(double)distance type:(NSString *)type group:(NSString *)group bonus:(NSString *)bonus longitude:(double)longitude latitude:(double)latitude endTime:(NSString *)endTime pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize userID:(NSInteger)userID{
     NSError *error = nil;
     
     NSString *status = [[NSString alloc]init];
@@ -178,7 +178,7 @@ NSString *ipAddr;
     }else{
         urlString = [urlString stringByAppendingFormat:@",\"endTime\":\"%@\"",[DateTimeUtils changeDateIntoString:[DateTimeUtils getCurrentTime]]];
     }
-    urlString = [urlString stringByAppendingFormat:@"}&pageNo=%ld&pageSize=%ld",(long)pageNo,(long)pageSize];
+    urlString = [urlString stringByAppendingFormat:@"}&userID=%ld&pageNo=%ld&pageSize=%ld",(long)userID,(long)pageNo,(long)pageSize];
     
     NSLog(@"getMissionListURL:%@",urlString);
     
@@ -240,10 +240,10 @@ NSString *ipAddr;
 
 
 //9 邀请加入群
-+(NSDictionary *)joinGroup:(NSInteger)userID groupName:(NSString *)groupName phoneNumber:(NSString *)phoneNumber{
++(NSDictionary *)joinGroup:(NSString *)groupName applicantName:(NSString *)phoneNumber userIDs:(NSString *)userIDs;{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/recommendJoinGroup.action?refereesID=%ld&groupName=%@&applicantName=%@",ipAddr,(long)userID,groupName,phoneNumber];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/recommendJoinGroup.action?groupName=%@&applicantName=%@&userIDs=%@",ipAddr,groupName,phoneNumber,userIDs];
     
     NSLog(@"joinGroupURL:%@",urlString);
     
@@ -537,6 +537,28 @@ NSString *ipAddr;
     NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/updateUser.action?userPOString={\"id\":\"%ld\",\"channelID\":\"%@\",\"deviceType\":\"4\"}&newPassword=",ipAddr,(long)userID,channelID];
     
     NSLog(@"updateChannelIDURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
+
+//22 获得没有加入群组的用户列表
++(NSDictionary *)getUnjoinedUser:(NSString *)groupName pageNo:(int)pageNo pageSize:(int)pageSize{
+    NSError *error = nil;
+     
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/getUnjoinedUser.action?groupName=%@&pageNo=%i&pageSize=%i",ipAddr,groupName,pageNo,pageSize];
+    
+    NSLog(@"getUnjoinedUserURL:%@",urlString);
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];

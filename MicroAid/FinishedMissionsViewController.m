@@ -23,9 +23,7 @@
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self){
-        self.count = 1;
-        self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
-        [self fetchMissionInfo:self.count pageSize:20];
+
         
     }
     return self;
@@ -38,6 +36,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.count = 1;
+    self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
+    [self fetchMissionInfo:self.count pageSize:100];
     self.tabBarController.tabBar.hidden = YES;
     
     // Do any additional setup after loading the view from its nib.
@@ -46,7 +47,7 @@
 
 -(void) viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    self.dataArray = nil;
+    //self.dataArray = nil;
 }
 
 
@@ -140,6 +141,9 @@
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                if(self.count == 1){
+                    [self.dataArray removeAllObjects];
+                }
                 [self.dataArray addObjectsFromArray:self.missionInfoArray];
                 [self.pullTableView reloadData];
             });
@@ -154,6 +158,7 @@
 
 - (void) successWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
     [ProgressHUD showSuccess:message];
 }
 

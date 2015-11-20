@@ -75,6 +75,8 @@
     
     _searchedPointAnnotations =[[BMKMapView alloc] init];
     
+    _locationPointAnnotation = [[BMKPointAnnotation alloc] init];
+    
     _locService = [[BMKLocationService alloc]init];
     _geocodesearch = [[BMKGeoCodeSearch alloc]init];
     [_mapView setZoomLevel:16];
@@ -88,6 +90,8 @@
     _geocodesearch.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     [self startLocation];
     self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -135,6 +139,7 @@
 
 -(void)createMission{
     self.view.userInteractionEnabled = false;
+    [self.navigationController.navigationBar setUserInteractionEnabled:false];
     CreateMissionViewController *createMissionVC = [[CreateMissionViewController alloc] initWithNibName:@"CreateMissionViewController" bundle:nil];
     createMissionVC.isEditMission = NO;
     [self.navigationController pushViewController:createMissionVC animated:YES];
@@ -276,6 +281,7 @@
 -(void) switchToTagDetailVC:(MissionInfo *)info{
     [ProgressHUD show:@"正在获取详细信息"];
     self.view.userInteractionEnabled = false;
+    [self.navigationController.navigationBar setUserInteractionEnabled:false];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
     if(info.userId == userID){
@@ -311,6 +317,8 @@
         annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
         ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
         ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
+        
+        annotationView.image = [UIImage imageNamed:@"sun.png"];   //把大头针换成别的图片
     }
     
     annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
@@ -433,6 +441,9 @@
     
     if(_longitude != coordinate.longitude || _latitude != coordinate.latitude){
         [_searchedPointAnnotations addAnnotation:pointAnnotation];
+    }else{
+        [_mapView removeAnnotation:_locationPointAnnotation];
+        _locationPointAnnotation = pointAnnotation;
     }
     
     [_mapView addAnnotation:pointAnnotation];
@@ -451,7 +462,7 @@
         [userDefaults setObject:self.location forKey:@"location"];
         [userDefaults synchronize];
         
-        CLLocationCoordinate2D userCurrentLocation = {self.latitude,self.longitude};
+        CLLocationCoordinate2D userCurrentLocation = {self.latitude, self.longitude};
         [self addPointAnnotation:userCurrentLocation title:self.location];
     }
 }
@@ -485,10 +496,12 @@
     [_searchedPointAnnotations removeAnnotations:array];
     [_mapView removeAnnotations:array];
     
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [userDefaults integerForKey:@"userID"];
     
     
     dispatch_async(kBgQueue, ^{
-        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusList distance:distance type:type group:group bonus:bonus longitude:longitude latitude:latitude endTime:endTime pageNo:1 pageSize:100];
+        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusList distance:distance type:type group:group bonus:bonus longitude:longitude latitude:latitude endTime:endTime pageNo:1 pageSize:100 userID:userID];
         //NSDictionary *nearbyBarrierFrees = [ShareBarrierFreeAPIS SearchNearbyBarrierFree:110.9 latitude:23.89];
         
         if ([[nearbyMissions objectForKey:@"result"] isEqualToString:@"fail"]) {

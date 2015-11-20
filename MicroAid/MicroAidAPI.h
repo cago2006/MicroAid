@@ -30,7 +30,7 @@
 +(NSDictionary *)createMission:(Mission *)mission;
 
 //6 获取附近任务列表
-+(NSDictionary *)getMissionList:(NSArray *)statusList distance:(double)distance type:(NSString *)type group:(NSString *)group bonus:(NSString *)bonus longitude:(double)longitude latitude:(double)latitude endTime:(NSString *)endTime pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
++(NSDictionary *)getMissionList:(NSArray *)statusList distance:(double)distance type:(NSString *)type group:(NSString *)group bonus:(NSString *)bonus longitude:(double)longitude latitude:(double)latitude endTime:(NSString *)endTime pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize userID:(NSInteger)userID;
 
 //7 新建群组
 +(NSDictionary *)createGroup:(NSInteger)userID userName:(NSString *)userName groupName:(NSString *)groupName;
@@ -39,7 +39,7 @@
 +(NSDictionary *)getGroupInfo:(NSString *)groupName;
 
 //9 邀请加入群
-+(NSDictionary *)joinGroup:(NSInteger)userID groupName:(NSString *)groupName phoneNumber:(NSString *)phoneNumber;
++(NSDictionary *)joinGroup:(NSString *)groupName applicantName:(NSString *)phoneNumber userIDs:(NSString *)userIDs;
 
 //10 退出群
 +(NSDictionary *)exitGroup:(NSInteger)userID groupName:(NSString *)groupName;
@@ -76,5 +76,9 @@
 
 //21 修改用户channelID
 +(NSDictionary *)updateChannelID:(NSInteger)userID channelID:(NSString *)channelID;
+
+//22 获得没有加入群组的用户列表
++(NSDictionary *)getUnjoinedUser:(NSString *)groupName pageNo:(int)pageNo pageSize:(int)pageSize;
+
 
 @end

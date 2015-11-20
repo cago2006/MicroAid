@@ -34,6 +34,7 @@
     __weak IBOutlet UIButton *addressBtn;
     __weak IBOutlet UITextField *titleTextField;
     __weak IBOutlet UITextView *descriptionTextView;
+    __weak IBOutlet UILabel *leftBonusLabel;
 }
 
 -(IBAction) buttonClicked:(UIButton *)sender;
@@ -53,5 +54,6 @@
 @property (nonatomic, assign) bool isEditMission;
 @property (nonatomic, assign) bool isFromMyMission;
 @property (assign, nonatomic) NSInteger missionID;
+@property (assign, nonatomic) NSInteger leftBonus;
 
 @end

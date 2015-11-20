@@ -42,7 +42,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+}
+
 -(void)savePassword{
+    [self.view setUserInteractionEnabled:false];
+    [self.navigationController.navigationBar setUserInteractionEnabled:false];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
     NSString *password = [userDefaults objectForKey:@"password"];
@@ -58,6 +65,9 @@
                 return ;
             }
         });
+    }else{
+        [self.view setUserInteractionEnabled:true];
+        [self.navigationController.navigationBar setUserInteractionEnabled:true];
     }
 }
 
@@ -73,11 +83,14 @@
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showError:message];
 }
 
 - (void) successWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
 }
 
@@ -98,7 +111,7 @@
         [ProgressHUD showError:@"密码过长！"];
         return FALSE;
     }
-    if (![oldPassword isEqualToString:newPassword]) {
+    if ([oldPassword isEqualToString:newPassword]) {
         [ProgressHUD showError:@"新旧密码一致,请重新输入新密码!"];
         return FALSE;
     }
@@ -114,6 +127,8 @@
 }
 
 -(void)returnToLogin{
+    [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *dictionary = [userDefaults dictionaryRepresentation];
     for(NSString* key in [dictionary allKeys]){

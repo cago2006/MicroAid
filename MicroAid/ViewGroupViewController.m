@@ -9,6 +9,7 @@
 #import "ViewGroupViewController.h"
 #import "MicroAidAPI.h"
 #import "GroupViewController.h"
+#import "RecJoinGroupViewController.h"
 
 @interface ViewGroupViewController ()
 
@@ -18,9 +19,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"groupName:%@",self.groupName);
-    [self getGroupInfo];
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getGroupInfo];
 }
 
 
@@ -53,33 +57,37 @@
 }
 
 -(IBAction)joinGroup:(UIButton *)sender{
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入被邀请人手机号" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
-    [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [[dialog textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDefault];
-    [dialog show];
-}
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if(buttonIndex == 1){
-        NSString *phoneNumber = [alertView textFieldAtIndex:0].text;
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSInteger userID = [userDefaults integerForKey:@"userID"];
-        dispatch_async(serverQueue, ^{
-            NSDictionary *resultDic = [MicroAidAPI joinGroup:userID groupName:self.groupName phoneNumber:phoneNumber];
-            if ([[resultDic objectForKey:@"flg"] boolValue]) {//邀请成功
-                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"邀请加入成功!" waitUntilDone:YES];
-                [self performSelectorOnMainThread:@selector(getGroupInfo) withObject:nil waitUntilDone:YES];
-            }else if([[resultDic objectForKey:@"type"]integerValue]==0){//失败，已经加入
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"对方已经加入该群！" waitUntilDone:YES];
-                return ;
-            }else{//邀请失败
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"查无此人！" waitUntilDone:YES];
-                return ;
-            }
-        });
-    }
+//    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入被邀请人手机号" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+//    [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
+//    [[dialog textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDefault];
+//    [dialog show];
+    RecJoinGroupViewController *rjgVC = [[RecJoinGroupViewController alloc]initWithNibName:@"RecJoinGroupViewController" bundle:nil];
+    rjgVC.groupName = self.groupName;
+    [self.navigationController pushViewController:rjgVC animated:YES];
     
 }
+
+//-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+//    if(buttonIndex == 1){
+//        NSString *phoneNumber = [alertView textFieldAtIndex:0].text;
+//        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//        NSInteger userID = [userDefaults integerForKey:@"userID"];
+//        dispatch_async(serverQueue, ^{
+//            NSDictionary *resultDic = [MicroAidAPI joinGroup:userID groupName:self.groupName phoneNumber:phoneNumber];
+//            if ([[resultDic objectForKey:@"flg"] boolValue]) {//邀请成功
+//                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"邀请加入成功!" waitUntilDone:YES];
+//                [self performSelectorOnMainThread:@selector(getGroupInfo) withObject:nil waitUntilDone:YES];
+//            }else if([[resultDic objectForKey:@"type"]integerValue]==0){//失败，已经加入
+//                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"对方已经加入该群！" waitUntilDone:YES];
+//                return ;
+//            }else{//邀请失败
+//                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"查无此人！" waitUntilDone:YES];
+//                return ;
+//            }
+//        });
+//    }
+//    
+//}
 
 -(void) getGroupInfo{
     dispatch_async(serverQueue, ^{
@@ -111,11 +119,14 @@
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showError:message];
 }
 
 - (void) successWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
 }
 
