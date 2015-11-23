@@ -72,6 +72,8 @@
 		AF6E68691BF20970001F8B64 /* RecJoinGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6E68671BF20970001F8B64 /* RecJoinGroupViewController.m */; };
 		AF6E686A1BF20970001F8B64 /* RecJoinGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF6E68681BF20970001F8B64 /* RecJoinGroupViewController.xib */; };
 		AF862D5C1BCBD85B003BF8CE /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */; };
+		AF89F6491C016D0800DD8F84 /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF89F6471C016D0800DD8F84 /* SearchTableViewController.m */; };
+		AF89F64A1C016D0800DD8F84 /* SearchTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF89F6481C016D0800DD8F84 /* SearchTableViewController.xib */; };
 		AF8E84BE1B9C3009009EC184 /* MissionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8E84BD1B9C3009009EC184 /* MissionInfo.m */; };
 		AFA694C91BCE7A12000AD7CC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA694C71BCE7A12000AD7CC /* MainTabBarController.m */; };
 		AFAF92FA1BCCA95100CE1A9D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */; };
@@ -220,6 +222,9 @@
 		AF6E68671BF20970001F8B64 /* RecJoinGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecJoinGroupViewController.m; sourceTree = "<group>"; };
 		AF6E68681BF20970001F8B64 /* RecJoinGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecJoinGroupViewController.xib; sourceTree = "<group>"; };
 		AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapAPI.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
+		AF89F6461C016D0800DD8F84 /* SearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewController.h; sourceTree = "<group>"; };
+		AF89F6471C016D0800DD8F84 /* SearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewController.m; sourceTree = "<group>"; };
+		AF89F6481C016D0800DD8F84 /* SearchTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewController.xib; sourceTree = "<group>"; };
 		AF8E84BC1B9C3009009EC184 /* MissionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionInfo.h; sourceTree = "<group>"; };
 		AF8E84BD1B9C3009009EC184 /* MissionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionInfo.m; sourceTree = "<group>"; };
 		AFA694C61BCE7A12000AD7CC /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -552,6 +557,9 @@
 				AF4A2C701B8B40EA00B61B1B /* RegisterViewController.h */,
 				AF4A2C711B8B40EA00B61B1B /* RegisterViewController.m */,
 				AF4A2C721B8B40EA00B61B1B /* RegisterViewController.xib */,
+				AF89F6461C016D0800DD8F84 /* SearchTableViewController.h */,
+				AF89F6471C016D0800DD8F84 /* SearchTableViewController.m */,
+				AF89F6481C016D0800DD8F84 /* SearchTableViewController.xib */,
 			);
 			name = login;
 			sourceTree = "<group>";
@@ -705,6 +713,7 @@
 				AFAF93001BCCAB2F00CE1A9D /* test.caf in Resources */,
 				AF4A2C741B8B40EA00B61B1B /* RegisterViewController.xib in Resources */,
 				AFDEE7D91B9D2F6000CCDA2C /* grayArrow@2x.png in Resources */,
+				AF89F64A1C016D0800DD8F84 /* SearchTableViewController.xib in Resources */,
 				AF42A67F1B95D70B0060D67C /* GroupTableViewController.xib in Resources */,
 				AF42A6711B94785D0060D67C /* BonusTableViewController.xib in Resources */,
 				AFDEE7D71B9D2F6000CCDA2C /* blueArrow@2x.png in Resources */,
@@ -769,6 +778,7 @@
 				AF02ED1A1B91A5CF00890BF7 /* GroupViewController.m in Sources */,
 				AF5A52021B9BDB230018CE98 /* Mission.m in Sources */,
 				AF42A6751B958C310060D67C /* DateTimeUtils.m in Sources */,
+				AF89F6491C016D0800DD8F84 /* SearchTableViewController.m in Sources */,
 				AFC90DA51B8AF6D80057CF3D /* MicroAidAPI.m in Sources */,
 				AF4E2B8A1B8C086A00425FF1 /* User.m in Sources */,
 				AF42A67E1B95D70B0060D67C /* GroupTableViewController.m in Sources */,
@@ -837,7 +847,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -924,7 +934,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -971,7 +981,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;

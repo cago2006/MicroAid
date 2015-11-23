@@ -53,10 +53,30 @@
     
     self.viewControllers=@[missionNav,groupNav,notifyNav,mineNav];
     
+//    missionNav = nil;
+//    missionVC = nil;
+//    groupNav = nil;
+//    groupVC = nil;
+//    notifyNav = nil;
+//    notifyVC = nil;
+//    mineNav = nil;
+//    mineVC = nil;
+}
+
+-(void) viewWillDisappear:(BOOL)animated{
+    self.viewControllers = nil;
+    [super viewWillDisappear:animated];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    self.viewControllers = nil;
+    [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    
+    self.viewControllers = nil;
     // Dispose of any resources that can be recreated.
 }
 

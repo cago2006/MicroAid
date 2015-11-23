@@ -8,21 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import <BaiduMapAPI/BMapKit.h>
+#import "SearchTableViewController.h"
 
-@interface HomeViewController : UIViewController<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UISearchBarDelegate>{
+@interface HomeViewController : UIViewController<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UISearchBarDelegate,passChoosedItemDelegate>{
     
     IBOutlet BMKMapView* _mapView;
     BMKLocationService* _locService;
     BMKGeoCodeSearch* _geocodesearch;
-
+    //IBOutlet UISearchBar *mySearchBar;
 }
 
 //当前经度
 @property (nonatomic, assign) double longitude;
+
+@property (nonatomic, strong) IBOutlet UISearchBar *mySearchBar;
+@property (nonatomic, strong) UITableViewController *searchController;
+@property (nonatomic, strong) NSString *searchString;
+
 //当前纬度
 @property (nonatomic, assign) double latitude;
 //当前位置
-@property (nonatomic, assign) NSString *location;
+@property (nonatomic, strong) NSString *location;
 
 //附近任务数组
 @property(nonatomic,strong) NSArray *missionInfoArray;

@@ -29,10 +29,10 @@
 }
 
 -(void)dealloc{
-    [portrait release];
-    [userName release];
-    [nickName release];
-    [super dealloc];
+//    [portrait release];
+//    [userName release];
+//    [nickName release];
+//    [super dealloc];
 }
 
 @end

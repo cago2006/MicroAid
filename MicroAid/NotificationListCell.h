@@ -9,14 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface NotificationListCell : UITableViewCell{
-    IBOutlet UILabel *title;
+    //IBOutlet UILabel *title;
     IBOutlet UILabel *taskName;
     IBOutlet UILabel *taskGroup;
     IBOutlet UILabel *time;
+    IBOutlet UIImageView *statusView;
 }
-@property (retain,nonatomic) UILabel *title;
+//@property (retain,nonatomic) UILabel *title;
 @property (retain,nonatomic) UILabel *taskName;
 @property (retain,nonatomic) UILabel *taskGroup;
 @property (retain,nonatomic) UILabel *time;
+@property (retain,nonatomic) UIImageView *statusView;
+
 
 @end

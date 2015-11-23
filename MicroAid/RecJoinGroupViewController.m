@@ -191,10 +191,9 @@
     static NSString *kCellID = @"cellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID];
     if(cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
     }
-    User *user = [[User alloc]init];
-    user = [self.dataArray objectAtIndex:indexPath.row];
+    User *user = [self.dataArray objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@(%@)",user.nickName,user.username];
     cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
     

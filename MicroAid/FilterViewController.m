@@ -28,13 +28,13 @@
     [saveBtn addTarget:self action:@selector(saveFilter) forControlEvents:UIControlEventTouchUpInside];
     [saveBtn setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
     UIBarButtonItem *saveItem = [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
-    [saveBtn release];
+    //[saveBtn release];
     
     UIBarButtonItem *resetItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(resetFilter)];
     
     NSArray *itemArray=[[NSArray alloc]initWithObjects:saveItem,resetItem, nil];
-    [saveItem release];
-    [resetItem release];
+    //[saveItem release];
+    //[resetItem release];
     [self.navigationItem setRightBarButtonItems:itemArray];
 
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
@@ -200,7 +200,7 @@
         }
         case 3:
         {
-            NSDate *date = [[NSDate alloc]init];
+            NSDate *date ;
             if([timeBtn.titleLabel.text isEqualToString:@"全部"]){
                 date = [DateTimeUtils getCurrentTime];
             }else{

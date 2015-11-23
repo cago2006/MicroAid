@@ -66,7 +66,37 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
  
     [_mapView setZoomLevel:16];
+    
+    _searchController = [[SearchTableViewController alloc]initWithStyle:UITableViewStylePlain superView:self];
+    NSInteger width = _searchBar.frame.size.width;
+    [_searchController.view setFrame:CGRectMake(30, 36, width-40, 0)];
+    [self.view addSubview:_searchController.view];
 }
+
+-(void) passItemValue:(NSString *)values{
+    _searchBar.text = values;
+    [self setSearchControllerHidden:YES];
+    [_searchBar endEditing:YES];
+    
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    _searchString = [userDefaults objectForKey:@"localCity"];
+    NSRange range = [_searchBar.text rangeOfString:@"市"];
+    if(range.location != NSNotFound){
+        _searchString = _searchBar.text;
+    }else{
+        _searchString = [NSString stringWithFormat:@"%@%@",_searchString,_searchBar.text];
+    }
+    NSLog(@"searching");
+    //搜索
+    [self beginGeocode:@"" andAddress:_searchString];
+    
+    
+    //将搜索过的地址保存
+    [self saveRecord:_searchBar.text];
+    [self.searchController.tableView reloadData];
+}
+
 -(void) passTypeValues:(NSMutableArray *)array choiceString:(NSString *)string{
     
 }
@@ -112,6 +142,7 @@
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     _geocodesearch.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     NSLog(@"appear");
+    [super viewWillAppear:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -119,7 +150,7 @@
     [_mapView viewWillDisappear];
     _mapView.delegate = nil; // 不用时，置nil
     _geocodesearch.delegate = nil; // 不用时，置nil
-    
+    [super viewWillDisappear:animated];
 }
 
 - (void)dealloc {
@@ -129,7 +160,7 @@
     if (_geocodesearch != nil) {
         _geocodesearch = nil;
     }
-    [super dealloc];
+    //[super dealloc];
 }
 
 -(void) returnToCreate{
@@ -247,22 +278,91 @@
 
 #pragma mark UISearchBarDelegate
 
+-(void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+    [self setSearchControllerHidden:NO];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    [self setSearchControllerHidden:YES];
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     
-    [searchBar resignFirstResponder];
-    
-    //self.missionLocation = searchBar.text;
-    isSuccess = NO;
-    
-    //搜索
-    [self beginGeocode:@"" andAddress:searchBar.text];
-    
-    //保存到偏好中
-    /*self.location = searchBar.text;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:self.location forKey:@"location"];
-    [userDefaults synchronize];*/
-    
+    _searchString = [userDefaults objectForKey:@"localCity"];
+    [searchBar resignFirstResponder];
+    NSRange range = [searchBar.text rangeOfString:@"市"];
+    if(range.location != NSNotFound){
+        _searchString = searchBar.text;
+    }else{
+        _searchString = [NSString stringWithFormat:@"%@%@",_searchString,searchBar.text];
+    }
+    //搜索
+    [self beginGeocode:@"" andAddress:_searchString];
+
+    [self saveRecord:searchBar.text];
+    [self.searchController.tableView reloadData];
 }
+
+-(void)saveRecord:(NSString *)string{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *recordArray = [NSMutableArray arrayWithArray:[userDefaults arrayForKey:@"recordArray"]];
+    BOOL isFind = NO;
+    int i = 0;
+    for(i = 0; i<[recordArray count]; i++){
+        if([self testSameAddress:string address2:[recordArray objectAtIndex:i]]){
+            isFind = YES;
+            break;
+        }
+    }
+    //如果找到，调整顺序，否则加入
+    if(isFind){
+        [recordArray removeObject:string];
+        [recordArray insertObject:string atIndex:0];
+    }else{
+        [recordArray insertObject:string atIndex:0];
+    }
+    [userDefaults setObject:recordArray forKey:@"recordArray"];
+    [userDefaults synchronize];
+}
+
+-(BOOL) testSameAddress:(NSString *)address1 address2:(NSString *)address2{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *localCity = [userDefaults objectForKey:@"localCity"];
+    if([address1 isEqualToString:address2]){
+        return YES;
+    }
+    if([address1 isEqualToString:[NSString stringWithFormat:@"%@%@",localCity,address2]]){
+        return YES;
+    }
+    if([address2 isEqualToString:[NSString stringWithFormat:@"%@%@",localCity,address1]]){
+        return YES;
+    }
+    return NO;
+}
+
+
+- (void) setSearchControllerHidden:(BOOL)hidden {
+    NSInteger height = hidden ? 0: 130;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSArray *recordArray = [userDefaults arrayForKey:@"recordArray"];
+    NSInteger size = recordArray.count;
+    if(height!=0){
+        if(size == 0){
+            height = 0;
+        }else if(size == 1){
+            height = 45;
+        }else if(size == 2){
+            height = 90;
+        }
+    }
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.2];
+    NSInteger width = _searchBar.frame.size.width;
+    
+    [_searchController.view setFrame:CGRectMake(30, 36, width-40, height)];
+    [UIView commitAnimations];
+}
+
 
 @end

@@ -142,8 +142,7 @@ NSString *ipAddr;
 +(NSDictionary *)getMissionList:(NSArray *)statusList distance:(double)distance type:(NSString *)type group:(NSString *)group bonus:(NSString *)bonus longitude:(double)longitude latitude:(double)latitude endTime:(NSString *)endTime pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize userID:(NSInteger)userID{
     NSError *error = nil;
     
-    NSString *status = [[NSString alloc]init];
-    status = @"[";
+    NSString *status = @"[";
     for(int i=0; i<statusList.count; i++){
         status = [status stringByAppendingString:[statusList objectAtIndex:i]];
     }
@@ -410,8 +409,7 @@ NSString *ipAddr;
 +(NSDictionary *)getMissionList2:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
     NSError *error = nil;
     
-    NSString *status = [[NSString alloc]init];
-    status = @"[";
+    NSString *status = @"[";
     for(int i=0; i<statusList.count; i++){
         status = [status stringByAppendingString:[statusList objectAtIndex:i]];
         status = [status stringByAppendingString:@","];
@@ -427,7 +425,7 @@ NSString *ipAddr;
     if(recUserID !=0){
         urlString = [urlString stringByAppendingFormat:@"\"recUserID\":\"%ld\",",(long)recUserID];
     }
-    urlString = [urlString stringByAppendingFormat:@"\"longitude\":\"%f\",\"latitude\":\"%f\",\"statusList\":%@}&pageNo=%ld&pageSize=%ld",longitude,latitude,status,(long)pageNo,(long)pageSize];
+    urlString = [urlString stringByAppendingFormat:@"\"longitude\":\"%f\",\"latitude\":\"%f\",\"statusList\":%@}&pageNo=%ld&pageSize=%ld&userID=%ld",longitude,latitude,status,(long)pageNo,(long)pageSize,(long)userID];
     
     
     NSLog(@"getMissionList2URL:%@",urlString);

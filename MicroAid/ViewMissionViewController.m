@@ -74,7 +74,9 @@
     self.toID = [[dic objectForKey:@"recUserID"]integerValue];
     [titleLabel setText:[dic objectForKey:@"title"]];
     [startTimeLabel setText:[NSString stringWithFormat:@"起始时间:%@",[dic objectForKey:@"startTime"]]];
-    [statusLabel setText:[NSString stringWithFormat:@"任务状态:%@",[dic objectForKey:@"statusInfo"]]];
+    NSString *status = [dic objectForKey:@"statusInfo"];
+    status = [status stringByReplacingOccurrencesOfString:@"接受" withString:@"认领"];
+    [statusLabel setText:[NSString stringWithFormat:@"任务状态:%@",status]];
     [endTimeLabel setText:[NSString stringWithFormat:@"截止时间:%@",[dic objectForKey:@"endTime"]]];
     //截止时间<现在时间
     if([DateTimeUtils isOutOfDate:[dic objectForKey:@"endTime"]]){
@@ -98,7 +100,7 @@
             UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
             [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [rightBtn addTarget:self action:@selector(acceptMission) forControlEvents:UIControlEventTouchUpInside];
-            [rightBtn setTitle:@"接受" forState:UIControlStateNormal];
+            [rightBtn setTitle:@"认领" forState:UIControlStateNormal];
             UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
             self.navigationItem.rightBarButtonItem = rightItem;
         }
@@ -149,10 +151,10 @@
     dispatch_async(serverQueue, ^{
         NSDictionary *resultDic = [MicroAidAPI acceptMission:self.missionID userID:userID];
         if ([[resultDic objectForKey:@"flg"] boolValue]) {//接受成功
-            [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务接受成功!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务认领成功!" waitUntilDone:YES];
             [self performSelectorOnMainThread:@selector(returnToMainTab) withObject:nil waitUntilDone:YES];
         }else if ([[resultDic objectForKey:@"onError"] boolValue]) {//接受失败
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务接受失败!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务认领失败!" waitUntilDone:YES];
             return ;
         }
     });

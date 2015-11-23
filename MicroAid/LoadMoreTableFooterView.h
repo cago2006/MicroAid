@@ -33,7 +33,7 @@
 @protocol LoadMoreTableFooterDelegate;
 @interface LoadMoreTableFooterView : UIView {
 	
-	id _delegate;
+	__unsafe_unretained id _delegate;
 	EGOPullState _state;
     
 	UILabel *_statusLabel;

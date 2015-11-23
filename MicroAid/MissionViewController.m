@@ -34,33 +34,33 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"可接受任务"];
+    [self.navigationItem setTitle:@"可认领任务"];
     
     UIButton *addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [addBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(createMission) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setBackgroundImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc]initWithCustomView:addBtn];
-    [addBtn release];
+    //[addBtn release];
     
     UIButton *filterBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [filterBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [filterBtn addTarget:self action:@selector(filterMission) forControlEvents:UIControlEventTouchUpInside];
     [filterBtn setBackgroundImage:[UIImage imageNamed:@"filter.png"] forState:UIControlStateNormal];
     UIBarButtonItem *filterItem = [[UIBarButtonItem alloc]initWithCustomView:filterBtn];
-    [filterBtn release];
+    //[filterBtn release];
     
     UIButton *locationBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [locationBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [locationBtn addTarget:self action:@selector(returnToLocation) forControlEvents:UIControlEventTouchUpInside];
     [locationBtn setBackgroundImage:[UIImage imageNamed:@"location.png"] forState:UIControlStateNormal];
     UIBarButtonItem *locationItem = [[UIBarButtonItem alloc]initWithCustomView:locationBtn];
-    [locationBtn release];
+    //[locationBtn release];
     
     NSArray *itemArray=[[NSArray alloc]initWithObjects:addItem,filterItem,locationItem, nil];
-    [addItem release];
-    [filterItem release];
-    [locationItem release];
+    //[addItem release];
+    //[filterItem release];
+    //[locationItem release];
     [self.navigationItem setRightBarButtonItems:itemArray];
     
     self.pullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];

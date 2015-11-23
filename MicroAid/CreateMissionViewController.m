@@ -38,9 +38,9 @@
     [saveBtn addTarget:self action:@selector(saveMission) forControlEvents:UIControlEventTouchUpInside];
     [saveBtn setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
     UIBarButtonItem *saveItem = [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
-    [saveBtn release];
+    //[saveBtn release];
     self.navigationItem.rightBarButtonItem = saveItem;
-    [saveItem release];
+    //[saveItem release];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     [self.pickerView setHidden:YES];
@@ -211,7 +211,7 @@
     switch (sender.tag) {
         case 0:
         {
-            NSDate *date = [[NSDate alloc]init];
+            NSDate *date;
             if([startTimeBtn.titleLabel.text isEqualToString:@"点击选择"]){
                 date = [DateTimeUtils getCurrentTime];
             }else{
@@ -225,7 +225,7 @@
         }
         case 1:
         {
-            NSDate *date = [[NSDate alloc]init];
+            NSDate *date;
             if([endTimeBtn.titleLabel.text isEqualToString:@"点击选择"]){
                 date = [DateTimeUtils getCurrentTimeAfterAnHour];
             }else{

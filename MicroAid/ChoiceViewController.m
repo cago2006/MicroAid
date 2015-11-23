@@ -90,7 +90,7 @@
     static NSString *kCellID = @"cellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID];
     if(cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
     }
     cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
     return cell;

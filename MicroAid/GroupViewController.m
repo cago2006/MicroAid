@@ -32,7 +32,7 @@
     [addBtn addTarget:self action:@selector(createGroup) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setBackgroundImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc]initWithCustomView:addBtn];
-    [addBtn release];
+    //[addBtn release];
     
     self.navigationItem.rightBarButtonItem = addItem;
     
@@ -160,7 +160,7 @@
     static NSString *kCellID = @"cellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID];
     if(cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
     }
     cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
     cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;

@@ -101,6 +101,7 @@
     dispatch_async(serverQueue, ^{
         [MicroAidAPI updateChannelID:userID channelID:[BPush getChannelId]];
     });
+    [super viewWillDisappear:animated];
 }
 
 //点击空白区域，键盘收起

@@ -106,8 +106,8 @@
     UIWebView * callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [self.view addSubview:callWebview];
-    [callWebview release];
-    [str release];
+    //[callWebview release];
+    //[str release];
 }
 
 @end

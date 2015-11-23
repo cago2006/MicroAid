@@ -29,12 +29,12 @@
     return self;
 }
 
--(void)dealloc{
-    [title release];
-    [distance release];
-    [group release];
-    [super dealloc];
-}
+//-(void)dealloc{
+//    [title release];
+//    [distance release];
+//    [group release];
+//    [super dealloc];
+//}
 
 
 @end

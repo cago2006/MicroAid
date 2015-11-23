@@ -31,9 +31,9 @@
     [saveBtn addTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
     [saveBtn setBackgroundImage:[UIImage imageNamed:@"save.png"] forState:UIControlStateNormal];
     UIBarButtonItem *saveItem = [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
-    [saveBtn release];
+    //[saveBtn release];
     self.navigationItem.rightBarButtonItem = saveItem;
-    [saveItem release];
+    //[saveItem release];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 

@@ -56,16 +56,16 @@
 -(void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     FinishedMissionsViewController *finishedMissionsVC = [[FinishedMissionsViewController alloc] initWithNibName:@"FinishedMissionsViewController" bundle:nil];
-    [finishedMissionsVC setTitle:@"已完成"];
+    [finishedMissionsVC setTitle:@"我完成"];
     [finishedMissionsVC setParentNav:self.navigationController];
     
     StartedMissionsViewController *startedMissionsVC = [[StartedMissionsViewController alloc] initWithNibName:@"StartedMissionsViewController" bundle:nil];
-    [startedMissionsVC setTitle:@"已发起"];
+    [startedMissionsVC setTitle:@"我发起"];
     NSLog(@"slef:%@",self.navigationController);
     [startedMissionsVC setParentNav:self.navigationController];
     
     ClaimedMissionsViewController *claimedMissionsVC = [[ClaimedMissionsViewController alloc] initWithNibName:@"ClaimedMissionsViewController" bundle:nil];
-    [claimedMissionsVC setTitle:@"已认领"];
+    [claimedMissionsVC setTitle:@"我认领"];
     [claimedMissionsVC setParentNav:self.navigationController];
     
     _controllers =[[NSArray alloc]initWithObjects:startedMissionsVC, claimedMissionsVC,finishedMissionsVC,  nil];

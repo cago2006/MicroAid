@@ -55,16 +55,16 @@
 
 
 - (void)dealloc {
-    [pullArrowImage release];
-    [pullBackgroundColor release];
-    [pullTextColor release];
-    [pullLastRefreshDate release];
-    
-    [refreshView release];
-    [loadMoreView release];
-    [delegateInterceptor release];
+//    [pullArrowImage release];
+//    [pullBackgroundColor release];
+//    [pullTextColor release];
+//    [pullLastRefreshDate release];
+//    
+//    [refreshView release];
+//    [loadMoreView release];
+//    [delegateInterceptor release];
     delegateInterceptor = nil;
-    [super dealloc];
+    //[super dealloc];
 }
 
 # pragma mark - Custom view configuration
@@ -177,8 +177,9 @@
 - (void)setPullArrowImage:(UIImage *)aPullArrowImage
 {
     if(aPullArrowImage != pullArrowImage) {
-        [pullArrowImage release];
-        pullArrowImage = [aPullArrowImage retain];
+        //[pullArrowImage release];
+        pullArrowImage = aPullArrowImage;
+        //pullArrowImage = [aPullArrowImage retain];
         [self configDisplayProperties];
     }
 }
@@ -186,8 +187,9 @@
 - (void)setPullBackgroundColor:(UIColor *)aColor
 {
     if(aColor != pullBackgroundColor) {
-        [pullBackgroundColor release];
-        pullBackgroundColor = [aColor retain];
+        //[pullBackgroundColor release];
+        //pullBackgroundColor = [aColor retain];
+        pullBackgroundColor = aColor;
         [self configDisplayProperties];
     } 
 }
@@ -195,8 +197,9 @@
 - (void)setPullTextColor:(UIColor *)aColor
 {
     if(aColor != pullTextColor) {
-        [pullTextColor release];
-        pullTextColor = [aColor retain];
+        //[pullTextColor release];
+        //pullTextColor = [aColor retain];
+        pullTextColor = aColor;
         [self configDisplayProperties];
     } 
 }
@@ -204,8 +207,9 @@
 - (void)setPullLastRefreshDate:(NSDate *)aDate
 {
     if(aDate != pullLastRefreshDate) {
-        [pullLastRefreshDate release];
-        pullLastRefreshDate = [aDate retain];
+        //[pullLastRefreshDate release];
+        //pullLastRefreshDate = [aDate retain];
+        pullLastRefreshDate = aDate;
         [refreshView refreshLastUpdatedDate];
     }
 }

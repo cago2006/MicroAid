@@ -50,6 +50,11 @@
     [self findUser];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    _imageView = nil;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -186,7 +191,7 @@
         static NSString *kCellID = @"cellID";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID];
         if(cell == nil){
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
         }
         if(indexPath.row == 0){
             cell.textLabel.text = @"我的任务";
@@ -205,7 +210,7 @@
         static NSString *kCellID = @"cellID";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID];
         if(cell == nil){
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
         }
         cell.textLabel.text = @"登出";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;

@@ -14,8 +14,9 @@
 #import <UIKit/UIKit.h>
 #import <BaiduMapAPI/BMapKit.h>
 #import "CreateMissionViewController.h"
+#import "SearchTableViewController.h"
 
-@interface LocationViewController : UIViewController<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UISearchBarDelegate,PassMultiValuesDelegate>{
+@interface LocationViewController : UIViewController<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UISearchBarDelegate,PassMultiValuesDelegate,passChoosedItemDelegate>{
     
     IBOutlet BMKMapView* _mapView;
     BMKGeoCodeSearch* _geocodesearch;
@@ -30,7 +31,10 @@
 @property (nonatomic, assign) double missionLatitude;
 //当前位置
 @property (nonatomic, retain) NSString *missionLocation;
+@property (nonatomic, strong) NSString *searchString;
 
 @property (nonatomic, assign) bool isView;
+
+@property (nonatomic, strong) UITableViewController *searchController;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation NotificationListCell
 
-@synthesize taskGroup,taskName,title,time;
+@synthesize taskGroup,taskName,time,statusView;
 
 - (void)awakeFromNib {
     // Initialization code
@@ -31,11 +31,12 @@
 }
 
 -(void)dealloc{
-    [title release];
-    [taskGroup release];
-    [taskName release];
-    [time release];
-    [super dealloc];
+    //[title release];
+//    [statusView release];
+//    [taskGroup release];
+//    [taskName release];
+//    [time release];
+//    [super dealloc];
 }
 
 @end

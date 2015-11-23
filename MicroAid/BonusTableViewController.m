@@ -89,7 +89,7 @@
     static NSString *kCellID = @"cellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellID];
     if(cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
     }
     cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
     if([indexPath isEqual: self.choosedIndex])cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -148,8 +148,7 @@
     {
         [ProgressHUD showError:@"请选择一项"];
     }else{
-        NSString *choosed = [[NSString alloc]init];
-        choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
+        NSString *choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         
         cmVC.isEditMission = NO;

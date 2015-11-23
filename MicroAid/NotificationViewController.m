@@ -99,7 +99,7 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 80;
+    return 54;
 }
 
 //点击显示具体信息，首先进行判断
@@ -109,6 +109,8 @@
     if([info.title isEqualToString:@"有新的任务发布,请查看!"]){
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSInteger userID = [userDefaults integerForKey:@"userID"];
+        //再加一个任务状态判断
+        //todo
         if(info.userID==userID){
             CreateMissionViewController *cmVC = [[CreateMissionViewController alloc]initWithNibName:@"CreateMissionViewController" bundle:nil];
             
@@ -121,6 +123,7 @@
             
             viewMissionVC.missionID = info.missionID;
             viewMissionVC.isAccepted = NO;
+            viewMissionVC.isSelf = true;
             
             self.tabBarController.tabBar.hidden = YES;
             
@@ -131,6 +134,7 @@
         
         viewMissionVC.missionID = info.missionID;
         viewMissionVC.isAccepted = YES;
+        viewMissionVC.isSelf = true;
         self.tabBarController.tabBar.hidden = YES;
         
         [self.navigationController pushViewController:viewMissionVC animated:YES];
@@ -153,7 +157,10 @@
 
     
     NotificationInfo *info = [self.dataArray objectAtIndex:indexPath.row];
-    [[cell title]setText:info.title];
+    //[[cell title]setText:info.title];
+    if([info.title isEqualToString:@"有新的任务发布,请查看!"]){
+        [[cell statusView]setImage:[UIImage imageNamed:@"green.png"]];
+    }
     [[cell taskName]setText:info.missionTitle];
     [[cell taskGroup]setText:info.missionGroup];
     [[cell time]setText:info.time];
