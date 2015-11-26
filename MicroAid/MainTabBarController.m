@@ -51,7 +51,10 @@
     mineNav.title = @"我";
     mineNav.tabBarItem.image = [UIImage imageNamed:@"menu_mine"];
     
-    self.viewControllers=@[missionNav,groupNav,notifyNav,mineNav];
+    
+    NSArray *controllers = [NSArray arrayWithObjects:missionNav,groupNav,notifyNav,mineNav,nil];
+    
+    self.viewControllers=controllers;
     
 }
 
