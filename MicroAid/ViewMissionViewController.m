@@ -76,6 +76,9 @@
     [startTimeLabel setText:[NSString stringWithFormat:@"起始时间:%@",[dic objectForKey:@"startTime"]]];
     NSString *status = [dic objectForKey:@"statusInfo"];
     status = [status stringByReplacingOccurrencesOfString:@"接受" withString:@"认领"];
+    if([status isEqualToString:@"已认领"] && [DateTimeUtils isOutOfDate:[dic objectForKey:@"endTime"]]){
+        status = @"已过期";
+    }
     [statusLabel setText:[NSString stringWithFormat:@"任务状态:%@",status]];
     [endTimeLabel setText:[NSString stringWithFormat:@"截止时间:%@",[dic objectForKey:@"endTime"]]];
     //截止时间<现在时间

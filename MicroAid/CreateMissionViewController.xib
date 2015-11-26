@@ -178,7 +178,7 @@
                     <subviews>
                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" id="snF-5B-CrJ">
                             <rect key="frame" x="0.0" y="61" width="320" height="178"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <date key="date" timeIntervalSinceReferenceDate="462769088.54628903">
                                 <!--2015-09-01 02:58:08 +0000-->
                             </date>

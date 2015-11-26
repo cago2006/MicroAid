@@ -26,6 +26,8 @@
 		AF04FA701BCBAD7D00035C59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012041B9045730016E973 /* QuartzCore.framework */; };
 		AF04FA711BCBAD8700035C59 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF6012021B90455D0016E973 /* CoreLocation.framework */; };
 		AF04FA751BCBADFF00035C59 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AF04FA741BCBADFF00035C59 /* libz.tbd */; };
+		AF12B6121C0406DB00D805D1 /* MineMissionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF12B6101C0406DB00D805D1 /* MineMissionListCell.m */; };
+		AF12B6131C0406DB00D805D1 /* MineMissionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF12B6111C0406DB00D805D1 /* MineMissionListCell.xib */; };
 		AF42A6701B94785D0060D67C /* BonusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42A66E1B94785D0060D67C /* BonusTableViewController.m */; };
 		AF42A6711B94785D0060D67C /* BonusTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF42A66F1B94785D0060D67C /* BonusTableViewController.xib */; };
 		AF42A6751B958C310060D67C /* DateTimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42A6741B958C310060D67C /* DateTimeUtils.m */; };
@@ -142,6 +144,9 @@
 		AF02ED291B9294D000890BF7 /* CreateMissionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateMissionViewController.m; sourceTree = "<group>"; };
 		AF02ED2A1B9294D000890BF7 /* CreateMissionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateMissionViewController.xib; sourceTree = "<group>"; };
 		AF04FA741BCBADFF00035C59 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		AF12B60F1C0406DB00D805D1 /* MineMissionListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineMissionListCell.h; sourceTree = "<group>"; };
+		AF12B6101C0406DB00D805D1 /* MineMissionListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineMissionListCell.m; sourceTree = "<group>"; };
+		AF12B6111C0406DB00D805D1 /* MineMissionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineMissionListCell.xib; sourceTree = "<group>"; };
 		AF42A66D1B94785D0060D67C /* BonusTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusTableViewController.h; sourceTree = "<group>"; };
 		AF42A66E1B94785D0060D67C /* BonusTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusTableViewController.m; sourceTree = "<group>"; };
 		AF42A66F1B94785D0060D67C /* BonusTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BonusTableViewController.xib; sourceTree = "<group>"; };
@@ -601,6 +606,9 @@
 				AFDC6C0B1BB3BD1F0080F6D1 /* ViewUserViewController.h */,
 				AFDC6C0C1BB3BD1F0080F6D1 /* ViewUserViewController.m */,
 				AFDC6C0D1BB3BD1F0080F6D1 /* ViewUserViewController.xib */,
+				AF12B60F1C0406DB00D805D1 /* MineMissionListCell.h */,
+				AF12B6101C0406DB00D805D1 /* MineMissionListCell.m */,
+				AF12B6111C0406DB00D805D1 /* MineMissionListCell.xib */,
 			);
 			name = mineView;
 			sourceTree = "<group>";
@@ -732,6 +740,7 @@
 				AF02ED1B1B91A5CF00890BF7 /* GroupViewController.xib in Resources */,
 				AFDEE7DA1B9D2F6000CCDA2C /* whiteArrow.png in Resources */,
 				AFDEE7E01B9D309100CCDA2C /* MissionListCell.xib in Resources */,
+				AF12B6131C0406DB00D805D1 /* MineMissionListCell.xib in Resources */,
 				AF5D62051B8EA2F800897E09 /* HomeViewController.xib in Resources */,
 				AF862D5C1BCBD85B003BF8CE /* mapapi.bundle in Resources */,
 				AF5E3A7E1BB92D2800521BEE /* NotificationListCell.xib in Resources */,
@@ -794,6 +803,7 @@
 				AFD43AB71BAD094A00D6D441 /* GTMBase64.m in Sources */,
 				AFDD8AD41BABACA200A3369B /* ModPasswordViewController.m in Sources */,
 				AF6B66321B8DF0CB0013F12A /* LoginViewController.mm in Sources */,
+				AF12B6121C0406DB00D805D1 /* MineMissionListCell.m in Sources */,
 				AFDEE7C81B9D2F4100CCDA2C /* EGORefreshTableHeaderView.m in Sources */,
 				AF5923F01BA93DD600158B86 /* FilterBonusTVC.m in Sources */,
 				AF02ED1F1B91E32500890BF7 /* NotificationViewController.m in Sources */,

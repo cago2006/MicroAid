@@ -33,12 +33,12 @@
     NSString *ipAddr = [defaults stringForKey:@"ipAddr"];
     if (ipAddr==nil || [ipAddr isEqualToString:@""])
     {
-        ipAddr =  @"218.193.130.169:8080";
-        //ipAddr =  @"10.131.241.184:8080";
+        //ipAddr =  @"218.193.130.169:8080";
+        ipAddr =  @"10.131.241.184:8080";
     }
     NSLog(@"IP : %@", ipAddr);
-    [MicroAidAPI setIpAddr:@"218.193.130.169:8080"];
-    //[MicroAidAPI setIpAddr:@"10.131.241.184:8080"];
+    //[MicroAidAPI setIpAddr:@"218.193.130.169:8080"];
+    [MicroAidAPI setIpAddr:@"10.131.241.184:8080"];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -154,6 +154,7 @@
     //[self.navigationViewController.view removeFromSuperview];
     //self.navigationViewController = nil;
     [self.mainTabBarController.view removeFromSuperview];
+    self.mainTabBarController.viewControllers = nil;
     self.mainTabBarController = nil;
     
     self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
@@ -165,6 +166,7 @@
 
 -(void) switchToHomeViewFromMainTab{
     [self.mainTabBarController.view removeFromSuperview];
+    self.mainTabBarController.viewControllers = nil;
     self.mainTabBarController = nil;
     
     HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];

@@ -9,7 +9,7 @@
 #import "ClaimedMissionsViewController.h"
 #import "MicroAidAPI.h"
 #import "MissionInfo.h"
-#import "MissionListCell.h"
+#import "MineMissionListCell.h"
 #import "CreateMissionViewController.h"
 #import "ViewMissionViewController.h"
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
@@ -99,15 +99,25 @@
 {
     static NSString *cellIdentifier = @"CustomCellIdentifier";
     
-    MissionListCell *cell = (MissionListCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    MineMissionListCell *cell = (MineMissionListCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil) {
-        NSArray *array = [[NSBundle mainBundle]loadNibNamed:@"MissionListCell" owner:self options:nil];
+        NSArray *array = [[NSBundle mainBundle]loadNibNamed:@"MineMissionListCell" owner:self options:nil];
         cell = [array objectAtIndex:0];
         [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     }
     // cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
     MissionInfo *info = [self.dataArray objectAtIndex:indexPath.row];
+    if([info.statusInfo isEqualToString:@"已接受"]){
+        [[cell statusView]setImage:[UIImage imageNamed:@"yellow.png"]];
+    }else if([info.statusInfo isEqualToString:@"已完成"]){
+        [[cell statusView]setImage:[UIImage imageNamed:@"green.png"]];
+    }else if([info.statusInfo isEqualToString:@"已过期"]){
+        [[cell statusView]setImage:[UIImage imageNamed:@"gray.png"]];
+    }else if([info.statusInfo isEqualToString:@"未接受"]){
+        [[cell statusView]setImage:[UIImage imageNamed:@"red.png"]];
+    }
+    //todo
     [[cell title]setText:info.title];
     [[cell distance]setText:[NSString stringWithFormat:@"%.1fm",info.distance]];
     [[cell group]setText:info.group];
@@ -127,7 +137,7 @@
     double longitude = [userDefaults doubleForKey:@"longitude"];
     
     dispatch_async(kBgQueue, ^{
-        NSDictionary *finishedMissions = [MicroAidAPI getMissionList2:0 recUserID:userID statusList:statusArray longitude:longitude latitude:latitude pageNo:pageNo pageSize:pageSize];
+        NSDictionary *finishedMissions = [MicroAidAPI getcClaimedMissionList:userID recUserID:userID statusList:statusArray longitude:longitude latitude:latitude pageNo:pageNo pageSize:pageSize];
         
         if ([[finishedMissions objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{

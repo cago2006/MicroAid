@@ -59,7 +59,7 @@
 //15 获取用户头像
 +(NSDictionary *)fetchPicture:(NSInteger)userID;
 
-//16 获取附近任务列表2(已完成、已发起、已接受等)
+//16 获取附近任务列表2(已完成、已发起等)
 +(NSDictionary *)getMissionList2:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
 
 //17 获取任务信息
@@ -80,5 +80,7 @@
 //22 获得没有加入群组的用户列表
 +(NSDictionary *)getUnjoinedUser:(NSString *)groupName pageNo:(int)pageNo pageSize:(int)pageSize;
 
+//23 获取我认领的任务列表
++(NSDictionary *)getcClaimedMissionList:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
 
 @end

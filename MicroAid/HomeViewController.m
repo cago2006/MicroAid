@@ -158,8 +158,6 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    NSLog(@"%@",@"homeview memory warning");
-    self.searchController = nil;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

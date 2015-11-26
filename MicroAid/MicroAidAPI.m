@@ -405,7 +405,7 @@ NSString *ipAddr;
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
 }
 
-//16 获取附近任务列表2(已完成、已发起、已接受等)
+//16 获取附近任务列表2(已完成、已发起等)
 +(NSDictionary *)getMissionList2:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
     NSError *error = nil;
     
@@ -557,6 +557,41 @@ NSString *ipAddr;
     NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/getUnjoinedUser.action?groupName=%@&pageNo=%i&pageSize=%i",ipAddr,groupName,pageNo,pageSize];
     
     NSLog(@"getUnjoinedUserURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
+//23 获取我认领的任务列表
++(NSDictionary *)getcClaimedMissionList:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
+    NSError *error = nil;
+    
+    NSString *status = @"[";
+    for(int i=0; i<statusList.count; i++){
+        status = [status stringByAppendingString:[statusList objectAtIndex:i]];
+        status = [status stringByAppendingString:@","];
+    }
+    status = [status substringToIndex:status.length-1];
+    status = [status stringByAppendingString:@"]"];
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/getTaskWithFilter?taskFilterString={",ipAddr];
+    
+    if(recUserID !=0){
+        urlString = [urlString stringByAppendingFormat:@"\"recUserID\":\"%ld\",",(long)recUserID];
+    }
+    urlString = [urlString stringByAppendingFormat:@"\"longitude\":\"%f\",\"latitude\":\"%f\",\"statusList\":%@}&pageNo=%ld&pageSize=%ld&userID=%ld",longitude,latitude,status,(long)pageNo,(long)pageSize,(long)userID];
+    
+    
+    NSLog(@"getcClaimedMissionListURL:%@",urlString);
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
