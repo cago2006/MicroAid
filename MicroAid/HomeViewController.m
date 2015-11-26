@@ -336,7 +336,7 @@
         [self.navigationController pushViewController:cmVC animated:YES];
     }else{
         ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
-        if([info.statusInfo isEqualToString:@"未接受"]){
+        if(([info.statusInfo isEqualToString:@"未接受"] || [info.statusInfo isEqualToString:@"未认领"])){
             viewMissionVC.isAccepted = NO;
         }else{
             viewMissionVC.isAccepted = YES;
@@ -383,31 +383,31 @@
         //自动搜索附近任务////////
         NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        double distance = [userDefaults doubleForKey:@"missionDistance"];
-        if(distance < 0.1){
-            distance = 1000;
-        }
+//        double distance = [userDefaults doubleForKey:@"missionDistance"];
+//        if(distance < 0.1){
+//            distance = 1000;
+//        }
         double latitude = [userDefaults doubleForKey:@"latitude"];
         double longitude = [userDefaults doubleForKey:@"longitude"];
-        NSString *endTime = [userDefaults objectForKey:@"missionEndTime"];
-        NSString *group = [userDefaults objectForKey:@"missionGroup"];
-        NSString *bonus = [userDefaults objectForKey:@"missionBonus"];
-        NSString *type = [userDefaults objectForKey:@"missionType"];
-        if(endTime==nil || [endTime isEqualToString:@""]){
-            endTime = @"全部";
-        }
-        if(group==nil || [group isEqualToString:@""]){
-            group = @"全部";
-        }
-        if(bonus==nil || [bonus isEqualToString:@""]){
-            bonus = @"全部";
-        }
-        if(type==nil || [type isEqualToString:@""]){
-            type = @"全部";
-        }
-        NSLog(@"distance:%f",distance);
+//        NSString *endTime = [userDefaults objectForKey:@"missionEndTime"];
+//        NSString *group = [userDefaults objectForKey:@"missionGroup"];
+//        NSString *bonus = [userDefaults objectForKey:@"missionBonus"];
+//        NSString *type = [userDefaults objectForKey:@"missionType"];
+//        if(endTime==nil || [endTime isEqualToString:@""]){
+//            endTime = @"全部";
+//        }
+//        if(group==nil || [group isEqualToString:@""]){
+//            group = @"全部";
+//        }
+//        if(bonus==nil || [bonus isEqualToString:@""]){
+//            bonus = @"全部";
+//        }
+//        if(type==nil || [type isEqualToString:@""]){
+//            type = @"全部";
+//        }
+//        NSLog(@"distance:%f",distance);
         
-        [self searchNearby:statusArray distance:distance type:type group:group bonus:bonus longitude:longitude latitude:latitude endTime:endTime];
+        [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:@"全部"];
     }
     
     return annotationView;
@@ -629,7 +629,7 @@
     
     
     dispatch_async(kBgQueue, ^{
-        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusList distance:distance type:type group:group bonus:bonus longitude:longitude latitude:latitude endTime:endTime pageNo:1 pageSize:100 userID:userID];
+        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusList distance:distance type:type group:group bonus:bonus longitude:longitude latitude:latitude endTime:endTime pageNo:1 pageSize:999 userID:userID];
         //NSDictionary *nearbyBarrierFrees = [ShareBarrierFreeAPIS SearchNearbyBarrierFree:110.9 latitude:23.89];
         
         if ([[nearbyMissions objectForKey:@"result"] isEqualToString:@"fail"]) {

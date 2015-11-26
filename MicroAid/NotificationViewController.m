@@ -106,7 +106,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NotificationInfo *info = [self.dataArray objectAtIndex:indexPath.row];
-    if([info.status isEqualToString:@"未接受"]){
+    if(([info.status isEqualToString:@"未接受"] || [info.status isEqualToString:@"未认领"])){
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSInteger userID = [userDefaults integerForKey:@"userID"];
         //再加一个任务状态判断
@@ -160,11 +160,11 @@
     //[[cell title]setText:info.title];
     if([info.status isEqualToString:@"已完成"]){
         [[cell statusView]setImage:[UIImage imageNamed:@"green.png"]];
-    }else if([info.status isEqualToString:@"已接受"]){
+    }else if(([info.status isEqualToString:@"已接受"] || [info.status isEqualToString:@"已认领"])){
         [[cell statusView]setImage:[UIImage imageNamed:@"yellow.png"]];
     }else if([info.status isEqualToString:@"已过期"]){
         [[cell statusView]setImage:[UIImage imageNamed:@"gray.png"]];
-    }else if([info.status isEqualToString:@"未接受"]){
+    }else if(([info.status isEqualToString:@"未接受"] || [info.status isEqualToString:@"未认领"] )){
         [[cell statusView]setImage:[UIImage imageNamed:@"red.png"]];
     }
     [[cell taskName]setText:info.missionTitle];

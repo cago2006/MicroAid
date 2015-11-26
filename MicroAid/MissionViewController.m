@@ -172,7 +172,7 @@
         [self.navigationController pushViewController:cmVC animated:YES];
     }else{
         ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
-        if([info.statusInfo isEqualToString:@"未接受"]){
+        if(([info.statusInfo isEqualToString:@"未接受"] || [info.statusInfo isEqualToString:@"未认领"] )){
             viewMissionVC.isAccepted = NO;
         }else{
             viewMissionVC.isAccepted = YES;
@@ -258,7 +258,9 @@
             });
             return;
         } else {
+            
             _missionInfoArray = [MissionInfo getMissionInfos:[nearbyMissions objectForKey:@"taskInfoList"]];
+            /*
             if ([_missionInfoArray count] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
@@ -273,6 +275,69 @@
                 }
                 [self.dataArray addObjectsFromArray:self.missionInfoArray];
                 [self.pullTableView reloadData];
+            });*/
+            if([_missionInfoArray count] < 20){
+                [self performSelectorOnMainThread:@selector(getAllOtherMission:) withObject:_missionInfoArray waitUntilDone:YES];
+            }else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if(self.count == 1){
+                        [self.dataArray removeAllObjects];
+                    }
+                    [self.dataArray addObjectsFromArray:self.missionInfoArray];
+                    [self.pullTableView reloadData];
+                });
+            }
+        }
+    });
+}
+
+
+-(void) getAllOtherMission:(NSArray *)missionArray{
+    if(self.count == 1){
+        [self.dataArray removeAllObjects];
+    }
+    [self.dataArray addObjectsFromArray:missionArray];
+    NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [userDefaults integerForKey:@"userID"];
+    double latitude = [userDefaults doubleForKey:@"latitude"];
+    double longitude = [userDefaults doubleForKey:@"longitude"];
+    NSString *endTime = [userDefaults objectForKey:@"missionEndTime"];
+    if(endTime==nil || [endTime isEqualToString:@""]){
+        endTime = @"全部";
+    }
+    dispatch_async(kBgQueue, ^{
+        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:endTime pageNo:1 pageSize:999 userID:userID];
+        
+        if ([[nearbyMissions objectForKey:@"onError"] boolValue]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alertView show];
+            });
+            return;
+        } else {
+            _othersMissionInfoArray = [MissionInfo getMissionInfos:[nearbyMissions objectForKey:@"taskInfoList"]];
+            NSMutableArray *array = [[NSMutableArray alloc]initWithArray:_othersMissionInfoArray];
+            for(NSUInteger i = 0; i< array.count; i++){
+                MissionInfo *temp1 = [array objectAtIndex:i];
+                for(MissionInfo *temp2 in self.dataArray){
+                    if(temp1.missionId == temp2.missionId){
+                        [array removeObjectAtIndex:i];
+                        i--;
+                        break;
+                    }
+                }
+            }
+            if ([missionArray count]== 0 && [array count] == 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alertView show];
+                });
+                return;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                 [self.dataArray addObjectsFromArray:array];
+                 [self.pullTableView reloadData];
             });
         }
     });

@@ -53,8 +53,8 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 
--(void) viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     FinishedMissionsViewController *finishedMissionsVC = [[FinishedMissionsViewController alloc] initWithNibName:@"FinishedMissionsViewController" bundle:nil];
     [finishedMissionsVC setTitle:@"我完成"];
     [finishedMissionsVC setParentNav:self.navigationController];
@@ -72,9 +72,9 @@
     
     selectedTab = NSIntegerMax;
     _delegate = nil;
+    
+    
     _indicatorView = [[UIView alloc] init];
-    
-    
     _indicatorView.backgroundColor= [UIColor orangeColor];//游标的颜色
     _statusHeight = 0.0;
     if (_controllers != nil)
@@ -86,6 +86,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    _indicatorView.frame = CGRectMake(0.0, 0.0, 0.0, 0.0);
 }
 
 

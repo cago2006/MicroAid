@@ -74,7 +74,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
     MissionInfo *info = [self.dataArray objectAtIndex:indexPath.row];
-    if(info.userId == userID && [info.statusInfo isEqualToString:@"未接受"]){
+    if(info.userId == userID && ([info.statusInfo isEqualToString:@"未接受"] || [info.statusInfo isEqualToString:@"未认领"])){
         CreateMissionViewController *cmVC = [[CreateMissionViewController alloc]initWithNibName:@"CreateMissionViewController" bundle:nil];
         
         self.tabBarController.tabBar.hidden = YES;
@@ -83,7 +83,7 @@
         [self.parentNavController pushViewController:cmVC animated:YES];
     }else{
         ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
-        if([info.statusInfo isEqualToString:@"未接受"]){
+        if(([info.statusInfo isEqualToString:@"未接受"] || [info.statusInfo isEqualToString:@"未认领"] )){
             viewMissionVC.isAccepted = NO;
         }else{
             viewMissionVC.isAccepted = YES;
@@ -109,13 +109,13 @@
     }
     // cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
     MissionInfo *info = [self.dataArray objectAtIndex:indexPath.row];
-    if([info.statusInfo isEqualToString:@"已接受"]){
+    if(([info.statusInfo isEqualToString:@"已接受"] || [info.statusInfo isEqualToString:@"已认领"])){
         [[cell statusView]setImage:[UIImage imageNamed:@"yellow.png"]];
     }else if([info.statusInfo isEqualToString:@"已完成"]){
         [[cell statusView]setImage:[UIImage imageNamed:@"green.png"]];
     }else if([info.statusInfo isEqualToString:@"已过期"]){
         [[cell statusView]setImage:[UIImage imageNamed:@"gray.png"]];
-    }else if([info.statusInfo isEqualToString:@"未接受"]){
+    }else if(([info.statusInfo isEqualToString:@"未接受"] || [info.statusInfo isEqualToString:@"未认领"])){
         [[cell statusView]setImage:[UIImage imageNamed:@"red.png"]];
     }
     //todo

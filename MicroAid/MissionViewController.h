@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSMutableArray *dataArray;
 //附近任务数组(每次从服务器获取)
 @property(nonatomic,strong) NSArray *missionInfoArray;
+@property(nonatomic,strong) NSArray *othersMissionInfoArray;
 @property(nonatomic,assign) int count;
 
 @end
