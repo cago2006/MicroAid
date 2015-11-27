@@ -137,7 +137,7 @@
     double longitude = [userDefaults doubleForKey:@"longitude"];
     
     dispatch_async(kBgQueue, ^{
-        NSDictionary *finishedMissions = [MicroAidAPI getcClaimedMissionList:userID recUserID:userID statusList:statusArray longitude:longitude latitude:latitude pageNo:pageNo pageSize:pageSize];
+        NSDictionary *finishedMissions = [MicroAidAPI getcClaimedAndFinishedMissionList:userID recUserID:userID statusList:statusArray longitude:longitude latitude:latitude pageNo:pageNo pageSize:pageSize];
         
         if ([[finishedMissions objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{

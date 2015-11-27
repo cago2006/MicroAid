@@ -130,14 +130,14 @@
 
 -(void)fetchMissionInfo:(int)pageNo pageSize:(int)pageSize{
     
-    NSArray *statusArray = [NSArray arrayWithObjects:@"2",@"3", nil];
+    NSArray *statusArray = [NSArray arrayWithObjects:@"2", nil];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
     double latitude = [userDefaults doubleForKey:@"latitude"];
     double longitude = [userDefaults doubleForKey:@"longitude"];
     
     dispatch_async(kBgQueue, ^{
-        NSDictionary *finishedMissions = [MicroAidAPI getMissionList2:userID recUserID:userID statusList:statusArray longitude:longitude latitude:latitude pageNo:pageNo pageSize:pageSize];
+        NSDictionary *finishedMissions = [MicroAidAPI getcClaimedAndFinishedMissionList:userID recUserID:userID statusList:statusArray longitude:longitude latitude:latitude pageNo:pageNo pageSize:pageSize];
         
         if ([[finishedMissions objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{

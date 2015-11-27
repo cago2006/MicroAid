@@ -406,7 +406,7 @@ NSString *ipAddr;
 }
 
 //16 获取附近任务列表2(已完成、已发起等)
-+(NSDictionary *)getMissionList2:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
++(NSDictionary *)getStaredMissionList:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
     NSError *error = nil;
     
     NSString *status = @"[";
@@ -428,7 +428,7 @@ NSString *ipAddr;
     urlString = [urlString stringByAppendingFormat:@"\"longitude\":\"%f\",\"latitude\":\"%f\",\"statusList\":%@}&pageNo=%ld&pageSize=%ld&userID=%ld",longitude,latitude,status,(long)pageNo,(long)pageSize,(long)userID];
     
     
-    NSLog(@"getMissionList2URL:%@",urlString);
+    NSLog(@"getStaredMissionListURL:%@",urlString);
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
@@ -572,7 +572,7 @@ NSString *ipAddr;
 }
 
 //23 获取我认领的任务列表
-+(NSDictionary *)getcClaimedMissionList:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
++(NSDictionary *)getcClaimedAndFinishedMissionList:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
     NSError *error = nil;
     
     NSString *status = @"[";
@@ -591,7 +591,7 @@ NSString *ipAddr;
     urlString = [urlString stringByAppendingFormat:@"\"longitude\":\"%f\",\"latitude\":\"%f\",\"statusList\":%@}&pageNo=%ld&pageSize=%ld&userID=%ld",longitude,latitude,status,(long)pageNo,(long)pageSize,(long)userID];
     
     
-    NSLog(@"getcClaimedMissionListURL:%@",urlString);
+    NSLog(@"getcClaimedAndFinishedMissionListURL:%@",urlString);
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];

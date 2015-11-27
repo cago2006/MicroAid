@@ -60,7 +60,7 @@
 +(NSDictionary *)fetchPicture:(NSInteger)userID;
 
 //16 获取附近任务列表2(已完成、已发起等)
-+(NSDictionary *)getMissionList2:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
++(NSDictionary *)getStaredMissionList:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
 
 //17 获取任务信息
 +(NSDictionary *)fetchMission:(NSInteger)missionID;
@@ -81,6 +81,6 @@
 +(NSDictionary *)getUnjoinedUser:(NSString *)groupName pageNo:(int)pageNo pageSize:(int)pageSize;
 
 //23 获取我认领的任务列表
-+(NSDictionary *)getcClaimedMissionList:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
++(NSDictionary *)getcClaimedAndFinishedMissionList:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
 
 @end
