@@ -114,7 +114,7 @@
         self.address = @"点击修改";
     }
     [addressBtn setTitle:self.address forState:UIControlStateNormal];
-    self.score = [[dic objectForKey:@"scroes"]integerValue];
+    self.score = [[dic objectForKey:@"scores"]integerValue];
     [scoreBtn setTitle:[NSString stringWithFormat:@"%ld",(long)self.score] forState:UIControlStateNormal];
     self.email = [dic objectForKey:@"email"];
     if(![self.email isKindOfClass:[NSString class]] || [self.email isEqualToString:@""]){
@@ -257,7 +257,11 @@
             BOOL isPhotoSuccess = NO;
             BOOL isInfoSuccess = NO;
             if(isInfoChanged){
-                NSDictionary *resultDic = [MicroAidAPI updateUser:userID nickName:nickNameBtn.titleLabel.text gender:genderBtn.titleLabel.text message:@"" address:addressBtn.titleLabel.text email:emailBtn.titleLabel.text];
+                NSString *tempNickName = [nickNameBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : nickNameBtn.titleLabel.text;
+                NSString *tempGender = [genderBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : genderBtn.titleLabel.text;
+                NSString *tempAddress = [addressBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : addressBtn.titleLabel.text;
+                NSString *tempEmail = [emailBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : emailBtn.titleLabel.text;
+                NSDictionary *resultDic = [MicroAidAPI updateUser:userID nickName:tempNickName gender:tempGender message:@"" address:tempAddress email:tempEmail];
                 if ([[resultDic objectForKey:@"flg"] boolValue]) {//查找成功
                     isInfoSuccess = YES;
                 }

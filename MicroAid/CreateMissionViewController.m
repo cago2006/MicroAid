@@ -116,7 +116,7 @@
 }
 
 -(void) showLeftBonus:(NSMutableDictionary *)dic{
-    self.leftBonus = [[dic objectForKey:@"scroes"]integerValue];
+    self.leftBonus = [[dic objectForKey:@"scores"]integerValue];
     [leftBonusLabel setText:[NSString stringWithFormat:@"%li分",(long)self.leftBonus]];
 }
 

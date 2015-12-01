@@ -66,7 +66,9 @@
                         [userDefaults removeObjectForKey:key];
                         [userDefaults synchronize];
                     }
-                    self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+                    if(self.loginViewController == nil){
+                       self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+                    }
                     [self.view addSubview:self.loginViewController.view];
                     return ;
                 });
@@ -74,7 +76,9 @@
             }
         });
     } else {
-        self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        if(self.loginViewController == nil){
+            self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        }
         [self.view addSubview:self.loginViewController.view];
     }
 }
@@ -87,9 +91,11 @@
         [MicroAidAPI updateChannelID:userID channelID:[BPush getChannelId]];
     });
     //如果已登陆
-    HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
-    self.homeNavigationViewController = [[UINavigationController alloc]initWithRootViewController:homeVC];
-    [self.homeNavigationViewController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
+    if(self.homeNavigationViewController == nil){
+        HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+        self.homeNavigationViewController = [[UINavigationController alloc]initWithRootViewController:homeVC];
+        [self.homeNavigationViewController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
+    }
     [self.view addSubview:self.homeNavigationViewController.view];
 }
 
@@ -102,13 +108,13 @@
 //从login界面到homeview界面
 - (void)switchToHomeViewFromLoginView
 {
-    
     [self.loginViewController.view removeFromSuperview];
-    self.loginViewController = nil;
-    
-    HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
-    self.homeNavigationViewController = [[UINavigationController alloc]initWithRootViewController:homeVC];
-    [self.homeNavigationViewController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
+    //self.loginViewController = nil;
+    if(self.homeNavigationViewController == nil){
+        HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+        self.homeNavigationViewController = [[UINavigationController alloc]initWithRootViewController:homeVC];
+        [self.homeNavigationViewController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
+    }
     [self.view addSubview:self.homeNavigationViewController.view];
     
 }
@@ -118,8 +124,11 @@
 {
     [self.homeNavigationViewController.view removeFromSuperview];
     self.homeNavigationViewController = nil;
-    
-    self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    self.loginViewController = nil;
+    self.mainTabBarController = nil;
+    if(self.loginViewController==nil){
+       self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    }
     [self.view addSubview:self.loginViewController.view];
 }
 
@@ -128,7 +137,7 @@
 {
     //TODO
     [self.homeNavigationViewController.view removeFromSuperview];
-    self.homeNavigationViewController = nil;
+    //self.homeNavigationViewController = nil;
     
     /*
     MainTabBarController *mainTBC = [[MainTabBarController alloc] init];
@@ -136,8 +145,9 @@
     [self.mainTabBarNavifationController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
     [self.view addSubview:self.mainTabBarNavifationController.view];*/
     
-    
-    self.mainTabBarController = [[MainTabBarController alloc]init];
+    if(self.mainTabBarController == nil){
+        self.mainTabBarController = [[MainTabBarController alloc]init];
+    }
     [self.view addSubview:self.mainTabBarController.view];
     
     //navigation
@@ -154,10 +164,12 @@
     //[self.navigationViewController.view removeFromSuperview];
     //self.navigationViewController = nil;
     [self.mainTabBarController.view removeFromSuperview];
-    self.mainTabBarController.viewControllers = nil;
-    self.mainTabBarController = nil;
+    //self.mainTabBarController.viewControllers = nil;
+    //self.mainTabBarController = nil;
     
-    self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    if(self.loginViewController){
+        self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    }
     [self.view addSubview:self.loginViewController.view];
     //[self.view.window.rootViewController presentViewController:self.loginViewController animated:NO completion:nil];
 
@@ -166,23 +178,28 @@
 
 -(void) switchToHomeViewFromMainTab{
     [self.mainTabBarController.view removeFromSuperview];
-    self.mainTabBarController.viewControllers = nil;
-    self.mainTabBarController = nil;
+    //self.mainTabBarController.viewControllers = nil;
+    //self.mainTabBarController = nil;
     
-    HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
-    self.homeNavigationViewController = [[UINavigationController alloc]initWithRootViewController:homeVC];
-    [self.homeNavigationViewController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
+    if(self.homeNavigationViewController == nil){
+        HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
+        self.homeNavigationViewController = [[UINavigationController alloc]initWithRootViewController:homeVC];
+        [self.homeNavigationViewController.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
+    }
     [self.view addSubview:self.homeNavigationViewController.view];
 }
 
 
 -(void) startLoginView{
-    self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    if(self.loginViewController == nil){
+        self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    }
     [self.view addSubview:self.loginViewController.view];
 }
 
 
 -(void) startMainTabView{
+    self.mainTabBarController = nil;
     self.mainTabBarController = [[MainTabBarController alloc]init];
     self.mainTabBarController.selectedIndex = 2;
     [self.view addSubview:self.mainTabBarController.view];

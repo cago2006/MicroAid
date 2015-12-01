@@ -22,7 +22,7 @@
         [info setMissionTitle:[dic objectForKey:@"taskName"]];
         [info setMissionGroup:[dic objectForKey:@"taskGroup"]];
         [info setTime:[dic objectForKey:@"time"]];
-        [info setStatus:[dic objectForKey:@"status"]];
+        [info setStatus:[dic objectForKey:@"statusInfo"]];
         [momentsArray addObject:info];
     }
     return momentsArray;

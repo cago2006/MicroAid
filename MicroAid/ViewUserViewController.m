@@ -77,14 +77,22 @@
     if(![gender isKindOfClass:[NSString class]]){
         genderLabel.text = @"此人没有填写";
     }else{
-        genderLabel.text = gender;
+        if([gender isEqualToString:@""]){
+            genderLabel.text = @"此人没有填写";
+        }else{
+            genderLabel.text = gender;
+        }
     }
     
     NSString *email = [dic objectForKey:@"email"];
     if(![email isKindOfClass:[NSString class]]){
         emailLabel.text = @"此人没有填写";
     }else{
-        emailLabel.text = email;
+        if([email isEqualToString:@""]){
+            emailLabel.text = @"此人没有填写";
+        }else{
+            emailLabel.text = email;
+        }
     }
 }
 
