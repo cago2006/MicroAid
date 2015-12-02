@@ -196,6 +196,7 @@
     [self.navigationController.navigationBar setUserInteractionEnabled:false];
     CreateMissionViewController *createMissionVC = [[CreateMissionViewController alloc] initWithNibName:@"CreateMissionViewController" bundle:nil];
     createMissionVC.isEditMission = NO;
+    createMissionVC.isFromHomeView = YES;
     [self.navigationController pushViewController:createMissionVC animated:YES];
 }
 

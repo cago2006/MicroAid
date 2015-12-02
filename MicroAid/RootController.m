@@ -165,9 +165,9 @@
     //self.navigationViewController = nil;
     [self.mainTabBarController.view removeFromSuperview];
     //self.mainTabBarController.viewControllers = nil;
-    //self.mainTabBarController = nil;
+    self.mainTabBarController = nil;
     
-    if(self.loginViewController){
+    if(self.loginViewController == nil){
         self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     }
     [self.view addSubview:self.loginViewController.view];

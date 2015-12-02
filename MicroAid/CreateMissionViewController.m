@@ -15,6 +15,7 @@
 #import "LocationViewController.h"
 #import "MyMissionsViewController.h"
 #import "RootController.h"
+#import "MainTabBarController.h"
 
 @interface CreateMissionViewController (){
     bool isStartTime;
@@ -407,9 +408,15 @@
         
         [self.navigationController popToViewController:myMissionVC animated:YES];
     }else{
-        RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
-        [rootController switchToMainTabViewFromHomeView];
+        if(self.isFromHomeView){
+            RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
+            [rootController switchToMainTabViewFromHomeView];
+        }else{
+            MainTabBarController *mainTBC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+            
+            [self.navigationController popToViewController:mainTBC animated:YES];
+        }
     }
 }
 

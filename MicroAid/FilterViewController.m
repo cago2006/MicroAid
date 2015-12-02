@@ -10,6 +10,7 @@
 #import "DateTimeUtils.h"
 #import "MicroAidAPI.h"
 #import "RootController.h"
+#import "MainTabBarController.h"
 
 @interface FilterViewController ()
 
@@ -273,9 +274,12 @@
     [userDefaults setObject:self.missionEndTime forKey:@"missionEndTime"];
     [userDefaults synchronize];
     
-    RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
-    [rootController switchToMainTabViewFromHomeView];
+//    RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//    //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
+//    [rootController switchToMainTabViewFromHomeView];
+    MainTabBarController *mainTBC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+    
+    [self.navigationController popToViewController:mainTBC animated:YES];
 }
 
 -(NSString *)formatBonus:(NSString *)bonus{
