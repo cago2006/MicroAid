@@ -14,6 +14,7 @@
 #import "GTMBase64.h"
 #import "MicroAidAPI.h"
 #import "MyMissionsViewController.h"
+#import "MySettingViewController.h"
 
 @interface MineViewController ()
 
@@ -105,7 +106,7 @@
     if(section == 0 || section ==2){
         return 1;
     }else{
-        return 2;
+        return 3;
     }
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -139,13 +140,13 @@
                 MyMissionsViewController *myMissionsVC = [[MyMissionsViewController alloc]initWithNibName:@"MyMissionsViewController" bundle:nil];
                 [self.navigationController pushViewController:myMissionsVC animated:YES];
             }
-//            else if(row == 1){//设置
-//                
-//            }
             else if(row == 1){//修改密码
                 ModPasswordViewController *modPasswordVC = [[ModPasswordViewController alloc]initWithNibName:@"ModPasswordViewController" bundle:nil];
                 
                 [self.navigationController pushViewController:modPasswordVC animated:YES];
+            }else if(row == 2){//设置
+                MySettingViewController *mySettingVC = [[MySettingViewController alloc]initWithNibName:@"MySettingViewController" bundle:nil];
+                [self.navigationController pushViewController:mySettingVC animated:YES];
             }
             break;
         }
@@ -195,12 +196,10 @@
         }
         if(indexPath.row == 0){
             cell.textLabel.text = @"我的任务";
-        }
-//        else if(indexPath.row == 1){
-//            cell.textLabel.text = @"设置";
-//        }
-        else if(indexPath.row == 1){
+        }else if(indexPath.row == 1){
             cell.textLabel.text = @"修改密码";
+        }else if(indexPath.row == 2){
+            cell.textLabel.text = @"设置";
         }
         
         cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;

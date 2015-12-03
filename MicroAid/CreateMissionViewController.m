@@ -56,12 +56,7 @@
         date = [DateTimeUtils getCurrentTimeAfterAnHour];
         [endTimeBtn setTitle:[DateTimeUtils changeDateIntoString:date] forState:UIControlStateNormal];
         
-        [objectBtn setTitle:@"公开" forState:UIControlStateNormal];
-        self.groupString = @"公开";
-        [bonusBtn setTitle:@"0分" forState:UIControlStateNormal];
-        self.bonusString = @"0分";
-        [typeBtn setTitle:@"拿快递" forState:UIControlStateNormal];
-        self.typeString = @"拿快递";
+        
         //self.tabBarController.tabBar.hidden = YES;
         
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -72,6 +67,22 @@
             self.missionLatitude = [userDefaults doubleForKey:@"latitude"];
             self.missionLongitude = [userDefaults doubleForKey:@"longitude"];
         }
+        
+        self.groupString = [userDefaults objectForKey:@"defaultMissionGroup"];
+        if(self.groupString == nil || [self.groupString isEqualToString:@""]){
+            self.groupString = @"公开";
+        }
+        [objectBtn setTitle:self.groupString forState:UIControlStateNormal];
+        self.bonusString = [userDefaults objectForKey:@"defaultMissionBonus"];
+        if(self.bonusString == nil || [self.bonusString isEqualToString:@""]){
+            self.bonusString = @"0分";
+        }
+        [bonusBtn setTitle:self.bonusString forState:UIControlStateNormal];
+        self.typeString = [userDefaults objectForKey:@"defaultMissionType"];
+        if(self.typeString == nil || [self.typeString isEqualToString:@""]){
+            self.typeString = @"拿快递";
+        }
+        [typeBtn setTitle:self.typeString forState:UIControlStateNormal];
     }
 }
 

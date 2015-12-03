@@ -77,6 +77,16 @@
 		AF89F6491C016D0800DD8F84 /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF89F6471C016D0800DD8F84 /* SearchTableViewController.m */; };
 		AF89F64A1C016D0800DD8F84 /* SearchTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF89F6481C016D0800DD8F84 /* SearchTableViewController.xib */; };
 		AF8E84BE1B9C3009009EC184 /* MissionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8E84BD1B9C3009009EC184 /* MissionInfo.m */; };
+		AFA432601C1034590064DFCA /* UserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA4325E1C1034590064DFCA /* UserTableViewCell.m */; };
+		AFA432611C1034590064DFCA /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA4325F1C1034590064DFCA /* UserTableViewCell.xib */; };
+		AFA432651C10513B0064DFCA /* MySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA432631C10513B0064DFCA /* MySettingViewController.m */; };
+		AFA432661C10513B0064DFCA /* MySettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA432641C10513B0064DFCA /* MySettingViewController.xib */; };
+		AFA4326B1C10552C0064DFCA /* SettingBonusTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA432691C10552C0064DFCA /* SettingBonusTVC.m */; };
+		AFA4326C1C10552C0064DFCA /* SettingBonusTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA4326A1C10552C0064DFCA /* SettingBonusTVC.xib */; };
+		AFA432701C1055430064DFCA /* SettingTypeTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA4326E1C1055430064DFCA /* SettingTypeTVC.m */; };
+		AFA432711C1055430064DFCA /* SettingTypeTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA4326F1C1055430064DFCA /* SettingTypeTVC.xib */; };
+		AFA432751C1055570064DFCA /* SettingGroupTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA432731C1055570064DFCA /* SettingGroupTVC.m */; };
+		AFA432761C1055570064DFCA /* SettingGroupTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA432741C1055570064DFCA /* SettingGroupTVC.xib */; };
 		AFA694C91BCE7A12000AD7CC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA694C71BCE7A12000AD7CC /* MainTabBarController.m */; };
 		AFAF92FA1BCCA95100CE1A9D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */; };
 		AFAF92FF1BCCAB2F00CE1A9D /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF92FD1BCCAB2F00CE1A9D /* libBPush.a */; };
@@ -232,6 +242,21 @@
 		AF89F6481C016D0800DD8F84 /* SearchTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewController.xib; sourceTree = "<group>"; };
 		AF8E84BC1B9C3009009EC184 /* MissionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionInfo.h; sourceTree = "<group>"; };
 		AF8E84BD1B9C3009009EC184 /* MissionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionInfo.m; sourceTree = "<group>"; };
+		AFA4325D1C1034590064DFCA /* UserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTableViewCell.h; sourceTree = "<group>"; };
+		AFA4325E1C1034590064DFCA /* UserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableViewCell.m; sourceTree = "<group>"; };
+		AFA4325F1C1034590064DFCA /* UserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
+		AFA432621C10513B0064DFCA /* MySettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySettingViewController.h; sourceTree = "<group>"; };
+		AFA432631C10513B0064DFCA /* MySettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySettingViewController.m; sourceTree = "<group>"; };
+		AFA432641C10513B0064DFCA /* MySettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MySettingViewController.xib; sourceTree = "<group>"; };
+		AFA432681C10552C0064DFCA /* SettingBonusTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingBonusTVC.h; sourceTree = "<group>"; };
+		AFA432691C10552C0064DFCA /* SettingBonusTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingBonusTVC.m; sourceTree = "<group>"; };
+		AFA4326A1C10552C0064DFCA /* SettingBonusTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingBonusTVC.xib; sourceTree = "<group>"; };
+		AFA4326D1C1055430064DFCA /* SettingTypeTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTypeTVC.h; sourceTree = "<group>"; };
+		AFA4326E1C1055430064DFCA /* SettingTypeTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTypeTVC.m; sourceTree = "<group>"; };
+		AFA4326F1C1055430064DFCA /* SettingTypeTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingTypeTVC.xib; sourceTree = "<group>"; };
+		AFA432721C1055570064DFCA /* SettingGroupTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingGroupTVC.h; sourceTree = "<group>"; };
+		AFA432731C1055570064DFCA /* SettingGroupTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingGroupTVC.m; sourceTree = "<group>"; };
+		AFA432741C1055570064DFCA /* SettingGroupTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingGroupTVC.xib; sourceTree = "<group>"; };
 		AFA694C61BCE7A12000AD7CC /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		AFA694C71BCE7A12000AD7CC /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -356,6 +381,9 @@
 				AF5E3A7A1BB92D2800521BEE /* NotificationListCell.h */,
 				AF5E3A7B1BB92D2800521BEE /* NotificationListCell.m */,
 				AF5E3A7C1BB92D2800521BEE /* NotificationListCell.xib */,
+				AFA4325D1C1034590064DFCA /* UserTableViewCell.h */,
+				AFA4325E1C1034590064DFCA /* UserTableViewCell.m */,
+				AFA4325F1C1034590064DFCA /* UserTableViewCell.xib */,
 			);
 			name = mainTab;
 			sourceTree = "<group>";
@@ -455,6 +483,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AFA432671C1054800064DFCA /* setting */ = {
+			isa = PBXGroup;
+			children = (
+				AFA432621C10513B0064DFCA /* MySettingViewController.h */,
+				AFA432631C10513B0064DFCA /* MySettingViewController.m */,
+				AFA432641C10513B0064DFCA /* MySettingViewController.xib */,
+				AFA432681C10552C0064DFCA /* SettingBonusTVC.h */,
+				AFA432691C10552C0064DFCA /* SettingBonusTVC.m */,
+				AFA4326A1C10552C0064DFCA /* SettingBonusTVC.xib */,
+				AFA4326D1C1055430064DFCA /* SettingTypeTVC.h */,
+				AFA4326E1C1055430064DFCA /* SettingTypeTVC.m */,
+				AFA4326F1C1055430064DFCA /* SettingTypeTVC.xib */,
+				AFA432721C1055570064DFCA /* SettingGroupTVC.h */,
+				AFA432731C1055570064DFCA /* SettingGroupTVC.m */,
+				AFA432741C1055570064DFCA /* SettingGroupTVC.xib */,
+			);
+			name = setting;
+			sourceTree = "<group>";
+		};
 		AFAF92FB1BCCAB0F00CE1A9D /* LibBPush */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +546,7 @@
 				AF5923EC1BA9014300158B86 /* filterMission */,
 				AFD43AB31BAD091F00D6D441 /* GTMBase64 */,
 				AFC90D7F1B8AF2010057CF3D /* Images.xcassets */,
+				AFA432671C1054800064DFCA /* setting */,
 				AFC90D9F1B8AF47A0057CF3D /* login */,
 				AF02ED111B91A57500890BF7 /* mainTab */,
 				AFDD8ACB1BAB97C500A3369B /* mineView */,
@@ -724,6 +772,7 @@
 				AF89F64A1C016D0800DD8F84 /* SearchTableViewController.xib in Resources */,
 				AF42A67F1B95D70B0060D67C /* GroupTableViewController.xib in Resources */,
 				AF42A6711B94785D0060D67C /* BonusTableViewController.xib in Resources */,
+				AFA4326C1C10552C0064DFCA /* SettingBonusTVC.xib in Resources */,
 				AFDEE7D71B9D2F6000CCDA2C /* blueArrow@2x.png in Resources */,
 				AF589C321BAFE1C200D1A797 /* FinishedMissionsViewController.xib in Resources */,
 				AFC90D801B8AF2010057CF3D /* Images.xcassets in Resources */,
@@ -738,15 +787,18 @@
 				AFDEE7D61B9D2F6000CCDA2C /* blueArrow.png in Resources */,
 				AFDEE7D41B9D2F6000CCDA2C /* blackArrow.png in Resources */,
 				AF02ED1B1B91A5CF00890BF7 /* GroupViewController.xib in Resources */,
+				AFA432661C10513B0064DFCA /* MySettingViewController.xib in Resources */,
 				AFDEE7DA1B9D2F6000CCDA2C /* whiteArrow.png in Resources */,
 				AFDEE7E01B9D309100CCDA2C /* MissionListCell.xib in Resources */,
 				AF12B6131C0406DB00D805D1 /* MineMissionListCell.xib in Resources */,
 				AF5D62051B8EA2F800897E09 /* HomeViewController.xib in Resources */,
 				AF862D5C1BCBD85B003BF8CE /* mapapi.bundle in Resources */,
 				AF5E3A7E1BB92D2800521BEE /* NotificationListCell.xib in Resources */,
+				AFA432611C1034590064DFCA /* UserTableViewCell.xib in Resources */,
 				AFDD8AD01BAB988D00A3369B /* MyInfoCell.xib in Resources */,
 				AF5923EB1BA801C400158B86 /* FilterViewController.xib in Resources */,
 				AF589C371BAFE59200D1A797 /* StartedMissionsViewController.xib in Resources */,
+				AFA432761C1055570064DFCA /* SettingGroupTVC.xib in Resources */,
 				AF42A6841B96908C0060D67C /* LocationViewController.xib in Resources */,
 				AF5923F61BA9482600158B86 /* FilterTypeTVC.xib in Resources */,
 				AF6011FA1B9036910016E973 /* Default-568h@2x.png in Resources */,
@@ -756,6 +808,7 @@
 				AF42A67A1B95C4480060D67C /* TypeTableViewController.xib in Resources */,
 				AF02ED261B92936200890BF7 /* NotificationViewController.xib in Resources */,
 				AFDD8AD51BABACA200A3369B /* ModPasswordViewController.xib in Resources */,
+				AFA432711C1055430064DFCA /* SettingTypeTVC.xib in Resources */,
 				AF68EBBA1B8F060A003FF85B /* ChoiceViewController.xib in Resources */,
 				AFDEE7DB1B9D2F6000CCDA2C /* whiteArrow@2x.png in Resources */,
 				AFDD8ADA1BABE11A00A3369B /* MyInfoViewController.xib in Resources */,
@@ -787,10 +840,12 @@
 				AF02ED1A1B91A5CF00890BF7 /* GroupViewController.m in Sources */,
 				AF5A52021B9BDB230018CE98 /* Mission.m in Sources */,
 				AF42A6751B958C310060D67C /* DateTimeUtils.m in Sources */,
+				AFA432601C1034590064DFCA /* UserTableViewCell.m in Sources */,
 				AF89F6491C016D0800DD8F84 /* SearchTableViewController.m in Sources */,
 				AFC90DA51B8AF6D80057CF3D /* MicroAidAPI.m in Sources */,
 				AF4E2B8A1B8C086A00425FF1 /* User.m in Sources */,
 				AF42A67E1B95D70B0060D67C /* GroupTableViewController.m in Sources */,
+				AFA432751C1055570064DFCA /* SettingGroupTVC.m in Sources */,
 				AF5D62041B8EA2F800897E09 /* HomeViewController.m in Sources */,
 				AFA694C91BCE7A12000AD7CC /* MainTabBarController.m in Sources */,
 				AFDC6C091BB23F700080F6D1 /* ViewMissionViewController.m in Sources */,
@@ -808,6 +863,8 @@
 				AF5923F01BA93DD600158B86 /* FilterBonusTVC.m in Sources */,
 				AF02ED1F1B91E32500890BF7 /* NotificationViewController.m in Sources */,
 				AF5923EA1BA801C400158B86 /* FilterViewController.m in Sources */,
+				AFA432651C10513B0064DFCA /* MySettingViewController.m in Sources */,
+				AFA4326B1C10552C0064DFCA /* SettingBonusTVC.m in Sources */,
 				AF4A2C3C1B8B355000B61B1B /* ProgressHUD.m in Sources */,
 				AFDC6C0E1BB3BD1F0080F6D1 /* ViewUserViewController.m in Sources */,
 				AFDD8AD91BABE11A00A3369B /* MyInfoViewController.m in Sources */,
@@ -825,6 +882,7 @@
 				AF02ED241B91E33600890BF7 /* MineViewController.m in Sources */,
 				AF02ED2B1B9294D000890BF7 /* CreateMissionViewController.m in Sources */,
 				AF5923FF1BAA59EE00158B86 /* ViewGroupViewController.m in Sources */,
+				AFA432701C1055430064DFCA /* SettingTypeTVC.m in Sources */,
 				AF68EBB91B8F060A003FF85B /* ChoiceViewController.m in Sources */,
 				AF02ED151B91A59D00890BF7 /* MissionViewController.m in Sources */,
 				AFDD8ACF1BAB988D00A3369B /* MyInfoCell.m in Sources */,

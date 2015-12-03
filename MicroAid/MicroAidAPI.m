@@ -606,4 +606,25 @@ NSString *ipAddr;
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
 }
 
+//24 获得加入群组的用户列表
++(NSDictionary *)getJoinedUser:(NSString *)groupName pageNo:(int)pageNo pageSize:(int)pageSize{
+    NSError *error = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/group/getJoinedUser.action?groupName=%@&pageNo=%i&pageSize=%i",ipAddr,groupName,pageNo,pageSize];
+    
+    NSLog(@"getJoinedUserURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
 @end

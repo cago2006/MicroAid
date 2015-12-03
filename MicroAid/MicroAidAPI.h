@@ -83,4 +83,7 @@
 //23 获取我认领的任务列表
 +(NSDictionary *)getcClaimedAndFinishedMissionList:(NSInteger)userID recUserID:(NSInteger)recUserID statusList:(NSArray *)statusList longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
 
+//24 获得加入群组的用户列表
++(NSDictionary *)getJoinedUser:(NSString *)groupName pageNo:(int)pageNo pageSize:(int)pageSize;
+
 @end

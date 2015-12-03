@@ -52,6 +52,7 @@
 }
 
 -(void)saveChange{
+    
     [self.view setUserInteractionEnabled:false];
     [self.navigationController.navigationBar setUserInteractionEnabled:false];
     NSArray *selectedRows = [self.pullTableView indexPathsForSelectedRows];
@@ -71,6 +72,7 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *phoneNumber = [userDefaults objectForKey:@"username"];
         
+        [ProgressHUD show:@"正在邀请..."];
         dispatch_async(serverQueue, ^{
             
             

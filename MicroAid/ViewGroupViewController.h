@@ -8,20 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewGroupViewController : UIViewController<UIAlertViewDelegate>{
-    __weak IBOutlet UILabel *groupNameLabel;
-    __weak IBOutlet UILabel *creatorLabel;
-    __weak IBOutlet UILabel *groupMembersLabel;
-    __weak IBOutlet UILabel *createTimeLabel;
+@interface ViewGroupViewController : UIViewController<UITableViewDelegate,UIAlertViewDelegate>{
+
 }
 
--(IBAction) joinGroup:(UIButton *)sender;
--(IBAction) exitGroup:(UIButton *)sender;
-@property (nonatomic, assign) NSString *groupName;
-@property (nonatomic, assign) NSString *groupCreator;
+@property (nonatomic, strong) NSString *groupName;
+@property (nonatomic, strong) NSString *groupCreator;
 @property (nonatomic, assign) NSInteger groupMembers;
-@property (nonatomic, assign) NSString *groupCreateTime;
-@property (nonatomic, assign) NSString *groupCreatorNickName;
+@property (nonatomic, strong) NSString *groupCreateTime;
+@property (nonatomic, strong) NSString *groupCreatorNickName;
 @property (nonatomic, assign) NSInteger groupID;
+
+@property (nonatomic, strong) IBOutlet UITableView *myTableView;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+//加入群组的人（每次从服务器获取)
+@property(nonatomic,strong) NSArray *userInfoArray;
 
 @end
