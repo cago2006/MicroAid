@@ -15,6 +15,7 @@
 #import "MicroAidAPI.h"
 #import "MyMissionsViewController.h"
 #import "MySettingViewController.h"
+#import "RankingViewController.h"
 
 @interface MineViewController ()
 
@@ -106,7 +107,7 @@
     if(section == 0 || section ==2){
         return 1;
     }else{
-        return 3;
+        return 4;
     }
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -147,6 +148,9 @@
             }else if(row == 2){//设置
                 MySettingViewController *mySettingVC = [[MySettingViewController alloc]initWithNibName:@"MySettingViewController" bundle:nil];
                 [self.navigationController pushViewController:mySettingVC animated:YES];
+            }else if(row == 3){//排行榜
+                RankingViewController *rankingVC = [[RankingViewController alloc]initWithNibName:@"RankingViewController" bundle:nil];
+                [self.navigationController pushViewController:rankingVC animated:YES];
             }
             break;
         }
@@ -200,6 +204,8 @@
             cell.textLabel.text = @"修改密码";
         }else if(indexPath.row == 2){
             cell.textLabel.text = @"设置";
+        }else if(indexPath.row == 3){
+            cell.textLabel.text = @"排行榜";
         }
         
         cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;

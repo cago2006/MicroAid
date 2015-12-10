@@ -627,4 +627,46 @@ NSString *ipAddr;
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
 }
 
+//25 获取积分排行
++(NSDictionary *)getUserInfoOrderByScore:(int)pageNo pageSize:(int)pageSize{
+    NSError *error = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/user/findAllUser.action?pageNo=%i&pageSize=%i",ipAddr,pageNo,pageSize];
+    
+    NSLog(@"getUserInfoOrderByScoreURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
+//26 比较版本
++(NSDictionary *)compareVersion:(NSString *)versionNum{
+    NSError *error = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/update/getversion.action?deviceType=4&version=%@",ipAddr,versionNum];
+    
+    NSLog(@"compareVersionURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
 @end

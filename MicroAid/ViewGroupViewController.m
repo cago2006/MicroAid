@@ -147,6 +147,12 @@
     [self.view endEditing:YES];
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if([[userDefaults objectForKey:@"defaultMissionGroup"] isEqualToString:self.groupName]){
+        [userDefaults setObject:@"公开" forKey:@"defaultMissionGroup"];
+        [userDefaults synchronize];
+    }
 }
 
 

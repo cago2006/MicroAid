@@ -74,6 +74,11 @@
 		AF6E68691BF20970001F8B64 /* RecJoinGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6E68671BF20970001F8B64 /* RecJoinGroupViewController.m */; };
 		AF6E686A1BF20970001F8B64 /* RecJoinGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF6E68681BF20970001F8B64 /* RecJoinGroupViewController.xib */; };
 		AF862D5C1BCBD85B003BF8CE /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */; };
+		AF86A5731C12C55000698B63 /* RankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF86A5711C12C55000698B63 /* RankingViewController.m */; };
+		AF86A5741C12C55000698B63 /* RankingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF86A5721C12C55000698B63 /* RankingViewController.xib */; };
+		AF86A5781C12C65800698B63 /* RankingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF86A5761C12C65800698B63 /* RankingTableViewCell.m */; };
+		AF86A5791C12C65800698B63 /* RankingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF86A5771C12C65800698B63 /* RankingTableViewCell.xib */; };
+		AF86A57B1C18409D00698B63 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF86A57A1C18409D00698B63 /* StoreKit.framework */; };
 		AF89F6491C016D0800DD8F84 /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF89F6471C016D0800DD8F84 /* SearchTableViewController.m */; };
 		AF89F64A1C016D0800DD8F84 /* SearchTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF89F6481C016D0800DD8F84 /* SearchTableViewController.xib */; };
 		AF8E84BE1B9C3009009EC184 /* MissionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF8E84BD1B9C3009009EC184 /* MissionInfo.m */; };
@@ -237,6 +242,13 @@
 		AF6E68671BF20970001F8B64 /* RecJoinGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecJoinGroupViewController.m; sourceTree = "<group>"; };
 		AF6E68681BF20970001F8B64 /* RecJoinGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecJoinGroupViewController.xib; sourceTree = "<group>"; };
 		AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapAPI.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
+		AF86A5701C12C55000698B63 /* RankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
+		AF86A5711C12C55000698B63 /* RankingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingViewController.m; sourceTree = "<group>"; };
+		AF86A5721C12C55000698B63 /* RankingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingViewController.xib; sourceTree = "<group>"; };
+		AF86A5751C12C65800698B63 /* RankingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingTableViewCell.h; sourceTree = "<group>"; };
+		AF86A5761C12C65800698B63 /* RankingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingTableViewCell.m; sourceTree = "<group>"; };
+		AF86A5771C12C65800698B63 /* RankingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RankingTableViewCell.xib; sourceTree = "<group>"; };
+		AF86A57A1C18409D00698B63 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		AF89F6461C016D0800DD8F84 /* SearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewController.h; sourceTree = "<group>"; };
 		AF89F6471C016D0800DD8F84 /* SearchTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchTableViewController.m; sourceTree = "<group>"; };
 		AF89F6481C016D0800DD8F84 /* SearchTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTableViewController.xib; sourceTree = "<group>"; };
@@ -334,6 +346,7 @@
 				AF04FA6D1BCBAD6300035C59 /* Security.framework in Frameworks */,
 				AF04FA6C1BCBAD5B00035C59 /* CoreFoundation.framework in Frameworks */,
 				AF04FA6B1BCBAD5100035C59 /* Foundation.framework in Frameworks */,
+				AF86A57B1C18409D00698B63 /* StoreKit.framework in Frameworks */,
 				AFAF92FF1BCCAB2F00CE1A9D /* libBPush.a in Frameworks */,
 				AF04FA6A1BCBAD1500035C59 /* SystemConfiguration.framework in Frameworks */,
 			);
@@ -384,6 +397,12 @@
 				AFA4325D1C1034590064DFCA /* UserTableViewCell.h */,
 				AFA4325E1C1034590064DFCA /* UserTableViewCell.m */,
 				AFA4325F1C1034590064DFCA /* UserTableViewCell.xib */,
+				AF86A5701C12C55000698B63 /* RankingViewController.h */,
+				AF86A5711C12C55000698B63 /* RankingViewController.m */,
+				AF86A5721C12C55000698B63 /* RankingViewController.xib */,
+				AF86A5751C12C65800698B63 /* RankingTableViewCell.h */,
+				AF86A5761C12C65800698B63 /* RankingTableViewCell.m */,
+				AF86A5771C12C65800698B63 /* RankingTableViewCell.xib */,
 			);
 			name = mainTab;
 			sourceTree = "<group>";
@@ -466,6 +485,7 @@
 		AF6011FD1B90402C0016E973 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF86A57A1C18409D00698B63 /* StoreKit.framework */,
 				AFD369C71BCF784800C9101D /* libstdc++.6.0.9.tbd */,
 				AFD369C51BCF782800C9101D /* libsqlite3.0.tbd */,
 				AFAF92F91BCCA95100CE1A9D /* CoreTelephony.framework */,
@@ -734,6 +754,11 @@
 					AFC90D6E1B8AF2010057CF3D = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 94RFBF469V;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					AFC90D871B8AF2010057CF3D = {
 						CreatedOnToolsVersion = 6.4;
@@ -782,6 +807,7 @@
 				AF5923F11BA93DD600158B86 /* FilterBonusTVC.xib in Resources */,
 				AF589C3C1BAFE5D900D1A797 /* ClaimedMissionsViewController.xib in Resources */,
 				AFDC6C0F1BB3BD1F0080F6D1 /* ViewUserViewController.xib in Resources */,
+				AF86A5741C12C55000698B63 /* RankingViewController.xib in Resources */,
 				AF589C2D1BAFDEAC00D1A797 /* MyMissionsViewController.xib in Resources */,
 				AF6B66331B8DF0CB0013F12A /* LoginViewController.xib in Resources */,
 				AFDEE7D61B9D2F6000CCDA2C /* blueArrow.png in Resources */,
@@ -795,6 +821,7 @@
 				AF862D5C1BCBD85B003BF8CE /* mapapi.bundle in Resources */,
 				AF5E3A7E1BB92D2800521BEE /* NotificationListCell.xib in Resources */,
 				AFA432611C1034590064DFCA /* UserTableViewCell.xib in Resources */,
+				AF86A5791C12C65800698B63 /* RankingTableViewCell.xib in Resources */,
 				AFDD8AD01BAB988D00A3369B /* MyInfoCell.xib in Resources */,
 				AF5923EB1BA801C400158B86 /* FilterViewController.xib in Resources */,
 				AF589C371BAFE59200D1A797 /* StartedMissionsViewController.xib in Resources */,
@@ -838,6 +865,7 @@
 				AF5923F51BA9482600158B86 /* FilterTypeTVC.m in Sources */,
 				AFDEE7CA1B9D2F4100CCDA2C /* MessageInterceptor.m in Sources */,
 				AF02ED1A1B91A5CF00890BF7 /* GroupViewController.m in Sources */,
+				AF86A5731C12C55000698B63 /* RankingViewController.m in Sources */,
 				AF5A52021B9BDB230018CE98 /* Mission.m in Sources */,
 				AF42A6751B958C310060D67C /* DateTimeUtils.m in Sources */,
 				AFA432601C1034590064DFCA /* UserTableViewCell.m in Sources */,
@@ -877,6 +905,7 @@
 				AF6E68691BF20970001F8B64 /* RecJoinGroupViewController.m in Sources */,
 				AF4A2C731B8B40EA00B61B1B /* RegisterViewController.m in Sources */,
 				AF42A6831B96908C0060D67C /* LocationViewController.m in Sources */,
+				AF86A5781C12C65800698B63 /* RankingTableViewCell.m in Sources */,
 				AF5E3A7D1BB92D2800521BEE /* NotificationListCell.m in Sources */,
 				AFDEE7CB1B9D2F4100CCDA2C /* PullTableView.m in Sources */,
 				AF02ED241B91E33600890BF7 /* MineViewController.m in Sources */,

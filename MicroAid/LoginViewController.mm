@@ -30,6 +30,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 /*
 #pragma mark - Navigation
 
@@ -94,6 +95,8 @@
     
 }
 
+
+
 -(void) viewWillDisappear:(BOOL)animated{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
@@ -121,6 +124,25 @@
     
     [registerVC.navigationItem setTitle:@"注册"];
     [self.view.window.rootViewController presentViewController:nav animated:YES completion:nil];
+    
+}
+
+-(IBAction) forgetPassword:(UIButton *)sender{
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"拨打客服电话18616113266？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认",nil];
+    [dialog setAlertViewStyle:UIAlertViewStyleDefault];
+    [dialog setTag:0];
+    [dialog show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(alertView.tag == 0){
+        if(buttonIndex == 1){
+            NSMutableString *str = [[NSMutableString alloc]initWithFormat:@"tel:%@",@"18616113266"];
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:str]];
+        }
+    }
+    self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     
 }
 

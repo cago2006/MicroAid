@@ -81,18 +81,18 @@
         status = @"已过期";
     }
     [statusLabel setText:[NSString stringWithFormat:@"任务状态:%@",status]];
-    if([status isEqualToString:@"已认领"]){
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSInteger userID = [userDefaults integerForKey:@"userID"];
-        if(userID == self.toID || userID == self.fromID){
-            UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
-            [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [rightBtn addTarget:self action:@selector(finishMission) forControlEvents:UIControlEventTouchUpInside];
-            [rightBtn setTitle:@"完成" forState:UIControlStateNormal];
-            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
-            self.navigationItem.rightBarButtonItem = rightItem;
-        }
-    }
+//    if([status isEqualToString:@"已认领"]){
+//        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//        NSInteger userID = [userDefaults integerForKey:@"userID"];
+//        if(userID == self.toID || userID == self.fromID){
+//            UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
+//            [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//            [rightBtn addTarget:self action:@selector(finishMission) forControlEvents:UIControlEventTouchUpInside];
+//            [rightBtn setTitle:@"完成" forState:UIControlStateNormal];
+//            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+//            self.navigationItem.rightBarButtonItem = rightItem;
+//        }
+//    }
     [endTimeLabel setText:[NSString stringWithFormat:@"截止时间:%@",[dic objectForKey:@"endTime"]]];
     //截止时间<现在时间
     if([DateTimeUtils isOutOfDate:[dic objectForKey:@"endTime"]]){

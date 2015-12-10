@@ -25,10 +25,35 @@
     return momentsArray;
 }
 
+//用于积分排行解析
++(NSMutableArray *)getUserInfosByScore:(NSArray *)dataArray pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
+    NSMutableArray *momentsArray = [[NSMutableArray alloc] init];
+    NSDictionary *dic = [[NSDictionary alloc]init];
+    int i = 1;
+    for (dic in dataArray) {
+        User *info =[[User alloc] init];
+        [info setUserID:[[dic objectForKey:@"id"] intValue]];
+        [info setNickName:[dic objectForKey:@"nickName"]];
+        [info setScores:[[dic objectForKey:@"scores"] integerValue]];
+        [info setRank:i+(pageNo-1)*pageSize];
+        i++;
+        [momentsArray addObject:info];
+    }
+    return momentsArray;
+}
+
 
 -(BOOL) verifyInfo:(NSString*)verifyPassword{
     if ([_username isEqualToString:@""]) {
         [ProgressHUD showError:@"用户名不能为空！"];
+        return FALSE;
+    }
+    if ([_question isEqualToString:@""]) {
+        [ProgressHUD showError:@"密码提示不能为空！"];
+        return FALSE;
+    }
+    if ([_answer isEqualToString:@""]) {
+        [ProgressHUD showError:@"密码提示回答不能为空！"];
         return FALSE;
     }
     NSString *regex = @"^((13[0-9])|(147)|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";

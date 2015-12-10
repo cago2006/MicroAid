@@ -88,6 +88,58 @@
     NSInteger width = self.mySearchBar.frame.size.width;
     [_searchController.view setFrame:CGRectMake(30, 36, width-40, 0)];
     [self.view addSubview:_searchController.view];
+    
+    [self compareVersion];
+}
+
+-(void)compareVersion{
+    dispatch_async(serverQueue, ^{
+        NSDictionary *resultDic = [MicroAidAPI compareVersion:@"1.1.0"];
+        
+        if (![[resultDic objectForKey:@"isLatest"] boolValue]) {
+            [self performSelectorOnMainThread:@selector(showUpdate) withObject:nil waitUntilDone:YES];
+        }
+    });
+}
+
+-(void)showUpdate{
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"不是最新版本(1.1.1)\n是否升级？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"升级",nil];
+    [dialog setAlertViewStyle:UIAlertViewStyleDefault];
+    [dialog setTag:1];
+    [dialog show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(alertView.tag == 1){
+        if(buttonIndex == 1){
+            [self openAppStore:@"1051712193"];
+        }
+    }
+    self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    
+}
+
+- (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
+{
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)openAppStore:(NSString *)appId
+{
+    [ProgressHUD show:@"AppStore加载中..."];
+    SKStoreProductViewController *storeProductVC = [[SKStoreProductViewController alloc] init];
+    storeProductVC.delegate = self;
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:appId forKey:SKStoreProductParameterITunesItemIdentifier];
+    [storeProductVC loadProductWithParameters:dict completionBlock:^(BOOL result, NSError *error)
+     {
+         if (result)
+         {
+             [self presentViewController:storeProductVC animated:YES completion:nil];
+             [ProgressHUD dismiss];
+         }
+     }];
 }
 
 -(void) passItemValue:(NSString *)values{

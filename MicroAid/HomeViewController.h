@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <BaiduMapAPI/BMapKit.h>
+#import <StoreKit/StoreKit.h>
 #import "SearchTableViewController.h"
 
-@interface HomeViewController : UIViewController<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UISearchBarDelegate,passChoosedItemDelegate>{
+@interface HomeViewController : UIViewController<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,UISearchBarDelegate,passChoosedItemDelegate,UIAlertViewDelegate,SKStoreProductViewControllerDelegate>{
     
     IBOutlet BMKMapView* _mapView;
     BMKLocationService* _locService;
@@ -44,6 +45,8 @@ typedef enum {
     SearchTagReverseGeoCode
 }ReverseGeoCodeType;
 @property (nonatomic, assign) ReverseGeoCodeType reverseGeoCodeType;
+
+- (void) openAppStore : (NSString *)appId;
 
 
 @end

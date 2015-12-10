@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController{
+
+@interface LoginViewController : UIViewController<UIAlertViewDelegate>{
     __weak IBOutlet UITextField *usernameTextField;
     __weak IBOutlet UITextField *passwordTextField;
 }
 
 -(IBAction) loginButtonClicked:(id)sender;
 -(IBAction) registerUser:(UIButton *)sender;
+-(IBAction) forgetPassword:(UIButton *)sender;
 
 @end

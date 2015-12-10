@@ -86,4 +86,10 @@
 //24 获得加入群组的用户列表
 +(NSDictionary *)getJoinedUser:(NSString *)groupName pageNo:(int)pageNo pageSize:(int)pageSize;
 
+//25 获取积分排行
++(NSDictionary *)getUserInfoOrderByScore:(int)pageNo pageSize:(int)pageSize;
+
+//26 比较版本
++(NSDictionary *)compareVersion:(NSString *)versionNum;
+
 @end
