@@ -89,6 +89,7 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [ProgressHUD dismiss];
+    self.tabBarController.tabBar.hidden = YES;
     self.view.userInteractionEnabled = true;
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
 }
@@ -406,13 +407,13 @@
 }
 
 - (void) successWithMessage:(NSString *)message {
-    [self.view setUserInteractionEnabled:true];
-    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [self.view endEditing:YES];
     [ProgressHUD showSuccess:message];
 }
 
 -(void) switchNextViewController{
+    [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
     if(self.isFromMyMission){
         
         MyMissionsViewController *myMissionVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];

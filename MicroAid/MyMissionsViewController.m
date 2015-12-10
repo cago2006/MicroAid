@@ -81,6 +81,7 @@
     {
         [self loadUI];
     }
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

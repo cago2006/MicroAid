@@ -94,7 +94,7 @@
 
 -(void)compareVersion{
     dispatch_async(serverQueue, ^{
-        NSDictionary *resultDic = [MicroAidAPI compareVersion:@"1.1.0"];
+        NSDictionary *resultDic = [MicroAidAPI compareVersion:@"1.1.1"];
         
         if (![[resultDic objectForKey:@"isLatest"] boolValue]) {
             [self performSelectorOnMainThread:@selector(showUpdate) withObject:nil waitUntilDone:YES];

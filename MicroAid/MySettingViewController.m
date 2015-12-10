@@ -62,6 +62,7 @@
         self.missionType = @"拿快递";
     }
     [typeBtn setTitle:self.missionType forState:UIControlStateNormal];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {

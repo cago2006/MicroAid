@@ -81,6 +81,7 @@
     [super viewWillAppear:animated];
     self.view.userInteractionEnabled = true;
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 -(void) passFilterBonusValues:(NSString *)string{
