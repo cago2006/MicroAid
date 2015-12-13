@@ -52,7 +52,7 @@
             
         }else if ([[resultDic objectForKey:@"onError"] boolValue])//获取失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败！" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
             return ;
         }
     });
@@ -66,7 +66,7 @@
             [self performSelectorOnMainThread:@selector(showFromPicture:) withObject:picture waitUntilDone:YES];
         }else if ([[resultDic objectForKey:@"onError"] boolValue])//创建失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败！" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
             return ;
         }else{
             [self performSelectorOnMainThread:@selector(showFromPicture:) withObject:nil waitUntilDone:YES];
@@ -74,6 +74,10 @@
     });
     self.fromID = [[dic objectForKey:@"userID"]integerValue];
     self.toID = [[dic objectForKey:@"recUserID"]integerValue];
+    if(self.toID>0){
+        toNickNameView.backgroundColor = [UIColor whiteColor];
+        [toNickNameView setText:@"toNickName"];
+    }
     [titleLabel setText:[dic objectForKey:@"title"]];
     [startTimeLabel setText:[NSString stringWithFormat:@"起始时间:%@",[dic objectForKey:@"startTime"]]];
     NSString *status = [dic objectForKey:@"statusInfo"];
@@ -131,7 +135,7 @@
                 [self performSelectorOnMainThread:@selector(showToPicture:) withObject:picture waitUntilDone:YES];
             }else if ([[resultDic objectForKey:@"onError"] boolValue])//创建失败
             {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败！" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
                 return ;
             }else{
                 [self performSelectorOnMainThread:@selector(showToPicture:) withObject:nil waitUntilDone:YES];
@@ -163,18 +167,32 @@
 }
 
 -(void) acceptMission{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSInteger userID = [userDefaults integerForKey:@"userID"];
-    dispatch_async(serverQueue, ^{
-        NSDictionary *resultDic = [MicroAidAPI acceptMission:self.missionID userID:userID];
-        if ([[resultDic objectForKey:@"flg"] boolValue]) {//接受成功
-            [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务认领成功!" waitUntilDone:YES];
-            [self performSelectorOnMainThread:@selector(returnToMainTab) withObject:nil waitUntilDone:YES];
-        }else if ([[resultDic objectForKey:@"onError"] boolValue]) {//接受失败
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务认领失败!" waitUntilDone:YES];
-            return ;
-        }
-    });
+    
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"确认要认领该任务？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认",nil];
+    [dialog setAlertViewStyle:UIAlertViewStyleDefault];
+    [dialog show];
+    
+    
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 1){
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSInteger userID = [userDefaults integerForKey:@"userID"];
+        dispatch_async(serverQueue, ^{
+            NSDictionary *resultDic = [MicroAidAPI acceptMission:self.missionID userID:userID];
+            if ([[resultDic objectForKey:@"flg"] boolValue]) {//接受成功
+                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务认领成功!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(returnToMainTab) withObject:nil waitUntilDone:YES];
+            }else if ([[resultDic objectForKey:@"onError"] boolValue]) {//接受失败
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务认领失败,请检查网络!" waitUntilDone:YES];
+                return ;
+            }
+        });
+    }
+    self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    
 }
 
 -(void)finishMission{

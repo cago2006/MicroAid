@@ -88,7 +88,7 @@
         }
         else//登录出错
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"登录失败！" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"登录失败,请检查网络!" waitUntilDone:YES];
             return ;
         }
     });

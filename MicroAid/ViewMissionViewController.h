@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewMissionViewController : UIViewController{
+@interface ViewMissionViewController : UIViewController<UIAlertViewDelegate>{
     __weak IBOutlet UILabel *titleLabel;
     __weak IBOutlet UILabel *startTimeLabel;
     __weak IBOutlet UILabel *endTimeLabel;
@@ -20,6 +20,8 @@
     __weak IBOutlet UITextView *desTextView;
     __weak IBOutlet UIButton *fromView;
     __weak IBOutlet UIButton *toView;
+    __weak IBOutlet UILabel *toNickNameView;
+    __weak IBOutlet UILabel *fromNickNameView;
 }
 
 @property (nonatomic, assign) bool isAccepted;

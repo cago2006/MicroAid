@@ -87,7 +87,7 @@
                 [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"退出成功!" waitUntilDone:YES];
                 [self performSelectorOnMainThread:@selector(returnToGroupList) withObject:nil waitUntilDone:YES];
             }else{//退出失败
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"退出失败！" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"退出失败,请检查网络!" waitUntilDone:YES];
                 return ;
             }
         });
@@ -117,7 +117,7 @@
             [self performSelectorOnMainThread:@selector(showGroupInfo:) withObject:dic waitUntilDone:YES];
         }else//查找失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"查找失败！" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"查找失败,请检查网络!" waitUntilDone:YES];
             return ;
         }
     });

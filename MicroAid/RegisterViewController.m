@@ -74,7 +74,7 @@
                 
             }else//注册失败
             {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"注册失败！" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"注册失败,请检查网络!" waitUntilDone:YES];
                 return ;
             }
         });
@@ -102,7 +102,7 @@
 
         }else//获取失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败！" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
             return ;
         }
     });

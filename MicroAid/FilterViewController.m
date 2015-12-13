@@ -31,9 +31,9 @@
     UIBarButtonItem *saveItem = [[UIBarButtonItem alloc]initWithCustomView:saveBtn];
     //[saveBtn release];
     
-    UIBarButtonItem *resetItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(resetFilter)];
+    //UIBarButtonItem *resetItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(resetFilter)];
     
-    NSArray *itemArray=[[NSArray alloc]initWithObjects:saveItem,resetItem, nil];
+    NSArray *itemArray=[[NSArray alloc]initWithObjects:saveItem, nil];
     //[saveItem release];
     //[resetItem release];
     [self.navigationItem setRightBarButtonItems:itemArray];
@@ -145,7 +145,7 @@
                     
                 }else//获取失败
                 {
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败！" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
                     return ;
                 }
             });
@@ -174,7 +174,7 @@
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllGroup:userID pageNo:1 pageSize:10];
                 if ([[resultDic objectForKey:@"onError"] boolValue]) {//获取成功
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败！" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
                     return ;
                 }else//获取失败
                 {

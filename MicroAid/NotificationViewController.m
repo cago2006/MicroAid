@@ -99,7 +99,7 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 54;
+    return 75;
 }
 
 //点击显示具体信息，首先进行判断
@@ -167,6 +167,7 @@
     }else if(([info.status isEqualToString:@"未接受"] || [info.status isEqualToString:@"未认领"] )){
         [[cell statusView]setImage:[UIImage imageNamed:@"red.png"]];
     }
+    [[cell nickName]setText:@"nickname"];
     [[cell taskName]setText:info.missionTitle];
     [[cell taskGroup]setText:info.missionGroup];
     [[cell time]setText:info.time];

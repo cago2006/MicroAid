@@ -10,7 +10,7 @@
 
 @implementation NotificationListCell
 
-@synthesize taskGroup,taskName,time,statusView;
+@synthesize taskGroup,taskName,time,statusView,nickName;
 
 - (void)awakeFromNib {
     // Initialization code

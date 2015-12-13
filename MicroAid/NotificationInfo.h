@@ -18,6 +18,7 @@
 @property(strong,nonatomic)NSString *missionGroup;//任务群组
 @property(strong,nonatomic)NSString *time;//通知时间
 @property(strong,nonatomic)NSString *status;//任务状态
+@property(strong,nonatomic)NSString *nickName;//昵称
 
 +(NSMutableArray *)getNotificationInfos:(NSArray *)dataArray;
 

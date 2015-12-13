@@ -104,7 +104,7 @@
             
         }else//获取失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败！" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
             return ;
         }
     });
@@ -122,7 +122,7 @@
             
         }else//获取失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"余额获取失败！" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"余额获取失败,请检查网络!" waitUntilDone:YES];
             return ;
         }
     });
@@ -272,7 +272,7 @@
                     
                 }else//获取失败
                 {
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败！" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
                     return ;
                 }
             });
@@ -290,7 +290,7 @@
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllGroup:userID pageNo:1 pageSize:10];
                 if ([[resultDic objectForKey:@"onError"] boolValue]) {//获取成功
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败！" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
                     return ;
                 }else//获取失败
                 {
@@ -501,7 +501,7 @@
                     
                 }else//创建失败
                 {
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务创建失败！" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"网络错误,任务创建失败!" waitUntilDone:YES];
                     return ;
                 }
             });

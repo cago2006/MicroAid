@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewMissionViewController">
@@ -10,11 +11,13 @@
                 <outlet property="bonusLabel" destination="ASc-HO-YOg" id="C3T-hY-2AC"/>
                 <outlet property="desTextView" destination="ETr-Lj-Xge" id="0Tm-tb-zXq"/>
                 <outlet property="endTimeLabel" destination="BtW-GS-FGM" id="lKa-fU-Kag"/>
+                <outlet property="fromNickNameView" destination="bF7-vz-iOa" id="SXX-ei-YrV"/>
                 <outlet property="fromView" destination="HLV-ZP-WJf" id="bj8-2p-rVe"/>
                 <outlet property="groupLabel" destination="42k-4e-AOa" id="P8v-jF-ZkR"/>
                 <outlet property="startTimeLabel" destination="Wb4-va-h1P" id="oBX-GR-oaC"/>
                 <outlet property="statusLabel" destination="2fn-6M-z3e" id="1hK-DA-aCx"/>
                 <outlet property="titleLabel" destination="H0a-9u-9TA" id="YNb-aR-ZGr"/>
+                <outlet property="toNickNameView" destination="SAT-sL-jNr" id="8B0-Sz-VPV"/>
                 <outlet property="toView" destination="PjB-Tm-bHx" id="ogj-Fw-7WN"/>
                 <outlet property="typeLabel" destination="EtP-el-5Og" id="LPV-Bx-uht"/>
                 <outlet property="view" destination="M3B-ez-Crf" id="KGQ-2H-03O"/>
@@ -53,6 +56,21 @@
                                 <action selector="fromBtnClicked:" destination="-1" eventType="touchUpInside" id="8qB-CD-csa"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fromNickName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bF7-vz-iOa">
+                            <rect key="frame" x="40" y="142" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SAT-sL-jNr">
+                            <rect key="frame" x="178" y="142" width="100" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -144,9 +162,4 @@
         <image name="background" width="669" height="407"/>
         <image name="default_pic" width="53" height="53"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

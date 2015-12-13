@@ -56,7 +56,7 @@
     
     
     //初始化选中的项目
-    NSArray *list = [string componentsSeparatedByString:@","];
+    NSArray *list = [string componentsSeparatedByString:@"；"];
     for(int i = 0; i< list.count; i++){
         for(int j = 0; j<self.dataArray.count; j++){
             if([[list objectAtIndex:i] isEqualToString:[self.dataArray objectAtIndex:j]]){
@@ -131,7 +131,7 @@
         NSString *choosed = [[NSString alloc]init];
         for (NSIndexPath *selectionIndex in selectedRows){
             choosed = [choosed stringByAppendingString:[self.dataArray objectAtIndex:selectionIndex.row]];
-            choosed = [choosed stringByAppendingString:@","];
+            choosed = [choosed stringByAppendingString:@"；"];
         }
         choosed = [choosed substringToIndex:choosed.length-1];
         

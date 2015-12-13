@@ -150,7 +150,7 @@ NSString *ipAddr;
     
     NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/getTaskWithFilter.action?taskFilterString={\"statusList\":%@,\"distance\":\"%f\",\"longitude\":\"%f\",\"latitude\":\"%f\"",ipAddr,status,distance,longitude,latitude];
     if(![type isEqualToString:@"全部"]){
-        NSArray *list = [type componentsSeparatedByString:@","];
+        NSArray *list = [type componentsSeparatedByString:@"；"];
         type = @"[";
         for(int i = 0; i< list.count; i++){
             type = [type stringByAppendingFormat:@"\"%@\",",[list objectAtIndex:i]];
@@ -160,7 +160,7 @@ NSString *ipAddr;
         urlString = [urlString stringByAppendingFormat:@",\"taskType\":%@",type];
     }
     if(![group isEqualToString:@"全部"]){
-        NSArray *list = [group componentsSeparatedByString:@","];
+        NSArray *list = [group componentsSeparatedByString:@"；"];
         group = @"[";
         for(int i = 0; i< list.count; i++){
             group = [group stringByAppendingFormat:@"\"%@\",",[list objectAtIndex:i]];

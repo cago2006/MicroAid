@@ -55,7 +55,7 @@
             [self performSelectorOnMainThread:@selector(showPicture:) withObject:picture waitUntilDone:YES];
         }else if([[resultDic objectForKey:@"onError"] boolValue])//创建失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败！" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
             return ;
         }else{
             [self performSelectorOnMainThread:@selector(showPicture:) withObject:nil waitUntilDone:YES];

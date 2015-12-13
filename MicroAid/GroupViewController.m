@@ -90,7 +90,7 @@
                 [self performSelectorOnMainThread:@selector(refreshTable) withObject:nil waitUntilDone:YES];
             }else//创建失败
             {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"群组创建失败！" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"群组创建失败,请检查网络!" waitUntilDone:YES];
                 return ;
             }
         });
