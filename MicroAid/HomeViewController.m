@@ -694,11 +694,11 @@
         } else {
             _missionInfoArray = [MissionInfo getMissionInfos:[nearbyMissions objectForKey:@"taskInfoList"]];
             if ([_missionInfoArray count] == 0) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"附近无待认领任务" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    [alertView show];
-                });
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    
+//                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"附近无待认领任务" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                    [alertView show];
+//                });
                 return;
             }
             dispatch_async(dispatch_get_main_queue(), ^{

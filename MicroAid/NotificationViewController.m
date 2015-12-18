@@ -167,7 +167,7 @@
     }else if(([info.status isEqualToString:@"未接受"] || [info.status isEqualToString:@"未认领"] )){
         [[cell statusView]setImage:[UIImage imageNamed:@"red.png"]];
     }
-    [[cell nickName]setText:@"nickname"];
+    [[cell nickName]setText:info.nickName];
     [[cell taskName]setText:info.missionTitle];
     [[cell taskGroup]setText:info.missionGroup];
     [[cell time]setText:info.time];

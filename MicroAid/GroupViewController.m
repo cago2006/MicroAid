@@ -107,6 +107,7 @@
      Code to actually refresh goes here.  刷新代码放在这
      
      */
+    [self.dataArray removeAllObjects];
     self.count = 1;
     //[self.dataArray removeAllObjects];
     [self getGroupInfo:self.count pageSize:20];

@@ -117,25 +117,38 @@ NSString *ipAddr;
 }
 
 //5 新建任务
-+(NSDictionary *)createMission:(Mission *)mission{
-    
++(NSDictionary *)createMission:(NSMutableDictionary *)dic{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/createTask.action?taskPOString={\"userID\":\"%ld\",\"title\":\"%@\",\"taskType\":\"%@\",\"taskScores\":\"%@\",\"startTime\":\"%@\",\"endTime\":\"%@\",\"status\":\"0\",\"description\":\"%@\",\"address\":\"%@\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"publicity\":\"%@\"}",ipAddr,(long)mission.userID,mission.title,mission.type,mission.bonus,mission.startTime,mission.endTime,mission.descript,mission.address,mission.longitude,mission.latitude,mission.group];
+    NSData *requestData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString = [@"taskPOString=" stringByAppendingString:[[NSString alloc] initWithData:requestData encoding:NSUTF8StringEncoding]];
     
-    NSLog(@"createMissionUserURL:%@",urlString);
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/createTask.action",ipAddr];
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
     
-    if (data)
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];//请求这个地址， timeoutInterval:10 设置为10s超时：请求时间超过10s会被认为连接不上，连接超时
+    
+    [request setHTTPMethod:@"POST"];//POST请求
+    [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];//body 数据
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];//请求头
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];//异步发送request，成功后会得到服务器返回的数据
+    
+    
+    if (returnData)
     {
-        return [MicroAidAPI toDictionary:data];
+        NSLog(@"returndata = %@", [MicroAidAPI toDictionary:returnData]);
+        return [MicroAidAPI toDictionary:returnData];
+        
+    }else{
+        NSLog(@"returndata = %@", @"服务器无响应");
+        
     }
     
-    //NSLog(@"result: %@",[SmartHomeAPIs toDictionary:data]);
-    
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+
 }
 
 //6 获取附近任务列表
@@ -465,22 +478,36 @@ NSString *ipAddr;
 }
 
 //18 修改任务
-+(NSDictionary *)updateMission:(Mission *)mission{
++(NSDictionary *)updateMission:(NSMutableDictionary *)dic{
+    
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/updateTask.action?taskPOString={\"id\":\"%ld\",\"userID\":\"%ld\",\"title\":\"%@\",\"taskType\":\"%@\",\"taskScores\":\"%@\",\"startTime\":\"%@\",\"endTime\":\"%@\",\"status\":\"%ld\",\"description\":\"%@\",\"address\":\"%@\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"publicity\":\"%@\"}",ipAddr,(long)mission.missionID,(long)mission.userID,mission.title,mission.type,mission.bonus,mission.startTime,mission.endTime,(long)mission.status,mission.descript,mission.address,mission.longitude,mission.latitude,mission.group];
+    NSData *requestData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString = [@"taskPOString=" stringByAppendingString:[[NSString alloc] initWithData:requestData encoding:NSUTF8StringEncoding]];
     
-    NSLog(@"updateMissionUserURL:%@",urlString);
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/updateTask.action",ipAddr];
     
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
     
-    if (data)
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];//请求这个地址， timeoutInterval:10 设置为10s超时：请求时间超过10s会被认为连接不上，连接超时
+    
+    [request setHTTPMethod:@"POST"];//POST请求
+    [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];//body 数据
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];//请求头
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];//异步发送request，成功后会得到服务器返回的数据
+    
+    
+    if (returnData)
     {
-        return [MicroAidAPI toDictionary:data];
+        NSLog(@"returndata = %@", [MicroAidAPI toDictionary:returnData]);
+        return [MicroAidAPI toDictionary:returnData];
+        
+    }else{
+        NSLog(@"returndata = %@", @"服务器无响应");
+        
     }
-    
-    //NSLog(@"result: %@",[SmartHomeAPIs toDictionary:data]);
     
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
 }

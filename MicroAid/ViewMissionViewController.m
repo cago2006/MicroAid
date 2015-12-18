@@ -46,9 +46,8 @@
     dispatch_async(serverQueue, ^{
         NSDictionary *resultDic = [MicroAidAPI fetchMission:self.missionID];
         if ([[resultDic objectForKey:@"flg"] boolValue]) {//获取成功
-            NSMutableDictionary *dic = [resultDic objectForKey:@"task"];
             //显示
-            [self performSelectorOnMainThread:@selector(showMissionInfo:) withObject:dic waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(showMissionInfo:) withObject:resultDic waitUntilDone:YES];
             
         }else if ([[resultDic objectForKey:@"onError"] boolValue])//获取失败
         {
@@ -58,13 +57,14 @@
     });
 }
 
--(void) showMissionInfo:(NSMutableDictionary *)dic{
+-(void) showMissionInfo:(NSDictionary *)resultDic{
+    NSMutableDictionary *dic = [resultDic objectForKey:@"task"];
     dispatch_async(serverQueue, ^{
-        NSDictionary *resultDic = [MicroAidAPI fetchPicture:[[dic objectForKey:@"userID"]integerValue]];
-        if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
-            NSData *picture = [resultDic objectForKey:@"picture"];
+        NSDictionary *resultDic2 = [MicroAidAPI fetchPicture:[[dic objectForKey:@"userID"]integerValue]];
+        if ([[resultDic2 objectForKey:@"flg"] boolValue]) {//创建成功
+            NSData *picture = [resultDic2 objectForKey:@"picture"];
             [self performSelectorOnMainThread:@selector(showFromPicture:) withObject:picture waitUntilDone:YES];
-        }else if ([[resultDic objectForKey:@"onError"] boolValue])//创建失败
+        }else if ([[resultDic2 objectForKey:@"onError"] boolValue])//创建失败
         {
             [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
             return ;
@@ -73,10 +73,11 @@
         }
     });
     self.fromID = [[dic objectForKey:@"userID"]integerValue];
+    [fromNickNameView setText:[resultDic objectForKey:@"userNickName"]];
     self.toID = [[dic objectForKey:@"recUserID"]integerValue];
     if(self.toID>0){
         toNickNameView.backgroundColor = [UIColor whiteColor];
-        [toNickNameView setText:@"toNickName"];
+        [toNickNameView setText:[resultDic objectForKey:@"recUserNickName"]];
     }
     [titleLabel setText:[dic objectForKey:@"title"]];
     [startTimeLabel setText:[NSString stringWithFormat:@"起始时间:%@",[dic objectForKey:@"startTime"]]];

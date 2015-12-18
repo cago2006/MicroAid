@@ -27,7 +27,7 @@
 +(NSDictionary *)fetchAllGroup:(NSInteger)userID pageNo:(int)pageNo pageSize:(int)pageSize;
 
 //5 新建任务
-+(NSDictionary *)createMission:(Mission *)mission;
++(NSDictionary *)createMission:(NSMutableDictionary *)dic;
 
 //6 获取附近任务列表
 +(NSDictionary *)getMissionList:(NSArray *)statusList distance:(double)distance type:(NSString *)type group:(NSString *)group bonus:(NSString *)bonus longitude:(double)longitude latitude:(double)latitude endTime:(NSString *)endTime pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize userID:(NSInteger)userID;
@@ -66,7 +66,7 @@
 +(NSDictionary *)fetchMission:(NSInteger)missionID;
 
 //18 修改任务
-+(NSDictionary *)updateMission:(Mission *)mission;
++(NSDictionary *)updateMission:(NSMutableDictionary *)dic;
 
 //19 接受任务
 +(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID;

@@ -23,6 +23,7 @@
         [info setMissionGroup:[dic objectForKey:@"taskGroup"]];
         [info setTime:[dic objectForKey:@"time"]];
         [info setStatus:[dic objectForKey:@"statusInfo"]];
+        [info setNickName:[dic objectForKey:@"userNickName"]];
         [momentsArray addObject:info];
     }
     return momentsArray;

@@ -439,7 +439,17 @@
     return [bonus substringToIndex:1];
 }
 
+//去掉空格
+-(NSString *)formatString:(NSString *)string{
+    return nil;
+}
+
 -(void) saveMission{
+    if(_isEditMission){
+        [ProgressHUD show:@"任务保存中..."];
+    }else{
+        [ProgressHUD show:@"任务创建中..."];
+    }
     [self.navigationController.navigationBar setUserInteractionEnabled:false];
     [self.view setUserInteractionEnabled:false];
     CGRect frame = self.inputView.frame;
@@ -457,28 +467,47 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     
+    [dic setObject:[NSString stringWithString:titleTextField.text] forKey:@"title"];
     [self.mission setTitle:[NSString stringWithString:titleTextField.text]];
+    [dic setObject:[NSString stringWithFormat:@"%li",(long)userID] forKey:@"userID"];
     [self.mission setUserID:userID];
+    [dic setObject:typeBtn.titleLabel.text forKey:@"taskType"];
     [self.mission setType:typeBtn.titleLabel.text];
+    [dic setObject:[self formatBonus:bonusBtn.titleLabel.text] forKey:@"taskScores"];
     [self.mission setBonus:[self formatBonus:bonusBtn.titleLabel.text]];
+    [dic setObject:startTimeBtn.titleLabel.text forKey:@"startTime"];
     [self.mission setStartTime:startTimeBtn.titleLabel.text];
+    [dic setObject:endTimeBtn.titleLabel.text forKey:@"endTime"];
     [self.mission setEndTime:endTimeBtn.titleLabel.text];
-    [self.mission setDescript:[NSString stringWithString:descriptionTextView.text]];
+    
+    [dic setObject:descriptionTextView.text forKey:@"description"];
+    
+    
+    NSLog(@"des:%@",[NSString stringWithString:descriptionTextView.text]);
+    [self.mission setDescript:descriptionTextView.text];
     if([[NSString stringWithString:descriptionTextView.text] isEqualToString:@"请在此输入任务描述"]){
         [self.mission setDescript:[NSString stringWithString:titleTextField.text]];
+        [dic setObject:[NSString stringWithString:titleTextField.text] forKey:@"description"];
     }
+    [dic setObject:addressBtn.titleLabel.text forKey:@"address"];
     [self.mission setAddress:addressBtn.titleLabel.text];
+    [dic setObject:objectBtn.titleLabel.text forKey:@"publicity"];
     [self.mission setGroup:objectBtn.titleLabel.text];
+    [dic setObject:[NSString stringWithFormat:@"%f",self.missionLatitude] forKey:@"latitude"];
     [self.mission setLatitude:self.missionLatitude];
+    [dic setObject:[NSString stringWithFormat:@"%f",self.missionLongitude] forKey:@"longitude"];
     [self.mission setLongitude:self.missionLongitude];
+    [dic setObject:@"0" forKey:@"status"];
     
     
     if([self.mission verifyInfo] && [self isLeftBonusEnough]){
         if(_isEditMission){
             [self.mission setMissionID:self.missionID];
+            [dic setObject:[NSString stringWithFormat:@"%li",(long)self.missionID] forKey:@"id"];
             dispatch_async(serverQueue, ^{
-                NSDictionary *resultDic = [MicroAidAPI updateMission:self.mission];
+                NSDictionary *resultDic = [MicroAidAPI updateMission:dic];
                 if ([[resultDic objectForKey:@"flg"] boolValue]) {//修改成功
                     //显示
                     [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务修改成功!" waitUntilDone:YES];
@@ -493,7 +522,7 @@
             
         }else{
             dispatch_async(serverQueue, ^{
-                NSDictionary *resultDic = [MicroAidAPI createMission:self.mission];
+                NSDictionary *resultDic = [MicroAidAPI createMission:dic];
                 if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
                     //显示
                     [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务创建成功!" waitUntilDone:YES];
@@ -507,6 +536,7 @@
             });
         }
     }else{
+        [ProgressHUD dismiss];
         [self.navigationController.navigationBar setUserInteractionEnabled:true];
         [self.view setUserInteractionEnabled:true];
     }
