@@ -47,8 +47,9 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *username = [userDefaults stringForKey:@"username"];
     NSString *password = [userDefaults stringForKey:@"password"];
+    bool isAgree = [userDefaults boolForKey:@"isAgreePolicy"];
     NSLog(@"userName=%@,password=%@",username,password);
-    if ((username != nil)&&(password != nil)&&!([username isEqualToString:@""]) && !([password isEqualToString:@""])) {
+    if (isAgree&&(username != nil)&&(password != nil)&&!([username isEqualToString:@""]) && !([password isEqualToString:@""])) {
         //如果已登陆,不用输入，直接登录
         dispatch_async(serverQueue, ^{
             NSDictionary *resultDic = [MicroAidAPI MobileLogin:username password:password channelID:[BPush getChannelId]];
