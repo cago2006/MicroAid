@@ -79,6 +79,10 @@
     self.tabBarController.tabBar.hidden = NO;
     self.view.userInteractionEnabled = true;
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    
+//    [self.messageView setHidden:YES];
+//    self.messageView.layer.cornerRadius = 10.f;
+//    self.messageView.layer.masksToBounds = YES;
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
@@ -331,8 +335,11 @@
             }
             if ([missionArray count]== 0 && [array count] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                    [alertView show];
+                    if(_othersMissionInfoArray.count==0){
+                        [self showMessage:@"无待认领任务"];
+                    }else{
+                        [self showMessage:@"没有更多了!"];
+                    }
                 });
                 return;
             }
@@ -342,6 +349,35 @@
             });
         }
     });
+}
+
+
+-(void)showMessage:(NSString *)message
+{
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UIView *showview =  [[UIView alloc]init];
+    showview.backgroundColor = [UIColor blackColor];
+    showview.frame = CGRectMake(1, 1, 1, 1);
+    showview.alpha = 1.0f;
+    showview.layer.cornerRadius = 5.0f;
+    showview.layer.masksToBounds = YES;
+    [window addSubview:showview];
+    
+    UILabel *label = [[UILabel alloc]init];
+    CGSize LabelSize = [message sizeWithFont:[UIFont systemFontOfSize:17] constrainedToSize:CGSizeMake(290, 9000)];
+    label.frame = CGRectMake(10, 5, LabelSize.width, LabelSize.height);
+    label.text = message;
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = 1;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:15];
+    [showview addSubview:label];
+    showview.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - LabelSize.width - 20)/2, [[UIScreen mainScreen] bounds].size.height - 100, LabelSize.width+20, LabelSize.height+10);
+    [UIView animateWithDuration:1.5 animations:^{
+        showview.alpha = 0;
+    } completion:^(BOOL finished) {
+        [showview removeFromSuperview];
+    }];
 }
 
 @end

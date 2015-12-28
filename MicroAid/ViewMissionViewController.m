@@ -15,6 +15,8 @@
 #import "LocationViewController.h"
 #import "DateTimeUtils.h"
 #import "MainTabBarController.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
 
 @interface ViewMissionViewController ()
 
@@ -29,6 +31,8 @@
     
     [self getMission];
     toView.userInteractionEnabled = NO;
+    
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -117,6 +121,11 @@
     }
     [typeLabel setText:[NSString stringWithFormat:@"任务类型:%@",[dic objectForKey:@"taskType"]]];
     desTextView.text =[dic objectForKey:@"description"];
+    UIButton *shareBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
+    [shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [shareBtn addTarget:self action:@selector(shareMission) forControlEvents:UIControlEventTouchUpInside];
+    [shareBtn setBackgroundImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc]initWithCustomView:shareBtn];
     if(self.toID<1){
         if(!self.isAccepted){
             UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
@@ -124,10 +133,13 @@
             [rightBtn addTarget:self action:@selector(acceptMission) forControlEvents:UIControlEventTouchUpInside];
             [rightBtn setTitle:@"认领" forState:UIControlStateNormal];
             UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
-            self.navigationItem.rightBarButtonItem = rightItem;
+            [self.navigationItem setRightBarButtonItems:[[NSArray alloc]initWithObjects:rightItem,shareItem,nil]];
+        }else{
+            self.navigationItem.rightBarButtonItem = shareItem;
         }
         
     }else{
+        self.navigationItem.rightBarButtonItem = shareItem;
         toView.userInteractionEnabled = YES;
         dispatch_async(serverQueue, ^{
             NSDictionary *resultDic = [MicroAidAPI fetchPicture:[[dic objectForKey:@"recUserID"]integerValue]];
@@ -166,6 +178,80 @@
         [toView setBackgroundImage:[UIImage imageWithData:imageData scale:0.0] forState:UIControlStateNormal];
     }
 }
+
+-(void) shareMission{
+    
+    UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"取消"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"新浪微博", @"微信好友",@"微信朋友圈", nil];
+    [choiceSheet showInView:self.view];
+}
+
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    //设置微信AppId，设置分享url，默认使用友盟的网址
+    [UMSocialWechatHandler setWXAppId:@"wxe378ace7a2b6687a" appSecret:@"e1908bdfde6b2db1513414697fe723b6" url:@"https://itunes.apple.com/cn/app/wei-zhu-hu-zhu-ping-tai-rang/id1051712193?l=en&mt=8"];
+    if(buttonIndex == 0) {
+        // 新浪微博
+        NSString *text = @"";
+        if(self.toID>0){
+            text = @"我在微助平台又完成了一个任务，快来加入我吧～";
+        }else{
+            text =  @"我在微助平台发布了一个任务，快来帮我完成吧～";
+        }
+        text = [NSString stringWithFormat:@"%@     任务名称:%@     下载链接(安卓):http://www.wandoujia.com/apps/cisl.ma下载链接(IOS):https://itunes.apple.com/cn/app/wei-zhu-hu-zhu-ping-tai-rang/id1051712193?l=en&mt=8",text,titleLabel.text];
+        [[UMSocialControllerService defaultControllerService] setShareText:text shareImage:fromView.currentBackgroundImage socialUIDelegate:nil];        //设置分享内容和回调对象
+        [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina].snsClickHandler(self,[UMSocialControllerService defaultControllerService],YES);
+    }else if(buttonIndex == 1) {
+        // 微信好友
+        if(self.toID>0){
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = @"我在微助平台又完成了一个任务，快来加入我吧～";
+        }else{
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = @"我在微助平台发布了一个任务，快来帮我完成吧～";
+        }
+
+        [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
+        
+        [[UMSocialDataService defaultDataService]
+                        postSNSWithTypes:@[UMShareToWechatSession]
+                                 content:titleLabel.text
+                                   image:fromView.currentBackgroundImage
+                                location:nil
+                             urlResource:nil
+                     presentedController:self
+                              completion:^(UMSocialResponseEntity *response){
+                                  if (response.responseCode == UMSResponseCodeSuccess) {
+                                      NSLog(@"分享成功！");
+                                  }
+                              }];
+
+    }else if(buttonIndex == 2){
+        //微信朋友圈
+        if(self.toID>0){
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"我又完成来一个任务，快来加入我吧～";
+        }else{
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = @"我在微助发布了一个任务，快来帮我完成吧～";
+        }
+        
+        [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeApp;
+        
+        [[UMSocialDataService defaultDataService]
+                        postSNSWithTypes:@[UMShareToWechatTimeline]
+                                 content:titleLabel.text
+                                   image:fromView.currentBackgroundImage
+                                location:nil
+                             urlResource:nil
+                     presentedController:self
+                              completion:^(UMSocialResponseEntity *response){
+                                  if (response.responseCode == UMSResponseCodeSuccess) {
+                                      NSLog(@"分享成功！");
+                                  }
+         }];
+    }
+}
+
 
 -(void) acceptMission{
     

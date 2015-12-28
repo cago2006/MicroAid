@@ -210,11 +210,13 @@
             if ([_groupInfoArray count] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if(self.count == 1){
-                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"您没有加入任何群组!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                        [alertView show];
+//                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"您没有加入任何群组!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                        [alertView show];
+                        [self showMessage:@"您没有加入任何群组!"];
                     }else{
-                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                        [alertView show];
+//                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                        [alertView show];
+                        [self showMessage:@"没有更多了!"];
                     }
                 });
                 return;
@@ -244,6 +246,32 @@
     [ProgressHUD showSuccess:message];
 }
 
-
+-(void)showMessage:(NSString *)message
+{
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UIView *showview =  [[UIView alloc]init];
+    showview.backgroundColor = [UIColor blackColor];
+    showview.frame = CGRectMake(1, 1, 1, 1);
+    showview.alpha = 1.0f;
+    showview.layer.cornerRadius = 5.0f;
+    showview.layer.masksToBounds = YES;
+    [window addSubview:showview];
+    
+    UILabel *label = [[UILabel alloc]init];
+    CGSize LabelSize = [message sizeWithFont:[UIFont systemFontOfSize:17] constrainedToSize:CGSizeMake(290, 9000)];
+    label.frame = CGRectMake(10, 5, LabelSize.width, LabelSize.height);
+    label.text = message;
+    label.textColor = [UIColor whiteColor];
+    label.textAlignment = 1;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:15];
+    [showview addSubview:label];
+    showview.frame = CGRectMake(([[UIScreen mainScreen] bounds].size.width - LabelSize.width - 20)/2, [[UIScreen mainScreen] bounds].size.height - 100, LabelSize.width+20, LabelSize.height+10);
+    [UIView animateWithDuration:1.5 animations:^{
+        showview.alpha = 0;
+    } completion:^(BOOL finished) {
+        [showview removeFromSuperview];
+    }];
+}
 
 @end

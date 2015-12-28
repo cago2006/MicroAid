@@ -8,7 +8,9 @@
 
 #import "AppDelegate.h"
 #import "BPush.h"
+#import "UMSocial.h"
 #import "RootController.h"
+#import "UMSocialSinaHandler.h"
 
 @interface AppDelegate ()
 
@@ -27,6 +29,12 @@
     if (!ret) {
         NSLog(@"manager start failed!");
     }
+    
+    
+    //友盟sdk
+    [UMSocialData setAppKey:@"5677a39de0f55a6853002e04"];
+     //打开新浪微博的SSO开关，设置新浪微博回调地址
+    [UMSocialSinaHandler openSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];//初始化window
     //self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[RootController alloc] init]];
@@ -71,6 +79,18 @@
     
     return YES;
 }
+
+
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (result == FALSE) {
+        //调用其他SDK，例如支付宝SDK等
+    }
+    return result;
+}
+
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {

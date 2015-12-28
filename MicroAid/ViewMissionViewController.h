@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewMissionViewController : UIViewController<UIAlertViewDelegate>{
+@interface ViewMissionViewController : UIViewController<UIAlertViewDelegate,UIActionSheetDelegate>{
     __weak IBOutlet UILabel *titleLabel;
     __weak IBOutlet UILabel *startTimeLabel;
     __weak IBOutlet UILabel *endTimeLabel;
