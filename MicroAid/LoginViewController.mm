@@ -119,22 +119,24 @@
     dispatch_async(serverQueue, ^{
         NSDictionary *resultDic = [MicroAidAPI MobileLogin:username password:password channelID:[BPush getChannelId]];
         
-        if ([[resultDic objectForKey:@"userID"] integerValue] > 0 ) {
-            
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setInteger:[[resultDic objectForKey:@"userID"] integerValue] forKey:@"userID"];
-            [userDefaults setObject:username forKey:@"username"];
-            [userDefaults setObject:password forKey:@"password"];
-            NSDictionary *array = [resultDic objectForKey:@"user"];
-            [userDefaults setObject:[array objectForKey:@"nickName"] forKey:@"nickName"];
-            [userDefaults synchronize];
-            
-            [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"登录成功" waitUntilDone:YES];
-            [self performSelectorOnMainThread:@selector(switchNextViewController) withObject:nil waitUntilDone:YES];
-            return ;
-        }
-        else//登录出错
-        {
+        if(![[resultDic objectForKey:@"onError"]boolValue]){
+            if ([[resultDic objectForKey:@"userID"] integerValue] > 0 ) {
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                [userDefaults setInteger:[[resultDic objectForKey:@"userID"] integerValue] forKey:@"userID"];
+                [userDefaults setObject:username forKey:@"username"];
+                [userDefaults setObject:password forKey:@"password"];
+                NSDictionary *array = [resultDic objectForKey:@"user"];
+                [userDefaults setObject:[array objectForKey:@"nickName"] forKey:@"nickName"];
+                [userDefaults synchronize];
+                
+                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"登录成功" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(switchNextViewController) withObject:nil waitUntilDone:YES];
+                return ;
+            }else if([[resultDic objectForKey:@"userID"] integerValue] < 0){
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"账号/密码错误!" waitUntilDone:YES];
+                return ;
+            }
+        }else{
             [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"登录失败,请检查网络!" waitUntilDone:YES];
             return ;
         }
