@@ -29,7 +29,7 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"积分排名"];
+    [self.navigationItem setTitle:@"排行榜"];
 
     //[addBtn release];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
@@ -44,7 +44,9 @@
     self.count = 1;
     //self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
     [self getUserInfoOrderByScore:self.count pageSize:20];
-    self.tabBarController.tabBar.hidden = YES;
+    self.tabBarController.tabBar.hidden = NO;
+    self.view.userInteractionEnabled = true;
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{

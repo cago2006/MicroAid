@@ -202,7 +202,7 @@
 -(void) startMainTabView{
     self.mainTabBarController = nil;
     self.mainTabBarController = [[MainTabBarController alloc]init];
-    self.mainTabBarController.selectedIndex = 2;
+    self.mainTabBarController.selectedIndex = 3;
     [self.view addSubview:self.mainTabBarController.view];
 }
 

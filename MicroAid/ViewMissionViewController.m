@@ -121,11 +121,12 @@
     }
     [typeLabel setText:[NSString stringWithFormat:@"任务类型:%@",[dic objectForKey:@"taskType"]]];
     desTextView.text =[dic objectForKey:@"description"];
-    UIButton *shareBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
-    [shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [shareBtn addTarget:self action:@selector(shareMission) forControlEvents:UIControlEventTouchUpInside];
-    [shareBtn setBackgroundImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
-    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc]initWithCustomView:shareBtn];
+    //分享
+//    UIButton *shareBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
+//    [shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [shareBtn addTarget:self action:@selector(shareMission) forControlEvents:UIControlEventTouchUpInside];
+//    [shareBtn setBackgroundImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
+//    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc]initWithCustomView:shareBtn];
     if(self.toID<1){
         if(!self.isAccepted){
             UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
@@ -133,13 +134,13 @@
             [rightBtn addTarget:self action:@selector(acceptMission) forControlEvents:UIControlEventTouchUpInside];
             [rightBtn setTitle:@"认领" forState:UIControlStateNormal];
             UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
-            [self.navigationItem setRightBarButtonItems:[[NSArray alloc]initWithObjects:rightItem,shareItem,nil]];
+            [self.navigationItem setRightBarButtonItems:[[NSArray alloc]initWithObjects:rightItem,nil]];
         }else{
-            self.navigationItem.rightBarButtonItem = shareItem;
+            //self.navigationItem.rightBarButtonItem = shareItem;
         }
         
     }else{
-        self.navigationItem.rightBarButtonItem = shareItem;
+        //self.navigationItem.rightBarButtonItem = shareItem;
         toView.userInteractionEnabled = YES;
         dispatch_async(serverQueue, ^{
             NSDictionary *resultDic = [MicroAidAPI fetchPicture:[[dic objectForKey:@"recUserID"]integerValue]];

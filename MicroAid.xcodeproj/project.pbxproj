@@ -1111,8 +1111,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1128,7 +1128,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				New_Setting = "";
-				PROVISIONING_PROFILE = "00a50e7a-2ee1-4b3a-b81c-b79b038592c3";
+				PROVISIONING_PROFILE = "f4f82069-2ef1-46ea-874c-4f95f04dfe52";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1138,8 +1138,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1160,7 +1160,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fudan.microAid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a50e7a-2ee1-4b3a-b81c-b79b038592c3";
+				PROVISIONING_PROFILE = "f4f82069-2ef1-46ea-874c-4f95f04dfe52";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Distribution;
@@ -1201,8 +1201,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1226,7 +1226,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				New_Setting = "";
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "00a50e7a-2ee1-4b3a-b81c-b79b038592c3";
+				PROVISIONING_PROFILE = "f4f82069-2ef1-46ea-874c-4f95f04dfe52";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1248,8 +1248,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1265,7 +1265,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				New_Setting = "";
-				PROVISIONING_PROFILE = "00a50e7a-2ee1-4b3a-b81c-b79b038592c3";
+				PROVISIONING_PROFILE = "f4f82069-2ef1-46ea-874c-4f95f04dfe52";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1275,8 +1275,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1297,7 +1297,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fudan.microAid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a50e7a-2ee1-4b3a-b81c-b79b038592c3";
+				PROVISIONING_PROFILE = "f4f82069-2ef1-46ea-874c-4f95f04dfe52";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1306,8 +1306,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiahua Xu (B8LSUHA3J8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiahua Xu (94RFBF469V)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1328,7 +1328,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.fudan.microAid;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "00a50e7a-2ee1-4b3a-b81c-b79b038592c3";
+				PROVISIONING_PROFILE = "f4f82069-2ef1-46ea-874c-4f95f04dfe52";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

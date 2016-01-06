@@ -107,7 +107,7 @@
     if(section == 0 || section ==2){
         return 1;
     }else{
-        return 4;
+        return 3;
     }
 }
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -148,9 +148,9 @@
             }else if(row == 2){//设置
                 MySettingViewController *mySettingVC = [[MySettingViewController alloc]initWithNibName:@"MySettingViewController" bundle:nil];
                 [self.navigationController pushViewController:mySettingVC animated:YES];
-            }else if(row == 3){//排行榜
-                RankingViewController *rankingVC = [[RankingViewController alloc]initWithNibName:@"RankingViewController" bundle:nil];
-                [self.navigationController pushViewController:rankingVC animated:YES];
+//            }else if(row == 3){//排行榜
+//                RankingViewController *rankingVC = [[RankingViewController alloc]initWithNibName:@"RankingViewController" bundle:nil];
+//                [self.navigationController pushViewController:rankingVC animated:YES];
             }
             break;
         }

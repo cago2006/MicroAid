@@ -340,6 +340,7 @@
                     }else{
                         [self showMessage:@"没有更多了!"];
                     }
+                    [self.pullTableView reloadData];
                 });
                 return;
             }

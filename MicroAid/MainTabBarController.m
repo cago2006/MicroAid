@@ -11,6 +11,7 @@
 #import "GroupViewController.h"
 #import "NotificationViewController.h"
 #import "MineViewController.h"
+#import "RankingViewController.h"
 
 @interface MainTabBarController ()
 
@@ -51,8 +52,15 @@
     mineNav.title = @"我";
     mineNav.tabBarItem.image = [UIImage imageNamed:@"menu_mine"];
     
+    RankingViewController *rankVC=[[RankingViewController alloc]initWithNibName:@"RankingViewController" bundle:nil];
+    //groupNav.view.backgroundColor=[UIColor brownColor];//背景颜色
+    UINavigationController *rankNav = [[UINavigationController alloc]initWithRootViewController:rankVC];
+    [rankNav.navigationBar performSelector:@selector(setBarTintColor:) withObject:[UIColor colorWithRed:255/255.0 green:239/255.0 blue:213/255.0 alpha:1]];
+    rankNav.title = @"排行";
+    rankNav.tabBarItem.image = [UIImage imageNamed:@"menu_rank"];
     
-    NSArray *controllers = [NSArray arrayWithObjects:missionNav,groupNav,notifyNav,mineNav,nil];
+    
+    NSArray *controllers = [NSArray arrayWithObjects:missionNav,groupNav,rankNav,notifyNav,mineNav,nil];
     
     self.viewControllers=controllers;
     

@@ -94,7 +94,7 @@
 
 -(void)compareVersion{
     dispatch_async(serverQueue, ^{
-        NSDictionary *resultDic = [MicroAidAPI compareVersion:@"1.1.1"];
+        NSDictionary *resultDic = [MicroAidAPI compareVersion:@"1.1.2"];
         
         if (![[resultDic objectForKey:@"isLatest"] boolValue]) {
             [self performSelectorOnMainThread:@selector(showUpdate) withObject:nil waitUntilDone:YES];
@@ -103,7 +103,7 @@
 }
 
 -(void)showUpdate{
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"不是最新版本(1.1.1)\n是否升级？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"升级",nil];
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"不是最新版本(1.1.2)\n是否升级？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"升级",nil];
     [dialog setAlertViewStyle:UIAlertViewStyleDefault];
     [dialog setTag:1];
     [dialog show];
