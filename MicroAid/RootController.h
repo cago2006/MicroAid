@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SPKitExample.h"
 
 
 @interface RootController : UIViewController

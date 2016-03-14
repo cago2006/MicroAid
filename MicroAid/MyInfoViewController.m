@@ -306,6 +306,9 @@
     [userDefaults setObject:nickNameBtn.titleLabel.text forKey:@"nickName"];
     [userDefaults synchronize];
     MineViewController *mineVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+    if(isPhotoChanged){
+        mineVC.isPicChange = YES;
+    }
     [self.navigationController popToViewController:mineVC animated:YES];
 }
 

@@ -36,16 +36,23 @@
     
     self.navigationItem.rightBarButtonItem = addItem;
     
+    self.pullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
+    self.pullTableView.pullBackgroundColor = [UIColor whiteColor];
+    self.pullTableView.pullTextColor = [UIColor blackColor];
+    
     self.dataArray = [[NSMutableArray alloc] init];
-
+    [self firstReflesh];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.tabBarController.tabBar.hidden = NO;
+}
+
+-(void) firstReflesh{
     self.count = 1;
     //self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
     [self getGroupInfo:self.count pageSize:20];
-    self.tabBarController.tabBar.hidden = NO;
 }
 
 -(void) viewWillDisappear:(BOOL)animated{

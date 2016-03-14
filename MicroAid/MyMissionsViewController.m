@@ -51,10 +51,7 @@
     
     
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-}
-
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+    
     FinishedMissionsViewController *finishedMissionsVC = [[FinishedMissionsViewController alloc] initWithNibName:@"FinishedMissionsViewController" bundle:nil];
     [finishedMissionsVC setTitle:@"我完成"];
     [finishedMissionsVC setParentNav:self.navigationController];
@@ -67,8 +64,12 @@
     ClaimedMissionsViewController *claimedMissionsVC = [[ClaimedMissionsViewController alloc] initWithNibName:@"ClaimedMissionsViewController" bundle:nil];
     [claimedMissionsVC setTitle:@"我认领"];
     [claimedMissionsVC setParentNav:self.navigationController];
-    
     _controllers =[[NSArray alloc]initWithObjects:startedMissionsVC, claimedMissionsVC,finishedMissionsVC,  nil];
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
     
     selectedTab = NSIntegerMax;
     _delegate = nil;

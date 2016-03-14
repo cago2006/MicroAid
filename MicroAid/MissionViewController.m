@@ -16,6 +16,8 @@
 #import "ProgressHUD.h"
 #import "FilterViewController.h"
 #import "ViewMissionViewController.h"
+#import "SPKitExample.h"
+
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 @interface MissionViewController ()
@@ -63,19 +65,25 @@
     //[locationItem release];
     [self.navigationItem setRightBarButtonItems:itemArray];
     
+    UIButton *messageBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
+    [messageBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [messageBtn addTarget:self action:@selector(showConversationList) forControlEvents:UIControlEventTouchUpInside];
+    [messageBtn setBackgroundImage:[UIImage imageNamed:@"message.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *messageItem = [[UIBarButtonItem alloc]initWithCustomView:messageBtn];
+    [self.navigationItem setLeftBarButtonItem:messageItem];
+    
     self.pullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
     self.pullTableView.pullBackgroundColor = [UIColor whiteColor];
     self.pullTableView.pullTextColor = [UIColor blackColor];
   
 
     self.dataArray = [[NSMutableArray alloc] init];
+    [self firstReflesh];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.count = 1;
-    //self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
-    [self searchNearby:self.count pageSize:20];
+    
     self.tabBarController.tabBar.hidden = NO;
     self.view.userInteractionEnabled = true;
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
@@ -83,6 +91,12 @@
 //    [self.messageView setHidden:YES];
 //    self.messageView.layer.cornerRadius = 10.f;
 //    self.messageView.layer.masksToBounds = YES;
+}
+
+-(void) firstReflesh{
+    self.count = 1;
+    //self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
+    [self searchNearby:self.count pageSize:20];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{
@@ -379,6 +393,50 @@
     } completion:^(BOOL finished) {
         [showview removeFromSuperview];
     }];
+}
+
+
+-(void) showConversationList{
+    
+    self.tabBarController.tabBar.hidden = YES;
+    
+    __weak typeof(self) weakSelf = self;
+    YWConversationListViewController *conversationListController = [[SPKitExample sharedInstance] exampleMakeConversationListControllerWithSelectItemBlock:^(YWConversation *aConversation) {
+        if ([aConversation isKindOfClass:[YWCustomConversation class]]) {
+            YWCustomConversation *customConversation = (YWCustomConversation *)aConversation;
+            [customConversation markConversationAsRead];
+        } else {
+            [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithConversation:aConversation fromNavigationController:weakSelf.navigationController];
+        }
+    }];
+    
+    __weak typeof(conversationListController) weakController = conversationListController;
+    [conversationListController setViewDidLoadBlock:^{
+        [weakController.navigationItem setTitle:@"消息"];
+        weakController.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    }];
+    
+
+    
+    //[self.navigationController popToRootViewControllerAnimated:NO];
+    [self.navigationController pushViewController:conversationListController animated:YES];
+    
+    
+    
+    //RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    ////[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
+    //[rootController switchToListFromMainTab:conversationListController];
+    
+    
+//    UINavigationController *conversation = [[UINavigationController alloc]initWithRootViewController:conversationListController];
+//    
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]init];
+//    backItem.title = @"返回";
+//    backItem.tintColor = [UIColor blackColor];
+//    conversation.navigationItem.backBarButtonItem =  backItem;
+    
+    //[UIApplication sharedApplication].keyWindow.rootViewController=conversation;
+    
 }
 
 @end

@@ -13,11 +13,13 @@
     __weak IBOutlet UILabel *genderLabel;
     __weak IBOutlet UILabel *emailLabel;
     __weak IBOutlet UIButton *phoneBtn;
+    __weak IBOutlet UIButton *bubbleBtn;
     __weak IBOutlet UIButton *photoBtn;
 }
 
 @property(nonatomic,assign) NSInteger userID;
 @property(nonatomic,strong) NSString *phoneNumber;
 -(IBAction)phoneBtnClicked:(UIButton *)sender;
+-(IBAction)bubbleBtnClicked:(UIButton *)sender;
 
 @end

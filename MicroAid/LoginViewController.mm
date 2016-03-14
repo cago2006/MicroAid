@@ -13,6 +13,8 @@
 #import "RegisterViewController.h"
 #import "HomeViewController.h"
 #import "MicroAidAPI.h"
+#import "SPKitExample.h"
+#import "SPUtil.h"
 
 @interface LoginViewController ()
 
@@ -203,7 +205,12 @@
     [self.view endEditing:YES];
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
+    
+    [self _tryLogin];
+    
 }
+
+
 
 - (void) errorWithMessage:(NSString *)message {
     [self.view setUserInteractionEnabled:true];
@@ -217,5 +224,90 @@
     //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
     [rootController switchToHomeViewFromLoginView];
 }
+
+
+- (void)_tryLogin
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [[SPUtil sharedInstance] setWaitingIndicatorShown:YES withKey:self.description];
+    
+    //这里先进行应用的登录
+    
+    //应用登陆成功后，登录IMSDK
+    [[SPKitExample sharedInstance] callThisAfterISVAccountLoginSuccessWithYWLoginId:@"visitor43"
+                                                                           passWord:@"taobao1234"
+                                                                    preloginedBlock:^{
+                                                                        [[SPUtil sharedInstance] setWaitingIndicatorShown:NO withKey:weakSelf.description];
+                                                                        [weakSelf _pushMainControllerAnimated:YES];
+                                                                    } successBlock:^{
+                                                                        
+                                                                        //  到这里已经完成SDK接入并登录成功，你可以通过exampleMakeConversationListControllerWithSelectItemBlock获得会话列表
+                                                                        [[SPUtil sharedInstance] setWaitingIndicatorShown:NO withKey:weakSelf.description];
+                                                                        
+                                                                        [weakSelf _pushMainControllerAnimated:YES];
+#if DEBUG
+                                                                        // 自定义轨迹参数均为透传
+                                                                        //                                                                        [YWExtensionServiceFromProtocol(IYWExtensionForCustomerService) updateExtraInfoWithExtraUI:@"透传内容" andExtraParam:@"透传内容"];
+#endif
+                                                                    } failedBlock:^(NSError *aError) {
+                                                                        [[SPUtil sharedInstance] setWaitingIndicatorShown:NO withKey:weakSelf.description];
+                                                                        
+                                                                        if (aError.code == YWLoginErrorCodePasswordError || aError.code == YWLoginErrorCodePasswordInvalid || aError.code == YWLoginErrorCodeUserNotExsit) {
+                                                                            
+//                                                                            dispatch_async(dispatch_get_main_queue(), ^{
+//                                                                                UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"登录失败, 可以使用游客登录。\n（如在调试，请确认AppKey、帐号、密码是否正确。）" delegate:weakSelf cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"游客登录", nil];
+//                                                                                [as showInView:weakSelf.view];
+//                                                                            });
+                                                                        }
+                                                                        
+                                                                    }];
+}
+
+
+- (void)_pushMainControllerAnimated:(BOOL)aAnimated
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [self _presentSplitControllerAnimated:aAnimated];
+    } else {
+        if (self.navigationController.topViewController != self) {
+            /// 已经进入主页面
+            return;
+        }
+        //UMFuncListsViewController *tabController = [[UMFuncListsViewController alloc] init];
+        
+        //[self.navigationController pushViewController:tabController animated:aAnimated];
+    }
+}
+
+- (void)_presentSplitControllerAnimated:(BOOL)aAnimated
+{
+    if (self.navigationController.topViewController != self) {
+        /// 已经进入主页面
+        return;
+    }
+    
+    UISplitViewController *splitController = [[UISplitViewController alloc] init];
+    
+    if ([splitController respondsToSelector:@selector(setPreferredDisplayMode:)]) {
+        [splitController setPreferredDisplayMode:UISplitViewControllerDisplayModeAllVisible];
+    }
+    
+    /// 各个页面
+    
+    UINavigationController *detailController = nil;
+    
+    {
+        /// 消息列表页面
+        
+        UIViewController *viewController = [[UIViewController alloc] init];
+        [viewController.view setBackgroundColor:[UIColor whiteColor]];
+        UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:viewController];
+        
+        detailController = nvc;
+    }
+    
+}
+
 
 @end

@@ -16,6 +16,7 @@
 #import "MyMissionsViewController.h"
 #import "MySettingViewController.h"
 #import "RankingViewController.h"
+#import "SPKitExample.h"
 
 @interface MineViewController ()
 
@@ -26,7 +27,7 @@
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self){
-        [self findUser];
+        [self findUserPic];
     }
     return self;
 }
@@ -49,12 +50,14 @@
     self.userName = [userDefaults objectForKey:@"username"];
     self.nickName = [userDefaults objectForKey:@"nickName"];
     [_myTableView reloadData];
-    [self findUser];
+    if(self.isPicChange){
+        [self findUserPic];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    _imageView = nil;
+    //_imageView = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,14 +66,14 @@
     
 }
 
--(void) findUser{
+-(void) findUserPic{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [userDefaults integerForKey:@"userID"];
     
     dispatch_sync(serverQueue, ^{
         NSDictionary *resultDic = [MicroAidAPI fetchPicture:userID];
         if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
-            NSData *picture = [resultDic objectForKey:@"picture"];
+            NSString *picture = [resultDic objectForKey:@"picture"];
             [self performSelectorOnMainThread:@selector(showPicture:) withObject:picture waitUntilDone:YES];
         }else if ([[resultDic objectForKey:@"onError"] boolValue])//创建失败
         {
@@ -161,6 +164,11 @@
                 [userDefaults removeObjectForKey:key];
                 [userDefaults synchronize];
             }
+            
+            ////
+            [[SPKitExample sharedInstance] callThisBeforeISVAccountLogout];
+            ////
+            
             RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
             [rootController switchToLoginViewFromMainTab];

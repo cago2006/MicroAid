@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UIImage *imageView;
 @property (nonatomic, strong) IBOutlet UITableView *myTableView;
+@property (nonatomic, assign) BOOL isPicChange;
 
 
 @end

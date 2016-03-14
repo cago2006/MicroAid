@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LoginViewController : UIViewController<UIAlertViewDelegate>{
+@interface LoginViewController : UIViewController<UIAlertViewDelegate,UIActionSheetDelegate>{
     __weak IBOutlet UITextField *usernameTextField;
     __weak IBOutlet UITextField *passwordTextField;
     __weak IBOutlet UIButton *checkBoxBtn;

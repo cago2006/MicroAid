@@ -13,6 +13,7 @@
 #import "ViewMissionViewController.h"
 #import "CreateMissionViewController.h"
 #import "SearchTableViewController.h"
+#import "SPKitExample.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
@@ -225,15 +226,29 @@
 */
 
 -(void)returnToLogin{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dictionary = [userDefaults dictionaryRepresentation];
-    for(NSString* key in [dictionary allKeys]){
-        [userDefaults removeObjectForKey:key];
-        [userDefaults synchronize];
-    }
-    RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
-    [rootController switchToLoginViewFromHomeView];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"是否退出？" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary *dictionary = [userDefaults dictionaryRepresentation];
+        for(NSString* key in [dictionary allKeys]){
+            [userDefaults removeObjectForKey:key];
+            [userDefaults synchronize];
+        }
+        
+        ////
+        [[SPKitExample sharedInstance] callThisBeforeISVAccountLogout];
+        ////
+        
+        
+        RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
+        [rootController switchToLoginViewFromHomeView];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 -(void)returnToMainTab{

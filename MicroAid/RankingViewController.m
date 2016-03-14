@@ -33,20 +33,27 @@
 
     //[addBtn release];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    
+
+    self.pullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
+    self.pullTableView.pullBackgroundColor = [UIColor whiteColor];
+    self.pullTableView.pullTextColor = [UIColor blackColor];
 
     self.dataArray = [[NSMutableArray alloc] init];
     
+    [self firstReflesh];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.count = 1;
-    //self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
-    [self getUserInfoOrderByScore:self.count pageSize:20];
     self.tabBarController.tabBar.hidden = NO;
     self.view.userInteractionEnabled = true;
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
+}
+
+-(void) firstReflesh{
+    self.count = 1;
+    //self.dataArray = [[NSMutableArray alloc]initWithCapacity:10];
+    [self getUserInfoOrderByScore:self.count pageSize:20];
 }
 
 -(void) viewWillDisappear:(BOOL)animated{

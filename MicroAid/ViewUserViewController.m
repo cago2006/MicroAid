@@ -9,9 +9,10 @@
 #import "ViewUserViewController.h"
 #import "MicroAidAPI.h"
 #import "GTMBase64.h"
+#import "SPKitExample.h"
 
 @interface ViewUserViewController ()
-
+@property(retain,nonatomic) NSDictionary * user;
 @end
 
 @implementation ViewUserViewController
@@ -23,6 +24,8 @@
     photoBtn.userInteractionEnabled = NO;
     phoneBtn.layer.cornerRadius = phoneBtn.frame.size.width/2.0;
     phoneBtn.layer.masksToBounds = phoneBtn.frame.size.width/2.0;
+    bubbleBtn.layer.cornerRadius = phoneBtn.frame.size.width/2.0;
+    bubbleBtn.layer.masksToBounds = phoneBtn.frame.size.width/2.0;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -39,8 +42,8 @@
     dispatch_async(serverQueue, ^{
         NSDictionary *resultDic = [MicroAidAPI findUser:self.userID];
         if ([[resultDic objectForKey:@"flg"] boolValue]) {//查找成功
-            NSDictionary *user = [resultDic objectForKey:@"user"];
-            [self performSelectorOnMainThread:@selector(showMyInfo:) withObject:user waitUntilDone:YES];
+            self.user = [resultDic objectForKey:@"user"];
+            [self performSelectorOnMainThread:@selector(showMyInfo:) withObject:self.user waitUntilDone:YES];
         }else if([[resultDic objectForKey:@"onError"] boolValue])//失败
         {
             [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"信息查找失败,请检查网络!" waitUntilDone:YES];
@@ -114,7 +117,15 @@
     [ProgressHUD showSuccess:message];
 }
 
--(IBAction)phoneBtnClicked:(UIButton *)sender{
+-(IBAction)bubbleBtnClicked:(UIButton *)sender{
+    __weak typeof(self) weakSelf = self;
+    /// 创建Person对象
+    YWPerson *person = [[YWPerson alloc] initWithPersonId:@"visitor345"];//[NSString stringWithFormat:@"visitor%li",(long)self.userID]];
+    [[SPKitExample sharedInstance] exampleOpenConversationViewControllerWithPerson:person fromNavigationController:weakSelf.navigationController];
+}
+
+
+-(IBAction)phoneBtnClicked:(UIButton *)sender{                               
     NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.phoneNumber];
     UIWebView * callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
@@ -122,5 +133,7 @@
     //[callWebview release];
     //[str release];
 }
+
+
 
 @end

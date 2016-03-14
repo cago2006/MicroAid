@@ -11,6 +11,7 @@
 #import "UMSocial.h"
 #import "RootController.h"
 #import "UMSocialSinaHandler.h"
+#import "SPKitExample.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,9 @@
 ///
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    //即时通信技术
+    [[SPKitExample sharedInstance] callThisInDidFinishLaunching];
     
     // 要使用百度地图，请先启动BaiduMapManager
     _mapManager = [[BMKMapManager alloc]init];
