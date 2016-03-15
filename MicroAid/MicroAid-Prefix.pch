@@ -29,7 +29,7 @@
 //{
 //    float latitude = 31.197414;
 //    float longitude = 121.606026;
-//    CLLocation *setLocation= [[[CLLocation alloc] initWithLatitude:latitude longitude:longitude] autorelease];
+//    CLLocation *setLocation= [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
 //    [self.delegate locationManager:self didUpdateToLocation:setLocation
 //                      fromLocation:setLocation];
 //}

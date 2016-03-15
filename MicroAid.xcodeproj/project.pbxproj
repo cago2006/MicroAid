@@ -28,6 +28,12 @@
 		AF04FA751BCBADFF00035C59 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AF04FA741BCBADFF00035C59 /* libz.tbd */; };
 		AF12B6121C0406DB00D805D1 /* MineMissionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF12B6101C0406DB00D805D1 /* MineMissionListCell.m */; };
 		AF12B6131C0406DB00D805D1 /* MineMissionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF12B6111C0406DB00D805D1 /* MineMissionListCell.xib */; };
+		AF1DB7101C97CB1B00F55F12 /* AddTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1DB70E1C97CB1B00F55F12 /* AddTagViewController.m */; };
+		AF1DB7111C97CB1B00F55F12 /* AddTagViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1DB70F1C97CB1B00F55F12 /* AddTagViewController.xib */; };
+		AF1DB7151C97D1AB00F55F12 /* TagLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1DB7131C97D1AB00F55F12 /* TagLocationViewController.m */; };
+		AF1DB7161C97D1AB00F55F12 /* TagLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1DB7141C97D1AB00F55F12 /* TagLocationViewController.xib */; };
+		AF1DB71A1C97DC2000F55F12 /* DescriptTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1DB7181C97DC2000F55F12 /* DescriptTableViewController.m */; };
+		AF1DB71B1C97DC2000F55F12 /* DescriptTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF1DB7191C97DC2000F55F12 /* DescriptTableViewController.xib */; };
 		AF1E4B991C900A95001D73F1 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E4B901C900A95001D73F1 /* SecurityGuardSDK.framework */; };
 		AF1E4B9A1C900A95001D73F1 /* UMOpenIMSDKFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E4B911C900A95001D73F1 /* UMOpenIMSDKFMWK.framework */; };
 		AF1E4B9B1C900A95001D73F1 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF1E4B921C900A95001D73F1 /* UTDID.framework */; };
@@ -163,6 +169,10 @@
 		AF7214B81C28EA5600F98950 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7214B31C28EA5600F98950 /* libWeChatSDK.a */; };
 		AF7214BA1C28F55000F98950 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7214B91C28F55000F98950 /* libiconv.tbd */; };
 		AF7214BC1C28F58600F98950 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7214BB1C28F58600F98950 /* libstdc++.tbd */; };
+		AF79991E1C97EE6F000062A7 /* FreeTypeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF79991C1C97EE6F000062A7 /* FreeTypeTableViewController.m */; };
+		AF79991F1C97EE6F000062A7 /* FreeTypeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF79991D1C97EE6F000062A7 /* FreeTypeTableViewController.xib */; };
+		AF7999231C97F7CA000062A7 /* ViewTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7999211C97F7CA000062A7 /* ViewTagViewController.m */; };
+		AF7999241C97F7CA000062A7 /* ViewTagViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF7999221C97F7CA000062A7 /* ViewTagViewController.xib */; };
 		AF862D5C1BCBD85B003BF8CE /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */; };
 		AF86A5731C12C55000698B63 /* RankingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF86A5711C12C55000698B63 /* RankingViewController.m */; };
 		AF86A5741C12C55000698B63 /* RankingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF86A5721C12C55000698B63 /* RankingViewController.xib */; };
@@ -252,6 +262,15 @@
 		AF12B60F1C0406DB00D805D1 /* MineMissionListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineMissionListCell.h; sourceTree = "<group>"; };
 		AF12B6101C0406DB00D805D1 /* MineMissionListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineMissionListCell.m; sourceTree = "<group>"; };
 		AF12B6111C0406DB00D805D1 /* MineMissionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineMissionListCell.xib; sourceTree = "<group>"; };
+		AF1DB70D1C97CB1B00F55F12 /* AddTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTagViewController.h; sourceTree = "<group>"; };
+		AF1DB70E1C97CB1B00F55F12 /* AddTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTagViewController.m; sourceTree = "<group>"; };
+		AF1DB70F1C97CB1B00F55F12 /* AddTagViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddTagViewController.xib; sourceTree = "<group>"; };
+		AF1DB7121C97D1AB00F55F12 /* TagLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagLocationViewController.h; sourceTree = "<group>"; };
+		AF1DB7131C97D1AB00F55F12 /* TagLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagLocationViewController.m; sourceTree = "<group>"; };
+		AF1DB7141C97D1AB00F55F12 /* TagLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TagLocationViewController.xib; sourceTree = "<group>"; };
+		AF1DB7171C97DC2000F55F12 /* DescriptTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptTableViewController.h; sourceTree = "<group>"; };
+		AF1DB7181C97DC2000F55F12 /* DescriptTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptTableViewController.m; sourceTree = "<group>"; };
+		AF1DB7191C97DC2000F55F12 /* DescriptTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptTableViewController.xib; sourceTree = "<group>"; };
 		AF1E4B901C900A95001D73F1 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
 		AF1E4B911C900A95001D73F1 /* UMOpenIMSDKFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMOpenIMSDKFMWK.framework; sourceTree = "<group>"; };
 		AF1E4B921C900A95001D73F1 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
@@ -450,6 +469,12 @@
 		AF7214B61C28EA5600F98950 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		AF7214B91C28F55000F98950 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		AF7214BB1C28F58600F98950 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		AF79991B1C97EE6F000062A7 /* FreeTypeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeTypeTableViewController.h; sourceTree = "<group>"; };
+		AF79991C1C97EE6F000062A7 /* FreeTypeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeTypeTableViewController.m; sourceTree = "<group>"; };
+		AF79991D1C97EE6F000062A7 /* FreeTypeTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FreeTypeTableViewController.xib; sourceTree = "<group>"; };
+		AF7999201C97F7CA000062A7 /* ViewTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewTagViewController.h; sourceTree = "<group>"; };
+		AF7999211C97F7CA000062A7 /* ViewTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewTagViewController.m; sourceTree = "<group>"; };
+		AF7999221C97F7CA000062A7 /* ViewTagViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewTagViewController.xib; sourceTree = "<group>"; };
 		AF862D5B1BCBD85B003BF8CE /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = mapapi.bundle; path = BaiduMapAPI.framework/Resources/mapapi.bundle; sourceTree = "<group>"; };
 		AF86A5701C12C55000698B63 /* RankingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RankingViewController.h; sourceTree = "<group>"; };
 		AF86A5711C12C55000698B63 /* RankingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RankingViewController.m; sourceTree = "<group>"; };
@@ -656,6 +681,28 @@
 				AF42A6821B96908C0060D67C /* LocationViewController.xib */,
 			);
 			name = createMission;
+			sourceTree = "<group>";
+		};
+		AF1DB7071C97AF0200F55F12 /* tag */ = {
+			isa = PBXGroup;
+			children = (
+				AF1DB7121C97D1AB00F55F12 /* TagLocationViewController.h */,
+				AF1DB7131C97D1AB00F55F12 /* TagLocationViewController.m */,
+				AF1DB7141C97D1AB00F55F12 /* TagLocationViewController.xib */,
+				AF1DB70D1C97CB1B00F55F12 /* AddTagViewController.h */,
+				AF1DB70E1C97CB1B00F55F12 /* AddTagViewController.m */,
+				AF1DB70F1C97CB1B00F55F12 /* AddTagViewController.xib */,
+				AF1DB7171C97DC2000F55F12 /* DescriptTableViewController.h */,
+				AF1DB7181C97DC2000F55F12 /* DescriptTableViewController.m */,
+				AF1DB7191C97DC2000F55F12 /* DescriptTableViewController.xib */,
+				AF79991B1C97EE6F000062A7 /* FreeTypeTableViewController.h */,
+				AF79991C1C97EE6F000062A7 /* FreeTypeTableViewController.m */,
+				AF79991D1C97EE6F000062A7 /* FreeTypeTableViewController.xib */,
+				AF7999201C97F7CA000062A7 /* ViewTagViewController.h */,
+				AF7999211C97F7CA000062A7 /* ViewTagViewController.m */,
+				AF7999221C97F7CA000062A7 /* ViewTagViewController.xib */,
+			);
+			name = tag;
 			sourceTree = "<group>";
 		};
 		AF1E4B8F1C900A95001D73F1 /* WXFrameworks */ = {
@@ -1083,6 +1130,7 @@
 				AFD43AB31BAD091F00D6D441 /* GTMBase64 */,
 				AFC90D7F1B8AF2010057CF3D /* Images.xcassets */,
 				AFA432671C1054800064DFCA /* setting */,
+				AF1DB7071C97AF0200F55F12 /* tag */,
 				AFC90D9F1B8AF47A0057CF3D /* login */,
 				AF02ED111B91A57500890BF7 /* mainTab */,
 				AFDD8ACB1BAB97C500A3369B /* mineView */,
@@ -1313,8 +1361,10 @@
 				AF1E4C1F1C9053C1001D73F1 /* input_plug_ico_transparent_nor@2x.png in Resources */,
 				AF1E4C261C9053C1001D73F1 /* 未标题-1_18.png in Resources */,
 				AF1E4C301C9053C1001D73F1 /* 未标题-1_40.png in Resources */,
+				AF1DB71B1C97DC2000F55F12 /* DescriptTableViewController.xib in Resources */,
 				AF7214AC1C27F94A00F98950 /* UMSLoginViewController.xib in Resources */,
 				AF1E4C1E1C9053C1001D73F1 /* input_plug_ico_hi_nor@2x.png in Resources */,
+				AF1DB7161C97D1AB00F55F12 /* TagLocationViewController.xib in Resources */,
 				AFAF93001BCCAB2F00CE1A9D /* test.caf in Resources */,
 				AF4A2C741B8B40EA00B61B1B /* RegisterViewController.xib in Resources */,
 				AF1E4C061C9053C1001D73F1 /* SPCallingCardBubbleChatContentView.xib in Resources */,
@@ -1329,6 +1379,7 @@
 				AF1E4C271C9053C1001D73F1 /* 未标题-1_19.png in Resources */,
 				AFA4326C1C10552C0064DFCA /* SettingBonusTVC.xib in Resources */,
 				AFDEE7D71B9D2F6000CCDA2C /* blueArrow@2x.png in Resources */,
+				AF1DB7111C97CB1B00F55F12 /* AddTagViewController.xib in Resources */,
 				AF589C321BAFE1C200D1A797 /* FinishedMissionsViewController.xib in Resources */,
 				AFC90D801B8AF2010057CF3D /* Images.xcassets in Resources */,
 				AF1E4C171C9053C1001D73F1 /* calling_card_bg@2x.png in Resources */,
@@ -1358,6 +1409,7 @@
 				AF7214AB1C27F94A00F98950 /* UMShareEditViewControlleriPad.xib in Resources */,
 				AF1E4C381C9053C1001D73F1 /* 未标题-1_53.png in Resources */,
 				AFDEE7DA1B9D2F6000CCDA2C /* whiteArrow.png in Resources */,
+				AF79991F1C97EE6F000062A7 /* FreeTypeTableViewController.xib in Resources */,
 				AF1E4C331C9053C1001D73F1 /* 未标题-1_43.png in Resources */,
 				AF1E4C3C1C9053C1001D73F1 /* pub_title_ico_back_white@2x.png in Resources */,
 				AF1E4C391C9053C1001D73F1 /* profile.json in Resources */,
@@ -1378,6 +1430,7 @@
 				AF86A5791C12C65800698B63 /* RankingTableViewCell.xib in Resources */,
 				AF1E4C201C9053C1001D73F1 /* YW_TGZ_Emoitons.emo in Resources */,
 				AF1E4C311C9053C1001D73F1 /* 未标题-1_41.png in Resources */,
+				AF7999241C97F7CA000062A7 /* ViewTagViewController.xib in Resources */,
 				AFDD8AD01BAB988D00A3369B /* MyInfoCell.xib in Resources */,
 				AF5923EB1BA801C400158B86 /* FilterViewController.xib in Resources */,
 				AF589C371BAFE59200D1A797 /* StartedMissionsViewController.xib in Resources */,
@@ -1435,6 +1488,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF1E4C0E1C9053C1001D73F1 /* SPBubbleViewModelCustomize.m in Sources */,
+				AF1DB7101C97CB1B00F55F12 /* AddTagViewController.m in Sources */,
 				AF42A6701B94785D0060D67C /* BonusTableViewController.m in Sources */,
 				AF5E3A811BC66F7900521BEE /* NotificationInfo.m in Sources */,
 				AF5923F51BA9482600158B86 /* FilterTypeTVC.m in Sources */,
@@ -1452,6 +1506,7 @@
 				AF42A67E1B95D70B0060D67C /* GroupTableViewController.m in Sources */,
 				AFA432751C1055570064DFCA /* SettingGroupTVC.m in Sources */,
 				AF5D62041B8EA2F800897E09 /* HomeViewController.m in Sources */,
+				AF79991E1C97EE6F000062A7 /* FreeTypeTableViewController.m in Sources */,
 				AFA694C91BCE7A12000AD7CC /* MainTabBarController.m in Sources */,
 				AF1E4C3D1C9053C1001D73F1 /* SPKitExample.m in Sources */,
 				AF1E4C3E1C9053C1001D73F1 /* SPUtil.m in Sources */,
@@ -1459,6 +1514,7 @@
 				AFC90D781B8AF2010057CF3D /* AppDelegate.m in Sources */,
 				AF589C311BAFE1C200D1A797 /* FinishedMissionsViewController.m in Sources */,
 				AF5923FA1BA9593700158B86 /* FilterGroupTVC.m in Sources */,
+				AF1DB71A1C97DC2000F55F12 /* DescriptTableViewController.m in Sources */,
 				AFDEE7DF1B9D309100CCDA2C /* MissionListCell.m in Sources */,
 				AF589C3B1BAFE5D900D1A797 /* ClaimedMissionsViewController.m in Sources */,
 				AF42A6791B95C4480060D67C /* TypeTableViewController.m in Sources */,
@@ -1483,6 +1539,7 @@
 				AF1E4C0C1C9053C1001D73F1 /* SPInputViewPluginGreeting.m in Sources */,
 				AF1E4C091C9053C1001D73F1 /* SPInputViewPluginCallingCard.m in Sources */,
 				AF8E84BE1B9C3009009EC184 /* MissionInfo.m in Sources */,
+				AF7999231C97F7CA000062A7 /* ViewTagViewController.m in Sources */,
 				AFC90DA21B8AF54E0057CF3D /* RootController.m in Sources */,
 				AF589C361BAFE59200D1A797 /* StartedMissionsViewController.m in Sources */,
 				AFDEE7C91B9D2F4100CCDA2C /* LoadMoreTableFooterView.m in Sources */,
@@ -1495,6 +1552,7 @@
 				AFDEE7CB1B9D2F4100CCDA2C /* PullTableView.m in Sources */,
 				AF02ED241B91E33600890BF7 /* MineViewController.m in Sources */,
 				AF02ED2B1B9294D000890BF7 /* CreateMissionViewController.m in Sources */,
+				AF1DB7151C97D1AB00F55F12 /* TagLocationViewController.m in Sources */,
 				AF1E4C151C9053C1001D73F1 /* SPMessageInputViewBarContentView.m in Sources */,
 				AF1E4C0B1C9053C1001D73F1 /* SPGreetingBubbleViewModel.m in Sources */,
 				AF5923FF1BAA59EE00158B86 /* ViewGroupViewController.m in Sources */,

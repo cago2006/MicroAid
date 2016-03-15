@@ -34,7 +34,7 @@
 //附近任务数组
 @property(nonatomic,strong) NSArray *missionInfoArray;
 
-//用于存放搜索到的pointAnnotation数组
+//用于存放搜索到的pointAnnotation数组(任务数组)
 @property(nonatomic,strong) BMKMapView *searchedPointAnnotations;
 
 //用于存放当前位置的地址

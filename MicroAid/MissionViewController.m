@@ -70,7 +70,7 @@
     [messageBtn addTarget:self action:@selector(showConversationList) forControlEvents:UIControlEventTouchUpInside];
     [messageBtn setBackgroundImage:[UIImage imageNamed:@"message.png"] forState:UIControlStateNormal];
     UIBarButtonItem *messageItem = [[UIBarButtonItem alloc]initWithCustomView:messageBtn];
-    [self.navigationItem setLeftBarButtonItem:messageItem];
+    //[self.navigationItem setLeftBarButtonItem:messageItem];
     
     self.pullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
     self.pullTableView.pullBackgroundColor = [UIColor whiteColor];

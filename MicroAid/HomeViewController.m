@@ -14,6 +14,7 @@
 #import "CreateMissionViewController.h"
 #import "SearchTableViewController.h"
 #import "SPKitExample.h"
+#import "AddTagViewController.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
@@ -44,7 +45,7 @@
         //self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"任务分布"];
+    [self.navigationItem setTitle:@"微助地图"];
     
     UIButton *logoutBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [logoutBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -55,7 +56,7 @@
     
     UIButton *addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [addBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [addBtn addTarget:self action:@selector(createMission) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn addTarget:self action:@selector(addTag) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setBackgroundImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc]initWithCustomView:addBtn];
     //[addBtn release];
@@ -258,6 +259,13 @@
     [rootController switchToMainTabViewFromHomeView];
 }
 
+-(void)addTag{
+    self.view.userInteractionEnabled = false;
+    [self.navigationController.navigationBar setUserInteractionEnabled:false];
+    AddTagViewController *addTagVC = [[AddTagViewController alloc] initWithNibName:@"AddTagViewController" bundle:nil];
+    [self.navigationController pushViewController:addTagVC animated:YES];
+}
+
 -(void)createMission{
     self.view.userInteractionEnabled = false;
     [self.navigationController.navigationBar setUserInteractionEnabled:false];
@@ -367,6 +375,37 @@
 
 #pragma mark BMMapGeoSearch
 
+/**
+ *拖动annotation view时，若view的状态发生变化，会调用此函数。ios3.2以后支持
+ *@param mapView 地图View
+ *@param view annotation view
+ *@param newState 新状态
+ *@param oldState 旧状态
+ */
+- (void)mapView:(BMKMapView *)mapView annotationView:(BMKAnnotationView *)view didChangeDragState:(BMKAnnotationViewDragState)newState
+   fromOldState:(BMKAnnotationViewDragState)oldState{
+    if (newState == BMKAnnotationViewDragStateEnding) {
+        self.longitude =  view.annotation.coordinate.longitude;
+        self.latitude = view.annotation.coordinate.latitude;
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setDouble:self.latitude forKey:@"latitude"];
+        [userDefaults setDouble:self.longitude forKey:@"longitude"];
+        [userDefaults synchronize];
+        
+        CLLocationCoordinate2D pt = (CLLocationCoordinate2D){self.latitude, self.longitude};
+        
+        BMKReverseGeoCodeOption *reverseGeocodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
+        reverseGeocodeSearchOption.reverseGeoPoint = pt;
+        [_geocodesearch reverseGeoCode:reverseGeocodeSearchOption];
+        
+        
+        NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
+        //自动搜索附近任务//////////////////////////////////////////////到时候该为自动搜索附近无障碍设施
+        [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:self.longitude latitude:self.latitude endTime:@"全部"];
+        
+    }
+}
 
 /**
  *当点击annotation view弹出的泡泡时，调用此接口
@@ -429,7 +468,7 @@
         ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
         ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
         
-        annotationView.image = [UIImage imageNamed:@"sun.png"];   //把大头针换成别的图片
+        annotationView.image = [UIImage imageNamed:@"red_bubble.png"];   //把大头针换成别的图片
     }
     
     annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
@@ -442,8 +481,8 @@
     
     NSLog(@"%f=%f,%f=%f",viewLocation.longitude, self.longitude, viewLocation.latitude, self.latitude);
     
-    if (viewLocation.longitude == self.longitude && viewLocation.latitude == self.latitude) {
-        //annotationView.draggable = YES;
+    if (viewLocation.longitude == self.longitude && viewLocation.latitude == self.latitude) {//代表自己的位置
+        annotationView.draggable = NO;
         ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorGreen;
         _mapView.centerCoordinate = (CLLocationCoordinate2D){_latitude, _longitude};
         [annotationView setSelected:YES animated:YES];
@@ -462,7 +501,7 @@
 //        NSString *bonus = [userDefaults objectForKey:@"missionBonus"];
 //        NSString *type = [userDefaults objectForKey:@"missionType"];
 //        if(endTime==nil || [endTime isEqualToString:@""]){
-//            endTime = @"全部";
+//            endTime = @"全部";annotationView.draggable = YES;a
 //        }
 //        if(group==nil || [group isEqualToString:@""]){
 //            group = @"全部";

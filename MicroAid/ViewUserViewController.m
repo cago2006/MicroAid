@@ -24,8 +24,9 @@
     photoBtn.userInteractionEnabled = NO;
     phoneBtn.layer.cornerRadius = phoneBtn.frame.size.width/2.0;
     phoneBtn.layer.masksToBounds = phoneBtn.frame.size.width/2.0;
-    bubbleBtn.layer.cornerRadius = phoneBtn.frame.size.width/2.0;
-    bubbleBtn.layer.masksToBounds = phoneBtn.frame.size.width/2.0;
+    bubbleBtn.userInteractionEnabled = NO;////////////////////////////////////
+    bubbleBtn.layer.cornerRadius = bubbleBtn.frame.size.width/2.0;
+    bubbleBtn.layer.masksToBounds = bubbleBtn.frame.size.width/2.0;
 }
 
 -(void) viewWillAppear:(BOOL)animated{

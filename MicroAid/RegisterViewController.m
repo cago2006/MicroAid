@@ -61,6 +61,10 @@
     
     BOOL isInfoRight = [self.user verifyInfo:[NSString stringWithString:passwordTextField2.text]];
     if (isInfoRight== TRUE) {
+        if(self.choiceIDStrings == nil||[self.choiceIDStrings isEqualToString:@""]){
+            [ProgressHUD showError:@"请选择您的帮助内容!"];
+            return;
+        }
         [ProgressHUD show:@"正在注册"];
         self.view.userInteractionEnabled = false;
         [self.navigationController.navigationBar setUserInteractionEnabled:false];

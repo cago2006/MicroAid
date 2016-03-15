@@ -206,6 +206,7 @@
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [ProgressHUD showSuccess:message];
     
+    //即时通信
     [self _tryLogin];
     
 }
