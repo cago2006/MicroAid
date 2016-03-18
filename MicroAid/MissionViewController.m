@@ -41,7 +41,7 @@
     UIButton *addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [addBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(createMission) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setBackgroundImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+    [addBtn setBackgroundImage:[UIImage imageNamed:@"add_mission.png"] forState:UIControlStateNormal];
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc]initWithCustomView:addBtn];
     //[addBtn release];
     

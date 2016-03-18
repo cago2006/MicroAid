@@ -20,10 +20,28 @@
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
+
+@interface TagAnnotation : BMKPointAnnotation
+{
+    int _type; ///<0:起点 1：终点 2：公交 3：地铁 4:驾乘 5:途经点
+    int _degree;
+}
+
+@property (nonatomic) int type;
+@property (nonatomic) int degree;
+@end
+
+@implementation TagAnnotation
+
+@synthesize type = _type;
+@synthesize degree = _degree;
+@end
+
+
 @interface HomeViewController (){
     bool isGeoSearch;
-    BMKPointAnnotation* pointAnnotation;
-    BMKPointAnnotation* pointAnnotation2;
+    TagAnnotation* pointAnnotation;
+    TagAnnotation* pointAnnotation2;
 }
 
 @end
@@ -65,7 +83,7 @@
     UIButton *addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [addBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(createMission) forControlEvents:UIControlEventTouchUpInside];
-    [addBtn setBackgroundImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+    [addBtn setBackgroundImage:[UIImage imageNamed:@"add_mission.png"] forState:UIControlStateNormal];
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc]initWithCustomView:addBtn];
     //[addBtn release];
     
@@ -412,7 +430,7 @@
         NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
         //自动搜索附近任务//////////////////////////////////////////////到时候该为自动搜索附近无障碍设施
         [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:self.longitude latitude:self.latitude endTime:@"全部"];
-        [self searchNearbyBarrierFree:2000 longitude:self.longitude latitude:self.latitude pageNo:1 pageSize:9999];
+        [self searchNearbyBarrierFree:10000 longitude:self.longitude latitude:self.latitude pageNo:1 pageSize:9999];
     }
 }
 
@@ -484,49 +502,102 @@
 
 
 //根据anntation生成对应的View
-- (BMKAnnotationView *)mapView:(BMKMapView *)view viewForAnnotation:(id <BMKAnnotation>)annotation
+- (BMKAnnotationView *)mapView:(BMKMapView *)view viewForAnnotation:(TagAnnotation*)annotation
 {
-    NSString *AnnotationViewID = @"annotationViewID";
-    //根据指定标识查找一个可被复用的标注View，一般在delegate中使用，用此函数来代替新申请一个View
-    BMKAnnotationView *annotationView = [view dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
-    if (annotationView == nil) {
-        annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
-        ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
-        ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
-        
-        annotationView.image = [UIImage imageNamed:@"free_barrier_info.png"];   //把大头针换成别的图
+    BMKAnnotationView* annotationView = nil;
+    switch(annotation.type){
+        case 0:
+        {
+            //根据指定标识查找一个可被复用的标注View，一般在delegate中使用，用此函数来代替新申请一个View
+            annotationView = [view dequeueReusableAnnotationViewWithIdentifier:@"annotation_free_barrier"];
+            if (annotationView == nil) {
+                annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotation_free_barrier"];
+                ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
+                ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
+                
+                annotationView.image = [UIImage imageNamed:@"free_barrier_info.png"];   //把大头针换成别的图
+            }
+            
+            annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
+            annotationView.annotation = annotation;
+            annotationView.canShowCallout = TRUE;
+            
+            // 设置是否可以拖拽
+            annotationView.draggable = NO;
+            CLLocationCoordinate2D viewLocation =[annotation coordinate];
+            
+            NSLog(@"%f=%f,%f=%f",viewLocation.longitude, self.longitude, viewLocation.latitude, self.latitude);
+            
+            if (viewLocation.longitude == self.longitude && viewLocation.latitude == self.latitude) {//代表自己的位置
+                annotationView.draggable = NO;
+                ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorGreen;
+                _mapView.centerCoordinate = (CLLocationCoordinate2D){_latitude, _longitude};
+                [annotationView setSelected:YES animated:YES];
+                
+                //自动搜索附近任务////////
+                NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                //        double distance = [userDefaults doubleForKey:@"missionDistance"];
+                //        if(distance < 0.1){
+                //            distance = 1000;
+                //        }
+                double latitude = [userDefaults doubleForKey:@"latitude"];
+                double longitude = [userDefaults doubleForKey:@"longitude"];
+                
+                [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:@"全部"];
+                
+                [self searchNearbyBarrierFree:2000 longitude:longitude latitude:latitude pageNo:1 pageSize:9999];//查看2公里内的无障碍设施
+            }
+        }
+            break;
+        case 1:
+        {
+            //根据指定标识查找一个可被复用的标注View，一般在delegate中使用，用此函数来代替新申请一个View
+            annotationView = [view dequeueReusableAnnotationViewWithIdentifier:@"annotation_mission"];
+            if (annotationView == nil) {
+                annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"annotation_mission"];
+                ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
+                ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
+                
+                annotationView.image = [UIImage imageNamed:@"red_bubble.png"];   //把大头针换成别的图
+            }
+            
+            annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
+            annotationView.annotation = annotation;
+            annotationView.canShowCallout = TRUE;
+            
+            // 设置是否可以拖拽
+            annotationView.draggable = NO;
+            CLLocationCoordinate2D viewLocation =[annotation coordinate];
+            
+            NSLog(@"%f=%f,%f=%f",viewLocation.longitude, self.longitude, viewLocation.latitude, self.latitude);
+            
+            if (viewLocation.longitude == self.longitude && viewLocation.latitude == self.latitude) {//代表自己的位置
+                annotationView.draggable = NO;
+                ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorGreen;
+                _mapView.centerCoordinate = (CLLocationCoordinate2D){_latitude, _longitude};
+                [annotationView setSelected:YES animated:YES];
+                
+                //自动搜索附近任务////////
+                NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                //        double distance = [userDefaults doubleForKey:@"missionDistance"];
+                //        if(distance < 0.1){
+                //            distance = 1000;
+                //        }
+                double latitude = [userDefaults doubleForKey:@"latitude"];
+                double longitude = [userDefaults doubleForKey:@"longitude"];
+                
+                [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:@"全部"];
+                
+                [self searchNearbyBarrierFree:100000 longitude:longitude latitude:latitude pageNo:1 pageSize:9999];//查看2公里内的无障碍设施
+            }
+        }
+            break;
+        default:
+            break;
     }
     
-    annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
-    annotationView.annotation = annotation;
-    annotationView.canShowCallout = TRUE;
-    
-    // 设置是否可以拖拽
-    annotationView.draggable = NO;
-    CLLocationCoordinate2D viewLocation =[annotation coordinate];
-    
-    NSLog(@"%f=%f,%f=%f",viewLocation.longitude, self.longitude, viewLocation.latitude, self.latitude);
-    
-    if (viewLocation.longitude == self.longitude && viewLocation.latitude == self.latitude) {//代表自己的位置
-        annotationView.draggable = NO;
-        ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorGreen;
-        _mapView.centerCoordinate = (CLLocationCoordinate2D){_latitude, _longitude};
-        [annotationView setSelected:YES animated:YES];
-        
-        //自动搜索附近任务////////
-        NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//        double distance = [userDefaults doubleForKey:@"missionDistance"];
-//        if(distance < 0.1){
-//            distance = 1000;
-//        }
-        double latitude = [userDefaults doubleForKey:@"latitude"];
-        double longitude = [userDefaults doubleForKey:@"longitude"];
-        
-        [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:@"全部"];
-        
-        [self searchNearbyBarrierFree:2000 longitude:longitude latitude:latitude pageNo:1 pageSize:9999];//查看2公里内的无障碍设施
-    }
     
     return annotationView;
 }
@@ -595,9 +666,10 @@
 //添加标注
 - (void)addPointAnnotation:(CLLocationCoordinate2D)coordinate title:(NSString*)title
 {
-    pointAnnotation = [[BMKPointAnnotation alloc]init];
+    pointAnnotation = [[TagAnnotation alloc]init];
     
     pointAnnotation.coordinate = coordinate;
+    pointAnnotation.type = 1;
     pointAnnotation.title = title;
     
     if(_longitude != coordinate.longitude || _latitude != coordinate.latitude){
@@ -615,9 +687,10 @@
 //添加标注
 - (void)addPointAnnotation2:(CLLocationCoordinate2D)coordinate title:(NSString*)title
 {
-    pointAnnotation2 = [[BMKPointAnnotation alloc]init];
+    pointAnnotation2 = [[TagAnnotation alloc]init];
     
     pointAnnotation2.coordinate = coordinate;
+    pointAnnotation2.type = 0;
     pointAnnotation2.title = title;
     
     if(_longitude != coordinate.longitude || _latitude != coordinate.latitude){
