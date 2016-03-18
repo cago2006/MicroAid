@@ -74,7 +74,7 @@
 
 -(void)getAllFacilities{
     self.dataArray = [NSMutableArray new];
-    self.allFacilities = @"无障碍厕所;无障碍坡道;无障碍电梯;无障碍停车场";
+    self.allFacilities = @"无障碍厕所;无障碍坡道;无障碍电梯;无障碍停车场;无障碍平台;无障碍通道;音响提示;盲文标示";
     self.allFacilities = [self.allFacilities substringToIndex:[self.allFacilities length]];
     NSArray *list = [self.allFacilities componentsSeparatedByString:@";"];
     [self.dataArray addObjectsFromArray:list];

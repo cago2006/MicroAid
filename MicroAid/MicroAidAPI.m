@@ -752,4 +752,38 @@ NSString *ipAddr;
     
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
 }
+
+//29 更新无障碍设施
++(NSDictionary *)updateBarrierFree:(NSInteger)userID dic:(NSMutableDictionary *)dic{
+    NSError *error = nil;
+    
+    NSData *requestData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString = [@"barrierFree=" stringByAppendingString:[[NSString alloc] initWithData:requestData encoding:NSUTF8StringEncoding]];
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/barrierfree/updateBarrierFree.action?userID=%li",ipAddr,(long)userID];
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];//请求这个地址， timeoutInterval:10 设置为10s超时：请求时间超过10s会被认为连接不上，连接超时
+    
+    [request setHTTPMethod:@"POST"];//POST请求
+    [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];//body 数据
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];//请求头
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];//异步发送request，成功后会得到服务器返回的数据
+    
+    
+    if (returnData)
+    {
+        NSLog(@"returndata = %@", [MicroAidAPI toDictionary:returnData]);
+        return [MicroAidAPI toDictionary:returnData];
+        
+    }else{
+        NSLog(@"returndata = %@", @"服务器无响应");
+        
+    }
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
 @end

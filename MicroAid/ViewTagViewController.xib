@@ -54,7 +54,7 @@
                     <rect key="frame" x="8" y="511" width="50" height="50"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" red="0.99215686270000003" green="0.69788024479999999" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" backgroundImage="bubble">
+                    <state key="normal" backgroundImage="pencil">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -76,7 +76,7 @@
                 </label>
                 <view contentMode="scaleToFill" id="6DA-V0-Jl0" userLabel="Map View" customClass="BMKMapView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="248"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1ba-F0-Zdu">
@@ -99,6 +99,6 @@
         </view>
     </objects>
     <resources>
-        <image name="bubble" width="512" height="512"/>
+        <image name="pencil" width="300" height="300"/>
     </resources>
 </document>

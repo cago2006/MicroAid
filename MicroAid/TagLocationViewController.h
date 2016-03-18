@@ -25,13 +25,13 @@
 @property (nonatomic, retain) NSString *tagLocation;
 @property (nonatomic, strong) NSString *searchString;
 
-@property (nonatomic, assign) bool isView;
+@property (nonatomic, assign) NSString *tagTitle;
 
 //用于存放当前位置的地址
 @property(nonatomic,strong) BMKPointAnnotation *locationPointAnnotation;
 
 //附近任务数组
-@property(nonatomic,strong) NSArray *freeBarrierInfoArray;
+@property(nonatomic,strong) NSMutableArray *freeBarrierInfoArray;
 @property (nonatomic, strong) UITableViewController *searchController;
 //用于存放搜索到的pointAnnotation数组(任务数组)
 @property(nonatomic,strong) BMKMapView *searchedPointAnnotations;

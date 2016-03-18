@@ -26,7 +26,6 @@
 }
 
 @property (nonatomic,assign) NSInteger tagID;
-@property (nonatomic,retain) NSDictionary *resultDic;
 @property (nonatomic,retain) FreeBarrierInfo *info;
 -(IBAction)rectifyBtnClicked:(UIButton *)sender;
 

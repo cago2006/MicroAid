@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TagLocationViewController.h"
+#import "FreeBarrierInfo.h"
 
 @interface AddTagViewController : UIViewController<UITextViewDelegate,UITextFieldDelegate>{
     __weak IBOutlet UIButton *descriptBtn;
@@ -26,7 +27,7 @@
 @property (assign, nonatomic) double longitude;
 @property (assign, nonatomic) double latitude;
 @property (assign, nonatomic) BOOL isEdit;
-@property (nonatomic,retain) NSDictionary *resultDic;
+@property (nonatomic,retain) FreeBarrierInfo *infoForEdit;
 
 -(IBAction) locationBtnClicked:(UIButton *)sender;
 -(IBAction) descripBtnClicked:(UIButton *)sender;

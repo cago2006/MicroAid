@@ -179,7 +179,7 @@
 -(IBAction)rectifyBtnClicked:(UIButton *)sender{
     AddTagViewController *modTag = [[AddTagViewController alloc]initWithNibName:@"AddTagViewController" bundle:nil];
     modTag.isEdit = YES;
-    modTag.resultDic = self.resultDic;
+    modTag.infoForEdit = self.info;
     [self.navigationController pushViewController:modTag animated:YES];
 }
 

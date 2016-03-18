@@ -97,4 +97,7 @@
 
 //28 按照距离获取附近的无障碍设施
 +(NSDictionary *)getFreeBarrierByDistance:(double)distance longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
+
+//29 更新无障碍设施
++(NSDictionary *)updateBarrierFree:(NSInteger)userID dic:(NSMutableDictionary *)dic;
 @end

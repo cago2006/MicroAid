@@ -41,9 +41,8 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    if(_geocodesearch == nil){
-        _geocodesearch = [[BMKGeoCodeSearch alloc]init];
-    }
+    _geocodesearch = [[BMKGeoCodeSearch alloc]init];
+    
     UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
     [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(returnToCreate) forControlEvents:UIControlEventTouchUpInside];
@@ -51,6 +50,10 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
   
+    _searchedPointAnnotations = [[BMKMapView alloc]init];
+    
+    _locationPointAnnotation = [[BMKPointAnnotation alloc] init];
+    
     _searchBar.text = self.tagLocation;
     //开始定位
     isGeoSearch = false;
@@ -164,7 +167,7 @@
         ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
         ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
         
-        annotationView.image = [UIImage imageNamed:@"red_bubble.png"];   //把大头针换成别的图片
+        annotationView.image = [UIImage imageNamed:@"free_barrier_info.png"];   //把大头针换成别的图片
     }
     
     annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
@@ -183,34 +186,8 @@
         _mapView.centerCoordinate = (CLLocationCoordinate2D){_tagLatitude, _tagLongitude};
         [annotationView setSelected:YES animated:YES];
         
-        //自动搜索附近任务////////
-        NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        //        double distance = [userDefaults doubleForKey:@"missionDistance"];
-        //        if(distance < 0.1){
-        //            distance = 1000;
-        //        }
-        double latitude = [userDefaults doubleForKey:@"latitude"];
-        double longitude = [userDefaults doubleForKey:@"longitude"];
-        //        NSString *endTime = [userDefaults objectForKey:@"missionEndTime"];
-        //        NSString *group = [userDefaults objectForKey:@"missionGroup"];
-        //        NSString *bonus = [userDefaults objectForKey:@"missionBonus"];
-        //        NSString *type = [userDefaults objectForKey:@"missionType"];
-        //        if(endTime==nil || [endTime isEqualToString:@""]){
-        //            endTime = @"全部";annotationView.draggable = YES;a
-        //        }
-        //        if(group==nil || [group isEqualToString:@""]){
-        //            group = @"全部";
-        //        }
-        //        if(bonus==nil || [bonus isEqualToString:@""]){
-        //            bonus = @"全部";
-        //        }
-        //        if(type==nil || [type isEqualToString:@""]){
-        //            type = @"全部";
-        //        }
-        //        NSLog(@"distance:%f",distance);
-        
-        [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:@"全部"];
+        //自动搜索附近无障碍设施////////
+        [self searchNearbyBarrierFree:2000 longitude:self.tagLongitude latitude:self.tagLatitude pageNo:1 pageSize:9999];
     }
     
     return annotationView;
@@ -378,37 +355,35 @@
 }
 
 
--(void)searchNearby:(NSArray *)statusList distance:(double)distance type:(NSString *)type group:(NSString *)group bonus:(NSString *)bonus longitude:(double)longitude latitude:(double)latitude endTime:(NSString *)endTime{
+-(void)searchNearbyBarrierFree:(double)distance longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
+    
     _reverseGeoCodeType = SearchTagReverseGeoCode;
     //删除已经搜索到的标签
     NSArray* array = [NSArray arrayWithArray:_searchedPointAnnotations.annotations];
     [_searchedPointAnnotations removeAnnotations:array];
     [_mapView removeAnnotations:array];
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSInteger userID = [userDefaults integerForKey:@"userID"];
-    
-    
     dispatch_async(kBgQueue, ^{
-        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusList distance:distance type:type group:group bonus:bonus longitude:longitude latitude:latitude endTime:endTime pageNo:1 pageSize:999 userID:userID];
+        NSDictionary *nearbyFreeBarriers = [MicroAidAPI getFreeBarrierByDistance:distance longitude:longitude latitude:latitude pageNo:pageNo pageSize:pageSize];
         //NSDictionary *nearbyBarrierFrees = [ShareBarrierFreeAPIS SearchNearbyBarrierFree:110.9 latitude:23.89];
         
-        if ([[nearbyMissions objectForKey:@"result"] isEqualToString:@"fail"]) {
+        if ([[nearbyFreeBarriers objectForKey:@"result"] isEqualToString:@"fail"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
             });
             return;
         } else {
-            _freeBarrierInfoArray = [FreeBarrierInfo getFreeBarrierInfos:[nearbyMissions objectForKey:@""]];
+            _freeBarrierInfoArray = [FreeBarrierInfo getFreeBarrierInfos:[nearbyFreeBarriers objectForKey:@"barrierFree"]];
+            for(int i = 0; i< _freeBarrierInfoArray.count;i++){
+                    FreeBarrierInfo *temp = [_freeBarrierInfoArray objectAtIndex:i];
+                    if(temp.latitude==self.tagLatitude && temp.longitude== self.tagLongitude && [temp.location isEqualToString:self.tagLocation] && [temp.title isEqualToString:self.tagTitle]){
+                        [_freeBarrierInfoArray removeObjectAtIndex:i];
+                    }
+            }
             if ([_freeBarrierInfoArray count] == 0) {
-                //                dispatch_async(dispatch_get_main_queue(), ^{
-                //
-                //                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"附近无待认领任务" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                //                    [alertView show];
-                //                });
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showMessage:@"附近没有无障碍设置"];
+                    [self showMessage:@"附近没有无障碍设施"];
                 });
                 return;
             }
