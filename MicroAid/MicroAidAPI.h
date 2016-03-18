@@ -92,4 +92,9 @@
 //26 比较版本
 +(NSDictionary *)compareVersion:(NSString *)versionNum;
 
+//27 添加无障碍设施
++(NSDictionary *)createBarrierFree:(NSInteger)userID dic:(NSMutableDictionary *)dic;
+
+//28 按照距离获取附近的无障碍设施
++(NSDictionary *)getFreeBarrierByDistance:(double)distance longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize;
 @end

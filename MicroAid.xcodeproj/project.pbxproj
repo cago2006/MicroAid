@@ -230,6 +230,7 @@
 		AFDEE7DB1B9D2F6000CCDA2C /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFDEE7D31B9D2F6000CCDA2C /* whiteArrow@2x.png */; };
 		AFDEE7DF1B9D309100CCDA2C /* MissionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDEE7DD1B9D309100CCDA2C /* MissionListCell.m */; };
 		AFDEE7E01B9D309100CCDA2C /* MissionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDEE7DE1B9D309100CCDA2C /* MissionListCell.xib */; };
+		AFEC0E021C9A4AC90069E7D7 /* FreeBarrierInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AFEC0E011C9A4AC90069E7D7 /* FreeBarrierInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -561,6 +562,8 @@
 		AFDEE7DC1B9D309100CCDA2C /* MissionListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissionListCell.h; sourceTree = "<group>"; };
 		AFDEE7DD1B9D309100CCDA2C /* MissionListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissionListCell.m; sourceTree = "<group>"; };
 		AFDEE7DE1B9D309100CCDA2C /* MissionListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MissionListCell.xib; sourceTree = "<group>"; };
+		AFEC0E001C9A4AC90069E7D7 /* FreeBarrierInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeBarrierInfo.h; sourceTree = "<group>"; };
+		AFEC0E011C9A4AC90069E7D7 /* FreeBarrierInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FreeBarrierInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -932,6 +935,8 @@
 				AF8E84BD1B9C3009009EC184 /* MissionInfo.m */,
 				AF5E3A7F1BC66F7900521BEE /* NotificationInfo.h */,
 				AF5E3A801BC66F7900521BEE /* NotificationInfo.m */,
+				AFEC0E001C9A4AC90069E7D7 /* FreeBarrierInfo.h */,
+				AFEC0E011C9A4AC90069E7D7 /* FreeBarrierInfo.m */,
 			);
 			name = entity;
 			sourceTree = "<group>";
@@ -1496,6 +1501,7 @@
 				AF02ED1A1B91A5CF00890BF7 /* GroupViewController.m in Sources */,
 				AF86A5731C12C55000698B63 /* RankingViewController.m in Sources */,
 				AF5A52021B9BDB230018CE98 /* Mission.m in Sources */,
+				AFEC0E021C9A4AC90069E7D7 /* FreeBarrierInfo.m in Sources */,
 				AF1E4C0F1C9053C1001D73F1 /* SPInputViewPluginTransparent.m in Sources */,
 				AF42A6751B958C310060D67C /* DateTimeUtils.m in Sources */,
 				AFA432601C1034590064DFCA /* UserTableViewCell.m in Sources */,

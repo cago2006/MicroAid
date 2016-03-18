@@ -34,6 +34,9 @@
 //附近任务数组
 @property(nonatomic,strong) NSArray *missionInfoArray;
 
+//附近任务数组
+@property(nonatomic,strong) NSArray *barrierFreeInfoArray;
+
 //用于存放搜索到的pointAnnotation数组(任务数组)
 @property(nonatomic,strong) BMKMapView *searchedPointAnnotations;
 

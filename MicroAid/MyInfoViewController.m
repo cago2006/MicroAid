@@ -75,19 +75,8 @@
         }
     });
     
-    dispatch_async(serverQueue, ^{
-        NSDictionary *resultDic = [MicroAidAPI fetchPicture:userID];
-        if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
-            NSData *picture = [resultDic objectForKey:@"picture"];
-            [self performSelectorOnMainThread:@selector(showPicture:) withObject:picture waitUntilDone:YES];
-        }else if([[resultDic objectForKey:@"onError"] boolValue])//创建失败
-        {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
-            return ;
-        }else{
-            [self performSelectorOnMainThread:@selector(showPicture:) withObject:nil waitUntilDone:YES];
-        }
-    });
+    NSString *picture = [userDefaults objectForKey:@"userProfile"];
+    [self showPicture:picture];
 }
 
 -(void) showPicture:(NSString *)picture{
@@ -95,8 +84,8 @@
         [photoBtn setBackgroundImage:[UIImage imageNamed:@"default_pic"] forState:UIControlStateNormal];
     }else{
         //需要转换了才能用
-        NSString *formatedString = [picture stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        NSData *imageData = [GTMBase64 decodeString:formatedString];
+        //NSString *formatedString = [picture stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+        NSData *imageData = [GTMBase64 decodeString:picture];
         [photoBtn setBackgroundImage:[UIImage imageWithData:imageData scale:0.0] forState:UIControlStateNormal];
     }
 }
@@ -272,7 +261,6 @@
                 
                 [dic setObject:picture forKey:@"picture"];
                 [dic setObject:[NSString stringWithFormat:@"%ld",(long)userID] forKey:@"userID"];
-                
                 NSDictionary *resultDic = [MicroAidAPI savePicture:dic];
                 if ([[resultDic objectForKey:@"flg"] boolValue]) {
                     isPhotoSuccess = YES;
@@ -306,9 +294,6 @@
     [userDefaults setObject:nickNameBtn.titleLabel.text forKey:@"nickName"];
     [userDefaults synchronize];
     MineViewController *mineVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-    if(isPhotoChanged){
-        mineVC.isPicChange = YES;
-    }
     [self.navigationController popToViewController:mineVC animated:YES];
 }
 
@@ -426,6 +411,16 @@
     NSData *imageData = UIImageJPEGRepresentation(self.portait,0.1);
     
     NSString *str =[GTMBase64 stringByEncodingData:imageData];
+    
+    
+    NSString *formatedString = [str stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    //        NSData *imageData = [GTMBase64 decodeString:formatedString];
+    //        self.imageView = [UIImage imageWithData:imageData scale:0.0];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:formatedString forKey:@"userProfile"];
+    [userDefaults synchronize];
+    
     
     return str;
 }

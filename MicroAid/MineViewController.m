@@ -50,9 +50,7 @@
     self.userName = [userDefaults objectForKey:@"username"];
     self.nickName = [userDefaults objectForKey:@"nickName"];
     [_myTableView reloadData];
-    if(self.isPicChange){
-        [self findUserPic];
-    }
+    [self showProfile];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -74,7 +72,7 @@
         NSDictionary *resultDic = [MicroAidAPI fetchPicture:userID];
         if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
             NSString *picture = [resultDic objectForKey:@"picture"];
-            [self performSelectorOnMainThread:@selector(showPicture:) withObject:picture waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(showPicture:) withObject:picture waitUntilDone:NO];
         }else if ([[resultDic objectForKey:@"onError"] boolValue])//创建失败
         {
             [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
@@ -91,8 +89,31 @@
     }else{
         //需要转换了才能用
         NSString *formatedString = [picture stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        NSData *imageData = [GTMBase64 decodeString:formatedString];
-        self.imageView = [UIImage imageWithData:imageData scale:0.0];
+//        NSData *imageData = [GTMBase64 decodeString:formatedString];
+//        self.imageView = [UIImage imageWithData:imageData scale:0.0];
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:formatedString forKey:@"userProfile"];
+        [userDefaults synchronize];
+        
+    }
+}
+
+-(void) showProfile{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *picture = [userDefaults objectForKey:@"userProfile"];
+    if(picture == nil){
+        self.imageView = [UIImage imageNamed:@"default_pic"];
+    }else{
+        //需要转换了才能用
+        //NSString *formatedString = [picture stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+                NSData *imageData = [GTMBase64 decodeString:picture];
+                self.imageView = [UIImage imageWithData:imageData scale:0.0];
+        
+        //NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        //[userDefaults setObject:formatedString forKey:@"userProfile"];
+        //[userDefaults synchronize];
+        
     }
 }
 

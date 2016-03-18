@@ -9,17 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "TagLocationViewController.h"
 
-@interface AddTagViewController : UIViewController<UITextViewDelegate>{
+@interface AddTagViewController : UIViewController<UITextViewDelegate,UITextFieldDelegate>{
     __weak IBOutlet UIButton *descriptBtn;
     __weak IBOutlet UIButton *locationBtn;
     __weak IBOutlet UIButton *typeBtn;
     __weak IBOutlet UITextView *descripTextView;
     __weak IBOutlet UITextView *supplementTextView;
     __weak IBOutlet UITextField *titleField;
-    
+    __weak IBOutlet UITextField *phoneField;
 }
 @property (strong, nonatomic) IBOutlet UIView *inputView;
-@property (retain, nonatomic) NSString *titleString;
 @property (retain, nonatomic) NSString *descriptString;
 @property (retain, nonatomic) NSString *supplementString;
 @property (retain, nonatomic) NSString *locationString;

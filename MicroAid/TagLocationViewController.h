@@ -18,11 +18,11 @@
 }
 
 //当前经度
-@property (nonatomic, assign) double missionLongitude;
+@property (nonatomic, assign) double tagLongitude;
 //当前纬度
-@property (nonatomic, assign) double missionLatitude;
+@property (nonatomic, assign) double tagLatitude;
 //当前位置
-@property (nonatomic, retain) NSString *missionLocation;
+@property (nonatomic, retain) NSString *tagLocation;
 @property (nonatomic, strong) NSString *searchString;
 
 @property (nonatomic, assign) bool isView;
@@ -31,7 +31,7 @@
 @property(nonatomic,strong) BMKPointAnnotation *locationPointAnnotation;
 
 //附近任务数组
-@property(nonatomic,strong) NSArray *missionInfoArray;
+@property(nonatomic,strong) NSArray *freeBarrierInfoArray;
 @property (nonatomic, strong) UITableViewController *searchController;
 //用于存放搜索到的pointAnnotation数组(任务数组)
 @property(nonatomic,strong) BMKMapView *searchedPointAnnotations;

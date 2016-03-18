@@ -9,7 +9,7 @@
 #import "TagLocationViewController.h"
 #import "AddTagViewController.h"
 #import "MicroAidAPI.h"
-#import "MissionInfo.h"
+#import "FreeBarrierInfo.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
@@ -51,10 +51,10 @@
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
   
-    _searchBar.text = self.missionLocation;
+    _searchBar.text = self.tagLocation;
     //开始定位
     isGeoSearch = false;
-    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){self.missionLatitude, self.missionLongitude};
+    CLLocationCoordinate2D pt = (CLLocationCoordinate2D){self.tagLatitude, self.tagLongitude};
         
     BMKReverseGeoCodeOption *reverseGeocodeSearchOption = [[BMKReverseGeoCodeOption alloc]init];
     reverseGeocodeSearchOption.reverseGeoPoint = pt;
@@ -139,9 +139,9 @@
     if(isSuccess){
         
         AddTagViewController *addTagVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-        addTagVC.locationString = self.missionLocation;
-        addTagVC.latitude = self.missionLatitude;
-        addTagVC.longitude = self.missionLongitude;
+        addTagVC.locationString = self.tagLocation;
+        addTagVC.latitude = self.tagLatitude;
+        addTagVC.longitude = self.tagLongitude;
         [self.navigationController popToViewController:addTagVC animated:YES];
     }else{
         [ProgressHUD showError:@"请搜索成功后再保存!"];
@@ -177,10 +177,10 @@
     CLLocationCoordinate2D viewLocation =[annotation coordinate];
     
     
-    if (viewLocation.longitude == self.missionLongitude && viewLocation.latitude == self.missionLatitude) {//代表自己的位置
+    if (viewLocation.longitude == self.tagLongitude && viewLocation.latitude == self.tagLatitude) {//代表自己的位置
         annotationView.draggable = NO;
         ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorGreen;
-        _mapView.centerCoordinate = (CLLocationCoordinate2D){_missionLatitude, _missionLongitude};
+        _mapView.centerCoordinate = (CLLocationCoordinate2D){_tagLatitude, _tagLongitude};
         [annotationView setSelected:YES animated:YES];
         
         //自动搜索附近任务////////
@@ -252,9 +252,9 @@
         BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
         item.coordinate = result.location;
         
-        self.missionLocation = result.address;
-        self.missionLatitude = result.location.latitude;
-        self.missionLongitude = result.location.longitude;
+        self.tagLocation = result.address;
+        self.tagLatitude = result.location.latitude;
+        self.tagLongitude = result.location.longitude;
         
         //TODO 将位置周围的任务标记出来
         
@@ -278,7 +278,7 @@
      [_mapView removeOverlays:array];*/
     if (error == 0) {
         BMKPointAnnotation* item = [[BMKPointAnnotation alloc]init];
-        CLLocationCoordinate2D pt = (CLLocationCoordinate2D){self.missionLatitude, self.missionLongitude};
+        CLLocationCoordinate2D pt = (CLLocationCoordinate2D){self.tagLatitude, self.tagLongitude};
         item.coordinate = pt;
         item.title = result.address;
         _searchBar.text = result.address;
@@ -400,15 +400,15 @@
             });
             return;
         } else {
-            _missionInfoArray = [MissionInfo getMissionInfos:[nearbyMissions objectForKey:@"taskInfoList"]];
-            if ([_missionInfoArray count] == 0) {
+            _freeBarrierInfoArray = [FreeBarrierInfo getFreeBarrierInfos:[nearbyMissions objectForKey:@""]];
+            if ([_freeBarrierInfoArray count] == 0) {
                 //                dispatch_async(dispatch_get_main_queue(), ^{
                 //
                 //                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"附近无待认领任务" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 //                    [alertView show];
                 //                });
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showMessage:@"无待认领任务"];
+                    [self showMessage:@"附近没有无障碍设置"];
                 });
                 return;
             }
@@ -423,15 +423,15 @@
 -(void) addPointAnnotations{
     if (_reverseGeoCodeType == SearchTagReverseGeoCode) {
         
-        NSUInteger len = [_missionInfoArray count];
+        NSUInteger len = [_freeBarrierInfoArray count];
         for (int i=0; i<len; i++) {
-            MissionInfo *info = [_missionInfoArray objectAtIndex:i];
+            FreeBarrierInfo *info = [_freeBarrierInfoArray objectAtIndex:i];
             CLLocationCoordinate2D coor;
             coor.latitude = info.latitude;
             coor.longitude = info.longitude;
             [self addPointAnnotation:coor title:info.title];
         }
-        _mapView.centerCoordinate = (CLLocationCoordinate2D){_missionLatitude, _missionLongitude};
+        _mapView.centerCoordinate = (CLLocationCoordinate2D){_tagLatitude, _tagLongitude};
     }
 }
 
@@ -443,7 +443,7 @@
     pointAnnotation.coordinate = coordinate;
     pointAnnotation.title = title;
     
-    if(_missionLongitude != coordinate.longitude || _missionLatitude != coordinate.latitude){
+    if(_tagLongitude != coordinate.longitude || _tagLatitude != coordinate.latitude){
         [_searchedPointAnnotations addAnnotation:pointAnnotation];
     }else{
         [_mapView removeAnnotation:_locationPointAnnotation];

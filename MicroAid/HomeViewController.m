@@ -15,12 +15,15 @@
 #import "SearchTableViewController.h"
 #import "SPKitExample.h"
 #import "AddTagViewController.h"
+#import "FreeBarrierInfo.h"
+#import "ViewTagViewController.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 @interface HomeViewController (){
     bool isGeoSearch;
     BMKPointAnnotation* pointAnnotation;
+    BMKPointAnnotation* pointAnnotation2;
 }
 
 @end
@@ -47,16 +50,21 @@
     }
     [self.navigationItem setTitle:@"微助地图"];
     
-    UIButton *logoutBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
-    [logoutBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [logoutBtn addTarget:self action:@selector(returnToLogin) forControlEvents:UIControlEventTouchUpInside];
-    [logoutBtn setBackgroundImage:[UIImage imageNamed:@"logout.png"] forState:UIControlStateNormal];
-    UIBarButtonItem *logoutItem = [[UIBarButtonItem alloc]initWithCustomView:logoutBtn];
+//    UIButton *logoutBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
+//    [logoutBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [logoutBtn addTarget:self action:@selector(returnToLogin) forControlEvents:UIControlEventTouchUpInside];
+//    [logoutBtn setBackgroundImage:[UIImage imageNamed:@"logout.png"] forState:UIControlStateNormal];
+//    UIBarButtonItem *logoutItem = [[UIBarButtonItem alloc]initWithCustomView:logoutBtn];
     //[logoutBtn release];
+    UIButton *addTagBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
+    [addTagBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [addTagBtn addTarget:self action:@selector(addTag) forControlEvents:UIControlEventTouchUpInside];
+    [addTagBtn setBackgroundImage:[UIImage imageNamed:@"add_free_barrier.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *addTagItem = [[UIBarButtonItem alloc]initWithCustomView:addTagBtn];
     
     UIButton *addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [addBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [addBtn addTarget:self action:@selector(addTag) forControlEvents:UIControlEventTouchUpInside];
+    [addBtn addTarget:self action:@selector(createMission) forControlEvents:UIControlEventTouchUpInside];
     [addBtn setBackgroundImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
     UIBarButtonItem *addItem = [[UIBarButtonItem alloc]initWithCustomView:addBtn];
     //[addBtn release];
@@ -68,7 +76,7 @@
     UIBarButtonItem *listItem = [[UIBarButtonItem alloc]initWithCustomView:listBtn];
     //[listBtn release];
     
-    NSArray *itemArray=[[NSArray alloc]initWithObjects:logoutItem,addItem,listItem, nil];
+    NSArray *itemArray=[[NSArray alloc]initWithObjects:addItem,addTagItem,listItem, nil];
     //[logoutItem release];
     //[addItem release];
     //[listItem release];
@@ -184,6 +192,7 @@
     self.view.userInteractionEnabled = true;
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [super viewWillAppear:animated];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -403,7 +412,7 @@
         NSArray *statusArray = [NSArray arrayWithObjects:@"0", nil];
         //自动搜索附近任务//////////////////////////////////////////////到时候该为自动搜索附近无障碍设施
         [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:self.longitude latitude:self.latitude endTime:@"全部"];
-        
+        [self searchNearbyBarrierFree:2000 longitude:self.longitude latitude:self.latitude pageNo:1 pageSize:9999];
     }
 }
 
@@ -422,9 +431,26 @@
         //NSLog(@"%f=%f,%f=%f",info.latitude, viewLocation.latitude, info.longtitude, viewLocation.longitude);
         if (info.latitude == viewLocation.latitude && info.longitude == viewLocation.longitude && [info.title isEqualToString:view.annotation.title]) {
             [self switchToTagDetailVC:info];
-            break;
+            return;
         }
     }
+    len = [self.barrierFreeInfoArray count];
+    for (int i=0; i<len; i++) {
+        
+        FreeBarrierInfo *info = [self.barrierFreeInfoArray objectAtIndex:i];
+        //NSLog(@"%f=%f,%f=%f",info.latitude, viewLocation.latitude, info.longtitude, viewLocation.longitude);
+        if (info.latitude == viewLocation.latitude && info.longitude == viewLocation.longitude && [info.title isEqualToString:view.annotation.title]) {
+            [self switchToBarrierTagDetailVC:info];
+            return;
+        }
+    }
+}
+-(void) switchToBarrierTagDetailVC:(FreeBarrierInfo *)info{
+    self.view.userInteractionEnabled = false;
+    [self.navigationController.navigationBar setUserInteractionEnabled:false];
+    ViewTagViewController *viewTagVC = [[ViewTagViewController alloc]initWithNibName:@"ViewTagViewController" bundle:nil];
+    viewTagVC.info = info;
+    [self.navigationController pushViewController:viewTagVC animated:YES];
 }
 
 
@@ -468,7 +494,7 @@
         ((BMKPinAnnotationView*)annotationView).pinColor = BMKPinAnnotationColorRed;
         ((BMKPinAnnotationView*)annotationView).animatesDrop = YES;
         
-        annotationView.image = [UIImage imageNamed:@"red_bubble.png"];   //把大头针换成别的图片
+        annotationView.image = [UIImage imageNamed:@"free_barrier_info.png"];   //把大头针换成别的图
     }
     
     annotationView.centerOffset = CGPointMake(0, -(annotationView.frame.size.height * 0.5));
@@ -496,25 +522,10 @@
 //        }
         double latitude = [userDefaults doubleForKey:@"latitude"];
         double longitude = [userDefaults doubleForKey:@"longitude"];
-//        NSString *endTime = [userDefaults objectForKey:@"missionEndTime"];
-//        NSString *group = [userDefaults objectForKey:@"missionGroup"];
-//        NSString *bonus = [userDefaults objectForKey:@"missionBonus"];
-//        NSString *type = [userDefaults objectForKey:@"missionType"];
-//        if(endTime==nil || [endTime isEqualToString:@""]){
-//            endTime = @"全部";annotationView.draggable = YES;a
-//        }
-//        if(group==nil || [group isEqualToString:@""]){
-//            group = @"全部";
-//        }
-//        if(bonus==nil || [bonus isEqualToString:@""]){
-//            bonus = @"全部";
-//        }
-//        if(type==nil || [type isEqualToString:@""]){
-//            type = @"全部";
-//        }
-//        NSLog(@"distance:%f",distance);
         
         [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:@"全部"];
+        
+        [self searchNearbyBarrierFree:2000 longitude:longitude latitude:latitude pageNo:1 pageSize:9999];//查看2公里内的无障碍设施
     }
     
     return annotationView;
@@ -597,6 +608,26 @@
     }
     
     [_mapView addAnnotation:pointAnnotation];
+    [_mapView setNeedsDisplay];
+    NSLog(@"addPointAnnotation");
+}
+
+//添加标注
+- (void)addPointAnnotation2:(CLLocationCoordinate2D)coordinate title:(NSString*)title
+{
+    pointAnnotation2 = [[BMKPointAnnotation alloc]init];
+    
+    pointAnnotation2.coordinate = coordinate;
+    pointAnnotation2.title = title;
+    
+    if(_longitude != coordinate.longitude || _latitude != coordinate.latitude){
+        [_searchedPointAnnotations addAnnotation:pointAnnotation2];
+    }else{
+        [_mapView removeAnnotation:_locationPointAnnotation];
+        _locationPointAnnotation = pointAnnotation2;
+    }
+    
+    [_mapView addAnnotation:pointAnnotation2];
     [_mapView setNeedsDisplay];
     NSLog(@"addPointAnnotation");
 }
@@ -748,11 +779,6 @@
         } else {
             _missionInfoArray = [MissionInfo getMissionInfos:[nearbyMissions objectForKey:@"taskInfoList"]];
             if ([_missionInfoArray count] == 0) {
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    
-//                    UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"附近无待认领任务" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                    [alertView show];
-//                });
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self showMessage:@"无待认领任务"];
                 });
@@ -760,6 +786,32 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self addPointAnnotations];
+            });
+        }
+    });
+}
+
+-(void)searchNearbyBarrierFree:(double)distance longitude:(double)longitude latitude:(double)latitude pageNo:(NSInteger)pageNo pageSize:(NSInteger)pageSize{
+    dispatch_async(kBgQueue, ^{
+        NSDictionary *nearbyFreeBarriers = [MicroAidAPI getFreeBarrierByDistance:distance longitude:longitude latitude:latitude pageNo:pageNo pageSize:pageSize];
+        //NSDictionary *nearbyBarrierFrees = [ShareBarrierFreeAPIS SearchNearbyBarrierFree:110.9 latitude:23.89];
+        
+        if ([[nearbyFreeBarriers objectForKey:@"result"] isEqualToString:@"fail"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alertView show];
+            });
+            return;
+        } else {
+            _barrierFreeInfoArray = [FreeBarrierInfo getFreeBarrierInfos:[nearbyFreeBarriers objectForKey:@"barrierFree"]];
+            if ([_barrierFreeInfoArray count] == 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self showMessage:@"附近没有无障碍设施"];
+                });
+                return;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self addPointAnnotations2];
             });
         }
     });
@@ -776,6 +828,21 @@
             coor.latitude = info.latitude;
             coor.longitude = info.longitude;
             [self addPointAnnotation:coor title:info.title];
+        }
+        _mapView.centerCoordinate = (CLLocationCoordinate2D){_latitude, _longitude};
+    }
+}
+
+-(void) addPointAnnotations2{
+    if (_reverseGeoCodeType == SearchTagReverseGeoCode) {
+        
+        NSUInteger len = [_barrierFreeInfoArray count];
+        for (int i=0; i<len; i++) {
+            FreeBarrierInfo *info = [_barrierFreeInfoArray objectAtIndex:i];
+            CLLocationCoordinate2D coor;
+            coor.latitude = info.latitude;
+            coor.longitude = info.longitude;
+            [self addPointAnnotation2:coor title:info.title];
         }
         _mapView.centerCoordinate = (CLLocationCoordinate2D){_latitude, _longitude};
     }

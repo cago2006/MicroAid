@@ -10,6 +10,8 @@
 #import "TagLocationViewController.h"
 #import "DescriptTableViewController.h"
 #import "FreeTypeTableViewController.h"
+#import "MicroAidAPI.h"
+#import "RootController.h"
 
 @interface AddTagViewController ()
 
@@ -86,9 +88,9 @@
     
     TagLocationViewController *locationVC = [[TagLocationViewController alloc] initWithNibName:@"TagLocationViewController" bundle:nil];
     
-    locationVC.missionLocation = self.locationString;
-    locationVC.missionLatitude = self.latitude;
-    locationVC.missionLongitude = self.longitude;
+    locationVC.tagLocation = self.locationString;
+    locationVC.tagLatitude = self.latitude;
+    locationVC.tagLongitude = self.longitude;
     
     [self.navigationController pushViewController:locationVC animated:YES];
 }
@@ -123,12 +125,79 @@
     
 }
 
+-(void) textFieldDidBeginEditing:(UITextField *)textField{
+    CGRect frame = self.inputView.frame;
+    frame.origin.y =64 - 200;
+    [UIView animateWithDuration:0.5f
+                          delay:0
+         usingSpringWithDamping:1
+          initialSpringVelocity:0.1f
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.inputView.frame = frame;}
+                     completion:^(BOOL finished) {}];
+}
+
 -(void) saveTag{
     if(self.isEdit){
         //纠错，不一定马上改正
-    }else{
-        //添加无障碍设施
+    }else{//添加无障碍设施
+        if([self validateTag]){
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+            [dic setObject:[titleField text] forKey:@"name"];
+            [dic setObject:self.descriptString forKey:@"description"];
+            [dic setObject:[phoneField text] forKey:@"tel"];
+            [dic setObject:self.locationString forKey:@"address"];
+            [dic setObject:[NSString stringWithFormat:@"%f",self.latitude] forKey:@"latitude"];
+            [dic setObject:[NSString stringWithFormat:@"%f",self.longitude] forKey:@"longitude"];
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            NSInteger userID = [[userDefaults objectForKey:@"userID"] integerValue];
+            
+            dispatch_async(serverQueue, ^{
+                NSDictionary *resultDic = [MicroAidAPI createBarrierFree:userID dic:dic];
+                if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
+                    //显示
+                    [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务创建成功!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(returnToHome) withObject:nil waitUntilDone:YES];
+                    
+                }else//创建失败
+                {
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"网络错误,任务创建失败!" waitUntilDone:YES];
+                    return ;
+                }
+            });
+        }
     }
+}
+
+-(BOOL) validateTag{
+    if([[titleField text]isEqualToString:@""]){
+        return NO;
+    }
+    if(self.locationString == nil||[self.locationString isEqualToString:@""]){
+        return NO;
+    }
+    if(self.descriptString == nil || [self.descriptString isEqualToString:@""]){
+        return NO;
+    }
+    return YES;
+}
+
+- (void) errorWithMessage:(NSString *)message {
+    [self.view setUserInteractionEnabled:true];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    [ProgressHUD showError:message];
+}
+
+- (void) successWithMessage:(NSString *)message {
+    [self.view setUserInteractionEnabled:true];
+    [self.view endEditing:YES];
+    [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    [ProgressHUD showSuccess:message];
+}
+
+-(void)returnToHome{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end
