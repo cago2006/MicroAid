@@ -215,7 +215,8 @@
     [super viewWillAppear:animated];
     
     if(self.timer == nil){
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
+        //每30s更新一下地理位置，是否存在推荐请求
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
         [self.timer fire];
     }
     

@@ -97,7 +97,8 @@
     
     _locService.delegate = self;
     if(self.timer == nil){
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
+        //每30s更新一下地理位置，是否存在推荐请求
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
         [self.timer fire];
     }
 }
@@ -490,7 +491,6 @@
     //将定位信息保存到偏好中
     self.latitude = userLocation.location.coordinate.latitude;
     self.longitude = userLocation.location.coordinate.longitude;
-    NSLog(@"Main---latitude:%f,longitude:%f",self.latitude,self.longitude);
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSInteger userID = [[userDefaults objectForKey:@"userID"]integerValue];
