@@ -28,4 +28,17 @@
     return momentsArray;
 }
 
++(MissionInfo *)getRecMissionInfos:(NSDictionary *)dic{
+    MissionInfo *info =[[MissionInfo alloc] init];
+    [info setMissionId:[[dic objectForKey:@"id"] intValue]];
+    [info setDistance:[[dic objectForKey:@"distance"] doubleValue]];
+    [info setTitle:[dic objectForKey:@"title"]];
+    [info setGroup:[dic objectForKey:@"publicity"]];
+    [info setStatusInfo:[dic objectForKey:@"statusInfo"]];
+    [info setLongitude:[[dic objectForKey:@"longitude"] doubleValue]];
+    [info setLatitude:[[dic objectForKey:@"latitude"] doubleValue]];
+    [info setUserId:[[dic objectForKey:@"userID"] intValue]];
+    return info;
+}
+
 @end

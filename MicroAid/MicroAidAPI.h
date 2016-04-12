@@ -69,7 +69,7 @@
 +(NSDictionary *)updateMission:(NSMutableDictionary *)dic;
 
 //19 接受任务
-+(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID;
++(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID isFromRec:(NSInteger)isFromRec;
 
 //20 获取通知
 +(NSDictionary *)fetchNotification:(NSInteger )userID pageNo:(int)pageNo pageSize:(int)pageSize;
@@ -100,4 +100,7 @@
 
 //29 更新无障碍设施
 +(NSDictionary *)updateBarrierFree:(NSInteger)userID dic:(NSMutableDictionary *)dic;
+
+//30 根据用户位置推荐任务
++(NSDictionary *)recommendMission:(NSInteger)userID distance:(double)distance longitude:(double)longitude latitude:(double)latitude;
 @end

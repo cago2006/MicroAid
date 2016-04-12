@@ -19,6 +19,7 @@
     //IBOutlet UISearchBar *mySearchBar;
 }
 
+@property (nonatomic, retain) NSTimer *timer;
 //当前经度
 @property (nonatomic, assign) double longitude;
 

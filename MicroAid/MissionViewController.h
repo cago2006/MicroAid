@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <BaiduMapAPI/BMapKit.h>
 #import "PullTableView.h"
+#import "ViewMissionViewController.h"
+#import "MissionInfo.h"
+#import "MicroAidAPI.h"
 
-@interface MissionViewController : UIViewController<PullTableViewDelegate,UITableViewDelegate>{
+#define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+
+@interface MissionViewController : UIViewController<PullTableViewDelegate,UITableViewDelegate,BMKLocationServiceDelegate>{
+    BMKLocationService* _locService;
 }
 
 @property (nonatomic, strong) IBOutlet PullTableView *pullTableView;
@@ -18,5 +25,12 @@
 @property(nonatomic,strong) NSArray *missionInfoArray;
 @property(nonatomic,strong) NSArray *othersMissionInfoArray;
 @property(nonatomic,assign) int count;
+
+//当前纬度
+@property (nonatomic, assign) double latitude;
+//当前经度
+@property (nonatomic, assign) double longitude;
+
+@property (nonatomic, retain) NSTimer *timer;
 
 @end

@@ -20,5 +20,6 @@
 @property(assign,nonatomic) int userId;//发布者id
 
 +(NSMutableArray *)getMissionInfos:(NSArray *)dataArray;
++(MissionInfo *)getRecMissionInfos:(NSDictionary *)dic;
 
 @end

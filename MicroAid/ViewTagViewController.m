@@ -37,7 +37,7 @@
     rectifyBtn.layer.masksToBounds = rectifyBtn.frame.size.width/2.0;
     _searchedPointAnnotations =[[BMKMapView alloc] init];
     
-    [self searchNearbyBarrierFree:20000 longitude:self.info.longitude latitude:self.info.latitude pageNo:1 pageSize:9999];
+    [self searchNearbyBarrierFree:10000 longitude:self.info.longitude latitude:self.info.latitude pageNo:1 pageSize:9999];
 //    if(_geocodesearch == nil){
 //        _geocodesearch = [[BMKGeoCodeSearch alloc]init];
 //    }
@@ -148,7 +148,7 @@
 //        item.title = self.tagLocation;
 //        [_mapView addAnnotation:item];
 //        _mapView.centerCoordinate = pt;
-        [self searchNearbyBarrierFree:20000 longitude:self.info.longitude latitude:self.info.latitude pageNo:1 pageSize:9999];
+        [self searchNearbyBarrierFree:10000 longitude:self.info.longitude latitude:self.info.latitude pageNo:1 pageSize:9999];
     }
 }
 
@@ -169,7 +169,7 @@
 //        //NSLog(@"%f=%f,%f=%f",info.latitude, viewLocation.latitude, info.longtitude, viewLocation.longitude);
         if (info.latitude == viewLocation.latitude && info.longitude == viewLocation.longitude && [info.title isEqualToString:view.annotation.title]) {
             [self showInfo:info];
-            [self searchNearbyBarrierFree:20000 longitude:self.info.longitude latitude:self.info.latitude pageNo:1 pageSize:9999];
+            [self searchNearbyBarrierFree:10000 longitude:self.info.longitude latitude:self.info.latitude pageNo:1 pageSize:9999];
             break;
         }
     }
@@ -206,7 +206,7 @@
     [locationLabel setText:info.location];
     [titleLabel setText:info.title];
     [phoneLebel setText:info.tel];
-    [timeLebel setText:[NSString stringWithFormat:@"%@创建于%@",info.userName,info.time]];
+    [timeLebel setText:[NSString stringWithFormat:@"%@最后修改于%@",info.userName,info.time]];
 }
 
 

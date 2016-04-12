@@ -25,6 +25,7 @@
 }
 
 @property (nonatomic, assign) bool isAccepted;
+@property (assign, nonatomic) NSInteger isFromRec;
 @property (assign, nonatomic) double missionDistance;
 @property (strong, nonatomic) NSString *missionAddress;
 @property (assign, nonatomic) double missionLatitude;

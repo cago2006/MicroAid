@@ -268,7 +268,7 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSInteger userID = [userDefaults integerForKey:@"userID"];
         dispatch_async(serverQueue, ^{
-            NSDictionary *resultDic = [MicroAidAPI acceptMission:self.missionID userID:userID];
+            NSDictionary *resultDic = [MicroAidAPI acceptMission:self.missionID userID:userID isFromRec:self.isFromRec];
             if ([[resultDic objectForKey:@"flg"] boolValue]) {//接受成功
                 [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务认领成功!" waitUntilDone:YES];
                 [self performSelectorOnMainThread:@selector(returnToMainTab) withObject:nil waitUntilDone:YES];

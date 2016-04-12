@@ -513,10 +513,10 @@ NSString *ipAddr;
 }
 
 //19 接受任务
-+(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID{
++(NSDictionary *)acceptMission:(NSInteger )missionID userID:(NSInteger)userID isFromRec:(NSInteger)isFromRec{
     NSError *error = nil;
     
-    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/receiveTask.action?taskID=%ld&recUserID=%ld",ipAddr,(long)missionID,(long)userID];
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/receiveTask.action?taskID=%ld&recUserID=%ld&isFromRec=%ld",ipAddr,(long)missionID,(long)userID,(long)isFromRec];
     
     NSLog(@"fetchPictureURL:%@",urlString);
     
@@ -786,4 +786,26 @@ NSString *ipAddr;
     
     return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
 }
+
+//30 根据用户位置推荐任务
++(NSDictionary *)recommendMission:(NSInteger)userID distance:(double)distance longitude:(double)longitude latitude:(double)latitude{
+    NSError *error = nil;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/recommendTask.action?taskFilterString={\"distance\":\"%f\",\"longitude\":\"%f\",\"latitude\":\"%f\",\"endTime\":\"%@\"}&userID=%ld&pageNo=1&pageSize=9999",ipAddr,distance,longitude,latitude,[DateTimeUtils changeDateIntoString:[DateTimeUtils getCurrentTime]],(long)userID];
+    
+    NSLog(@"recommendMissionURL:%@",urlString);
+    
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    if (data)
+    {
+        return [MicroAidAPI toDictionary:data];
+    }
+    
+    //NSLog(@"result: %@",[MicroAidAPI toDictionary:data]);
+    
+    return [[NSDictionary alloc]initWithObjectsAndKeys:@"fail",@"result",nil];
+}
+
 @end

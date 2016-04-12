@@ -13,6 +13,7 @@
 #import "MineViewController.h"
 #import "RankingViewController.h"
 
+
 @interface MainTabBarController ()
 
 @end
@@ -63,13 +64,27 @@
     NSArray *controllers = [NSArray arrayWithObjects:missionNav,groupNav,rankNav,notifyNav,mineNav,nil];
     
     self.viewControllers=controllers;
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    
+}
+
+
+-(void) viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+}
+
+
+
 
 
 

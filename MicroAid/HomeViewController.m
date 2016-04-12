@@ -17,6 +17,7 @@
 #import "AddTagViewController.h"
 #import "FreeBarrierInfo.h"
 #import "ViewTagViewController.h"
+#import "MissionInfo.h"
 
 #define kBgQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
@@ -118,11 +119,13 @@
     [self.view addSubview:_searchController.view];
     
     [self compareVersion];
+    
+    
 }
 
 -(void)compareVersion{
     dispatch_async(serverQueue, ^{
-        NSDictionary *resultDic = [MicroAidAPI compareVersion:@"1.1.2"];
+        NSDictionary *resultDic = [MicroAidAPI compareVersion:@"1.1.4"];
         
         if (![[resultDic objectForKey:@"isLatest"] boolValue]) {
             [self performSelectorOnMainThread:@selector(showUpdate) withObject:nil waitUntilDone:YES];
@@ -131,7 +134,7 @@
 }
 
 -(void)showUpdate{
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"不是最新版本(1.1.2)\n是否升级？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"升级",nil];
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"目前版本(1.1.4)不是最新\n是否升级？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"升级",nil];
     [dialog setAlertViewStyle:UIAlertViewStyleDefault];
     [dialog setTag:1];
     [dialog show];
@@ -206,10 +209,15 @@
     _mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     _locService.delegate = self;
     _geocodesearch.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
-    [self startLocation];
+    //[self startLocation];
     self.view.userInteractionEnabled = true;
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
     [super viewWillAppear:animated];
+    
+    if(self.timer == nil){
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:15 target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
+        [self.timer fire];
+    }
     
 }
 
@@ -220,6 +228,9 @@
     _mapView.delegate = nil; // 不用时，置nil
     _locService.delegate = nil;
     _geocodesearch.delegate = nil; // 不用时，置nil
+    
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 - (void)dealloc {
@@ -347,10 +358,39 @@
     self.latitude = userLocation.location.coordinate.latitude;
     self.longitude = userLocation.location.coordinate.longitude;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger userID = [[userDefaults objectForKey:@"userID"]integerValue];
     [userDefaults setDouble:self.latitude forKey:@"latitude"];
     [userDefaults setDouble:self.longitude forKey:@"longitude"];
     [userDefaults synchronize];
 
+    
+    //根据用户当前位置推荐任务
+    dispatch_async(kBgQueue, ^{
+        NSDictionary *recommendMission = [MicroAidAPI recommendMission:userID distance:1000 longitude:self.longitude latitude:self.latitude];
+        if ([[recommendMission objectForKey:@"flg"] boolValue]) {//如果返回值中存在任务
+            MissionInfo *info = [MissionInfo getRecMissionInfos:[recommendMission objectForKey:@"recTask"]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"您有新的任务推荐，是否查看？" preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
+                    if(([info.statusInfo isEqualToString:@"未接受"] || [info.statusInfo isEqualToString:@"未认领"])){
+                        viewMissionVC.isAccepted = NO;
+                    }else{
+                        viewMissionVC.isAccepted = YES;
+                    }
+                    viewMissionVC.missionID = info.missionId;
+                    viewMissionVC.missionDistance = info.distance;
+                    viewMissionVC.isFromRec = 1;
+                    self.tabBarController.tabBar.hidden = YES;
+                    [self.navigationController pushViewController:viewMissionVC animated:YES];
+                }]];
+                
+                [self presentViewController:alert animated:YES completion:nil];
+            });
+        }
+    });
+    
     
     //TODO将位置周围的任务标记出来
     
@@ -546,7 +586,7 @@
                 
                 [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:@"全部"];
                 
-                [self searchNearbyBarrierFree:2000 longitude:longitude latitude:latitude pageNo:1 pageSize:9999];//查看2公里内的无障碍设施
+                [self searchNearbyBarrierFree:10000 longitude:longitude latitude:latitude pageNo:1 pageSize:9999];//查看10公里内的无障碍设施
             }
         }
             break;
@@ -590,7 +630,7 @@
                 
                 [self searchNearby:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:@"全部"];
                 
-                [self searchNearbyBarrierFree:100000 longitude:longitude latitude:latitude pageNo:1 pageSize:9999];//查看2公里内的无障碍设施
+                [self searchNearbyBarrierFree:10000 longitude:longitude latitude:latitude pageNo:1 pageSize:9999];//查看10公里内的无障碍设施
             }
         }
             break;

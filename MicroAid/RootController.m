@@ -36,12 +36,16 @@
     NSString *ipAddr = [defaults stringForKey:@"ipAddr"];
     if (ipAddr==nil || [ipAddr isEqualToString:@""])
     {
-        ipAddr =  @"218.193.130.169:8080";
+        //ipAddr =  @"218.193.130.169:8080";
         //ipAddr =  @"10.131.241.184:8080";
+        //ipAddr =  @"218.193.130.37:8088";
+        ipAddr =  @"10.131.241.141:8088";
     }
     NSLog(@"IP : %@", ipAddr);
-    [MicroAidAPI setIpAddr:@"218.193.130.169:8080"];
+    //[MicroAidAPI setIpAddr:@"218.193.130.37:8088"];
+    //[MicroAidAPI setIpAddr:@"218.193.130.169:8080"];
     //[MicroAidAPI setIpAddr:@"10.131.241.184:8080"];
+    [MicroAidAPI setIpAddr:@"10.131.241.141:8088"];
 }
 
 -(void)viewWillAppear:(BOOL)animated

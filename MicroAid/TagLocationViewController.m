@@ -187,7 +187,7 @@
         [annotationView setSelected:YES animated:YES];
         
         //自动搜索附近无障碍设施////////
-        [self searchNearbyBarrierFree:2000 longitude:self.tagLongitude latitude:self.tagLatitude pageNo:1 pageSize:9999];
+        [self searchNearbyBarrierFree:10000 longitude:self.tagLongitude latitude:self.tagLatitude pageNo:1 pageSize:9999];
     }
     
     return annotationView;
