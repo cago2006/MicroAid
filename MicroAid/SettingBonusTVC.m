@@ -32,7 +32,7 @@
     [self.navigationItem setTitle:@"默认悬赏金额"];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
-    self.dataArray = [NSMutableArray arrayWithObjects:@"0分",@"1分",@"2分",@"3分",@"4分",@"5分", nil];
+    self.dataArray = [NSMutableArray arrayWithObjects:Localized(@"0分"),Localized(@"1分"),Localized(@"2分"),Localized(@"3分"),Localized(@"4分"),Localized(@"5分"), nil];
     
     //初始化选中的项目
     for(int j = 0; j<self.dataArray.count; j++){

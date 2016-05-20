@@ -28,13 +28,13 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
+    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,70,40)];
     [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(returnToCreate) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [rightBtn setTitle:Localized(@"确定") forState:UIControlStateNormal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
-    [self.navigationItem setTitle:@"任务类型"];
+    [self.navigationItem setTitle:Localized(@"任务类型")];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 
@@ -93,7 +93,7 @@
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
     }
-    cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = Localized([self.dataArray objectAtIndex:indexPath.row]);
     if([indexPath isEqual: self.choosedIndex])cell.accessoryType = UITableViewCellAccessoryCheckmark;
     return cell;
 }
@@ -137,10 +137,11 @@
         
         
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-        
+        cmVC.isEditMission = _isParentEditMission;
+        cmVC.isFromHomeView = _isParentFromHomeView;
+        cmVC.isFromMyMission = _isParentFromMyMission;
         self.returnTypeDelegate = cmVC;
         [self.returnTypeDelegate passChoiceTypeValues:choosed];
-        cmVC.isEditMission = NO;
         
         [self.navigationController popToViewController:cmVC animated:YES];
         
@@ -152,7 +153,9 @@
         NSString *choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         
-        cmVC.isEditMission = NO;
+        cmVC.isEditMission = _isParentEditMission;
+        cmVC.isFromHomeView = _isParentFromHomeView;
+        cmVC.isFromMyMission = _isParentFromMyMission;
         self.returnTypeDelegate = cmVC;
         [self.returnTypeDelegate passChoiceTypeValues:choosed];
         

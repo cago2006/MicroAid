@@ -26,6 +26,15 @@
 
 @implementation RootController
 
++(NSString *)enToCn:(NSString *)string{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *appLanguage = [userDefaults objectForKey:@"appLanguage"];
+    if([appLanguage hasPrefix:@"en"]){
+        return Localized(string);
+    }else{
+        return string;
+    }
+}
 
 - (void)viewDidLoad
 {
@@ -36,16 +45,16 @@
     NSString *ipAddr = [defaults stringForKey:@"ipAddr"];
     if (ipAddr==nil || [ipAddr isEqualToString:@""])
     {
-        //ipAddr =  @"218.193.130.169:8080";
+        ipAddr =  @"218.193.130.169:8080";
         //ipAddr =  @"10.131.241.184:8080";
         //ipAddr =  @"218.193.130.37:8088";
-        ipAddr =  @"10.131.241.141:8088";
+        //ipAddr =  @"10.131.241.141:8088";
     }
     NSLog(@"IP : %@", ipAddr);
     //[MicroAidAPI setIpAddr:@"218.193.130.37:8088"];
-    //[MicroAidAPI setIpAddr:@"218.193.130.169:8080"];
+    [MicroAidAPI setIpAddr:@"218.193.130.169:8080"];
     //[MicroAidAPI setIpAddr:@"10.131.241.184:8080"];
-    [MicroAidAPI setIpAddr:@"10.131.241.141:8088"];
+    //[MicroAidAPI setIpAddr:@"10.131.241.141:8088"];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -134,8 +143,6 @@
 {
     [self.homeNavigationViewController.view removeFromSuperview];
     self.homeNavigationViewController = nil;
-    self.loginViewController = nil;
-    self.mainTabBarController = nil;
     if(self.loginViewController==nil){
        self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     }
@@ -176,6 +183,7 @@
     [self.mainTabBarController.view removeFromSuperview];
     //self.mainTabBarController.viewControllers = nil;
     self.mainTabBarController = nil;
+    self.homeNavigationViewController = nil;
     
     if(self.loginViewController == nil){
         self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];

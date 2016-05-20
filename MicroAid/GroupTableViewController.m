@@ -27,13 +27,13 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
+    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,70,40)];
     [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(returnToCreate) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [rightBtn setTitle:Localized(@"确定") forState:UIControlStateNormal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
-    [self.navigationItem setTitle:@"发布对象"];
+    [self.navigationItem setTitle:Localized(@"任务对象")];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 
@@ -135,7 +135,9 @@
         
         
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-        cmVC.isEditMission = NO;
+        cmVC.isEditMission = _isParentEditMission;
+        cmVC.isFromHomeView = _isParentFromHomeView;
+        cmVC.isFromMyMission = _isParentFromMyMission;
         self.returnGroupDelegate = cmVC;
         [self.returnGroupDelegate passChoiceGroupValues:choosed];
         
@@ -148,7 +150,9 @@
     }else{
         NSString *choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
-        cmVC.isEditMission = NO;
+        cmVC.isEditMission = _isParentEditMission;
+        cmVC.isFromHomeView = _isParentFromHomeView;
+        cmVC.isFromMyMission = _isParentFromMyMission;
         self.returnGroupDelegate = cmVC;
         [self.returnGroupDelegate passChoiceGroupValues:choosed];
         

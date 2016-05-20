@@ -67,19 +67,20 @@
         //self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"微助地图"];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"微助地图")]];
     
-//    UIButton *logoutBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
-//    [logoutBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [logoutBtn addTarget:self action:@selector(returnToLogin) forControlEvents:UIControlEventTouchUpInside];
-//    [logoutBtn setBackgroundImage:[UIImage imageNamed:@"logout.png"] forState:UIControlStateNormal];
-//    UIBarButtonItem *logoutItem = [[UIBarButtonItem alloc]initWithCustomView:logoutBtn];
-    //[logoutBtn release];
-    UIButton *addTagBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
-    [addTagBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [addTagBtn addTarget:self action:@selector(addTag) forControlEvents:UIControlEventTouchUpInside];
-    [addTagBtn setBackgroundImage:[UIImage imageNamed:@"add_free_barrier.png"] forState:UIControlStateNormal];
-    UIBarButtonItem *addTagItem = [[UIBarButtonItem alloc]initWithCustomView:addTagBtn];
+    UIButton *logoutBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
+    [logoutBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [logoutBtn addTarget:self action:@selector(returnToLogin) forControlEvents:UIControlEventTouchUpInside];
+    [logoutBtn setBackgroundImage:[UIImage imageNamed:@"logout.png"] forState:UIControlStateNormal];
+    UIBarButtonItem *logoutItem = [[UIBarButtonItem alloc]initWithCustomView:logoutBtn];
+    
+    
+//    UIButton *addTagBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
+//    [addTagBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [addTagBtn addTarget:self action:@selector(addTag) forControlEvents:UIControlEventTouchUpInside];
+//    [addTagBtn setBackgroundImage:[UIImage imageNamed:@"add_free_barrier.png"] forState:UIControlStateNormal];
+//    UIBarButtonItem *addTagItem = [[UIBarButtonItem alloc]initWithCustomView:addTagBtn];
     
     UIButton *addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [addBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -95,7 +96,7 @@
     UIBarButtonItem *listItem = [[UIBarButtonItem alloc]initWithCustomView:listBtn];
     //[listBtn release];
     
-    NSArray *itemArray=[[NSArray alloc]initWithObjects:addItem,addTagItem,listItem, nil];
+    NSArray *itemArray=[[NSArray alloc]initWithObjects:logoutItem,addItem,listItem, nil];
     //[logoutItem release];
     //[addItem release];
     //[listItem release];
@@ -215,8 +216,13 @@
     [super viewWillAppear:animated];
     
     if(self.timer == nil){
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSInteger recInterval = [[userDefaults objectForKey:@"recInterval"]integerValue];
+        if(recInterval<=0){
+            recInterval = 60;
+        }
         //每30s更新一下地理位置，是否存在推荐请求
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:recInterval target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
         [self.timer fire];
     }
     
@@ -272,6 +278,17 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSDictionary *dictionary = [userDefaults dictionaryRepresentation];
         for(NSString* key in [dictionary allKeys]){
+            //[key isEqualToString:@"username"]||[key isEqualToString:@"isAgreePolicy"]||[key isEqualToString:@"password"]||
+            if([key isEqualToString:@"appLanguage"]){
+                NSArray *languages = [NSLocale preferredLanguages];
+                NSString *language = [languages objectAtIndex:0];
+                if ([language hasPrefix:@"zh-Hans"]) {//开头匹配
+                    [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:@"appLanguage"];
+                }else{
+                    [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"appLanguage"];
+                }
+                continue;
+            }
             [userDefaults removeObjectForKey:key];
             [userDefaults synchronize];
         }

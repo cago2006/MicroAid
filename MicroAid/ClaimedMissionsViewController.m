@@ -120,7 +120,7 @@
     //todo
     [[cell title]setText:info.title];
     [[cell distance]setText:[NSString stringWithFormat:@"%.1fm",info.distance]];
-    [[cell group]setText:info.group];
+    [[cell group]setText:Localized(info.group)];
     
     cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
     

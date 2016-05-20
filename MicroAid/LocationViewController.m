@@ -37,10 +37,10 @@
     }
     
     if(!self.isView){
-        UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
+        UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,70,40)];
         [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [rightBtn addTarget:self action:@selector(returnToCreate) forControlEvents:UIControlEventTouchUpInside];
-        [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [rightBtn setTitle:Localized(@"确定") forState:UIControlStateNormal];
         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
         self.navigationItem.rightBarButtonItem = rightItem;
     }else{
@@ -62,7 +62,7 @@
             NSLog(@"反geo检索发送失败");
         }
     }
-    [self.navigationItem setTitle:@"任务定位"];
+    [self.navigationItem setTitle:Localized(@"任务位置")];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
  
     [_mapView setZoomLevel:16];
@@ -168,7 +168,9 @@
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         
         self.returnLocationDelegate = cmVC;
-        cmVC.isEditMission = NO;
+        cmVC.isEditMission = _isParentEditMission;
+        cmVC.isFromHomeView = _isParentFromHomeView;
+        cmVC.isFromMyMission = _isParentFromMyMission;
         [self.returnLocationDelegate passChoiceLocationValues:self.missionLocation latitude:self.missionLatitude longitude:self.missionLongitude];
         
         [self.navigationController popToViewController:cmVC animated:YES];

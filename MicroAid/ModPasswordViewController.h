@@ -12,6 +12,9 @@
     __weak IBOutlet UITextField *oldPasswordTextField;
     __weak IBOutlet UITextField *passwordTextField;
     __weak IBOutlet UITextField *passwordTextField2;
+    __weak IBOutlet UILabel *oldPasswordLabel;
+    __weak IBOutlet UILabel *passwordLabel;
+    __weak IBOutlet UILabel *passwordLabel2;
 }
 
 @end

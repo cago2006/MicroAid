@@ -14,9 +14,12 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "ProgressHUD.h"
+#import "RootController.h"
 #define serverQueue dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0)
 
 #endif
+
+#define Localized(key)  [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"]] ofType:@"lproj"]] localizedStringForKey:(key) value:nil table:@"Language"]
 
 
 //#ifdef TARGET_IPHONE_SIMULATOR

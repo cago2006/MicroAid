@@ -108,6 +108,7 @@
 		AF1E4C3C1C9053C1001D73F1 /* pub_title_ico_back_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1E4C011C9053C1001D73F1 /* pub_title_ico_back_white@2x.png */; };
 		AF1E4C3D1C9053C1001D73F1 /* SPKitExample.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E4C031C9053C1001D73F1 /* SPKitExample.m */; };
 		AF1E4C3E1C9053C1001D73F1 /* SPUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1E4C051C9053C1001D73F1 /* SPUtil.m */; };
+		AF2D78531CE96AC400FACBF4 /* Language.strings in Resources */ = {isa = PBXBuildFile; fileRef = AF2D78551CE96AC400FACBF4 /* Language.strings */; };
 		AF42A6701B94785D0060D67C /* BonusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42A66E1B94785D0060D67C /* BonusTableViewController.m */; };
 		AF42A6711B94785D0060D67C /* BonusTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF42A66F1B94785D0060D67C /* BonusTableViewController.xib */; };
 		AF42A6751B958C310060D67C /* DateTimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = AF42A6741B958C310060D67C /* DateTimeUtils.m */; };
@@ -359,6 +360,8 @@
 		AF1E4C031C9053C1001D73F1 /* SPKitExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPKitExample.m; sourceTree = "<group>"; };
 		AF1E4C041C9053C1001D73F1 /* SPUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUtil.h; sourceTree = "<group>"; };
 		AF1E4C051C9053C1001D73F1 /* SPUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUtil.m; sourceTree = "<group>"; };
+		AF2D78571CE96AE200FACBF4 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Language.strings"; sourceTree = "<group>"; };
+		AF2D78591CE96FD400FACBF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Language.strings; sourceTree = "<group>"; };
 		AF42A66D1B94785D0060D67C /* BonusTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonusTableViewController.h; sourceTree = "<group>"; };
 		AF42A66E1B94785D0060D67C /* BonusTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonusTableViewController.m; sourceTree = "<group>"; };
 		AF42A66F1B94785D0060D67C /* BonusTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BonusTableViewController.xib; sourceTree = "<group>"; };
@@ -1099,6 +1102,7 @@
 		AFC90D661B8AF2010057CF3D = {
 			isa = PBXGroup;
 			children = (
+				AF2D78551CE96AC400FACBF4 /* Language.strings */,
 				AF1E4BB21C90536A001D73F1 /* UMOpenKit */,
 				AF1E4B8F1C900A95001D73F1 /* WXFrameworks */,
 				AF7214B01C28EA5600F98950 /* UMSocial_Sdk_Extra_Frameworks */,
@@ -1466,6 +1470,7 @@
 				AF1E4C251C9053C1001D73F1 /* 未标题-1_11.png in Resources */,
 				AFDD8AD51BABACA200A3369B /* ModPasswordViewController.xib in Resources */,
 				AFA432711C1055430064DFCA /* SettingTypeTVC.xib in Resources */,
+				AF2D78531CE96AC400FACBF4 /* Language.strings in Resources */,
 				AF68EBBA1B8F060A003FF85B /* ChoiceViewController.xib in Resources */,
 				AFDEE7DB1B9D2F6000CCDA2C /* whiteArrow@2x.png in Resources */,
 				AFDD8ADA1BABE11A00A3369B /* MyInfoViewController.xib in Resources */,
@@ -1588,6 +1593,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AF2D78551CE96AC400FACBF4 /* Language.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AF2D78571CE96AE200FACBF4 /* zh-Hans */,
+				AF2D78591CE96FD400FACBF4 /* en */,
+			);
+			name = Language.strings;
+			sourceTree = "<group>";
+		};
 		AF72148B1C27F94A00F98950 /* UMSocialLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

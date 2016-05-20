@@ -35,6 +35,15 @@
     __weak IBOutlet UITextField *titleTextField;
     __weak IBOutlet UITextView *descriptionTextView;
     __weak IBOutlet UILabel *leftBonusLabel;
+    __weak IBOutlet UIButton *confirmBtn;
+    __weak IBOutlet UIButton *cancleBtn;
+    __weak IBOutlet UILabel *startTimeLabel;
+    __weak IBOutlet UILabel *endTimeLabel;
+    __weak IBOutlet UILabel *typeLabel;
+    __weak IBOutlet UILabel *objectLabel;
+    __weak IBOutlet UILabel *bonusLabel;
+    __weak IBOutlet UILabel *balanceLabel;
+    __weak IBOutlet UILabel *addressLabel;
 }
 
 -(IBAction) buttonClicked:(UIButton *)sender;

@@ -24,7 +24,7 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"修改密码"];
+    [self.navigationItem setTitle:Localized(@"修改密码")];
     
     UIButton *saveBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [saveBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -40,6 +40,12 @@
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+    [oldPasswordLabel setText:Localized(@"原始密码")];
+    [passwordLabel setText:Localized(@"新密码")];
+    [passwordLabel2 setText:Localized(@"确认密码")];
+    [oldPasswordTextField setPlaceholder:Localized(@"请输入原始密码")];
+    [passwordTextField setPlaceholder:Localized(@"6-16位新密码")];
+    [passwordTextField2 setPlaceholder:Localized(@"再次输入新密码")];
 }
 
 - (void)didReceiveMemoryWarning {

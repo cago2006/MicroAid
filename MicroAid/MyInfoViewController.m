@@ -29,7 +29,7 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"编辑信息"];
+    [self.navigationItem setTitle:Localized(@"编辑信息")];
     UIButton *saveBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [saveBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [saveBtn addTarget:self action:@selector(saveMyInfo) forControlEvents:UIControlEventTouchUpInside];
@@ -47,6 +47,11 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+    [nameLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"姓名")]];
+    [genderLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"性别")]];
+    [emailLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"邮箱")]];
+    [addressLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"地址")]];
+    [scoreLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"积分")]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -93,11 +98,11 @@
 -(void) showMyInfo:(NSDictionary *)dic{
     self.nickName =[dic objectForKey:@"nickName"];
     [nickNameBtn setTitle:self.nickName forState:UIControlStateNormal];
-    self.gender = [dic objectForKey:@"gender"];
+    self.gender = Localized([dic objectForKey:@"gender"]);
     if(![self.gender isKindOfClass:[NSString class]] || [self.gender isEqualToString:@""]){
         self.gender = @"点击修改";
     }
-    [genderBtn setTitle:self.gender forState:UIControlStateNormal];
+    [genderBtn setTitle:Localized(self.gender) forState:UIControlStateNormal];
     self.address = [dic objectForKey:@"address"];
     if(![self.address isKindOfClass:[NSString class]] || [self.address isEqualToString:@""]){
         self.address = @"点击修改";
@@ -116,7 +121,7 @@
 -(IBAction) choosePhoto:(UIButton *)sender{
     UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
-                                                    cancelButtonTitle:@"取消"
+                                                    cancelButtonTitle:Localized(@"取消")
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:@"拍照", @"从相册中选取", nil];
     [choiceSheet showInView:self.view];
@@ -147,7 +152,7 @@
             break;
         }
         case 1:{
-            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请选择性别" message:nil delegate:self cancelButtonTitle:@"男" otherButtonTitles:@"女",nil];
+            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请选择性别" message:nil delegate:self cancelButtonTitle:Localized(@"男") otherButtonTitles:Localized(@"女"),nil];
             [dialog setAlertViewStyle:UIAlertViewStyleDefault];
             [dialog setTag:1];
             [dialog show];
@@ -194,7 +199,7 @@
         }
         if(alertView.tag == 1){
             //self.gender = @"女";
-            [genderBtn setTitle:@"女" forState:UIControlStateNormal];
+            [genderBtn setTitle:Localized(@"女") forState:UIControlStateNormal];
         }
         if(alertView.tag == 2){
             NSString *email = [alertView textFieldAtIndex:0].text;
@@ -217,7 +222,7 @@
     }else if(buttonIndex == 0){
         if(alertView.tag == 1){
             //self.gender = @"男";
-            [genderBtn setTitle:@"男" forState:UIControlStateNormal];
+            [genderBtn setTitle:Localized(@"男") forState:UIControlStateNormal];
         }
     }
     
@@ -248,6 +253,13 @@
             if(isInfoChanged){
                 NSString *tempNickName = [nickNameBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : nickNameBtn.titleLabel.text;
                 NSString *tempGender = [genderBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : genderBtn.titleLabel.text;
+                if([[[NSUserDefaults standardUserDefaults]objectForKey:@"appLanguage"] isEqualToString:@"en"]){
+                    if([tempGender isEqualToString:@"Female"]){
+                        tempGender = @"女";
+                    }else if([tempGender isEqualToString:@"Male"]){
+                        tempGender = @"男";
+                    }
+                }
                 NSString *tempAddress = [addressBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : addressBtn.titleLabel.text;
                 NSString *tempEmail = [emailBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : emailBtn.titleLabel.text;
                 NSDictionary *resultDic = [MicroAidAPI updateUser:userID nickName:tempNickName gender:tempGender message:@"" address:tempAddress email:tempEmail];

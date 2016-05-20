@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1509" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
+                <outlet property="agreePolicyBtn" destination="SFk-NQ-6eX" id="zIj-15-UhW"/>
+                <outlet property="agreePolicyTitleLabel" destination="Teo-GL-Xn6" id="aGp-PQ-6wf"/>
                 <outlet property="checkBoxBtn" destination="l2p-Gd-pBs" id="ZQu-xv-XS9"/>
                 <outlet property="closePolicyBtn" destination="l7t-Y9-JTb" id="4yQ-gR-AOE"/>
                 <outlet property="detailTextView" destination="ANa-aQ-mkG" id="arP-Tm-17I"/>
@@ -18,6 +20,7 @@
                 <outlet property="policyView" destination="fIa-rK-2BB" id="O0X-z0-Gy9"/>
                 <outlet property="usernameTextField" destination="t1Y-vo-POa" id="Q2N-0b-ufM"/>
                 <outlet property="view" destination="5lf-Aq-ssV" id="tFo-S0-cYk"/>
+                <outlet property="weizhuLabel" destination="Deg-LQ-DOu" id="ljN-xg-uPl"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -34,7 +37,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="微助" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Deg-LQ-DOu">
-                            <rect key="frame" x="191" y="52" width="84" height="65"/>
+                            <rect key="frame" x="176" y="52" width="130" height="65"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="34"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

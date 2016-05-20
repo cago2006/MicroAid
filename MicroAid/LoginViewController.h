@@ -16,6 +16,9 @@
     __weak IBOutlet UIButton *policyBtn;
     __weak IBOutlet UITextView *detailTextView;
     __weak IBOutlet UIButton *closePolicyBtn;
+    __weak IBOutlet UIButton *agreePolicyBtn;
+    __weak IBOutlet UILabel *agreePolicyTitleLabel;
+    __weak IBOutlet UILabel *weizhuLabel;
 }
 
 -(IBAction) loginButtonClicked:(id)sender;

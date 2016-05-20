@@ -37,4 +37,8 @@
 
 @property (nonatomic, strong) UITableViewController *searchController;
 
+@property (nonatomic, assign) bool isParentEditMission;
+@property (nonatomic, assign) bool isParentFromHomeView;
+@property (nonatomic, assign) bool isParentFromMyMission;
+
 @end

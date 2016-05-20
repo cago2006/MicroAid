@@ -1,0 +1,59 @@
+/* 
+  Language.strings
+  MicroAid
+
+  Created by jiahuaxu on 16/5/16.
+  Copyright © 2016年 Strikingly. All rights reserved.
+*/
+"微助"="WeiZhu";
+"添加"="Add";
+"取消"="Cancel";
+"同意"="Agree";
+"微助用户隐私条款"="WeiZhu User Privacy Policy";
+"任务"="Requests";
+"群组"="Groups";
+"通知"="Notifications";
+"我"="Me";
+"排行"="Leaderboard";
+"微助地图"="WeiZhu Map";
+"可认领任务"="Acceptable Requests";
+"我的群组"="My Groups";
+"我的通知"="My Notifications";
+"我的任务"="My Requests";
+"修改密码"="Change Password";
+"设置"="Settings";
+"创建任务"="Create Request";
+"起始时间"="Start Time";
+"截止时间"="End Time";
+"任务类型"="Req Type";
+"任务对象"="Req Object";
+"悬赏金额"="Req Bonus";
+"余额"="Balance";
+"任务位置"="Req Addr";
+"请在此输入任务描述"="Input Request Descriptions Here";
+"任务标题"="Request Title";
+"确定"="Confirm";
+"分"="point";
+"分s"="points";
+"公开"="public";"public"="公开";
+"拿快递"="Express Dilivery";"买东西"="Shopping";"查资料"="Searching Information";"送材料"="Sending Something";
+"生活知识"="Life Knowledge";"照顾人"="Taking care of somebody";"其他"="Others";
+"Express Dilivery"="拿快递";"Shopping"="买东西";"Searching Information"="查资料";"Sending Something"="送材料";
+"Life Knowledge"="生活知识";"Taking care of somebody"="照顾人";"Others"="其他";
+"查看任务"="View Request";
+"认领"="Accept";
+"任务状态"="Req Status";
+"确认要认领该任务"="Are you sure to accept this request";
+"已认领"="Accepted";
+"已完成"="Finished";
+"已过期"="Out of Date";
+"未认领"="Not be Accepted";
+"登出"="Log Out";
+"0分"="0 point";"1分"="1 point";"2分"="2 points";"3分"="3 points";"4分"="4 points";"5分"="5 points";
+"0 point"="0分";"1 point"="1分";"2 points"="2分";"3 points"="3分";"4 points"="4分";"5 points"="5分";
+"姓名"="Name";"性别"="Gender";"邮箱"="Email";"地址"="Address";"积分"="Points";
+"男"="Male";"女"="Female";"编辑信息"="My Profile";
+"我完成"="Finished";"我认领"="Accepted";"我发起"="Started";
+"原始密码"="Old Passwd:";"新密码"="New Passwd:";"确认密码"="Confirm:";
+"请输入原始密码"="Input your old password";"6-16位新密码"="Set your new password";"再次输入新密码"="Confirm your new password";
+"设置默认值"="Set Defaults";"推荐间隔"="Rec Interval";"秒"="sec";

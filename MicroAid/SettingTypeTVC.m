@@ -38,7 +38,7 @@
     [super viewWillAppear:animated];
     //初始化选中的项目
     for(int j = 0; j<self.dataArray.count; j++){
-        if([self.typeString isEqualToString:[self.dataArray objectAtIndex:j]]){
+        if([self.typeString isEqualToString:Localized([self.dataArray objectAtIndex:j])]){
             self.choosedIndex = [NSIndexPath indexPathForRow:j inSection:0];
         }
     }
@@ -75,7 +75,7 @@
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
     }
-    cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = Localized([self.dataArray objectAtIndex:indexPath.row]);
     if([indexPath isEqual: self.choosedIndex])cell.accessoryType = UITableViewCellAccessoryCheckmark;
     return cell;
 }
@@ -118,7 +118,7 @@
         
         MySettingViewController *mySettingVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         
-        mySettingVC.missionType = choosed;
+        mySettingVC.missionType = Localized(choosed);
         
         [self.navigationController popToViewController:mySettingVC animated:YES];
         
@@ -130,7 +130,7 @@
         NSString *choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         MySettingViewController *mySettingVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         
-        mySettingVC.missionType = choosed;
+        mySettingVC.missionType = Localized(choosed);
         
         [self.navigationController popToViewController:mySettingVC animated:YES];
     }

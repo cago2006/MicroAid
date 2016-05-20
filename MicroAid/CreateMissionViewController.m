@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self.navigationItem setTitle:@"创建任务"];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"创建任务")]];
     
     self.mission= [[Mission alloc] init];
     
@@ -44,6 +44,17 @@
     //[saveItem release];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
+    [confirmBtn setTitle:[NSString stringWithFormat:@"%@",Localized(@"确定")] forState:UIControlStateNormal];
+    [cancleBtn setTitle:[NSString stringWithFormat:@"%@",Localized(@"取消")] forState:UIControlStateNormal];
+    [titleTextField setPlaceholder:[NSString stringWithFormat:@"%@",Localized(@"任务标题")]];
+    [startTimeLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"起始时间")]];
+    [endTimeLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"截止时间")]];
+    [typeLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"任务类型")]];
+    [objectLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"任务对象")]];
+    [bonusLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"悬赏金额")]];
+    [balanceLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"余额")]];
+    [addressLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"任务位置")]];
+    [descriptionTextView setText:[NSString stringWithFormat:@"%@",Localized(@"请在此输入任务描述")]];
     [self.pickerView setHidden:YES];
     
     [self getLeftBobus];
@@ -68,19 +79,19 @@
             self.missionLongitude = [userDefaults doubleForKey:@"longitude"];
         }
         
-        self.groupString = [userDefaults objectForKey:@"defaultMissionGroup"];
+        self.groupString = Localized([userDefaults objectForKey:@"defaultMissionGroup"]);
         if(self.groupString == nil || [self.groupString isEqualToString:@""]){
-            self.groupString = @"公开";
+            self.groupString = Localized(@"公开");
         }
         [objectBtn setTitle:self.groupString forState:UIControlStateNormal];
-        self.bonusString = [userDefaults objectForKey:@"defaultMissionBonus"];
+        self.bonusString = Localized([userDefaults objectForKey:@"defaultMissionBonus"]);
         if(self.bonusString == nil || [self.bonusString isEqualToString:@""]){
-            self.bonusString = @"0分";
+            self.bonusString = Localized(@"0分");
         }
         [bonusBtn setTitle:self.bonusString forState:UIControlStateNormal];
-        self.typeString = [userDefaults objectForKey:@"defaultMissionType"];
+        self.typeString = Localized([userDefaults objectForKey:@"defaultMissionType"]);
         if(self.typeString == nil || [self.typeString isEqualToString:@""]){
-            self.typeString = @"拿快递";
+            self.typeString = Localized(@"拿快递");
         }
         [typeBtn setTitle:self.typeString forState:UIControlStateNormal];
     }
@@ -130,7 +141,7 @@
 
 -(void) showLeftBonus:(NSMutableDictionary *)dic{
     self.leftBonus = [[dic objectForKey:@"scores"]integerValue];
-    [leftBonusLabel setText:[NSString stringWithFormat:@"%li分",(long)self.leftBonus]];
+    [leftBonusLabel setText:[NSString stringWithFormat:@"%li%@",(long)self.leftBonus,Localized(@"分s")]];
 }
 
 
@@ -148,7 +159,11 @@
     
     titleTextField.text = [dic objectForKey:@"title"];
     
-    self.bonusString = [NSString stringWithFormat:@"%ld分",(long)[[dic objectForKey:@"taskScores"]integerValue]];
+    if((long)[[dic objectForKey:@"taskScores"]integerValue]>0){
+        self.bonusString = [NSString stringWithFormat:@"%ld%@",(long)[[dic objectForKey:@"taskScores"]integerValue],Localized(@"分")];
+    }else{
+        self.bonusString = [NSString stringWithFormat:@"%ld%@",(long)[[dic objectForKey:@"taskScores"]integerValue],Localized(@"分")];
+    }
     [bonusBtn setTitle:self.bonusString forState:UIControlStateNormal];
     
     self.locationString = [dic objectForKey:@"address"];
@@ -208,14 +223,14 @@
                              self.inputView.frame = frame;}
                          completion:^(BOOL finished) {}];
     
-    if ([textView.text isEqualToString:@"请在此输入任务描述"]) {
+    if ([textView.text isEqualToString:[NSString stringWithFormat:@"%@",Localized(@"请在此输入任务描述")]]) {
         textView.text = @"";
     }
 }
 
 -(void) textViewDidEndEditing:(UITextView *)textView{
     if ([textView.text isEqualToString:@""]) {
-        textView.text = @"请在此输入任务描述";
+        textView.text = [NSString stringWithFormat:@"%@",Localized(@"请在此输入任务描述")];
     }
 }
 
@@ -264,7 +279,7 @@
                     for(int i =0; i<[list count]; i++){
                         NSDictionary *subList = [list objectAtIndex:i];
                         //NSString *index = (NSString *)[subList objectForKey:@"id"];
-                        NSString *taskType =(NSString *)[subList objectForKey:@"taskType"];
+                        NSString *taskType =Localized((NSString *)[subList objectForKey:@"taskType"]);
                         [array addObject:taskType];
                     }
                     //显示
@@ -297,7 +312,7 @@
                     if ([[resultDic objectForKey:@"flg"] boolValue]) {//有值
                         NSArray *list = [resultDic objectForKey:@"groupInfoList"];
                         NSMutableArray *array = [NSMutableArray arrayWithCapacity:[list count]];
-                        [array addObject:@"公开"];
+                        [array addObject:Localized(@"公开")];
                         for(int i =0; i<[list count]; i++){
                             NSString *groupName =(NSString *)[list objectAtIndex:i];
                             [array addObject:groupName];
@@ -306,7 +321,7 @@
                         [self performSelectorOnMainThread:@selector(openGroupView:) withObject:array waitUntilDone:YES];
                     }else{
                         NSMutableArray *array = [NSMutableArray arrayWithCapacity:1];
-                        [array addObject:@"公开"];
+                        [array addObject:Localized(@"公开")];
                         //显示
                         [self performSelectorOnMainThread:@selector(openGroupView:) withObject:array waitUntilDone:YES];
                     }
@@ -318,7 +333,9 @@
         {
             [self.pickerView setHidden:YES];
             BonusTableViewController *bonusVC = [[BonusTableViewController alloc] initWithNibName:@"BonusTableViewController" bundle:nil];
-            
+            bonusVC.isParentEditMission = _isEditMission;
+            bonusVC.isParentFromHomeView = _isFromHomeView;
+            bonusVC.isParentFromMyMission = _isFromMyMission;
             self.passMultiValuesDelegate = bonusVC;
             [self.passMultiValuesDelegate passBonusValues:self.bonusString];
             
@@ -330,7 +347,9 @@
         {
             [self.pickerView setHidden:YES];
             LocationViewController *locationVC = [[LocationViewController alloc] initWithNibName:@"LocationViewController" bundle:nil];
-            
+            locationVC.isParentEditMission = _isEditMission;
+            locationVC.isParentFromHomeView = _isFromHomeView;
+            locationVC.isParentFromMyMission = _isFromMyMission;
             self.passMultiValuesDelegate = locationVC;
             [self.passMultiValuesDelegate passLocationValues:self.locationString latitude:self.missionLatitude longitude:self.missionLongitude];
             
@@ -388,6 +407,9 @@
 
 -(void) openTypeView:(NSMutableArray *)array{
     TypeTableViewController *typeVC = [[TypeTableViewController alloc] initWithNibName:@"TypeTableViewController" bundle:nil];
+    typeVC.isParentEditMission = _isEditMission;
+    typeVC.isParentFromHomeView = _isFromHomeView;
+    typeVC.isParentFromMyMission = _isFromMyMission;
     self.passMultiValuesDelegate = typeVC;
     [self.passMultiValuesDelegate passTypeValues:array choiceString:self.typeString];
     [self.navigationController pushViewController:typeVC animated:YES];
@@ -395,6 +417,9 @@
 
 -(void) openGroupView:(NSMutableArray *)array{
     GroupTableViewController *groupVC = [[GroupTableViewController alloc] initWithNibName:@"GroupTableViewController" bundle:nil];
+    groupVC.isParentEditMission = _isEditMission;
+    groupVC.isParentFromHomeView = _isFromHomeView;
+    groupVC.isParentFromMyMission = _isFromMyMission;
     self.passMultiValuesDelegate = groupVC;
     [self.passMultiValuesDelegate passGroupValues:array choiceString:self.groupString];
     [self.navigationController pushViewController:groupVC animated:YES];
@@ -446,7 +471,7 @@
 
 -(void) saveMission{
     if(_isEditMission){
-        [ProgressHUD show:@"任务保存中..."];
+        [ProgressHUD show:@"任务修改中..."];
     }else{
         [ProgressHUD show:@"任务创建中..."];
     }
@@ -487,7 +512,7 @@
     
     NSLog(@"des:%@",[NSString stringWithString:descriptionTextView.text]);
     [self.mission setDescript:descriptionTextView.text];
-    if([[NSString stringWithString:descriptionTextView.text] isEqualToString:@"请在此输入任务描述"]){
+    if([[NSString stringWithString:descriptionTextView.text] isEqualToString:[NSString stringWithFormat:@"%@",Localized(@"请在此输入任务描述")]]){
         [self.mission setDescript:[NSString stringWithString:titleTextField.text]];
         [dic setObject:[NSString stringWithString:titleTextField.text] forKey:@"description"];
     }
@@ -501,8 +526,8 @@
     [self.mission setLongitude:self.missionLongitude];
     [dic setObject:@"0" forKey:@"status"];
     
-    
-    if([self.mission verifyInfo] && [self isLeftBonusEnough]){
+    NSString *result = [self.mission verifyInfo];
+    if([result isEqualToString:@"yes"] && [self isLeftBonusEnough]){
         if(_isEditMission){
             [self.mission setMissionID:self.missionID];
             [dic setObject:[NSString stringWithFormat:@"%li",(long)self.missionID] forKey:@"id"];
@@ -536,7 +561,7 @@
             });
         }
     }else{
-        [ProgressHUD dismiss];
+        [ProgressHUD showError:result];
         [self.navigationController.navigationBar setUserInteractionEnabled:true];
         [self.view setUserInteractionEnabled:true];
     }

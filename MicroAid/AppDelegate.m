@@ -34,6 +34,16 @@
         NSLog(@"manager start failed!");
     }
     
+    //获得系统语言
+    if (![[NSUserDefaults standardUserDefaults]objectForKey:@"appLanguage"]) {
+        NSArray *languages = [NSLocale preferredLanguages];
+        NSString *language = [languages objectAtIndex:0];
+        if ([language hasPrefix:@"zh-Hans"]) {//开头匹配
+            [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:@"appLanguage"];
+        }else{
+            [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"appLanguage"];
+        }
+    }
     
     //友盟sdk
     [UMSocialData setAppKey:@"5677a39de0f55a6853002e04"];

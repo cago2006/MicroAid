@@ -45,7 +45,7 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"我的任务"];
+    [self.navigationItem setTitle:Localized(@"我的任务")];
     
     self.view.backgroundColor = [UIColor whiteColor];//tab颜色
     
@@ -53,16 +53,16 @@
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     FinishedMissionsViewController *finishedMissionsVC = [[FinishedMissionsViewController alloc] initWithNibName:@"FinishedMissionsViewController" bundle:nil];
-    [finishedMissionsVC setTitle:@"我完成"];
+    [finishedMissionsVC setTitle:Localized(@"我完成")];
     [finishedMissionsVC setParentNav:self.navigationController];
     
     StartedMissionsViewController *startedMissionsVC = [[StartedMissionsViewController alloc] initWithNibName:@"StartedMissionsViewController" bundle:nil];
-    [startedMissionsVC setTitle:@"我发起"];
+    [startedMissionsVC setTitle:Localized(@"我发起")];
     NSLog(@"slef:%@",self.navigationController);
     [startedMissionsVC setParentNav:self.navigationController];
     
     ClaimedMissionsViewController *claimedMissionsVC = [[ClaimedMissionsViewController alloc] initWithNibName:@"ClaimedMissionsViewController" bundle:nil];
-    [claimedMissionsVC setTitle:@"我认领"];
+    [claimedMissionsVC setTitle:Localized(@"我认领")];
     [claimedMissionsVC setParentNav:self.navigationController];
     _controllers =[[NSArray alloc]initWithObjects:startedMissionsVC, claimedMissionsVC,finishedMissionsVC,  nil];
 }

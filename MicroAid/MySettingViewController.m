@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.navigationItem setTitle:@"设置默认值"];
+    [self.navigationItem setTitle:Localized(@"设置默认值")];
     //self.tabBarController.tabBar.hidden = YES;
     
     UIButton *saveBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
@@ -41,28 +41,38 @@
     
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    self.missionGroup = [userDefaults objectForKey:@"defaultMissionGroup"];
-    self.missionBonus = [userDefaults objectForKey:@"defaultMissionBonus"];
-    self.missionType = [userDefaults objectForKey:@"defaultMissionType"];
-    
+    self.missionGroup = Localized([userDefaults objectForKey:@"defaultMissionGroup"]);
+    self.missionBonus = Localized([userDefaults objectForKey:@"defaultMissionBonus"]);
+    self.missionType = Localized([userDefaults objectForKey:@"defaultMissionType"]);
+    self.recInterval = [[userDefaults objectForKey:@"recInterval"]integerValue];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [typeLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"任务类型")]];
+    [objectLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"任务对象")]];
+    [bonusLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"悬赏金额")]];
+    [recIntervalLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"推荐间隔")]];
+    [secondLabel setText:Localized(@"秒")];
     if(self.missionGroup == nil || [self.missionGroup isEqualToString:@""]){
-        self.missionGroup = @"公开";
+        self.missionGroup = Localized(@"公开");
     }
     [objectBtn setTitle:self.missionGroup forState:UIControlStateNormal];
     if(self.missionBonus == nil || [self.missionBonus isEqualToString:@""]){
-        self.missionBonus = @"0分";
+        self.missionBonus = Localized(@"0分");
     }
     [bonusBtn setTitle:self.missionBonus forState:UIControlStateNormal];
     
     if(self.missionType == nil || [self.missionType isEqualToString:@""]){
-        self.missionType = @"拿快递";
+        self.missionType = Localized(@"拿快递");
     }
     [typeBtn setTitle:self.missionType forState:UIControlStateNormal];
+    if(self.recInterval <=0 ){
+        self.recInterval = 60;
+    }
+    [recIntervalField setText:[NSString stringWithFormat:@"%li",self.recInterval]];
     self.tabBarController.tabBar.hidden = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -124,7 +134,7 @@
                     if ([[resultDic objectForKey:@"flg"] boolValue]) {//获取成功
                         NSArray *list = [resultDic objectForKey:@"groupInfoList"];
                         NSMutableArray *array = [NSMutableArray arrayWithCapacity:[list count]];
-                        [array addObject:@"公开"];
+                        [array addObject:Localized(@"公开")];
                         for(int i =0; i<[list count]; i++){
                             NSString *groupName =(NSString *)[list objectAtIndex:i];
                             [array addObject:groupName];
@@ -133,8 +143,7 @@
                         [self performSelectorOnMainThread:@selector(openGroupView:) withObject:array waitUntilDone:YES];
                     }else{
                         NSMutableArray *array = [NSMutableArray arrayWithCapacity:2];
-                        [array addObject:@"全部"];
-                        [array addObject:@"公开"];
+                        [array addObject:Localized(@"公开")];
                         //显示
                         [self performSelectorOnMainThread:@selector(openGroupView:) withObject:array waitUntilDone:YES];
                     }
@@ -183,7 +192,22 @@
     [userDefaults setObject:self.missionGroup forKey:@"defaultMissionGroup"];
     [userDefaults setObject:self.missionBonus forKey:@"defaultMissionBonus"];
     [userDefaults setObject:self.missionType forKey:@"defaultMissionType"];
+    [userDefaults setInteger:self.recInterval forKey:@"recInterval"];
     [userDefaults synchronize];
+    
+    NSLog(@"BdefaultMissionGroup:%@",[userDefaults objectForKey:@"defaultMissionGroup"]);
+    NSLog(@"BdefaultMissionBonus:%@",[userDefaults objectForKey:@"defaultMissionBonus"]);
+    NSLog(@"BdefaultMissionType:%@",[userDefaults objectForKey:@"defaultMissionType"]);
+    
+    [userDefaults setObject:[RootController enToCn:self.missionGroup] forKey:@"defaultMissionGroup"];
+    [userDefaults setObject:[RootController enToCn:self.missionBonus] forKey:@"defaultMissionBonus"];
+    [userDefaults setObject:[RootController enToCn:self.missionType] forKey:@"defaultMissionType"];
+    [userDefaults setInteger:self.recInterval forKey:@"recInterval"];
+    [userDefaults synchronize];
+    
+    NSLog(@"defaultMissionGroup:%@",[userDefaults objectForKey:@"defaultMissionGroup"]);
+    NSLog(@"defaultMissionBonus:%@",[userDefaults objectForKey:@"defaultMissionBonus"]);
+    NSLog(@"defaultMissionType:%@",[userDefaults objectForKey:@"defaultMissionType"]);
     
     //    RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     //    //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
@@ -192,5 +216,7 @@
     
     [self.navigationController popToViewController:mainTBC animated:YES];
 }
+
+
 
 @end

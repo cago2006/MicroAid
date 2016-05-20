@@ -24,7 +24,7 @@
 @property(nonatomic)double longitude;
 @property(nonatomic)double latitude;
 
--(BOOL) verifyInfo;
+-(NSString *) verifyInfo;
 
 
 @end

@@ -12,6 +12,7 @@
 
 @interface RootController : UIViewController
 
++(NSString *)enToCn:(NSString *)string;
 
 -(void) switchToHomeViewFromLoginView;  //从login界面到homeview界面
 

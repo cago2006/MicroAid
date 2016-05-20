@@ -36,7 +36,7 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"可认领任务"];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"可认领任务")]];
     
     UIButton *addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [addBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -97,8 +97,13 @@
     
     _locService.delegate = self;
     if(self.timer == nil){
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSInteger recInterval = [[userDefaults objectForKey:@"recInterval"]integerValue];
+        if(recInterval<=0){
+            recInterval = 60;
+        }
         //每30s更新一下地理位置，是否存在推荐请求
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:recInterval target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
         [self.timer fire];
     }
 }

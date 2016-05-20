@@ -15,6 +15,11 @@
     __weak IBOutlet UIButton *addressBtn;
     __weak IBOutlet UIButton *scoreBtn;
     __weak IBOutlet UIButton *photoBtn;
+    __weak IBOutlet UILabel *nameLabel;
+    __weak IBOutlet UILabel *genderLabel;
+    __weak IBOutlet UILabel *emailLabel;
+    __weak IBOutlet UILabel *addressLabel;
+    __weak IBOutlet UILabel *scoreLabel;
 }
 -(IBAction) modeInfo:(UIButton *)sender;
 -(IBAction) choosePhoto:(UIButton *)sender;

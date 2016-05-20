@@ -29,7 +29,7 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"排行榜"];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"排行")]];
 
     //[addBtn release];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];

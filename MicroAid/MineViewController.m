@@ -40,7 +40,7 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"我"];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"我")]];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -182,6 +182,16 @@
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSDictionary *dictionary = [userDefaults dictionaryRepresentation];
             for(NSString* key in [dictionary allKeys]){
+                if([key isEqualToString:@"appLanguage"]){
+                    NSArray *languages = [NSLocale preferredLanguages];
+                    NSString *language = [languages objectAtIndex:0];
+                    if ([language hasPrefix:@"zh-Hans"]) {//开头匹配
+                        [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:@"appLanguage"];
+                    }else{
+                        [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"appLanguage"];
+                    }
+                    continue;
+                }
                 [userDefaults removeObjectForKey:key];
                 [userDefaults synchronize];
             }
@@ -228,11 +238,11 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
         }
         if(indexPath.row == 0){
-            cell.textLabel.text = @"我的任务";
+            cell.textLabel.text = [NSString stringWithFormat:@"%@",Localized(@"我的任务")];
         }else if(indexPath.row == 1){
-            cell.textLabel.text = @"修改密码";
+            cell.textLabel.text = [NSString stringWithFormat:@"%@",Localized(@"修改密码")];
         }else if(indexPath.row == 2){
-            cell.textLabel.text = @"设置";
+            cell.textLabel.text = [NSString stringWithFormat:@"%@",Localized(@"设置")];
         }else if(indexPath.row == 3){
             cell.textLabel.text = @"排行榜";
         }
@@ -246,7 +256,7 @@
         if(cell == nil){
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
         }
-        cell.textLabel.text = @"登出";
+        cell.textLabel.text = Localized(@"登出");
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.backgroundColor = [UIColor redColor];
         

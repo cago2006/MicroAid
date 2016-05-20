@@ -26,7 +26,7 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"我的群组"];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"我的群组")]];
     UIButton *addBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
     [addBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [addBtn addTarget:self action:@selector(createGroup) forControlEvents:UIControlEventTouchUpInside];
@@ -78,7 +78,7 @@
 -(void) createGroup{
     self.view.userInteractionEnabled = false;
     [self.navigationController.navigationBar setUserInteractionEnabled:false];
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入群组名称" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"添加",nil];
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入群组名称" message:nil delegate:self cancelButtonTitle:[NSString stringWithFormat:@"%@",Localized(@"取消")] otherButtonTitles:[NSString stringWithFormat:@"%@",Localized(@"添加")],nil];
     [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [[dialog textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDefault];
     [dialog show];

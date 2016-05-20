@@ -20,4 +20,8 @@
 @property (retain,nonatomic) id <ReturnBonusDelegate> returnBonusDelegate;
 @property (nonatomic, strong) NSIndexPath *choosedIndex;
 
+@property (nonatomic, assign) bool isParentEditMission;
+@property (nonatomic, assign) bool isParentFromHomeView;
+@property (nonatomic, assign) bool isParentFromMyMission;
+
 @end

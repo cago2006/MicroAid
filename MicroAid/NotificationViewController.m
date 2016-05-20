@@ -28,7 +28,7 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    [self.navigationItem setTitle:@"我的通知"];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"我的通知")]];
     
     self.pullTableView.pullArrowImage = [UIImage imageNamed:@"blackArrow"];
     self.pullTableView.pullBackgroundColor = [UIColor whiteColor];
@@ -169,7 +169,7 @@
     }
     [[cell nickName]setText:info.nickName];
     [[cell taskName]setText:info.missionTitle];
-    [[cell taskGroup]setText:info.missionGroup];
+    [[cell taskGroup]setText:Localized(info.missionGroup)];
     [[cell time]setText:info.time];
     
     cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;

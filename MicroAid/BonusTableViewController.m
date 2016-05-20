@@ -28,13 +28,13 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
+    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,70,40)];
     [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(returnToCreate) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [rightBtn setTitle:Localized(@"确定") forState:UIControlStateNormal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
-    [self.navigationItem setTitle:@"悬赏金额"];
+    [self.navigationItem setTitle:Localized(@"悬赏金额")];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
 }
@@ -51,7 +51,7 @@
 -(void) passBonusValues:(NSString *)string{
     //初始化项目
     self.dataArray = [NSMutableArray new];
-    self.dataArray = [NSMutableArray arrayWithObjects:@"0分",@"1分",@"2分",@"3分",@"4分",@"5分", nil];
+    self.dataArray = [NSMutableArray arrayWithObjects:Localized(@"0分"),Localized(@"1分"),Localized(@"2分"),Localized(@"3分"),Localized(@"4分"),Localized(@"5分"), nil];
     
     //初始化选中的项目
     for(int j = 0; j<self.dataArray.count; j++){
@@ -137,7 +137,9 @@
         
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         
-        cmVC.isEditMission = NO;
+        cmVC.isEditMission = _isParentEditMission;
+        cmVC.isFromHomeView = _isParentFromHomeView;
+        cmVC.isFromMyMission = _isParentFromMyMission;
         self.returnBonusDelegate = cmVC;
         [self.returnBonusDelegate passChoiceBonusValues:choosed];
         
@@ -151,7 +153,9 @@
         NSString *choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
         
-        cmVC.isEditMission = NO;
+        cmVC.isEditMission = _isParentEditMission;
+        cmVC.isFromHomeView = _isParentFromHomeView;
+        cmVC.isFromMyMission = _isParentFromMyMission;
         
         self.returnBonusDelegate = cmVC;
         [self.returnBonusDelegate passChoiceBonusValues:choosed];

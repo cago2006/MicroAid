@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationItem setTitle:@"查看任务"];
+    [self.navigationItem setTitle:Localized(@"查看任务")];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     [self getMission];
@@ -84,13 +84,13 @@
         [toNickNameView setText:[resultDic objectForKey:@"recUserNickName"]];
     }
     [titleLabel setText:[dic objectForKey:@"title"]];
-    [startTimeLabel setText:[NSString stringWithFormat:@"起始时间:%@",[dic objectForKey:@"startTime"]]];
+    [startTimeLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"起始时间"),[dic objectForKey:@"startTime"]]];
     NSString *status = [dic objectForKey:@"statusInfo"];
     status = [status stringByReplacingOccurrencesOfString:@"接受" withString:@"认领"];
     if([status isEqualToString:@"已认领"] && [DateTimeUtils isOutOfDate:[dic objectForKey:@"endTime"]]){
         status = @"已过期";
     }
-    [statusLabel setText:[NSString stringWithFormat:@"任务状态:%@",status]];
+    [statusLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"任务状态"),Localized(status)]];
 //    if([status isEqualToString:@"已认领"]){
 //        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 //        NSInteger userID = [userDefaults integerForKey:@"userID"];
@@ -103,23 +103,32 @@
 //            self.navigationItem.rightBarButtonItem = rightItem;
 //        }
 //    }
-    [endTimeLabel setText:[NSString stringWithFormat:@"截止时间:%@",[dic objectForKey:@"endTime"]]];
+    [endTimeLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"截止时间"),[dic objectForKey:@"endTime"]]];
     //截止时间<现在时间
     if([DateTimeUtils isOutOfDate:[dic objectForKey:@"endTime"]]){
         self.isAccepted = YES;
     }
-    [typeLabel setText:[NSString stringWithFormat:@"任务类型:%@",[dic objectForKey:@"taskType"]]];
-    [groupLabel setText:[NSString stringWithFormat:@"任务对象:%@",[dic objectForKey:@"publicity"]]];
-    [bonusLabel setText:[NSString stringWithFormat:@"任务悬赏:%@",[NSString stringWithFormat:@"%ld分",(long)[[dic objectForKey:@"taskScores"]integerValue]]]];
+    [typeLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"任务类型"),Localized([dic objectForKey:@"taskType"])]];
+    [groupLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"任务对象"),[dic objectForKey:@"publicity"]]];
+    if((long)[[dic objectForKey:@"taskScores"]integerValue]<2){
+        [bonusLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"悬赏金额"),[NSString stringWithFormat:@"%ld%@",(long)[[dic objectForKey:@"taskScores"]integerValue],Localized(@"分")]]];
+    }else{
+        [bonusLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"悬赏金额"),[NSString stringWithFormat:@"%ld%@",(long)[[dic objectForKey:@"taskScores"]integerValue],Localized(@"分s")]]];
+    }
+    
     self.missionAddress = [dic objectForKey:@"address"];
     self.missionLatitude = [[dic objectForKey:@"latitude"]doubleValue];
     self.missionLongitude = [[dic objectForKey:@"longitude"]doubleValue];
     if(!self.isSelf){
-        [addressLabel setText:[NSString stringWithFormat:@"任务地址:%@(距您%.1f米)",self.missionAddress,self.missionDistance]];
+        if([[[NSUserDefaults standardUserDefaults]objectForKey:@"appLanguage"] hasPrefix:@"en"]){
+            [addressLabel setText:[NSString stringWithFormat:@"%@:%@(%.1fm away)",Localized(@"任务位置"),self.missionAddress,self.missionDistance]];
+        }else{
+            [addressLabel setText:[NSString stringWithFormat:@"%@:%@(距您%.1fm)",Localized(@"任务位置"),self.missionAddress,self.missionDistance]];
+        }
     }else{
-        [addressLabel setText:[NSString stringWithFormat:@"任务地址:%@",self.missionAddress]];
+        [addressLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"任务位置"),self.missionAddress]];
     }
-    [typeLabel setText:[NSString stringWithFormat:@"任务类型:%@",[dic objectForKey:@"taskType"]]];
+    [typeLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"任务类型"),Localized([dic objectForKey:@"taskType"])]];
     desTextView.text =[dic objectForKey:@"description"];
     //分享
 //    UIButton *shareBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
@@ -129,10 +138,10 @@
 //    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc]initWithCustomView:shareBtn];
     if(self.toID<1){
         if(!self.isAccepted){
-            UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
+            UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,60,60)];
             [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [rightBtn addTarget:self action:@selector(acceptMission) forControlEvents:UIControlEventTouchUpInside];
-            [rightBtn setTitle:@"认领" forState:UIControlStateNormal];
+            [rightBtn setTitle:Localized(@"认领") forState:UIControlStateNormal];
             UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
             [self.navigationItem setRightBarButtonItems:[[NSArray alloc]initWithObjects:rightItem,nil]];
         }else{
@@ -256,7 +265,7 @@
 
 -(void) acceptMission{
     
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"确认要认领该任务？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认",nil];
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@?",Localized(@"确认要认领该任务")] message:nil delegate:self cancelButtonTitle:Localized(@"取消") otherButtonTitles:Localized(@"确定"),nil];
     [dialog setAlertViewStyle:UIAlertViewStyleDefault];
     [dialog show];
     
