@@ -21,6 +21,13 @@
     __weak IBOutlet UITextField *passwordTextField;
     __weak IBOutlet UITextField *passwordTextField2;
     __weak IBOutlet UITextField *nickNameTextField;
+    __weak IBOutlet UILabel *accountLabel;
+    __weak IBOutlet UILabel *passLabel;
+    __weak IBOutlet UILabel *confirmLabel;
+    __weak IBOutlet UILabel *nickNameLabel;
+    __weak IBOutlet UILabel *helpLabel;
+    __weak IBOutlet UIButton *helpBtn;
+    __weak IBOutlet UIButton *registerBtn;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *inputView;

@@ -28,10 +28,13 @@
         self.navigationController.navigationBar.translucent = NO;
     }
     
-    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
+    [self.navigationItem setTitle:Localized(@"推荐加入群")];
+    
+    
+    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,70,70)];
     [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(saveChange) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [rightBtn setTitle:Localized(@"确定") forState:UIControlStateNormal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
@@ -72,16 +75,16 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *phoneNumber = [userDefaults objectForKey:@"username"];
         
-        [ProgressHUD show:@"正在邀请..."];
+        [ProgressHUD show:Localized(@"正在邀请...")];
         dispatch_async(serverQueue, ^{
             
             
             NSDictionary *resultDic = [MicroAidAPI joinGroup:self.groupName applicantName:phoneNumber userIDs:choosedID];
             if ([[resultDic objectForKey:@"flg"] boolValue]) {//邀请成功
-                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"邀请加入成功!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:Localized(@"邀请加入成功!") waitUntilDone:YES];
                 [self performSelectorOnMainThread:@selector(returnToViewGroup) withObject:nil waitUntilDone:YES];
             }else{//邀请失败
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"邀请加入失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"邀请加入失败,请检查网络!") waitUntilDone:YES];
                 return ;
             }
         });
@@ -137,7 +140,7 @@
         
         if ([[userInfo objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"获取数据失败") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
             });
             return;
@@ -149,11 +152,11 @@
                     if(self.count == 1){
 //                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"所有用户都已经加入该群组!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                        [alertView show];
-                        [self showMessage:@"所有用户都已经加入该群组!"];
+                        [self showMessage:Localized(@"所有用户都已经加入该群组!")];
                     }else{
 //                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                        [alertView show];
-                        [self showMessage:@"没有更多了!"];
+                        [self showMessage:Localized(@"没有更多了!")];
                     }
                 });
                 return;

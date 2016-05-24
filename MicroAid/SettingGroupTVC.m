@@ -26,10 +26,10 @@
     UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
     [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(returnToSetting) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [rightBtn setTitle:Localized(@"确定") forState:UIControlStateNormal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
-    [self.navigationItem setTitle:@"默认群组"];
+    [self.navigationItem setTitle:Localized(@"设置默认群组")];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     
@@ -123,7 +123,7 @@
     }
     else if(self.choosedIndex == nil || [self.choosedIndex isEqual:@""])
     {
-        [ProgressHUD showError:@"请选择一项"];
+        [ProgressHUD showError:Localized(@"请选择一项")];
     }else{
         NSString *choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         MySettingViewController *mySettingVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];

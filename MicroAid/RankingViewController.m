@@ -196,7 +196,7 @@
         
         if ([[userInfo objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"获取数据失败") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
             });
             return;
@@ -206,10 +206,10 @@
             if ([_userInfoArray count] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if(self.count == 1){
-                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有用户!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"没有用户!") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                         [alertView show];
                     }else{
-                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"没有更多了!") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                         [alertView show];
                     }
                 });

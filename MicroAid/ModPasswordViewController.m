@@ -68,11 +68,11 @@
         dispatch_async(serverQueue, ^{
             NSDictionary *resultDic = [MicroAidAPI modPassword:userID password:oldPasswordTextField.text newPassword:passwordTextField.text];
             if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
-                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"密码修改成功,请重新登录!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:Localized(@"密码修改成功,请重新登录!") waitUntilDone:YES];
                 [self performSelectorOnMainThread:@selector(returnToLogin) withObject:nil waitUntilDone:YES];
             }else//创建失败
             {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"密码修改失败,请检查网络！" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"密码修改失败,请检查网络！") waitUntilDone:YES];
                 return ;
             }
         });
@@ -107,31 +107,31 @@
 
 -(BOOL) verifyInfo:(NSString*)password oldPassword:(NSString*)oldPassword newPassword:(NSString *)newPassword newPassword2:(NSString *)newPassword2{
     if (![oldPassword isEqualToString:password]) {
-        [ProgressHUD showError:@"原始密码错误！"];
+        [ProgressHUD showError:Localized(@"原始密码错误！")];
         return FALSE;
     }
     if ([newPassword isEqualToString:@""]) {
-        [ProgressHUD showError:@"密码不能为空！"];
+        [ProgressHUD showError:Localized(@"密码不能为空！")];
         return FALSE;
     }
     if(newPassword.length < 6) {
-        [ProgressHUD showError:@"密码过短！"];
+        [ProgressHUD showError:Localized(@"密码过短！")];
         return FALSE;
     }
     if(newPassword.length > 16) {
-        [ProgressHUD showError:@"密码过长！"];
+        [ProgressHUD showError:Localized(@"密码过长！")];
         return FALSE;
     }
     if ([oldPassword isEqualToString:newPassword]) {
-        [ProgressHUD showError:@"新旧密码一致,请重新输入新密码!"];
+        [ProgressHUD showError:Localized(@"新旧密码一致,请重新输入新密码!")];
         return FALSE;
     }
     if ([newPassword2 isEqualToString:@""]) {
-        [ProgressHUD showError:@"再次输入密码不能为空！"];
+        [ProgressHUD showError:Localized(@"再次输入密码不能为空！")];
         return FALSE;
     }
     if(![newPassword isEqualToString:newPassword2]){
-        [ProgressHUD showError:@"两次输入密码不一致，请重新输入！"];
+        [ProgressHUD showError:Localized(@"两次输入密码不一致，请重新输入！")];
         return FALSE;
     }
     return TRUE;

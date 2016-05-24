@@ -30,7 +30,12 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *appLanguage = [userDefaults objectForKey:@"appLanguage"];
     if([appLanguage hasPrefix:@"en"]){
-        return Localized(string);
+        NSString *temp = [NSString stringWithFormat:@"%@1",string];
+        if([Localized(temp) hasSuffix:@"1"]){
+            return string;
+        }else{
+            return Localized(temp);
+        }
     }else{
         return string;
     }
@@ -75,7 +80,7 @@
             }
             else//登录出错
             {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"登录失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"登录失败,请检查网络!") waitUntilDone:YES];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
                     NSDictionary *dictionary = [userDefaults dictionaryRepresentation];
@@ -108,7 +113,8 @@
         [MicroAidAPI updateChannelID:userID channelID:[BPush getChannelId]];
     });
     
-    [self _tryLogin];
+    //即时通信
+    //[self _tryLogin];
     //如果已登陆
     if(self.homeNavigationViewController == nil){
         HomeViewController *homeVC = [[HomeViewController alloc]initWithNibName:@"HomeViewController" bundle:nil];
@@ -233,6 +239,20 @@
     [self.view addSubview:self.mainTabBarController.view];
 }
 
+//刷新主界面
+-(void) refreshMainTabView{
+    self.mainTabBarController = nil;
+    self.mainTabBarController = [[MainTabBarController alloc]init];
+    self.mainTabBarController.selectedIndex = 4;
+    [self.view addSubview:self.mainTabBarController.view];
+}
+
+//刷新登陆界面
+-(void) refreshLoginView{
+    self.loginViewController = nil;
+    self.loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    [self.view addSubview:self.loginViewController.view];
+}
 
 
 //OpenIM

@@ -27,13 +27,13 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
+    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,70,70)];
     [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(returnToFilter) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [rightBtn setTitle:Localized(@"确定") forState:UIControlStateNormal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
-    [self.navigationItem setTitle:@"任务对象"];
+    [self.navigationItem setTitle:Localized(@"任务对象")];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 }
 

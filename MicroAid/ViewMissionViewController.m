@@ -55,7 +55,7 @@
             
         }else if ([[resultDic objectForKey:@"onError"] boolValue])//获取失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"列表获取失败,请检查网络!") waitUntilDone:YES];
             return ;
         }
     });
@@ -65,12 +65,12 @@
     NSMutableDictionary *dic = [resultDic objectForKey:@"task"];
     dispatch_async(serverQueue, ^{
         NSDictionary *resultDic2 = [MicroAidAPI fetchPicture:[[dic objectForKey:@"userID"]integerValue]];
-        if ([[resultDic2 objectForKey:@"flg"] boolValue]) {//创建成功
+        if ([[resultDic2 objectForKey:@"flg"] boolValue]) {//成功
             NSData *picture = [resultDic2 objectForKey:@"picture"];
             [self performSelectorOnMainThread:@selector(showFromPicture:) withObject:picture waitUntilDone:YES];
-        }else if ([[resultDic2 objectForKey:@"onError"] boolValue])//创建失败
+        }else if ([[resultDic2 objectForKey:@"onError"] boolValue])//失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"头像查找失败,请检查网络!") waitUntilDone:YES];
             return ;
         }else{
             [self performSelectorOnMainThread:@selector(showFromPicture:) withObject:nil waitUntilDone:YES];
@@ -109,7 +109,7 @@
         self.isAccepted = YES;
     }
     [typeLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"任务类型"),Localized([dic objectForKey:@"taskType"])]];
-    [groupLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"任务对象"),[dic objectForKey:@"publicity"]]];
+    [groupLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"任务对象"),Localized([dic objectForKey:@"publicity"])]];
     if((long)[[dic objectForKey:@"taskScores"]integerValue]<2){
         [bonusLabel setText:[NSString stringWithFormat:@"%@:%@",Localized(@"悬赏金额"),[NSString stringWithFormat:@"%ld%@",(long)[[dic objectForKey:@"taskScores"]integerValue],Localized(@"分")]]];
     }else{
@@ -158,7 +158,7 @@
                 [self performSelectorOnMainThread:@selector(showToPicture:) withObject:picture waitUntilDone:YES];
             }else if ([[resultDic objectForKey:@"onError"] boolValue])//创建失败
             {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"头像查找失败,请检查网络!") waitUntilDone:YES];
                 return ;
             }else{
                 [self performSelectorOnMainThread:@selector(showToPicture:) withObject:nil waitUntilDone:YES];
@@ -193,7 +193,7 @@
     
     UIActionSheet *choiceSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
-                                                    cancelButtonTitle:@"取消"
+                                                    cancelButtonTitle:Localized(@"取消")
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:@"新浪微博", @"微信好友",@"微信朋友圈", nil];
     [choiceSheet showInView:self.view];
@@ -279,10 +279,10 @@
         dispatch_async(serverQueue, ^{
             NSDictionary *resultDic = [MicroAidAPI acceptMission:self.missionID userID:userID isFromRec:self.isFromRec];
             if ([[resultDic objectForKey:@"flg"] boolValue]) {//接受成功
-                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务认领成功!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:Localized(@"任务认领成功!") waitUntilDone:YES];
                 [self performSelectorOnMainThread:@selector(returnToMainTab) withObject:nil waitUntilDone:YES];
             }else if ([[resultDic objectForKey:@"onError"] boolValue]) {//接受失败
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务认领失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"任务认领失败,请检查网络!") waitUntilDone:YES];
                 return ;
             }
         });

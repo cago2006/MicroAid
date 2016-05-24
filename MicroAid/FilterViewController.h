@@ -24,6 +24,14 @@
     __weak IBOutlet UIButton *objectBtn;
     __weak IBOutlet UIButton *bonusBtn;
     __weak IBOutlet UITextField *distanceTextField;
+    __weak IBOutlet UILabel *distanceLabel;
+    __weak IBOutlet UILabel *typeLabel;
+    __weak IBOutlet UILabel *bonusLabel;
+    __weak IBOutlet UILabel *objectLabel;
+    __weak IBOutlet UILabel *timeLabel;
+    __weak IBOutlet UILabel *miLabel;
+    __weak IBOutlet UIButton *confirmBtn;
+    __weak IBOutlet UIButton *cancelBtn;
 }
 
 -(IBAction) buttonClicked:(UIButton *)sender;

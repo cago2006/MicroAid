@@ -27,11 +27,16 @@
     bubbleBtn.userInteractionEnabled = NO;////////////////////////////////////
     bubbleBtn.layer.cornerRadius = bubbleBtn.frame.size.width/2.0;
     bubbleBtn.layer.masksToBounds = bubbleBtn.frame.size.width/2.0;
+    
+    [self.navigationItem setTitle:Localized(@"用户信息")];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
+    [nameLabel1 setText:[NSString stringWithFormat:@"%@:",Localized(@"姓名")]];
+    [genderLabel1 setText:[NSString stringWithFormat:@"%@:",Localized(@"性别")]];
+    [emailLabel1 setText:[NSString stringWithFormat:@"%@:",Localized(@"邮箱")]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,7 +52,7 @@
             [self performSelectorOnMainThread:@selector(showMyInfo:) withObject:self.user waitUntilDone:YES];
         }else if([[resultDic objectForKey:@"onError"] boolValue])//失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"信息查找失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"信息查找失败,请检查网络") waitUntilDone:YES];
             return ;
         }
     });
@@ -59,7 +64,7 @@
             [self performSelectorOnMainThread:@selector(showPicture:) withObject:picture waitUntilDone:YES];
         }else if([[resultDic objectForKey:@"onError"] boolValue])//创建失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"头像查找失败,请检查网络!") waitUntilDone:YES];
             return ;
         }else{
             [self performSelectorOnMainThread:@selector(showPicture:) withObject:nil waitUntilDone:YES];
@@ -82,12 +87,12 @@
     self.phoneNumber = [dic objectForKey:@"userName"];
     
     nameLabel.text = [dic objectForKey:@"nickName"];
-    NSString *gender = [dic objectForKey:@"gender"];
+    NSString *gender = Localized([dic objectForKey:@"gender"]);
     if(![gender isKindOfClass:[NSString class]]){
-        genderLabel.text = @"此人没有填写";
+        genderLabel.text = Localized(@"此人没有填写");
     }else{
         if([gender isEqualToString:@""]){
-            genderLabel.text = @"此人没有填写";
+            genderLabel.text = Localized(@"此人没有填写");
         }else{
             genderLabel.text = gender;
         }
@@ -95,10 +100,10 @@
     
     NSString *email = [dic objectForKey:@"email"];
     if(![email isKindOfClass:[NSString class]]){
-        emailLabel.text = @"此人没有填写";
+        emailLabel.text = Localized(@"此人没有填写");
     }else{
         if([email isEqualToString:@""]){
-            emailLabel.text = @"此人没有填写";
+            emailLabel.text = Localized(@"此人没有填写");
         }else{
             emailLabel.text = email;
         }

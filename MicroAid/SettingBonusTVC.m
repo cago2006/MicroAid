@@ -23,13 +23,13 @@
         //        self.edgesForExtendedLayout=UIRectEdgeNone;
         self.navigationController.navigationBar.translucent = NO;
     }
-    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,40,40)];
+    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,500,70,70)];
     [rightBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(returnToSetting) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [rightBtn setTitle:Localized(@"确定") forState:UIControlStateNormal];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
     self.navigationItem.rightBarButtonItem = rightItem;
-    [self.navigationItem setTitle:@"默认悬赏金额"];
+    [self.navigationItem setTitle:Localized(@"默认悬赏金额")];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
     
     self.dataArray = [NSMutableArray arrayWithObjects:Localized(@"0分"),Localized(@"1分"),Localized(@"2分"),Localized(@"3分"),Localized(@"4分"),Localized(@"5分"), nil];
@@ -123,7 +123,7 @@
     }
     else if(self.choosedIndex == nil || [self.choosedIndex isEqual:@""])
     {
-        [ProgressHUD showError:@"请选择一项"];
+        [ProgressHUD showError:Localized(@"请选择一项")];
     }else{
         NSString *choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         MySettingViewController *mySettingVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];

@@ -146,7 +146,7 @@
     }
     else if(self.choosedIndex == nil || [self.choosedIndex isEqual:@""])
     {
-        [ProgressHUD showError:@"请选择一项"];
+        [ProgressHUD showError:Localized(@"请选择一项")];
     }else{
         NSString *choosed = [self.dataArray objectAtIndex:self.choosedIndex.row];
         CreateMissionViewController *cmVC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];

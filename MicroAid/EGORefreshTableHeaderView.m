@@ -109,37 +109,58 @@
         NSTimeInterval timeSinceLastUpdate = [date timeIntervalSinceNow];
         NSInteger timeToDisplay = 0;
         timeSinceLastUpdate *= -1;
-        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSString *appLanguage = [userDefaults objectForKey:@"appLanguage"];
         if(timeSinceLastUpdate < anHour) {
             timeToDisplay = (NSInteger) (timeSinceLastUpdate / aMinute);
-            
-            if(timeToDisplay == /* Singular*/ 1) {
-            _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld分钟前更新",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+            if(timeToDisplay <= /* Singular*/ 1) {
+                if([appLanguage hasPrefix:@"en"]){
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"update %ld minute ago",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }else{
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld分钟前更新",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }
             } else {
                 /* Plural */
-                _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld分钟前更新",@"PullTableViewLan",@"Last uppdate in minutes plural"), (long)timeToDisplay];
-
+                if([appLanguage hasPrefix:@"en"]){
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"update %ld minutes ago",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }else{
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld分钟前更新",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }
             }
             
         } else if (timeSinceLastUpdate < aDay) {
             timeToDisplay = (NSInteger) (timeSinceLastUpdate / anHour);
-            if(timeToDisplay == /* Singular*/ 1) {
-                _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld小时前更新",@"PullTableViewLan",@"Last uppdate in hours singular"), (long)timeToDisplay];
+            if(timeToDisplay <= /* Singular*/ 1) {
+                if([appLanguage hasPrefix:@"en"]){
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"update %ld hour ago",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }else{
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld小时前更新",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }
             } else {
                 /* Plural */
-                _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld小时前更新",@"PullTableViewLan",@"Last uppdate in hours plural"), (long)timeToDisplay];
-                
+                if([appLanguage hasPrefix:@"en"]){
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"update %ld hours ago",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }else{
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld小时前更新",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }
             }
             
         } else {
             timeToDisplay = (NSInteger) (timeSinceLastUpdate / aDay);
-            if(timeToDisplay == /* Singular*/ 1) {
-                _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ld天前更新",@"PullTableViewLan",@"Last uppdate in days singular"), (long)timeToDisplay];
+            if(timeToDisplay <= /* Singular*/ 1) {
+                if([appLanguage hasPrefix:@"en"]){
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"update %ld day ago",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }else{
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld天前更新",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }
             } else {
                 /* Plural */
-                _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"ld天前更新",@"PullTableViewLan",@"Last uppdate in days plural"), (long)timeToDisplay];
+                if([appLanguage hasPrefix:@"en"]){
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"update %ld days ago",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }else{
+                    _lastUpdatedLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"%ld天前更新",@"PullTableViewLan",@"Last uppdate in minutes singular"),(long)timeToDisplay];
+                }
             }
-            
         }
         
     } else {
@@ -161,7 +182,7 @@
 	switch (aState) {
 		case EGOOPullPulling:
 			
-			_statusLabel.text = NSLocalizedStringFromTable(@"释放刷新...",@"PullTableViewLan", @"Release to refresh status");
+			_statusLabel.text = NSLocalizedStringFromTable(Localized(@"释放刷新..."),@"PullTableViewLan", @"Release to refresh status");
 			[CATransaction begin];
 			[CATransaction setAnimationDuration:FLIP_ANIMATION_DURATION];
 			_arrowImage.transform = CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
@@ -177,7 +198,7 @@
 				[CATransaction commit];
 			}
 			
-			_statusLabel.text = NSLocalizedStringFromTable(@"下拉刷新...",@"PullTableViewLan", @"Pull down to refresh status");
+			_statusLabel.text = NSLocalizedStringFromTable(Localized(@"下拉刷新..."),@"PullTableViewLan", @"Pull down to refresh status");
 			[_activityView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
@@ -190,7 +211,7 @@
 			break;
 		case EGOOPullLoading:
 			
-			_statusLabel.text = NSLocalizedStringFromTable(@"载入中...",@"PullTableViewLan", @"Loading Status");
+			_statusLabel.text = NSLocalizedStringFromTable(Localized(@"载入中..."),@"PullTableViewLan", @"Loading Status");
 			[_activityView startAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 

@@ -28,4 +28,8 @@
 
 -(void) startMainTabView;  //打开主界面
 
+-(void) refreshMainTabView;  //刷新主界面
+
+-(void) refreshLoginView;  //刷新登陆界面
+
 @end

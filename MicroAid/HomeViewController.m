@@ -135,7 +135,7 @@
 }
 
 -(void)showUpdate{
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"目前版本(1.1.4)不是最新\n是否升级？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"升级",nil];
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@(1.1.4)%@",@"目前版本",@"不是最新是否升级？"] message:nil delegate:self cancelButtonTitle:Localized(@"取消") otherButtonTitles:Localized(@"升级"),nil];
     [dialog setAlertViewStyle:UIAlertViewStyleDefault];
     [dialog setTag:1];
     [dialog show];
@@ -159,7 +159,7 @@
 
 - (void)openAppStore:(NSString *)appId
 {
-    [ProgressHUD show:@"AppStore加载中..."];
+    [ProgressHUD show:Localized(@"AppStore加载中...")];
     SKStoreProductViewController *storeProductVC = [[SKStoreProductViewController alloc] init];
     storeProductVC.delegate = self;
     
@@ -226,6 +226,8 @@
         [self.timer fire];
     }
     
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"微助地图")]];
+    [_mySearchBar setPlaceholder:Localized(@"输入地址定位")];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -273,8 +275,9 @@
 
 -(void)returnToLogin{
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"是否退出？" preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:Localized(@"是否退出?") preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"取消") style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:Localized(@"确定") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSDictionary *dictionary = [userDefaults dictionaryRepresentation];
         for(NSString* key in [dictionary allKeys]){
@@ -302,8 +305,6 @@
         //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
         [rootController switchToLoginViewFromHomeView];
     }]];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
     
     [self presentViewController:alert animated:YES completion:nil];
 }
@@ -388,9 +389,9 @@
         if ([[recommendMission objectForKey:@"flg"] boolValue]) {//如果返回值中存在任务
             MissionInfo *info = [MissionInfo getRecMissionInfos:[recommendMission objectForKey:@"recTask"]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"您有新的任务推荐，是否查看？" preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
-                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:Localized(@"您有新的任务推荐，是否查看？") preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:Localized(@"取消") style:UIAlertActionStyleDefault handler:nil]];
+                [alert addAction:[UIAlertAction actionWithTitle:Localized(@"确定") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
                     if(([info.statusInfo isEqualToString:@"未接受"] || [info.statusInfo isEqualToString:@"未认领"])){
                         viewMissionVC.isAccepted = NO;
@@ -531,7 +532,7 @@
 
 
 -(void) switchToTagDetailVC:(MissionInfo *)info{
-    [ProgressHUD show:@"正在获取详细信息"];
+    [ProgressHUD show:Localized(@"正在获取详细信息")];
     self.view.userInteractionEnabled = false;
     [self.navigationController.navigationBar setUserInteractionEnabled:false];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -678,7 +679,7 @@
     else
     {
         NSLog(@"geo检索发送失败");
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"搜索发送失败" message:@"请检查您的网络，重试" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:Localized(@"搜索发送失败") message:Localized(@"请检查您的网络并重试") delegate:self cancelButtonTitle:nil otherButtonTitles:Localized(@"确定"),nil];
         [myAlertView show];
         return false;
     }
@@ -717,7 +718,7 @@
         [self addPointAnnotation:userCurrentLocation title:result.address];
         
     }else{
-        [ProgressHUD showError:@"查询不到该地址"];
+        [ProgressHUD showError:Localized(@"查询不到该地址")];
     }
 }
 
@@ -903,7 +904,7 @@
         
         if ([[nearbyMissions objectForKey:@"result"] isEqualToString:@"fail"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"获取数据失败") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
             });
             return;
@@ -911,7 +912,7 @@
             _missionInfoArray = [MissionInfo getMissionInfos:[nearbyMissions objectForKey:@"taskInfoList"]];
             if ([_missionInfoArray count] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showMessage:@"无待认领任务"];
+                    [self showMessage:Localized(@"无待认领任务")];
                 });
                 return;
             }
@@ -929,7 +930,7 @@
         
         if ([[nearbyFreeBarriers objectForKey:@"result"] isEqualToString:@"fail"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"获取数据失败") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
             });
             return;
@@ -937,7 +938,7 @@
             _barrierFreeInfoArray = [FreeBarrierInfo getFreeBarrierInfos:[nearbyFreeBarriers objectForKey:@"barrierFree"]];
             if ([_barrierFreeInfoArray count] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showMessage:@"附近没有无障碍设施"];
+                    [self showMessage:Localized(@"附近没有无障碍设施")];
                 });
                 return;
             }

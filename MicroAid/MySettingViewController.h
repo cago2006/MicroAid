@@ -18,6 +18,8 @@
     __weak IBOutlet UILabel *bonusLabel;
     __weak IBOutlet UILabel *recIntervalLabel;
     __weak IBOutlet UILabel *secondLabel;
+    __weak IBOutlet UIButton *languageBtn;
+    __weak IBOutlet UILabel *languageLabel;
 }
 
 -(IBAction) buttonClicked:(UIButton *)sender;

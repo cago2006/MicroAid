@@ -75,7 +75,7 @@
             [self performSelectorOnMainThread:@selector(showMyInfo:) withObject:user waitUntilDone:YES];
         }else if([[resultDic objectForKey:@"onError"] boolValue])//失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"信息查找失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"信息查找失败,请检查网络!") waitUntilDone:YES];
             return ;
         }
     });
@@ -100,19 +100,19 @@
     [nickNameBtn setTitle:self.nickName forState:UIControlStateNormal];
     self.gender = Localized([dic objectForKey:@"gender"]);
     if(![self.gender isKindOfClass:[NSString class]] || [self.gender isEqualToString:@""]){
-        self.gender = @"点击修改";
+        self.gender = Localized(@"点击修改");
     }
     [genderBtn setTitle:Localized(self.gender) forState:UIControlStateNormal];
     self.address = [dic objectForKey:@"address"];
     if(![self.address isKindOfClass:[NSString class]] || [self.address isEqualToString:@""]){
-        self.address = @"点击修改";
+        self.address = Localized(@"点击修改");
     }
     [addressBtn setTitle:self.address forState:UIControlStateNormal];
     self.score = [[dic objectForKey:@"scores"]integerValue];
     [scoreBtn setTitle:[NSString stringWithFormat:@"%ld",(long)self.score] forState:UIControlStateNormal];
     self.email = [dic objectForKey:@"email"];
     if(![self.email isKindOfClass:[NSString class]] || [self.email isEqualToString:@""]){
-        self.email = @"点击修改";
+        self.email = Localized(@"点击修改");
     }
     [emailBtn setTitle:self.email forState:UIControlStateNormal];
     
@@ -123,7 +123,7 @@
                                                              delegate:self
                                                     cancelButtonTitle:Localized(@"取消")
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"拍照", @"从相册中选取", nil];
+                                                    otherButtonTitles:Localized(@"拍照"), Localized(@"从相册中选取"), nil];
     [choiceSheet showInView:self.view];
 }
 
@@ -143,7 +143,7 @@
 -(IBAction)modeInfo:(UIButton *)sender{
     switch(sender.tag){
         case 0:{
-            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入昵称" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:Localized(@"请输入昵称") message:nil delegate:self cancelButtonTitle:Localized(@"取消") otherButtonTitles:Localized(@"确定"),nil];
             [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
             [dialog textFieldAtIndex:0].text = nickNameBtn.titleLabel.text;
             [dialog setTag:0];
@@ -152,16 +152,16 @@
             break;
         }
         case 1:{
-            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请选择性别" message:nil delegate:self cancelButtonTitle:Localized(@"男") otherButtonTitles:Localized(@"女"),nil];
+            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:Localized(@"请选择性别") message:nil delegate:self cancelButtonTitle:Localized(@"男") otherButtonTitles:Localized(@"女"),nil];
             [dialog setAlertViewStyle:UIAlertViewStyleDefault];
             [dialog setTag:1];
             [dialog show];
             break;
         }
         case 2:{
-            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入邮箱" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:Localized(@"请输入邮箱") message:nil delegate:self cancelButtonTitle:Localized(@"取消") otherButtonTitles:Localized(@"确定"),nil];
             [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            if(![emailBtn.titleLabel.text isEqualToString:@"点击修改"]){
+            if(![emailBtn.titleLabel.text isEqualToString:Localized(@"点击修改")]){
                 [dialog textFieldAtIndex:0].text = emailBtn.titleLabel.text;
             }
             [dialog setTag:2];
@@ -170,9 +170,9 @@
             break;
         }
         case 3:{
-            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入住址" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定",nil];
+            UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:Localized(@"请输入住址") message:nil delegate:self cancelButtonTitle:Localized(@"取消") otherButtonTitles:Localized(@"确定"),nil];
             [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
-            if(![addressBtn.titleLabel.text isEqualToString:@"点击修改"]){
+            if(![addressBtn.titleLabel.text isEqualToString:Localized(@"点击修改")]){
                 [dialog textFieldAtIndex:0].text = addressBtn.titleLabel.text;
             }
             [dialog setTag:3];
@@ -194,7 +194,7 @@
                 //self.nickName = nickName;
                 [nickNameBtn setTitle:nickName forState:UIControlStateNormal];
             }else{
-                [self errorWithMessage:@"请输入昵称"];
+                [self errorWithMessage:Localized(@"请输入昵称")];
             }
         }
         if(alertView.tag == 1){
@@ -207,7 +207,7 @@
                 //self.email = email;
                 [emailBtn setTitle:email forState:UIControlStateNormal];
             }else{
-                [self errorWithMessage:@"请输入正确的邮箱地址"];
+                [self errorWithMessage:Localized(@"请输入正确的邮箱地址")];
             }
         }
         if(alertView.tag == 3){
@@ -216,7 +216,7 @@
                 //self.address = address;
                 [addressBtn setTitle:address forState:UIControlStateNormal];
             }else{
-                [self errorWithMessage:@"请输入地址"];
+                [self errorWithMessage:Localized(@"请输入地址")];
             }
         }
     }else if(buttonIndex == 0){
@@ -241,7 +241,7 @@
     NSInteger userID = [userDefaults integerForKey:@"userID"];
 //    [userDefaults setObject:nickNameBtn.titleLabel.text forKey:@"nickName"];
 //    [userDefaults synchronize];
-    [ProgressHUD show:@"正在上传"];
+    [ProgressHUD show:Localized(@"正在上传")];
     self.view.userInteractionEnabled = NO;
     [self.navigationController.navigationBar setUserInteractionEnabled:false];
     
@@ -251,8 +251,8 @@
             BOOL isPhotoSuccess = NO;
             BOOL isInfoSuccess = NO;
             if(isInfoChanged){
-                NSString *tempNickName = [nickNameBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : nickNameBtn.titleLabel.text;
-                NSString *tempGender = [genderBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : genderBtn.titleLabel.text;
+                NSString *tempNickName = [nickNameBtn.titleLabel.text isEqualToString:Localized(@"点击修改")]? @"" : nickNameBtn.titleLabel.text;
+                NSString *tempGender = [genderBtn.titleLabel.text isEqualToString:Localized(@"点击修改")]? @"" : genderBtn.titleLabel.text;
                 if([[[NSUserDefaults standardUserDefaults]objectForKey:@"appLanguage"] isEqualToString:@"en"]){
                     if([tempGender isEqualToString:@"Female"]){
                         tempGender = @"女";
@@ -260,8 +260,8 @@
                         tempGender = @"男";
                     }
                 }
-                NSString *tempAddress = [addressBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : addressBtn.titleLabel.text;
-                NSString *tempEmail = [emailBtn.titleLabel.text isEqualToString:@"点击修改"]? @"" : emailBtn.titleLabel.text;
+                NSString *tempAddress = [addressBtn.titleLabel.text isEqualToString:Localized(@"点击修改")]? @"" : addressBtn.titleLabel.text;
+                NSString *tempEmail = [emailBtn.titleLabel.text isEqualToString:Localized(@"点击修改")]? @"" : emailBtn.titleLabel.text;
                 NSDictionary *resultDic = [MicroAidAPI updateUser:userID nickName:tempNickName gender:tempGender message:@"" address:tempAddress email:tempEmail];
                 if ([[resultDic objectForKey:@"flg"] boolValue]) {//查找成功
                     isInfoSuccess = YES;
@@ -280,14 +280,14 @@
             }
             
             if(((isInfoChanged && isInfoSuccess)||!isInfoChanged) && ((isPhotoChanged && isPhotoSuccess)||!isPhotoChanged)){
-                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"信息修改成功!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:Localized(@"信息修改成功!") waitUntilDone:YES];
                 [self performSelectorOnMainThread:@selector(returnToMine) withObject:nil waitUntilDone:YES];
             }else if((isInfoChanged && isInfoSuccess)||!isInfoChanged){
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像修改失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"头像修改失败,请检查网络!") waitUntilDone:YES];
             }else if((isPhotoChanged && isPhotoSuccess)||!isPhotoChanged){
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"基本信息修改失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"基本信息修改失败,请检查网络!") waitUntilDone:YES];
             }else{
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"信息修改失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"信息修改失败,请检查网络!") waitUntilDone:YES];
                 return ;
             }
             

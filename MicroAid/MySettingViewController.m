@@ -49,10 +49,14 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.navigationItem setTitle:Localized(@"设置默认值")];
+    [self.navigationController.navigationBar setHidden:NO];
     [typeLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"任务类型")]];
     [objectLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"任务对象")]];
     [bonusLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"悬赏金额")]];
     [recIntervalLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"推荐间隔")]];
+    [languageLabel setText:Localized(@"系统语言:")];
+    [languageBtn setTitle:Localized(@"中文") forState:UIControlStateNormal];
     [secondLabel setText:Localized(@"秒")];
     if(self.missionGroup == nil || [self.missionGroup isEqualToString:@""]){
         self.missionGroup = Localized(@"公开");
@@ -101,7 +105,7 @@
                     
                 }else//获取失败
                 {
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"列表获取失败,请检查网络!") waitUntilDone:YES];
                     return ;
                 }
             });
@@ -127,7 +131,7 @@
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllGroup:userID pageNo:1 pageSize:10];
                 if ([[resultDic objectForKey:@"onError"] boolValue]) {//获取成功
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"列表获取失败,请检查网络!") waitUntilDone:YES];
                     return ;
                 }else//获取失败
                 {
@@ -150,6 +154,13 @@
                 }
             });
             break;
+        }
+        case 3:{
+            if([languageBtn.titleLabel.text isEqualToString:@"中文"]){
+                [languageBtn setTitle:@"English" forState:UIControlStateNormal];
+            }else{
+                [languageBtn setTitle:@"中文" forState:UIControlStateNormal];
+            }
         }
         default:
             break;
@@ -188,33 +199,36 @@
 
 -(void)saveFilter{
 
+    BOOL isLanguageChanged = NO;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:self.missionGroup forKey:@"defaultMissionGroup"];
-    [userDefaults setObject:self.missionBonus forKey:@"defaultMissionBonus"];
-    [userDefaults setObject:self.missionType forKey:@"defaultMissionType"];
-    [userDefaults setInteger:self.recInterval forKey:@"recInterval"];
-    [userDefaults synchronize];
-    
-    NSLog(@"BdefaultMissionGroup:%@",[userDefaults objectForKey:@"defaultMissionGroup"]);
-    NSLog(@"BdefaultMissionBonus:%@",[userDefaults objectForKey:@"defaultMissionBonus"]);
-    NSLog(@"BdefaultMissionType:%@",[userDefaults objectForKey:@"defaultMissionType"]);
     
     [userDefaults setObject:[RootController enToCn:self.missionGroup] forKey:@"defaultMissionGroup"];
     [userDefaults setObject:[RootController enToCn:self.missionBonus] forKey:@"defaultMissionBonus"];
     [userDefaults setObject:[RootController enToCn:self.missionType] forKey:@"defaultMissionType"];
     [userDefaults setInteger:self.recInterval forKey:@"recInterval"];
+    if([[userDefaults objectForKey:@"appLanguage"]hasPrefix:@"en"]&&[languageBtn.titleLabel.text isEqualToString:@"中文"]){
+        isLanguageChanged = YES;
+        [[NSUserDefaults standardUserDefaults] setObject:@"zh-Hans" forKey:@"appLanguage"];
+    }else if([[userDefaults objectForKey:@"appLanguage"]hasPrefix:@"zh-Hans"]&&[languageBtn.titleLabel.text isEqualToString:@"English"]){
+        isLanguageChanged = YES;
+        [[NSUserDefaults standardUserDefaults] setObject:@"en" forKey:@"appLanguage"];
+    }
     [userDefaults synchronize];
     
-    NSLog(@"defaultMissionGroup:%@",[userDefaults objectForKey:@"defaultMissionGroup"]);
-    NSLog(@"defaultMissionBonus:%@",[userDefaults objectForKey:@"defaultMissionBonus"]);
-    NSLog(@"defaultMissionType:%@",[userDefaults objectForKey:@"defaultMissionType"]);
     
     //    RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     //    //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
     //    [rootController switchToMainTabViewFromHomeView];
-    MainTabBarController *mainTBC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+    if(isLanguageChanged){
+        RootController *rootController = (RootController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        //[UIApplication sharedApplication]获得uiapplication实例，keywindow为当前主窗口，rootviewcontroller获取根控件
+        [rootController refreshMainTabView];
+    }else{
+        MainTabBarController *mainTBC = [self.navigationController.viewControllers objectAtIndex:self.navigationController.viewControllers.count-2];
+        
+        [self.navigationController popToViewController:mainTBC animated:YES];
+    }
     
-    [self.navigationController popToViewController:mainTBC animated:YES];
 }
 
 

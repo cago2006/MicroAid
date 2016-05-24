@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.navigationItem setTitle:@"筛选任务"];
+    [self.navigationItem setTitle:Localized(@"筛选任务")];
     //self.tabBarController.tabBar.hidden = YES;
     
     UIButton *saveBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,20,20)];
@@ -43,14 +43,17 @@
     [self.pickerView setHidden:YES];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    self.missionGroup = [userDefaults objectForKey:@"missionGroup"];
+    self.missionGroup = [self changeString:[userDefaults objectForKey:@"missionGroup"]];
     self.missionDistance = [userDefaults doubleForKey:@"missionDistance"];
-    self.missionBonus = [userDefaults objectForKey:@"missionBonus"];
-    self.missionType = [userDefaults objectForKey:@"missionType"];
-    self.missionEndTime = [userDefaults objectForKey:@"missionEndTime"];
+    if(!([userDefaults objectForKey:@"missionBonus"]==nil || [[userDefaults objectForKey:@"missionBonus"]isEqualToString:@""] || [[userDefaults objectForKey:@"missionBonus"]isEqualToString:@"全部"] || [[userDefaults objectForKey:@"missionBonus"]isEqualToString:@"All"])){
+        self.missionBonus = [NSString stringWithFormat:@"%@分",[userDefaults objectForKey:@"missionBonus"]];
+        self.missionBonus = Localized(self.missionBonus);
+    }
+    self.missionType = [self changeString:[userDefaults objectForKey:@"missionType"]];
+    self.missionEndTime = Localized([userDefaults objectForKey:@"missionEndTime"]);
     
     if(self.missionEndTime == nil || [self.missionEndTime isEqualToString:@""]){
-        self.missionEndTime = @"全部";
+        self.missionEndTime =Localized(@"全部");
     }
     [timeBtn setTitle:self.missionEndTime forState:UIControlStateNormal];
     if(self.missionDistance < 0.1){
@@ -58,20 +61,19 @@
     }
     distanceTextField.text = [NSString stringWithFormat:@"%.1f",self.missionDistance];
     if(self.missionGroup == nil || [self.missionGroup isEqualToString:@""]){
-        self.missionGroup = @"全部";
+        self.missionGroup = Localized(@"全部");
     }
     [objectBtn setTitle:self.missionGroup forState:UIControlStateNormal];
     if(self.missionBonus == nil || [self.missionBonus isEqualToString:@""]){
-        self.missionBonus = @"全部";
+        self.missionBonus = Localized(@"全部");
     }
-    if([self.missionBonus isEqualToString:@"全部"]){
+    if([self.missionBonus isEqualToString:Localized(@"全部")]){
         [bonusBtn setTitle:self.missionBonus forState:UIControlStateNormal];
     }else{
-        NSString *bonusAfterFomat = [NSString stringWithFormat:@"%@分",self.missionBonus];
-        [bonusBtn setTitle:bonusAfterFomat forState:UIControlStateNormal];
+        [bonusBtn setTitle:self.missionBonus forState:UIControlStateNormal];
     }
     if(self.missionType == nil || [self.missionType isEqualToString:@""]){
-        self.missionType = @"全部";
+        self.missionType = Localized(@"全部");
     }
     typeBtn.titleLabel.text = self.missionType;
     [typeBtn setTitle:self.missionType forState:UIControlStateNormal];
@@ -82,6 +84,14 @@
     self.view.userInteractionEnabled = true;
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
     self.tabBarController.tabBar.hidden = YES;
+    [distanceLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"任务距离")]];
+    [typeLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"任务类型")]];
+    [bonusLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"悬赏金额")]];
+    [objectLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"发布对象")]];
+    [timeLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"结束时间")]];
+    [miLabel setText:[NSString stringWithFormat:@"%@",Localized(@"米")]];
+    [cancelBtn setTitle:Localized(@"取消") forState:UIControlStateNormal];
+    [confirmBtn setTitle:Localized(@"确定") forState:UIControlStateNormal];
 }
 
 -(void) passFilterBonusValues:(NSString *)string{
@@ -134,11 +144,11 @@
                 if ([[resultDic objectForKey:@"flg"] boolValue]) {//获取成功
                     NSArray *list = [resultDic objectForKey:@"excelList"];
                     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[list count]+1];
-                    [array addObject:@"全部"];
+                    [array addObject:Localized(@"全部")];
                     for(int i =0; i<[list count]; i++){
                         NSDictionary *subList = [list objectAtIndex:i];
                         NSString *taskType =(NSString *)[subList objectForKey:@"taskType"];
-                        [array addObject:taskType];
+                        [array addObject:Localized(taskType)];
                     }
                     //显示
                     [self performSelectorOnMainThread:@selector(openTypeView:) withObject:array waitUntilDone:YES];
@@ -173,7 +183,7 @@
             
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllGroup:userID pageNo:1 pageSize:10];
-                if ([[resultDic objectForKey:@"onError"] boolValue]) {//获取成功
+                if ([[resultDic objectForKey:@"onError"] boolValue]) {//获取失败
                     [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
                     return ;
                 }else//获取失败
@@ -181,8 +191,8 @@
                     if ([[resultDic objectForKey:@"flg"] boolValue]) {//获取成功
                         NSArray *list = [resultDic objectForKey:@"groupInfoList"];
                         NSMutableArray *array = [NSMutableArray arrayWithCapacity:[list count]];
-                        [array addObject:@"全部"];
-                        [array addObject:@"公开"];
+                        [array addObject:Localized(@"全部")];
+                        [array addObject:Localized(@"公开")];
                         for(int i =0; i<[list count]; i++){
                             NSString *groupName =(NSString *)[list objectAtIndex:i];
                             [array addObject:groupName];
@@ -191,8 +201,8 @@
                         [self performSelectorOnMainThread:@selector(openGroupView:) withObject:array waitUntilDone:YES];
                     }else{
                         NSMutableArray *array = [NSMutableArray arrayWithCapacity:2];
-                        [array addObject:@"全部"];
-                        [array addObject:@"公开"];
+                        [array addObject:Localized(@"全部")];
+                        [array addObject:Localized(@"公开")];
                         //显示
                         [self performSelectorOnMainThread:@selector(openGroupView:) withObject:array waitUntilDone:YES];
                     }
@@ -203,7 +213,7 @@
         case 3:
         {
             NSDate *date ;
-            if([timeBtn.titleLabel.text isEqualToString:@"全部"]){
+            if([timeBtn.titleLabel.text isEqualToString:Localized(@"全部")]){
                 date = [DateTimeUtils getCurrentTime];
             }else{
                 date = [DateTimeUtils changeStringIntoDate:timeBtn.titleLabel.text];
@@ -268,10 +278,10 @@
     [self.view endEditing:YES];
     self.missionDistance = [distanceTextField.text doubleValue];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:self.missionGroup forKey:@"missionGroup"];
+    [userDefaults setObject:[self formatString:self.missionGroup] forKey:@"missionGroup"];
     [userDefaults setDouble:self.missionDistance forKey:@"missionDistance"];
-    [userDefaults setObject:[self formatBonus:self.missionBonus] forKey:@"missionBonus"];
-    [userDefaults setObject:self.missionType forKey:@"missionType"];
+    [userDefaults setObject:[RootController enToCn:[self formatBonus:self.missionBonus]] forKey:@"missionBonus"];
+    [userDefaults setObject:[self formatString:self.missionType] forKey:@"missionType"];
     [userDefaults setObject:self.missionEndTime forKey:@"missionEndTime"];
     [userDefaults synchronize];
     
@@ -284,12 +294,53 @@
 }
 
 -(NSString *)formatBonus:(NSString *)bonus{
-    if([bonus isEqualToString:@"全部"]){
+    if([bonus isEqualToString:Localized(@"全部")]){
         return bonus;
     }
     return [bonus substringToIndex:1];
 }
 
+//保存的时候，存的内容是中文版
+-(NSString *)formatString:(NSString *)string{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *appLanguage = [userDefaults objectForKey:@"appLanguage"];
+    if([appLanguage hasPrefix:@"en"]){
+        NSArray *stringList = [string componentsSeparatedByString:@"；"];
+        NSString * result = @"";
+        NSString * subString = [[NSString alloc]init];
+        for(subString in stringList){
+            NSString *temp = [NSString stringWithFormat:@"%@1",subString];
+            if(![Localized(temp) hasSuffix:@"1"]){
+                subString = Localized(temp);
+            }
+            result = [NSString stringWithFormat:@"%@%@；",result,subString];
+        }
+        result = [result substringToIndex:[result length]-1];
+        return result;
+    }else{
+        return string;
+    }
+}
+
+//显示的时候，判断
+-(NSString *)changeString:(NSString *)string{
+    if(string==nil||[string isEqualToString:@""]){
+        return nil;
+    }
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *appLanguage = [userDefaults objectForKey:@"appLanguage"];
+    if([appLanguage hasPrefix:@"en"]){
+        NSArray *stringList = [string componentsSeparatedByString:@"；"];
+        NSString * result = @"";
+        for(NSString *subString in stringList){
+            result = [NSString stringWithFormat:@"%@%@；",result,Localized(subString)];
+        }
+        result = [result substringToIndex:[result length]-1];
+        return result;
+    }else{
+        return string;
+    }
+}
 
 
 @end

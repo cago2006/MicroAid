@@ -162,7 +162,7 @@ NSString *ipAddr;
     status = [status stringByAppendingString:@"]"];
     
     NSString *urlString = [NSString stringWithFormat:@"http://%@/MICRO_AID/task/getTaskWithFilter.action?taskFilterString={\"statusList\":%@,\"distance\":\"%f\",\"longitude\":\"%f\",\"latitude\":\"%f\"",ipAddr,status,distance,longitude,latitude];
-    if(![type isEqualToString:@"全部"]){
+    if(!([type isEqualToString:@"全部"]||[type isEqualToString:@"All"])){
         NSArray *list = [type componentsSeparatedByString:@"；"];
         type = @"[";
         for(int i = 0; i< list.count; i++){
@@ -172,7 +172,7 @@ NSString *ipAddr;
         type = [type stringByAppendingString:@"]"];
         urlString = [urlString stringByAppendingFormat:@",\"taskType\":%@",type];
     }
-    if(![group isEqualToString:@"全部"]){
+    if(!([group isEqualToString:@"全部"]||[group isEqualToString:@"All"])){
         NSArray *list = [group componentsSeparatedByString:@"；"];
         group = @"[";
         for(int i = 0; i< list.count; i++){
@@ -182,10 +182,10 @@ NSString *ipAddr;
         group = [group stringByAppendingString:@"]"];
         urlString = [urlString stringByAppendingFormat:@",\"publicity\":%@",group];
     }
-    if(![bonus isEqualToString:@"全部"]){
+    if(!([bonus isEqualToString:@"全部"]||[bonus isEqualToString:@"All"])){
         urlString = [urlString stringByAppendingFormat:@",\"taskScores\":\"%@\"",bonus];
     }
-    if(![endTime isEqualToString:@"全部"]){
+    if(!([endTime isEqualToString:@"全部"]||[endTime isEqualToString:@"All"])){
         urlString = [urlString stringByAppendingFormat:@",\"endTime\":\"%@\"",endTime];
     }else{
         urlString = [urlString stringByAppendingFormat:@",\"endTime\":\"%@\"",[DateTimeUtils changeDateIntoString:[DateTimeUtils getCurrentTime]]];

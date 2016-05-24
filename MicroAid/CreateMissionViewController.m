@@ -103,6 +103,7 @@
     self.tabBarController.tabBar.hidden = YES;
     self.view.userInteractionEnabled = true;
     [self.navigationController.navigationBar setUserInteractionEnabled:true];
+    
 }
 
 -(void) getMission{
@@ -115,7 +116,7 @@
             
         }else//获取失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"列表获取失败,请检查网络!") waitUntilDone:YES];
             return ;
         }
     });
@@ -133,7 +134,7 @@
             
         }else//获取失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"余额获取失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"余额获取失败,请检查网络!") waitUntilDone:YES];
             return ;
         }
     });
@@ -240,7 +241,7 @@
         case 0:
         {
             NSDate *date;
-            if([startTimeBtn.titleLabel.text isEqualToString:@"点击选择"]){
+            if([startTimeBtn.titleLabel.text isEqualToString:Localized(@"点击选择")]){
                 date = [DateTimeUtils getCurrentTime];
             }else{
                 date = [DateTimeUtils changeStringIntoDate:startTimeBtn.titleLabel.text];
@@ -254,7 +255,7 @@
         case 1:
         {
             NSDate *date;
-            if([endTimeBtn.titleLabel.text isEqualToString:@"点击选择"]){
+            if([endTimeBtn.titleLabel.text isEqualToString:Localized(@"点击选择")]){
                 date = [DateTimeUtils getCurrentTimeAfterAnHour];
             }else{
                 date = [DateTimeUtils changeStringIntoDate:endTimeBtn.titleLabel.text];
@@ -287,7 +288,7 @@
                     
                 }else//获取失败
                 {
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"列表获取失败,请检查网络!") waitUntilDone:YES];
                     return ;
                 }
             });
@@ -305,7 +306,7 @@
             dispatch_async(serverQueue, ^{
                 NSDictionary *resultDic = [MicroAidAPI fetchAllGroup:userID pageNo:1 pageSize:10];
                 if ([[resultDic objectForKey:@"onError"] boolValue]) {//获取成功
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"列表获取失败,请检查网络!") waitUntilDone:YES];
                     return ;
                 }else//获取失败
                 {
@@ -458,7 +459,7 @@
 }
 
 -(NSString *)formatBonus:(NSString *)bonus{
-    if([bonus isEqualToString:@"点击选择"]){
+    if([bonus isEqualToString:Localized(@"点击选择")]){
         return bonus;
     }
     return [bonus substringToIndex:1];
@@ -471,9 +472,9 @@
 
 -(void) saveMission{
     if(_isEditMission){
-        [ProgressHUD show:@"任务修改中..."];
+        [ProgressHUD show:Localized(@"任务修改中...")];
     }else{
-        [ProgressHUD show:@"任务创建中..."];
+        [ProgressHUD show:Localized(@"任务创建中...")];
     }
     [self.navigationController.navigationBar setUserInteractionEnabled:false];
     [self.view setUserInteractionEnabled:false];
@@ -498,8 +499,8 @@
     [self.mission setTitle:[NSString stringWithString:titleTextField.text]];
     [dic setObject:[NSString stringWithFormat:@"%li",(long)userID] forKey:@"userID"];
     [self.mission setUserID:userID];
-    [dic setObject:typeBtn.titleLabel.text forKey:@"taskType"];
-    [self.mission setType:typeBtn.titleLabel.text];
+    [dic setObject:[RootController enToCn:typeBtn.titleLabel.text] forKey:@"taskType"];
+    [self.mission setType:[RootController enToCn:typeBtn.titleLabel.text]];
     [dic setObject:[self formatBonus:bonusBtn.titleLabel.text] forKey:@"taskScores"];
     [self.mission setBonus:[self formatBonus:bonusBtn.titleLabel.text]];
     [dic setObject:startTimeBtn.titleLabel.text forKey:@"startTime"];
@@ -518,8 +519,8 @@
     }
     [dic setObject:addressBtn.titleLabel.text forKey:@"address"];
     [self.mission setAddress:addressBtn.titleLabel.text];
-    [dic setObject:objectBtn.titleLabel.text forKey:@"publicity"];
-    [self.mission setGroup:objectBtn.titleLabel.text];
+    [dic setObject:[RootController enToCn:objectBtn.titleLabel.text] forKey:@"publicity"];
+    [self.mission setGroup:[RootController enToCn:objectBtn.titleLabel.text]];
     [dic setObject:[NSString stringWithFormat:@"%f",self.missionLatitude] forKey:@"latitude"];
     [self.mission setLatitude:self.missionLatitude];
     [dic setObject:[NSString stringWithFormat:@"%f",self.missionLongitude] forKey:@"longitude"];
@@ -535,12 +536,12 @@
                 NSDictionary *resultDic = [MicroAidAPI updateMission:dic];
                 if ([[resultDic objectForKey:@"flg"] boolValue]) {//修改成功
                     //显示
-                    [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务修改成功!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:Localized(@"任务修改成功!") waitUntilDone:YES];
                     [self performSelectorOnMainThread:@selector(switchNextViewController) withObject:nil waitUntilDone:YES];
                     return;
                 }else//修改失败
                 {
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"任务修改失败,请检查网络!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"任务修改失败,请检查网络!") waitUntilDone:YES];
                     return ;
                 }
             });
@@ -550,12 +551,12 @@
                 NSDictionary *resultDic = [MicroAidAPI createMission:dic];
                 if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
                     //显示
-                    [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"任务创建成功!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:Localized(@"任务创建成功!") waitUntilDone:YES];
                     [self performSelectorOnMainThread:@selector(switchNextViewController) withObject:nil waitUntilDone:YES];
                     
                 }else//创建失败
                 {
-                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"网络错误,任务创建失败!" waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"网络错误,任务创建失败!") waitUntilDone:YES];
                     return ;
                 }
             });
@@ -572,7 +573,7 @@
     if(bonus < self.leftBonus || bonus == self.leftBonus){
         return true;
     }else{
-        [ProgressHUD showError:@"余额不足！"];
+        [ProgressHUD showError:Localized(@"余额不足!")];
         return false;
     }
 }

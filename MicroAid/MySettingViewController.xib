@@ -9,6 +9,8 @@
             <connections>
                 <outlet property="bonusBtn" destination="A9E-k1-0eK" id="g2u-8d-LIF"/>
                 <outlet property="bonusLabel" destination="t2d-dh-MI6" id="fNE-iZ-8XH"/>
+                <outlet property="languageBtn" destination="TAc-oI-JVX" id="C2R-A6-UTH"/>
+                <outlet property="languageLabel" destination="gQb-U5-DQl" id="8bk-TJ-h2b"/>
                 <outlet property="objectBtn" destination="Ja0-Ml-ARS" id="253-hn-Ono"/>
                 <outlet property="objectLabel" destination="nLS-L0-vXV" id="1yt-Gx-aWF"/>
                 <outlet property="recIntervalField" destination="WXP-nt-l3D" id="Uwe-a5-YwV"/>
@@ -101,6 +103,25 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TAc-oI-JVX">
+                    <rect key="frame" x="105" y="246" width="185" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <state key="normal" title="中文">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="buttonClicked:" destination="-1" eventType="touchUpInside" id="cdp-BM-wOB"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="系统语言：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gQb-U5-DQl">
+                    <rect key="frame" x="-3" y="246" width="106" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="0.93725490196078431" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <point key="canvasLocation" x="549" y="343"/>

@@ -17,8 +17,15 @@
     __weak IBOutlet UITextView *detailTextView;
     __weak IBOutlet UIButton *closePolicyBtn;
     __weak IBOutlet UIButton *agreePolicyBtn;
+    __weak IBOutlet UIButton *forgetBtn;
+    __weak IBOutlet UIButton *loginBtn;
+    __weak IBOutlet UIButton *signUpBtn;
     __weak IBOutlet UILabel *agreePolicyTitleLabel;
     __weak IBOutlet UILabel *weizhuLabel;
+    __weak IBOutlet UILabel *usernameLabel;
+    __weak IBOutlet UILabel *passwordLabel;
+    __weak IBOutlet UILabel *readLabel;
+    __weak IBOutlet UIButton *languageBtn;
 }
 
 -(IBAction) loginButtonClicked:(id)sender;
@@ -28,6 +35,7 @@
 -(IBAction) readPolicy:(UIButton *)sender;
 -(IBAction) closePolicy:(UIButton *)sender;
 -(IBAction) agreePolicy:(UIButton *)sender;
+-(IBAction) changeLanguage:(UIButton *)sender;
 @property(nonatomic, assign) BOOL isAgree;
 @property (strong, nonatomic) IBOutlet UIView *policyView;
 @property (strong, nonatomic) IBOutlet UIView *imageView;

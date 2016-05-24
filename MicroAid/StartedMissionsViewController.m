@@ -147,7 +147,7 @@
         
         if ([[finishedMissions objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败,请检查网络!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"获取数据失败,请检查网络") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
             });
             return;

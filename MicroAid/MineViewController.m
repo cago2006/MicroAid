@@ -51,6 +51,7 @@
     self.nickName = [userDefaults objectForKey:@"nickName"];
     [_myTableView reloadData];
     [self showProfile];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"我")]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -75,7 +76,7 @@
             [self performSelectorOnMainThread:@selector(showPicture:) withObject:picture waitUntilDone:NO];
         }else if ([[resultDic objectForKey:@"onError"] boolValue])//创建失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"头像查找失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"头像查找失败,请检查网络!") waitUntilDone:YES];
             return ;
         }else{
             [self performSelectorOnMainThread:@selector(showPicture:) withObject:nil waitUntilDone:YES];

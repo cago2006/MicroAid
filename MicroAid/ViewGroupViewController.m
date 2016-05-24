@@ -71,23 +71,23 @@
 
 
 -(void)exitGroup{
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"确认要退出该群？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认",nil];
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:Localized(@"确定要退出该群?") message:nil delegate:self cancelButtonTitle:Localized(@"取消") otherButtonTitles:Localized(@"确定"),nil];
     [dialog setAlertViewStyle:UIAlertViewStyleDefault];
     [dialog show];
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(buttonIndex == 1){
-        [ProgressHUD show:@"正在退出..."];
+        [ProgressHUD show:Localized(@"正在退出...")];
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSInteger userID = [userDefaults integerForKey:@"userID"];
         dispatch_async(serverQueue, ^{
             NSDictionary *resultDic = [MicroAidAPI exitGroup:userID groupName:self.groupName];
             if ([[resultDic objectForKey:@"flg"] boolValue]) {//退出成功
-                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"退出成功!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:Localized(@"退出成功!") waitUntilDone:YES];
                 [self performSelectorOnMainThread:@selector(returnToGroupList) withObject:nil waitUntilDone:YES];
             }else{//退出失败
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"退出失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"退出失败,请检查网络!") waitUntilDone:YES];
                 return ;
             }
         });
@@ -117,7 +117,7 @@
             [self performSelectorOnMainThread:@selector(showGroupInfo:) withObject:dic waitUntilDone:YES];
         }else//查找失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"查找失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"查找失败,请检查网络!") waitUntilDone:YES];
             return ;
         }
     });
@@ -218,7 +218,7 @@
         
         if ([[userInfo objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"获取数据失败") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
             });
             return;

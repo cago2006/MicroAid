@@ -8,12 +8,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FilterViewController">
             <connections>
                 <outlet property="bonusBtn" destination="BgF-KM-dAq" id="BAX-eU-3E9"/>
+                <outlet property="bonusLabel" destination="okw-D3-Q0K" id="wEk-Ca-zbg"/>
+                <outlet property="cancelBtn" destination="Blq-m2-6M1" id="kzP-aK-eHc"/>
+                <outlet property="confirmBtn" destination="fCj-pz-gh1" id="iGz-OY-b1d"/>
                 <outlet property="datePickerView" destination="gNe-e6-5Ce" id="zdN-UR-esg"/>
+                <outlet property="distanceLabel" destination="IdK-eW-2Sr" id="ulC-AZ-yDl"/>
                 <outlet property="distanceTextField" destination="F8p-BA-1V9" id="JLm-RI-24g"/>
+                <outlet property="miLabel" destination="lRy-YF-yUa" id="p5L-0X-Fsv"/>
                 <outlet property="objectBtn" destination="UQC-BU-7cm" id="D5y-jV-2xd"/>
+                <outlet property="objectLabel" destination="Txc-rR-vtY" id="JAq-bl-Bkf"/>
                 <outlet property="pickerView" destination="etY-X4-mnw" id="ikp-g4-nMR"/>
                 <outlet property="timeBtn" destination="eC6-jx-gqk" id="Xgt-It-ELP"/>
+                <outlet property="timeLabel" destination="dGc-fl-Eij" id="din-Pc-qjy"/>
                 <outlet property="typeBtn" destination="rX5-bF-sz1" id="H2x-er-WnN"/>
+                <outlet property="typeLabel" destination="HYB-ei-RMb" id="EZ2-FB-Hoj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,8 +30,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务距离：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IdK-eW-2Sr">
-                    <rect key="frame" x="8" y="23" width="85" height="31"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务距离：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IdK-eW-2Sr">
+                    <rect key="frame" x="0.0" y="23" width="93" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -42,29 +50,29 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务类型：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HYB-ei-RMb">
-                    <rect key="frame" x="8" y="78" width="85" height="31"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务类型：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HYB-ei-RMb">
+                    <rect key="frame" x="0.0" y="78" width="93" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="悬赏金额：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="okw-D3-Q0K">
-                    <rect key="frame" x="8" y="133" width="85" height="31"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="悬赏金额：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="okw-D3-Q0K">
+                    <rect key="frame" x="0.0" y="133" width="93" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布对象：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Txc-rR-vtY">
-                    <rect key="frame" x="8" y="186" width="85" height="31"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布对象：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Txc-rR-vtY">
+                    <rect key="frame" x="0.0" y="186" width="93" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="结束时间：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dGc-fl-Eij">
-                    <rect key="frame" x="8" y="241" width="85" height="31"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="结束时间：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dGc-fl-Eij">
+                    <rect key="frame" x="0.0" y="241" width="93" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -164,7 +172,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="0.93725490196078431" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="453" y="231"/>
+            <point key="canvasLocation" x="501" y="258"/>
         </view>
     </objects>
 </document>

@@ -28,10 +28,10 @@
     }
     self.user= [[User alloc] init];
     
-    UIButton *leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,40,40)];
+    UIButton *leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,0,70,70)];
     [leftBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(returnToLogin) forControlEvents:UIControlEventTouchUpInside];
-    [leftBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [leftBtn setTitle:Localized(@"取消") forState:UIControlStateNormal];
     //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(returnToLogin)];
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc]initWithCustomView:leftBtn];
     self.navigationItem.leftBarButtonItem = leftItem;
@@ -41,6 +41,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [accountLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"账号")]];
+    [passLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"密码")]];
+    [confirmLabel setText:Localized(@"确认密码")];
+    [nickNameLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"昵称")]];
+    [helpLabel setText:[NSString stringWithFormat:@"%@:",Localized(@"帮助内容")]];
+    [helpBtn setTitle:Localized(@"点击选择") forState:UIControlStateNormal];
+    [registerBtn setTitle:Localized(@"注册") forState:UIControlStateNormal];
+    [usernameTextField setPlaceholder:Localized(@"手机号码")];
+    [passwordTextField setPlaceholder:Localized(@"6-16位密码")];
+    [passwordTextField2 setPlaceholder:Localized(@"再次输入密码")];
+    [nickNameTextField setPlaceholder:Localized(@"2-6位用户昵称")];
 }
 
 /*
@@ -62,10 +77,10 @@
     BOOL isInfoRight = [self.user verifyInfo:[NSString stringWithString:passwordTextField2.text]];
     if (isInfoRight== TRUE) {
         if(self.choiceIDStrings == nil||[self.choiceIDStrings isEqualToString:@""]){
-            [ProgressHUD showError:@"请选择您的帮助内容!"];
+            [ProgressHUD showError:Localized(@"请选择您的帮助内容!")];
             return;
         }
-        [ProgressHUD show:@"正在注册"];
+        [ProgressHUD show:Localized(@"正在注册")];
         self.view.userInteractionEnabled = false;
         [self.navigationController.navigationBar setUserInteractionEnabled:false];
         
@@ -74,11 +89,11 @@
             if ([[resultDic objectForKey:@"userID"] integerValue] > 0) {//注册成功
                 
                 [self.user setUserID:[[resultDic objectForKey:@"userID"] integerValue]];
-                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"注册成功" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:Localized(@"注册成功") waitUntilDone:YES];
                 
             }else//注册失败
             {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"注册失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"注册失败,请检查网络!") waitUntilDone:YES];
                 return ;
             }
         });
@@ -98,7 +113,7 @@
                 NSDictionary *subList = [list objectAtIndex:i];
                 NSString *index = (NSString *)[subList objectForKey:@"id"];
                 NSString *taskType =(NSString *)[subList objectForKey:@"taskType"];
-                [array addObject:taskType];
+                [array addObject:Localized(taskType)];
                 [self.choiceDic setObject:index forKey:taskType];
             }
             //显示
@@ -106,7 +121,7 @@
 
         }else//获取失败
         {
-            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"列表获取失败,请检查网络!" waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"列表获取失败,请检查网络!") waitUntilDone:YES];
             return ;
         }
     });
@@ -126,10 +141,12 @@
     self.choiceStrings = string;
     self.choiceIDStrings = [[NSString alloc]init];
     NSArray *list = [string componentsSeparatedByString:@","];
-    for(NSString *sub in list){
+    NSString *sub = [[NSString alloc]init];
+    for(sub in list){
         if([sub isEqualToString:@""]){
             continue;
         }
+        sub = [RootController enToCn:sub];
         self.choiceIDStrings = [self.choiceIDStrings stringByAppendingString:[NSString stringWithFormat:@"%@", [self.choiceDic objectForKey:sub]]];
         self.choiceIDStrings = [self.choiceIDStrings stringByAppendingString:@","];
     }

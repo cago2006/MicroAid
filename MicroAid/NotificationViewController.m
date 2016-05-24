@@ -203,7 +203,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
 //                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                [alertView show];
-                [self showMessage:@"获取数据失败,请检查网络"];
+                [self showMessage:Localized(@"获取数据失败,请检查网络")];
             });
             return;
         } else {
@@ -213,11 +213,11 @@
                     if(self.count == 1){
 //                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"您没有通知!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                        [alertView show];
-                        [self showMessage:@"您没有通知!"];
+                        [self showMessage:Localized(@"您没有通知!")];
                     }else{
 //                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                        [alertView show];
-                        [self showMessage:@"没有更多了!"];
+                        [self showMessage:Localized(@"没有更多了!")];
                     }
                 });
                 return;

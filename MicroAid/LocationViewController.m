@@ -175,7 +175,7 @@
         
         [self.navigationController popToViewController:cmVC animated:YES];
     }else{
-        [ProgressHUD showError:@"请搜索成功后再保存!"];
+        [ProgressHUD showError:Localized(@"请搜索成功后再保存!")];
     }
     
 }
@@ -222,7 +222,7 @@
     else
     {
         NSLog(@"geo检索发送失败");
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"搜索发送失败" message:@"请检查您的网络，重试" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:Localized(@"搜索发送失败") message:Localized(@"请检查您的网络并重试") delegate:self cancelButtonTitle:nil otherButtonTitles:Localized(@"确定"),nil];
         [myAlertView show];
         return false;
     }
@@ -254,7 +254,7 @@
         _mapView.centerCoordinate = result.location;//地图中心
         
     }else{
-        [ProgressHUD showError:@"查询不到该地址"];
+        [ProgressHUD showError:Localized(@"查询不到该地址")];
     }
 }
 

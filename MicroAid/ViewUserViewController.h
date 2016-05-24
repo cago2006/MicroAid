@@ -15,6 +15,9 @@
     __weak IBOutlet UIButton *phoneBtn;
     __weak IBOutlet UIButton *bubbleBtn;
     __weak IBOutlet UIButton *photoBtn;
+    __weak IBOutlet UILabel *nameLabel1;
+    __weak IBOutlet UILabel *genderLabel1;
+    __weak IBOutlet UILabel *emailLabel1;
 }
 
 @property(nonatomic,assign) NSInteger userID;

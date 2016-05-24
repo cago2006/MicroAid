@@ -113,7 +113,7 @@
 	switch (aState) {
 		case EGOOPullPulling:
 			
-			_statusLabel.text = NSLocalizedStringFromTable(@"释放加载更多...",@"PullTableViewLan", @"Release to load more status");
+			_statusLabel.text = NSLocalizedStringFromTable(Localized(@"释放加载更多..."),@"PullTableViewLan", @"Release to load more status");
 			[CATransaction begin];
 			[CATransaction setAnimationDuration:FLIP_ANIMATION_DURATION];
 			_arrowImage.transform = CATransform3DIdentity;
@@ -129,7 +129,7 @@
 				[CATransaction commit];
 			}
 			
-			_statusLabel.text = NSLocalizedStringFromTable(@"上拉加载更多...", @"PullTableViewLan",@"Pull down to load more status");
+			_statusLabel.text = NSLocalizedStringFromTable(Localized(@"上拉加载更多..."), @"PullTableViewLan",@"Pull down to load more status");
 			[_activityView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
@@ -140,7 +140,7 @@
 			break;
 		case EGOOPullLoading:
 			
-			_statusLabel.text = NSLocalizedStringFromTable(@"载入中...", @"PullTableViewLan",@"Loading Status");
+			_statusLabel.text = NSLocalizedStringFromTable(Localized(@"载入中..."), @"PullTableViewLan",@"Loading Status");
 			[_activityView startAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 

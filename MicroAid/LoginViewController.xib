@@ -12,12 +12,19 @@
                 <outlet property="checkBoxBtn" destination="l2p-Gd-pBs" id="ZQu-xv-XS9"/>
                 <outlet property="closePolicyBtn" destination="l7t-Y9-JTb" id="4yQ-gR-AOE"/>
                 <outlet property="detailTextView" destination="ANa-aQ-mkG" id="arP-Tm-17I"/>
+                <outlet property="forgetBtn" destination="n9z-K9-OwO" id="NSN-IA-reH"/>
                 <outlet property="icView" destination="yhU-02-a9i" id="fG4-Tp-ayr"/>
                 <outlet property="imageView" destination="vEm-51-dBe" id="5Ug-7x-I07"/>
                 <outlet property="itemView" destination="1At-GB-9z9" id="p1e-Qy-TEi"/>
+                <outlet property="languageBtn" destination="oKU-zg-xsd" id="Ain-bE-umb"/>
+                <outlet property="loginBtn" destination="6OT-CE-YEn" id="7W7-0U-N5j"/>
+                <outlet property="passwordLabel" destination="ATD-XA-xID" id="3SR-0C-NCu"/>
                 <outlet property="passwordTextField" destination="ncq-47-I1H" id="uXP-N5-VsA"/>
                 <outlet property="policyBtn" destination="N1H-IX-bbG" id="XR1-Av-ZrQ"/>
-                <outlet property="policyView" destination="fIa-rK-2BB" id="O0X-z0-Gy9"/>
+                <outlet property="policyView" destination="fIa-rK-2BB" id="mGs-0u-VZB"/>
+                <outlet property="readLabel" destination="xVI-7a-LfP" id="qsq-y1-ChQ"/>
+                <outlet property="signUpBtn" destination="WO9-zP-rJM" id="irs-qa-ZHg"/>
+                <outlet property="usernameLabel" destination="Wio-0L-7zi" id="Ecf-WE-7hT"/>
                 <outlet property="usernameTextField" destination="t1Y-vo-POa" id="Q2N-0b-ufM"/>
                 <outlet property="view" destination="5lf-Aq-ssV" id="tFo-S0-cYk"/>
                 <outlet property="weizhuLabel" destination="Deg-LQ-DOu" id="ljN-xg-uPl"/>
@@ -50,8 +57,8 @@
                     <rect key="frame" x="0.0" y="170" width="320" height="398"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wio-0L-7zi">
-                            <rect key="frame" x="37" y="14" width="51" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账号：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wio-0L-7zi">
+                            <rect key="frame" x="8" y="14" width="80" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -63,8 +70,8 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ATD-XA-xID">
-                            <rect key="frame" x="37" y="62" width="51" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ATD-XA-xID">
+                            <rect key="frame" x="8" y="62" width="80" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -76,8 +83,8 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                         </textField>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="n9z-K9-OwO">
-                            <rect key="frame" x="223" y="93" width="77" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="n9z-K9-OwO">
+                            <rect key="frame" x="146" y="93" width="154" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="忘记密码">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,22 +93,22 @@
                                 <action selector="forgetPassword:" destination="-1" eventType="touchUpInside" id="0ZB-cW-onG"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我已阅读并同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xVI-7a-LfP">
-                            <rect key="frame" x="80" y="125" width="98" height="26"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我已阅读并同意" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xVI-7a-LfP">
+                            <rect key="frame" x="60" y="125" width="118" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l2p-Gd-pBs">
-                            <rect key="frame" x="57" y="128" width="20" height="20"/>
+                            <rect key="frame" x="38" y="128" width="20" height="20"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <connections>
                                 <action selector="check:" destination="-1" eventType="touchUpInside" id="Gl3-As-CJc"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="N1H-IX-bbG">
-                            <rect key="frame" x="177" y="125" width="86" height="26"/>
+                            <rect key="frame" x="179" y="125" width="116" height="26"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <state key="normal" title="用户隐私条款">
@@ -137,6 +144,17 @@
                                 <action selector="registerUser:" destination="-1" eventType="touchUpInside" id="OyV-bN-jrp"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oKU-zg-xsd">
+                            <rect key="frame" x="215" y="368" width="104" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            <state key="normal" title="English version">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeLanguage:" destination="-1" eventType="touchUpInside" id="bEB-E3-Kac"/>
+                                <action selector="forgetPassword:" destination="-1" eventType="touchUpInside" id="KKY-o6-HKj"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="0.93725490199999995" blue="0.83529411760000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
@@ -144,7 +162,7 @@
                     <rect key="frame" x="19" y="62" width="281" height="444"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="ANa-aQ-mkG">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" id="ANa-aQ-mkG">
                             <rect key="frame" x="0.0" y="33" width="281" height="370"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="0.93725490196078431" blue="0.83529411764705885" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

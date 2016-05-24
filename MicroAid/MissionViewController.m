@@ -106,6 +106,8 @@
         self.timer = [NSTimer scheduledTimerWithTimeInterval:recInterval target:self selector:@selector(startLocation) userInfo:nil repeats:YES];
         [self.timer fire];
     }
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"%@",Localized(@"可认领任务")]];
+    [self.tabBarItem setTitle:Localized(@"任务")];
 }
 
 -(void) firstReflesh{
@@ -236,7 +238,7 @@
     MissionInfo *info = [self.dataArray objectAtIndex:indexPath.row];
     [[cell title]setText:info.title];
     [[cell distance]setText:[NSString stringWithFormat:@"%.1fm",info.distance]];
-    [[cell group]setText:info.group];
+    [[cell group]setText:Localized(info.group)];
     
     cell.accessoryType =UITableViewCellAccessoryDisclosureIndicator;
     
@@ -273,16 +275,16 @@
     NSString *bonus = [userDefaults objectForKey:@"missionBonus"];
     NSString *type = [userDefaults objectForKey:@"missionType"];
     if(endTime==nil || [endTime isEqualToString:@""]){
-        endTime = @"全部";
+        endTime = Localized(@"全部");
     }
     if(group==nil || [group isEqualToString:@""]){
-        group = @"全部";
+        group = Localized(@"全部");
     }
     if(bonus==nil || [bonus isEqualToString:@""]){
-        bonus = @"全部";
+        bonus = Localized(@"全部");
     }
     if(type==nil || [type isEqualToString:@""]){
-        type = @"全部";
+        type = Localized(@"全部");
     }
     
     dispatch_async(kBgQueue, ^{
@@ -290,7 +292,7 @@
         
         if ([[nearbyMissions objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"获取数据失败") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
             });
             return;
@@ -341,10 +343,10 @@
     double longitude = [userDefaults doubleForKey:@"longitude"];
     NSString *endTime = [userDefaults objectForKey:@"missionEndTime"];
     if(endTime==nil || [endTime isEqualToString:@""]){
-        endTime = @"全部";
+        endTime = Localized(@"全部");
     }
     dispatch_async(kBgQueue, ^{
-        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusArray distance:999999999 type:@"全部" group:@"全部" bonus:@"全部" longitude:longitude latitude:latitude endTime:endTime pageNo:1 pageSize:999 userID:userID];
+        NSDictionary *nearbyMissions = [MicroAidAPI getMissionList:statusArray distance:999999999 type:Localized(@"全部") group:Localized(@"全部") bonus:Localized(@"全部") longitude:longitude latitude:latitude endTime:endTime pageNo:1 pageSize:999 userID:userID];
         
         if ([[nearbyMissions objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -368,9 +370,9 @@
             if ([missionArray count]== 0 && [array count] == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if(_othersMissionInfoArray.count==0){
-                        [self showMessage:@"无待认领任务"];
+                        [self showMessage:Localized(@"无待认领任务")];
                     }else{
-                        [self showMessage:@"没有更多了!"];
+                        [self showMessage:Localized(@"没有更多了!")];
                     }
                     [self.pullTableView reloadData];
                 });
@@ -510,9 +512,9 @@
         if ([[recommendMission objectForKey:@"flg"] boolValue]) {//如果返回值中存在任务
             MissionInfo *info = [MissionInfo getRecMissionInfos:[recommendMission objectForKey:@"recTask"]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"您有新的任务推荐，是否查看？" preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
-                [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:Localized(@"您有新的任务推荐，是否查看？") preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:Localized(@"取消") style:UIAlertActionStyleDefault handler:nil]];
+                [alert addAction:[UIAlertAction actionWithTitle:Localized(@"确定") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     ViewMissionViewController *viewMissionVC =[[ViewMissionViewController alloc]initWithNibName:@"ViewMissionViewController" bundle:nil];
                     if(([info.statusInfo isEqualToString:@"未接受"] || [info.statusInfo isEqualToString:@"未认领"])){
                         viewMissionVC.isAccepted = NO;

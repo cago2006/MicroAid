@@ -78,7 +78,7 @@
 -(void) createGroup{
     self.view.userInteractionEnabled = false;
     [self.navigationController.navigationBar setUserInteractionEnabled:false];
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"请输入群组名称" message:nil delegate:self cancelButtonTitle:[NSString stringWithFormat:@"%@",Localized(@"取消")] otherButtonTitles:[NSString stringWithFormat:@"%@",Localized(@"添加")],nil];
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:Localized(@"创建新群组") message:Localized(@"请输入群组名称") delegate:self cancelButtonTitle:[NSString stringWithFormat:@"%@",Localized(@"取消")] otherButtonTitles:[NSString stringWithFormat:@"%@",Localized(@"添加")],nil];
     [dialog setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [[dialog textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeDefault];
     [dialog show];
@@ -93,11 +93,11 @@
         dispatch_async(serverQueue, ^{
             NSDictionary *resultDic = [MicroAidAPI createGroup:userID userName:userName groupName:groupName];
             if ([[resultDic objectForKey:@"flg"] boolValue]) {//创建成功
-                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:@"群组创建成功!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(successWithMessage:) withObject:Localized(@"群组创建成功!") waitUntilDone:YES];
                 [self performSelectorOnMainThread:@selector(refreshTable) withObject:nil waitUntilDone:YES];
             }else//创建失败
             {
-                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:@"群组创建失败,请检查网络!" waitUntilDone:YES];
+                [self performSelectorOnMainThread:@selector(errorWithMessage:) withObject:Localized(@"群组创建失败,请检查网络!") waitUntilDone:YES];
                 return ;
             }
         });
@@ -200,7 +200,7 @@
         
         if ([[groupInfo objectForKey:@"onError"] boolValue]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"获取数据失败" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:Localized(@"获取数据失败") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
             });
             return;
@@ -219,11 +219,11 @@
                     if(self.count == 1){
 //                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"您没有加入任何群组!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                        [alertView show];
-                        [self showMessage:@"您没有加入任何群组!"];
+                        [self showMessage:Localized(@"您没有加入任何群组!")];
                     }else{
 //                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"没有更多了!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                        [alertView show];
-                        [self showMessage:@"没有更多了!"];
+                        [self showMessage:Localized(@"没有更多了!")];
                     }
                 });
                 return;
